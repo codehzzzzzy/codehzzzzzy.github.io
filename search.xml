@@ -52,10 +52,88 @@
 </ul>
 ]]></content>
       <categories>
-        <category>底层源码</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01-设计模式的原则</title>
+    <url>/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[<h1 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a><strong>设计模式的目的</strong></h1><p><strong>1、代码重用性</strong></p>
+<p><strong>2、可读性</strong></p>
+<p><strong>3、可扩展性（增加功能时，对原来的功能没有影响）</strong></p>
+<p><strong>4、可靠性（增加功能时，对原来的功能没有影响）</strong></p>
+<p><strong>5、高内聚，低耦合</strong></p>
+<h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a><strong>单一职责原则</strong></h2><p><strong>一个类应该只负责一项职责</strong></p>
+<p>如：类 A 负责两个不同职责：职责 1，职责 2。</p>
+<p>当职责 1 需求变更而改变 A 时，可能造成职责 2 执行错误，所以需要将类 A 的粒度分解为 A1，A2</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>降低类的复杂度，一个类负责一个职责</li>
+<li>提高类的可读性</li>
+<li>降低变更的风险</li>
+</ul>
+<p>只有类中方法数量足够少时，可以在方法级别保持单一职责原则</p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/1.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/3.png" alt="0"></p>
+<h2 id="接口隔离的原则"><a href="#接口隔离的原则" class="headerlink" title="接口隔离的原则"></a><strong>接口隔离的原则</strong></h2><p><strong>客户端不应该依赖它不需要的接口，即一个类对另一个类的依赖应该建立在最小的接口上</strong></p>
+<p>类A和类C只需要依赖接口1的一部分接口，而不需要实现全部，所以可以将接口 Interface1 拆分为独立的几个接口(这里我们拆分成 3 个接口)，类 A 和类 C 分别与他们需要的接口建立依赖关系</p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/4.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/5.png" alt="0"></p>
+<h2 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a><strong>依赖倒转原则</strong></h2><p>1）高层模块不应该依赖底层模块，二者都应该依赖其抽象</p>
+<p>2）抽象不应该依赖细节，细节应该依赖抽象</p>
+<p><strong>3）核心思想：面向接口编程</strong></p>
+<p>三种方式：接口传递，构造方法传递，setter方法传递</p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/6.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/7.png" alt="0"></p>
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a><strong>里氏替换原则</strong></h2><p><strong>继承给程序设计带来便利也带来了弊端：</strong></p>
+<ul>
+<li>使用继承会给程序带来侵入性</li>
+<li>可移植性降低</li>
+<li>增加对象间的耦合</li>
+<li>当这个类要修改时，必须考虑到所有的子类</li>
+</ul>
+<p><strong>正确使用继承：</strong></p>
+<ul>
+<li>使用继承时，在子类中尽量不要重写父类的方法</li>
+<li>在适当的情况，可以使用聚合，组合，依赖来解决</li>
+</ul>
+<p><strong>解决方法：让原来的子类和父类都继承一个更通俗的基类，将原有的继承关系去掉，采用聚合，组合，依赖等关系来代替</strong></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/8.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/9.png" alt="0"></p>
+<h2 id="开闭原则-（最基础，最重要）"><a href="#开闭原则-（最基础，最重要）" class="headerlink" title="开闭原则 （最基础，最重要）"></a><strong>开闭原则</strong> <strong>（最基础，最重要）</strong></h2><p><strong>比如一个类，模块和函数一个对扩展开发（对提供方），对修改关闭（对使用方）。</strong></p>
+<p><strong>当软件需要变化，尽量通过扩展代码，而不是通过修改已有代码的方法实现</strong></p>
+<p><strong>案例：</strong></p>
+<p>如果需要增加新的功能，绘制别的图形，需要在使用方处修改代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Ocp</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">      <span class="comment">//使用看看存在的问题</span></span><br><span class="line">      <span class="type">GraphicEditor</span> <span class="variable">graphicEditor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GraphicEditor</span>();</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Rectangle</span>());</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Circle</span>());</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Triangle</span>());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这是一个用于绘图的类 [使用方]</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GraphicEditor</span> &#123;</span><br><span class="line">   <span class="comment">//接收Shape对象，然后根据type，来绘制不同的图形</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawShape</span><span class="params">(Shape s)</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (s.m_type == <span class="number">1</span>)</span><br><span class="line">         drawRectangle(s);</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (s.m_type == <span class="number">2</span>)</span><br><span class="line">         drawCircle(s);</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (s.m_type == <span class="number">3</span>)</span><br><span class="line">         drawTriangle(s);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//绘制矩形</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawRectangle</span><span class="params">(Shape r)</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制矩形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//绘制圆形</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawCircle</span><span class="params">(Shape r)</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制圆形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//绘制三角形</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawTriangle</span><span class="params">(Shape r)</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制三角形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Shape类，基类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   <span class="type">int</span> m_type;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Rectangle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Circle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">2</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新增画三角形</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Triangle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Triangle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">3</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>改进：</strong></p>
+<p>创建一个抽象类Shape，提供一个抽象方法drow，然后让子类去继承该抽象方法，重写该抽象方法，当需要增加新的功能的时候，只需要创建一个新的类去继承抽象方法并重写即可，无需对使用方代码进行改动</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Ocp</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">      <span class="comment">//使用看看存在的问题</span></span><br><span class="line">      <span class="type">GraphicEditor</span> <span class="variable">graphicEditor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GraphicEditor</span>();</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Rectangle</span>());</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Circle</span>());</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">Triangle</span>());</span><br><span class="line">      graphicEditor.drawShape(<span class="keyword">new</span> <span class="title class_">OtherGraphic</span>());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这是一个用于绘图的类 [使用方]</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GraphicEditor</span> &#123;</span><br><span class="line">   <span class="comment">//接收Shape对象，调用draw方法</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawShape</span><span class="params">(Shape s)</span> &#123;</span><br><span class="line">      s.draw();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Shape类，基类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   <span class="type">int</span> m_type;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span>;<span class="comment">//抽象方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Rectangle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制矩形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Circle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">2</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制圆形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新增画三角形</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Triangle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   Triangle() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">3</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制三角形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//新增一个图形</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OtherGraphic</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">   OtherGraphic() &#123;</span><br><span class="line">      <span class="built_in">super</span>.m_type = <span class="number">4</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot; 绘制其它图形 &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="迪米特法则-（最少知道原则）"><a href="#迪米特法则-（最少知道原则）" class="headerlink" title="迪米特法则 （最少知道原则）"></a><strong>迪米特法则</strong> <strong>（最少知道原则）</strong></h2><p> <strong>一个对象应该对其他对象保持最少的了解</strong></p>
+<p>每个对象都会与其他对象有耦合关系，只要两个对象之间有耦合关系，则这两个对象之间是朋友关系</p>
+<p>其中，出现成员变量，方法参数，方法返回值中的类为直接的朋友</p>
+<p>迪米特法则只要要求降低类间（对象间）耦合关系，并不是要求完全没有依赖关系</p>
+<h2 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a><strong>合成复用原则</strong></h2><p><strong>尽量使用合成或者聚合的方式，而不是使用继承</strong></p>
+<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起</p>
+<p><strong>针对接口编程，而不是针对具体实现编程</strong></p>
+<p><strong>松耦合设计</strong></p>
+<p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/10.png" alt="0"></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
@@ -164,10 +242,11 @@
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
 ]]></content>
       <categories>
-        <category>底层源码</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -198,10 +277,11 @@
 </ul>
 ]]></content>
       <categories>
-        <category>底层源码</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -225,10 +305,34 @@
 <h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
 ]]></content>
       <categories>
-        <category>底层源码</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -348,32 +452,11 @@
 
 ]]></content>
       <categories>
-        <category>底层源码</category>
+        <category>java</category>
       </categories>
       <tags>
         <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>06-本地方法栈和本地方法</title>
-    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
-<p>本地方法的作用：</p>
-<p>1、Java应用与Java外面的环境交互</p>
-<p>2、与操作系统进行交互</p>
-<p>3、Sun公司解释器由C实现</p>
-<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
-<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
-<p>当某一个线程调用本地方法时</p>
-<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
-<p>可以使用本地处理器中的寄存器</p>
-<p>……（和虚拟机拥有一样的权限）</p>
-]]></content>
-      <categories>
-        <category>底层源码</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
 </search>
