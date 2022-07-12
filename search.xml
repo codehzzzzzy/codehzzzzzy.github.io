@@ -171,7 +171,7 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>03-数据区概述与线程</title>
     <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
 <p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
@@ -197,9 +197,15 @@
 <li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>底层源码</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>04-程序计数器</title>
     <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
     <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
 <p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
@@ -218,9 +224,15 @@
 <p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
 <h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/6.jpg" alt="截图6"></p>
 ]]></content>
+      <categories>
+        <category>底层源码</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>05-虚拟机栈及相关问题</title>
     <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p>​    <img src="/1.jpg" alt="0"></p>
 <p>&#x3D;&#x3D;<strong>不存在GC，存在OOM</strong>&#x3D;&#x3D;</p>
@@ -275,8 +287,8 @@
 <p><strong>二、按照在类中声明的位置分：	1、成员变量：在使用前都经过默认初始化赋值</strong></p>
 <p>​    	  		<strong>类变量：linking的prepare阶段，给类变量默认赋值  —&gt;  initial阶段，给类变量显式赋值即静态代码块赋值</strong></p>
 <pre><code>           **实例变量：随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值**
-
-      **2、局部变量：使用前必须进行显示赋值，否则编译不通过**
+   
+       **2、局部变量：使用前必须进行显示赋值，否则编译不通过**
 </code></pre>
 <p><strong>局部变量表中的变量是重要的垃圾回收根节点，只要被局部变量表中的直接或间接引用的对象都不会被回收</strong></p>
 <h3 id="操作数（表达式）栈"><a href="#操作数（表达式）栈" class="headerlink" title="操作数（表达式）栈"></a><strong>操作数（表达式）栈</strong></h3><ol>
@@ -335,5 +347,33 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//s1的声明方式是线程安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//StringBuilder线程不安全</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s2的操作过程是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder s2)</span>&#123;</span><br><span class="line">    s2.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s3的操作是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s3.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s4的操作是线程安全的,s4其实在内部消亡了</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s4.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s4.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">        s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    method2(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>底层源码</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
+]]></content>
+      <categories>
+        <category>底层源码</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
   </entry>
 </search>
