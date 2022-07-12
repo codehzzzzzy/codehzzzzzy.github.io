@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>01-什么是JVM?</title>
+    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
+    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
+<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
+<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
+<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
+<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
+<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
+<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
+<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
+<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>跨平台性</li>
+<li>指令集小</li>
+<li>指令多</li>
+<li>执行性能比寄存器差</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
+<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
+<p><strong>2、基于寄存器的计算流程</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
+<p><strong>总结</strong></p>
+<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
+<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
+<p><strong>虚拟机的执行</strong></p>
+<ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
+<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
+</ul>
+<p><strong>虚拟机的退出</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
+<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
+<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>底层源码</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>02-类加载器和类加载过程</title>
     <url>/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a><strong>类加载过程</strong></h1><p><img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/1.png" alt="截图"></p>
@@ -174,28 +232,6 @@
       </tags>
   </entry>
   <entry>
-    <title>06-本地方法栈和本地方法</title>
-    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
-<p>本地方法的作用：</p>
-<p>1、Java应用与Java外面的环境交互</p>
-<p>2、与操作系统进行交互</p>
-<p>3、Sun公司解释器由C实现</p>
-<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
-<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
-<p>当某一个线程调用本地方法时</p>
-<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
-<p>可以使用本地处理器中的寄存器</p>
-<p>……（和虚拟机拥有一样的权限）</p>
-]]></content>
-      <categories>
-        <category>底层源码</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>05-虚拟机栈及相关问题</title>
     <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p> <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.jpg" alt="0"></p>
@@ -319,55 +355,19 @@
       </tags>
   </entry>
   <entry>
-    <title>01-什么是JVM?</title>
-    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
-    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
-<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
-<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
-<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
-<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
-<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
-<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
-<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
-<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
-<p><strong>基于栈式架构的特点</strong></p>
-<ul>
-<li>跨平台性</li>
-<li>指令集小</li>
-<li>指令多</li>
-<li>执行性能比寄存器差</li>
-</ul>
-<p><strong>基于寄存器架构的特点</strong></p>
-<ul>
-<li>指令集架构则完全依赖硬件，可移植性差</li>
-<li>性能优秀和执行更高效</li>
-</ul>
-<p><strong>举例</strong></p>
-<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
-<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
-<p><strong>2、基于寄存器的计算流程</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
-<p><strong>总结</strong></p>
-<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
-<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
-<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
-<p><strong>虚拟机的执行</strong></p>
-<ul>
-<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
-<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
-<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
-</ul>
-<p><strong>虚拟机的退出</strong></p>
-<ul>
-<li><strong>程序正常执行结束</strong></li>
-<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
-<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
-<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
-<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
-</ul>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
 ]]></content>
       <categories>
         <category>底层源码</category>
