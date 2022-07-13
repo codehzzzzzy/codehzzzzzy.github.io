@@ -250,34 +250,6 @@
       </tags>
   </entry>
   <entry>
-    <title>04-程序计数器</title>
-    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
-<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
-<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
-<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
-<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
-<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
-<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
-<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
-<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
-<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
-<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
-<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
-<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
-<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
-<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>03-数据区概述与线程</title>
     <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
@@ -313,19 +285,24 @@
       </tags>
   </entry>
   <entry>
-    <title>06-本地方法栈和本地方法</title>
-    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
-<p>本地方法的作用：</p>
-<p>1、Java应用与Java外面的环境交互</p>
-<p>2、与操作系统进行交互</p>
-<p>3、Sun公司解释器由C实现</p>
-<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
-<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
-<p>当某一个线程调用本地方法时</p>
-<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
-<p>可以使用本地处理器中的寄存器</p>
-<p>……（和虚拟机拥有一样的权限）</p>
+    <title>04-程序计数器</title>
+    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
+<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
+<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
+<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
+<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
+<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
+<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
+<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
+<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
+<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
+<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
+<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
+<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
+<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
+<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -460,6 +437,29 @@
       </tags>
   </entry>
   <entry>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>07-堆</title>
     <url>/2022/07/13/07-%E5%A0%86/</url>
     <content><![CDATA[<h1 id="堆的核心概述"><a href="#堆的核心概述" class="headerlink" title="堆的核心概述"></a><strong>堆的核心概述</strong></h1><p>一个进程对应一个JVM实例，一个JVM实例中有一个运行时数据区，一个运行时数据区中只有一个堆空间</p>
@@ -471,7 +471,7 @@
 <li><strong>多个线程共享一个堆区，容易造成并发性能差的问题，所以堆划分出线程私有的缓冲区，每个线程占一份</strong></li>
 <li>几乎所有的对象实例都在这里分配内存</li>
 <li>数组和对象可能永远不会存储在栈上，因为栈帧中保存引用，指向对象或数组在堆中的位置</li>
-<li>在方法结束后，堆中的对象不会马上被移除，仅仅在垃圾回收的时候会被移除<em><strong>（只是移除了方法区指向堆空间的索引，如果方法结束就移除堆中的对象的话，当方法多次调用时，会因为多次GC而影响系统性能）</strong></em></li>
+<li>在方法结束后，堆中的对象不会马上被移除，仅仅在垃圾回收的时候会被移除<em><strong>（只是移除了方法区指向堆空间的索引，如果方法结束就移除堆中的对象的话，当方法多次调用时，会因为多次 GC而影响系统性能）</strong></em></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleHeap</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SimpleHeap</span><span class="params">(<span class="type">int</span> id)</span> &#123;<span class="built_in">this</span>.id = id;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123; System.out.println(<span class="string">&quot;My ID is &quot;</span> + id); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SimpleHeap</span> <span class="variable">sl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleHeap</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="type">SimpleHeap</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleHeap</span>(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -488,8 +488,8 @@
 <p>新生区&lt;&#x3D;&gt;新生代&lt;&#x3D;&gt;年轻代</p>
 <p>养老区&lt;&#x3D;&gt;老年区&lt;&#x3D;&gt;老年代</p>
 <p>永久代&lt;&#x3D;&gt;永久区</p>
-<h2 id="堆空间大小的设置-Xms-Xmx"><a href="#堆空间大小的设置-Xms-Xmx" class="headerlink" title="堆空间大小的设置 -Xms -Xmx"></a>堆空间大小的设置 -Xms -Xmx</h2><p>-Xms（默认：物理内存的1&#x2F;64）：表示<strong>堆空间（新生代＋老年代）的起始内存</strong></p>
-<p>-Xmx（默认：物理内存的1&#x2F;4）：则用于表示<strong>堆空间的最大内存</strong></p>
+<h2 id="堆空间大小的设置-Xms-Xmx"><a href="#堆空间大小的设置-Xms-Xmx" class="headerlink" title="堆空间大小的设置 -Xms -Xmx"></a>堆空间大小的设置 -Xms -Xmx</h2><p><code>-Xms</code>（默认：物理内存的1&#x2F;64）：表示<strong>堆空间（新生代＋老年代）的起始内存</strong></p>
+<p><code>-Xmx</code>（默认：物理内存的1&#x2F;4）：则用于表示<strong>堆空间的最大内存</strong></p>
 <p><strong>通常会将-Xms和-Xmx两个参数配置相同的值，目的是为了能够在java垃圾回收机制清理完堆区后不需要重新分隔计算堆区的大小，从而提升性能</strong></p>
 <h2 id="新生代与老年代"><a href="#新生代与老年代" class="headerlink" title="新生代与老年代"></a><strong>新生代与老年代</strong></h2><p>堆区可细分为新生代和老年代，新生代又可划分为Eden空间，Survivor1空间和Survivor2空间（from区，to区）</p>
 <img src="/2022/07/13/07-%E5%A0%86/2.png" alt="1" style="zoom: 70%;">
@@ -497,13 +497,13 @@
 <ul>
 <li>配置新生代和老年代在堆结构中的占比<strong>（一般不进行调整）</strong></li>
 </ul>
-<p>默认情况下 -XX:NewRatio&#x3D;2，表示新生代占1，老年代占2，即新生代占整个堆的1&#x2F;3</p>
+<p>默认情况下 <code>-XX:NewRatio=2</code>，表示新生代占1，老年代占2，即新生代占整个堆的1&#x2F;3</p>
 <ul>
 <li>配置年轻代中的Eden和Survivor区的比例</li>
 </ul>
-<p> -XX:SurvivorRatio&#x3D;8，表示调整这个空间比例<strong>（Eden空间和另外两个Survivor空间缺省所占的比例是8:1:1）</strong></p>
+<p> <code>-XX:SurvivorRatio=8</code>，表示调整这个空间比例<strong>（Eden空间和另外两个Survivor空间缺省所占的比例是8:1:1）</strong></p>
 <ul>
-<li>配置新生代的空间的大小：-Xmn，一般不设置</li>
+<li>配置新生代的空间的大小：<code>-Xmn</code>，一般不设置</li>
 </ul>
 <p><strong>几乎所有的Java对象都是在Eden区被new出来的，大部分的Java对象的销毁都在新生代进行的</strong></p>
 <h1 id="对象分配"><a href="#对象分配" class="headerlink" title="对象分配"></a><strong>对象分配</strong></h1><h2 id="一般过程"><a href="#一般过程" class="headerlink" title="一般过程"></a>一般过程</h2><img src="/2022/07/13/07-%E5%A0%86/3.png" alt="1" style="zoom: 70%;">
@@ -517,7 +517,7 @@
 <img src="/2022/07/13/07-%E5%A0%86/5.png" alt="1" style="zoom: 70%;">
 
 <p>当年龄计数器上的值为阈值时（默认为15）对象就会转存到老年区</p>
-<p>采用-XX:MaxTenuringThreshold，参数可以设置对象在经过多少次GC后会被放入老年代</p>
+<p>采用<code>-XX:MaxTenuringThreshold</code>，参数可以设置对象在经过多少次GC后会被放入老年代</p>
 <p><em><strong>实际上时对 Eden区到 Survivor区过度的一种策略，是为了保证 Eden区到 Survivor区不会频繁的进行复制一直存活的对象且对Survivor区也能保证不会具有太多的一直占据的内存</strong></em></p>
 <p><em><strong>关于垃圾回收，频繁在新生区进行收集，很少在养老区收集，几乎不在永久区 &#x2F; 元空间收集</strong></em></p>
 <h2 id="特殊过程"><a href="#特殊过程" class="headerlink" title="特殊过程"></a>特殊过程</h2><p><strong>当存在一个超大对象，导致Eden区放不下的时候，该对象则会直接放到老年区</strong></p>
@@ -555,7 +555,7 @@
 <li>Major GC的速度比Minor GC满10倍以上，STW时间更长</li>
 <li>Major GC后，如果内存还是不足，直接返回OOM</li>
 </ul>
-<h2 id="Full-GC触发机制（-）"><a href="#Full-GC触发机制（-）" class="headerlink" title="Full GC触发机制（*）"></a>Full GC触发机制（*）</h2><p>1、调用 System.gc() 时，系统建议执行Full GC，但是不必然执行</p>
+<h2 id="Full-GC触发机制（-）"><a href="#Full-GC触发机制（-）" class="headerlink" title="Full GC触发机制（*）"></a>Full GC触发机制（*）</h2><p>1、调用 <code>System.gc()</code> 时，系统建议执行Full GC，但是不必然执行</p>
 <p>2、老年代空间不足</p>
 <p>3、方法区空间不足</p>
 <p>…………</p>
@@ -575,13 +575,13 @@
 <p><em><strong>注意：</strong></em></p>
 <p>1、JVM将TLAB作为内存分配的首选</p>
 <p><em><strong>2、TLAB只占 Eden的1%，当对象在TLAB空间分配内存失败后，JVM在Eden直接分配内存，而且通过加锁来确保原子性</strong></em></p>
-<p>3、TLAB大小可以通过 -XX:TLABWasteTargetPercent + 参数进行设置</p>
+<p>3、TLAB大小可以通过 <code>-XX:TLABWasteTargetPercent</code> + 参数进行设置</p>
 <img src="/2022/07/13/07-%E5%A0%86/7.png" alt="1" style="zoom: 80%;">
 
 
 
-<h1 id="总结堆空间参数设置"><a href="#总结堆空间参数设置" class="headerlink" title="总结堆空间参数设置"></a>总结堆空间参数设置</h1><p><em><strong>1、-XX:+PrintFlagsInitial : 查看所有的参数的默认初始值</strong></em></p>
-<p>2、-XX:+PrintFlagsFinal : 查看所有的参数的最终值(可能会存在修改(:表示修改了),不再是初始值)</p>
+<h1 id="总结堆空间参数设置"><a href="#总结堆空间参数设置" class="headerlink" title="总结堆空间参数设置"></a>总结堆空间参数设置</h1><p><em><strong>1、<code>-XX:+PrintFlagsInitial</code> : 查看所有的参数的默认初始值</strong></em></p>
+<p>2、<code>-XX:+PrintFlagsFinal</code> : 查看所有的参数的最终值(可能会存在修改(:表示修改了),不再是初始值)</p>
 <p>3、具体查看某个参数的指令:</p>
 <ul>
 <li>jps:查看当前运行中的进程</li>
@@ -590,23 +590,48 @@
 <p><em><strong>4、-Xms:初始堆空间内存 (默认为物理内存的1&#x2F;64)</strong></em></p>
 <p><em><strong>5、-Xmx:最大堆空间内存(默认为物理内存的1&#x2F;4)</strong></em></p>
 <p>6、-Xmn:设置新生代的大小。(初始值及最大值)</p>
-<p>7、-XX:NewRatio:配置新生代与老年代在堆结构的占比</p>
+<p>7、<code>-XX:NewRatio</code>:配置新生代与老年代在堆结构的占比</p>
 <ul>
-<li>默认:-XX:NewRatio&#x3D;2,表示新生代占1,老年代占2,新生代占整个堆的1&#x2F;3</li>
-<li>可以修改-XX:NewRatio&#x3D;4,表示新生代占1,老年代占4,新生代占整个堆的1&#x2F;5</li>
+<li>默认:-<code>XX:NewRatio=2</code>,表示新生代占1,老年代占2,新生代占整个堆的1&#x2F;3</li>
+<li>可以修改<code>-XX:NewRatio=4</code>,表示新生代占1,老年代占4,新生代占整个堆的1&#x2F;5</li>
 </ul>
-<p>8、-XX:SurvivorRatio:设置新生代中Eden和S0&#x2F;S1空间的比例<br>(Eden空间和另外两个Survivor空间缺省所占的比例是8:1:1)</p>
-<p>9、-XX:MaxTenuringThreshold:设置新生代垃圾的最大年龄</p>
+<p>8、<code>-XX:SurvivorRatio</code>:设置新生代中Eden和S0&#x2F;S1空间的比例<br>(Eden空间和另外两个Survivor空间缺省所占的比例是8:1:1)</p>
+<p>9、<code>-XX:MaxTenuringThreshold</code>设置新生代垃圾的最大年龄</p>
 <p><em><strong>10、-XX:+PrintGCDetails:输出详细的GC处理日志</strong></em><br><em><strong>(如下这两种方式是简单的打印 gc 简要信息：</strong></em></p>
-<p><em><strong>1） -XX:+PrintGC</strong></em></p>
-<p><em><strong>2） -verbose:gc</strong></em></p>
-<p><em><strong>11、-XX:HandlePromotionFailure:是否设置空间分配担保</strong></em><br><em><strong>(JDK6之后,只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行Minor GC,否则将进行Full GC)</strong></em></p>
-<h1 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h1><p><em><strong>将堆上的对象分配到栈，需要使用逃逸分析手段</strong></em></p>
+<p><em><strong>1） <code>-XX:+PrintGC</code></strong></em></p>
+<p>*<strong>2） <code>-verbose:gc*</code></strong></p>
+<p><em><strong>11、<code>-XX:HandlePromotionFailure</code>:是否设置空间分配担保</strong></em><br><em><strong>(JDK6之后,只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行Minor GC,否则将进行Full GC)</strong></em></p>
+<h1 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><em><strong>将堆上的对象分配到栈，需要使用逃逸分析手段</strong></em></p>
 <ol>
 <li><strong>当一个对象在方法中被定义后，对象只在方法内部使用，则认为没有发生逃逸</strong></li>
 <li>当一个对象在方法中被定义后，它被外部方法所引用,则认为发生逃逸。<strong>例如作为调用参数传递到其他地方中</strong></li>
 </ol>
 <p><strong>其实就是看new出来的对象是否有可能在方法外被调用</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> EscapeAnalysis object;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 方法返回 EscapeAnalysis 对象，发生逃逸</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> EscapeAnalysis <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">return</span> <span class="variable">object</span> <span class="operator">=</span>= <span class="literal">null</span> ? <span class="keyword">new</span> <span class="title class_">EscapeAnalysis</span>() : object;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 对象的作用域仅在当前方法中有效，没有发生逃逸</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">useEscapeAnalysis1</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">EscapeAnalysis</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EscapeAnalysis</span>();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 引用成员变量的值，发生逃逸</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">useEscapeAnalysis2</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">EscapeAnalysis</span> <span class="variable">instance</span> <span class="operator">=</span> getInstance();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在jdk7及之后，可以通过</p>
+<p>1、<code>-XX:+DoEscapeAnalysis</code> 显式开启逃逸分析</p>
+<p>2、通过 <code>-XX:+PrintEscapeAnalysis</code> 查看逃逸分析的筛选结果</p>
+<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><h3 id="栈上分配"><a href="#栈上分配" class="headerlink" title="栈上分配"></a>栈上分配</h3><ul>
+<li>成员变量赋值</li>
+<li>方法返回值</li>
+<li>实例引用传递</li>
+</ul>
+<p><em><strong>在开启逃逸分析后执行时间变，而且没有发生GC</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//栈上分配测试</span></span><br><span class="line"><span class="comment">//-Xmx1G -Xms1G -XX:-DoEscapeAnalysis -XX:+PrintGCDetails</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10000000</span>; i++) &#123;</span><br><span class="line">            alloc();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//查看执行时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;花费的时间为：&quot;</span>+(end-start)+<span class="string">&quot;ms&quot;</span>);</span><br><span class="line">        <span class="comment">//为了方便查看堆内存中对象的个数，线程sleep</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(); <span class="comment">//未发生逃逸</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="同步省略"><a href="#同步省略" class="headerlink" title="同步省略"></a>同步省略</h3><p>也叫做锁消除，指在动态编译同步块时，JIT编译器可以<strong>借助逃逸分析来判断同步块所使用的锁对象是否只能被一个线程访问而没有被发布到其他线程</strong>，如果没有，那么在编译这个同步块的时候，就会<strong>取消这部分代码的同步</strong>，大大提高并发性和性能。</p>
+<p><strong>代码中堆obj进行加锁，但是obj对象的生命周期只在test1方法中，并不会被其他线程访问到，所以在JIT编译阶段就会优化成test2的</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">synchronized</span> (obj) &#123;</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    System.out.println(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分离对象或标量替换"><a href="#分离对象或标量替换" class="headerlink" title="分离对象或标量替换"></a>分离对象或标量替换</h3><p>标量：一个无法再分解成更小的数据的数据，如基本数据类型</p>
+<p>聚合量：还可以继续分解的数据，如对象</p>
+<p><em><strong>如果一个对象不会被外界访问的话，经过JIT的优化，就会把对象拆解成若干个成员变量来替代，这就是标量替换</strong></em></p>
+<p><em><strong>标量替换可以大大减少堆内存的占用，因为不需要创建对象，也就不需要分配堆内存</strong></em></p>
+<p>参数：<code>-XX:+EliminateAllocations</code>开启标量替换，允许将对象打散分配在栈上<strong>（默认打开）</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123; alloc();&#125;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">       System.out.println(<span class="string">&quot;x&quot;</span> + point.x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + point.y);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> x;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> y;</span><br><span class="line">       <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> i1)</span> &#123;&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;x&quot;</span> + x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>java</category>
@@ -859,35 +884,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2-3-算法的空间复杂度分析</title>
-    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>2.计算机访问内存的方式都是一次一个字节</p>
-<p>3.一个引用（机器地址）需要8个字节表示：</p>
-<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
-<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
-<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
-<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
-<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
-<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
-<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
-<p>算法二的空间复杂度为O(n)</p>
-<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
-<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
-<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3-1-冒泡排序</title>
     <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p><strong>排序原理：</strong> </p>
@@ -920,6 +916,35 @@
 <p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
 <p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
 <p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-3-算法的空间复杂度分析</title>
+    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>2.计算机访问内存的方式都是一次一个字节</p>
+<p>3.一个引用（机器地址）需要8个字节表示：</p>
+<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
+<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
+<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
+<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
+<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
+<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
+<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
+<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
+<p>算法二的空间复杂度为O(n)</p>
+<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
+<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
+<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
