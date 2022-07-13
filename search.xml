@@ -437,26 +437,161 @@
       </tags>
   </entry>
   <entry>
-    <title>06-本地方法栈和本地方法</title>
-    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
-<p>本地方法的作用：</p>
-<p>1、Java应用与Java外面的环境交互</p>
-<p>2、与操作系统进行交互</p>
-<p>3、Sun公司解释器由C实现</p>
-<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
-<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
-<p>当某一个线程调用本地方法时</p>
-<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
-<p>可以使用本地处理器中的寄存器</p>
-<p>……（和虚拟机拥有一样的权限）</p>
+    <title>1-1-数据结构分类</title>
+    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
+<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
+</ul>
+<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
+<ul>
+<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
+</ul>
+<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
+<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
+<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
+<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
+<li>图形结构：图形结构的数据元素是多对多的关系</li>
+</ul>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
 ]]></content>
       <categories>
-        <category>java</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-nginx-目录，配置文件</title>
+    <url>/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="使用-工具tree查看目录结构"><a href="#使用-工具tree查看目录结构" class="headerlink" title="使用 工具tree查看目录结构"></a><strong>使用</strong> <strong>工具tree查看目录结构</strong></h2><p><strong>1、安装tree工具：</strong> <strong>yum install -y tree</strong></p>
+<p><strong>2、</strong> <strong>tree &#x2F;usr&#x2F;local&#x2F;nginx</strong> <strong>(tree后面跟的是Nginx的安装目录)</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/1.png" alt="0"></p>
+<h2 id="查看进程的PID"><a href="#查看进程的PID" class="headerlink" title="查看进程的PID"></a><strong>查看进程的PID</strong></h2><p><strong>1、查看nginx的master进程和worker进程：</strong> <strong>ps -ef | grep nginx</strong></p>
+<p><strong>2、nginx的.&#x2F;configure的配置参数的时候，有一个参数是–pid-path&#x3D;PATH默认是</strong> <strong>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid</strong></p>
+<p><strong>所以可以通过查看该文件来获取nginx的master进程ID</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/3.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/4.png" alt="0"></p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a><strong>信号</strong></h2><table>
+<thead>
+<tr>
+<th><strong>信号</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TERM或INT</strong></td>
+<td><strong>立即关闭整个服务</strong></td>
+</tr>
+<tr>
+<td><strong>QUIT</strong></td>
+<td><strong>“优雅”地关闭整个服务</strong></td>
+</tr>
+<tr>
+<td><strong>HUP</strong></td>
+<td><strong>重读配置文件并使用服务对新配置项生效</strong></td>
+</tr>
+<tr>
+<td><strong>USR1</strong></td>
+<td><strong>重新打开日志文件，可以用来进行日志切割</strong></td>
+</tr>
+<tr>
+<td><strong>USR2</strong></td>
+<td><strong>平滑升级</strong> <strong>到最新版的nginx</strong></td>
+</tr>
+<tr>
+<td><strong>WINCH</strong></td>
+<td><strong>所有子进程不在接收处理新连接相当于给work进程发送QUIT指令</strong></td>
+</tr>
+</tbody></table>
+<h3 id="调用命令为-kill-signal-PID"><a href="#调用命令为-kill-signal-PID" class="headerlink" title="调用命令为 kill -signal PID"></a><strong>调用命令为</strong> <strong>kill -signal PID</strong></h3><p><strong>1、发送</strong>  <strong>TERM 或 INT</strong>  <strong>信号给master进程，会将Nginx服务</strong> <strong>立即关闭</strong> <strong>。</strong></p>
+<p><strong>2、发送</strong>  <strong>QUIT</strong>  <strong>信号给master进程，master进程会控制所有的work进程不再接收新的请求，</strong> <strong>等所有请求处理完后，在把进程都关闭掉</strong></p>
+<p><strong>3、发送</strong>  <strong>HUP</strong>  <strong>信号给master进程，master进程会把控制旧的work进程不再接收新的请求，等处理完请求后将旧的work进程关闭掉，然后根据nginx的配置文件重新启动新的work进程</strong></p>
+<p><strong>4、发送</strong>  <strong>USR1</strong>  <strong>信号给master进程，告诉Nginx重新开启日志文件</strong></p>
+<p><strong>5、</strong> <strong>发送</strong>  <strong>USR2</strong>  <strong>信号给master进程，</strong> <strong>重新开启对应的master进程和work进程</strong> <strong>，这时系统里会有两个master进程和四个master进程</strong></p>
+<p><strong>新的master进程的PID会被记录在			&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid</strong></p>
+<p><strong>而之前的旧的master进程PID会被记在	&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin文件中</strong></p>
+<p><strong>最后再发送  QUIT  信号给旧的master进程</strong></p>
+<p><strong>6、发送</strong>  <strong>WINCH</strong>  <strong>信号给master进程,让master进程控制不让所有的work进程在接收新的请求了</strong></p>
+<p><strong>请求处理完后关闭work进程。</strong> <strong>注意master进程不会被关闭掉</strong></p>
+<h3 id="nginx命令行控制"><a href="#nginx命令行控制" class="headerlink" title="nginx命令行控制"></a><strong>nginx命令行控制</strong></h3><p><strong>在sbin目录下，可以对nginx进行状态控制</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/5.png" alt="0"></p>
+<p><strong>.&#x2F;nginx-v			查看版本号信息</strong>		</p>
+<p><strong>.&#x2F;nginx-V			查看版本号信息和配置信息</strong></p>
+<p><strong>.&#x2F;nginx-t			测试配置文件语法是否正确</strong></p>
+<p><strong>.&#x2F;nginx-T			测试nginx的配置文件语法是否正确并列出用到的配置文件信息然后退出</strong></p>
+<p><strong>.&#x2F;nginx-q			在配置测试期间禁止显示非错误消息</strong>	</p>
+<p><strong>.&#x2F;nginx-s			s即signal信号，后面可以跟</strong></p>
+<ul>
+<li>​								<strong>stop[快速关闭，类似于TERM&#x2F;INT信号的作用]</strong></li>
+<li><pre><code>                   		**quit[优雅的关闭，类似于QUIT信号的作用]** 
+</code></pre>
+</li>
+<li>​								<strong>reopen[重新打开日志文件类似于USR1信号的作用]</strong> </li>
+<li>​								<strong>reload[类似于HUP信号的作用]</strong></li>
+</ul>
+<p><strong>.&#x2F;nginx-p			指定Nginx的prefix路径</strong></p>
+<p><strong>.&#x2F;nginx-c			指定Nginx的配置文件路径</strong></p>
+<p><strong>.&#x2F;nginx-g			补充Nginx配置文件，向Nginx服务指定启动时应用全局的配置</strong></p>
+<h2 id="nginx-conf配置文件结构"><a href="#nginx-conf配置文件结构" class="headerlink" title="nginx.conf配置文件结构"></a><strong>nginx.conf配置文件结构</strong></h2><p><strong>nginx.conf配置文件中默认有三大块：全局块、events块、http块</strong></p>
+<p><strong>http块中可以配置多个server块，每个server块又可以配置多个location块</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/6.png" alt="0"></p>
+<h3 id="全局块"><a href="#全局块" class="headerlink" title="全局块"></a><strong>全局块</strong></h3><h4 id="一、user指令"><a href="#一、user指令" class="headerlink" title="一、user指令"></a><strong>一、user指令</strong></h4><p><strong>可以指定启动运行工作进程的用户及用户组，这样对于系统的权限访问控制的更加精细，也更加安全</strong></p>
+<h4 id="二、work-process指令"><a href="#二、work-process指令" class="headerlink" title="二、work process指令"></a><strong>二、work process指令</strong></h4><p><strong>1、master_process:用来指定是否开启工作进程</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/7.png" alt="0"></p>
+<p><strong>2、worker _ processes:用于配置Nginx生成工作进程的数量</strong> <strong>，这个是Nginx服务器实现并发处理服务的关键所在</strong></p>
+<p><strong>process的值越大，可以支持的并发处理量也越多</strong> <strong>但事实上这个值的设定是需要受到来自服务器自身的限制建议将该值和服务器CPU的内核数保存一致</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/8.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/9.png" alt="0"></p>
+<h4 id="三、其他指令"><a href="#三、其他指令" class="headerlink" title="三、其他指令"></a><strong>三、其他指令</strong></h4><p><strong>1、deamon：</strong> <strong>设定Nginx是否以守护进程的方式启动</strong></p>
+<p><strong>守护进程是linux后台一种服务进程，特点是独立于控制终端，不会随着终端的关闭而停止</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/10.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/11.png" alt="0"></p>
+<p><strong>2、pid：</strong> <strong>配置nginx当前master进程的进程号ID存储的文件路径</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/12.png" alt="0"></p>
+<p><strong>3、error_log：</strong> <strong>配置nginx错误日志存放路径</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/13.png" alt="0"></p>
+<p><strong>日志级别的值有：debug|info|notice|warn|error|crit|alert|emerg</strong></p>
+<pre><code>                              **调试 |信息| 通知 |警告 |错误|临界|警报|紧急**
+</code></pre>
+<p><strong>4、include：</strong> <strong>引入其他配置文件</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/14.png" alt="0"></p>
+<h4 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h4><p><strong>1）创建一个main.conf，在里面写上配置文件</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/15.png" alt="0"></p>
+<p><strong>2）引入配置文件</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/16.png" alt="0"></p>
+<p><strong>3）加载成功</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/17.png" alt="0"></p>
+<h3 id="events块"><a href="#events块" class="headerlink" title="events块"></a><strong>events块</strong></h3><h4 id="1、-accept-mutex：-设置nginx网络连接序列化"><a href="#1、-accept-mutex：-设置nginx网络连接序列化" class="headerlink" title="1、 accept_mutex： 设置nginx网络连接序列化"></a><strong>1、</strong> <strong>accept_mutex：</strong> <strong>设置nginx网络连接序列化</strong></h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/18.png" alt="0"></p>
+<p><strong>如果设置为on，将会对多个Nginx进程接收连接进行序列号，一个个来唤醒接收，</strong> <strong>防止了多个进程对连接的争抢</strong></p>
+<h4 id="2、-multi-accept：-用来设置是否允许同时接收多个网络连接"><a href="#2、-multi-accept：-用来设置是否允许同时接收多个网络连接" class="headerlink" title="2、 multi_accept： 用来设置是否允许同时接收多个网络连接"></a><strong>2、</strong> <strong>multi_accept：</strong> <strong>用来设置是否允许同时接收多个网络连接</strong></h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/19.png" alt="0"></p>
+<p><strong>如果multi_accept被禁止了，nginx一个工作进程只能同时接受一个新的连接。否则，一个工作进程可以同时接受所有的新连接</strong></p>
+<h4 id="3、-worker-connections：-用来配置单个worker进程最大的连接数"><a href="#3、-worker-connections：-用来配置单个worker进程最大的连接数" class="headerlink" title="3、 worker_connections： 用来配置单个worker进程最大的连接数"></a><strong>3、</strong> <strong>worker_connections：</strong> <strong>用来配置单个worker进程最大的连接数</strong></h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/20.png" alt="0"></p>
+<p><strong>连接数不仅仅包括和前端用户建立的连接数，而是包括所有可能的连接数</strong></p>
+<h4 id="4、-use：用来设置Nginx服务器选择哪种事件驱动来处理网络消息"><a href="#4、-use：用来设置Nginx服务器选择哪种事件驱动来处理网络消息" class="headerlink" title="4、 use：用来设置Nginx服务器选择哪种事件驱动来处理网络消息"></a><strong>4、</strong> <strong>use：</strong>用来设置Nginx服务器选择哪种事件驱动来处理网络消息</h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/21.png" alt="0"></p>
+<h3 id="HTTP块"><a href="#HTTP块" class="headerlink" title="HTTP块"></a><strong>HTTP块</strong></h3><h4 id="自定义MIME-Type（网络资源的媒体类型）"><a href="#自定义MIME-Type（网络资源的媒体类型）" class="headerlink" title="自定义MIME-Type（网络资源的媒体类型）"></a><strong>自定义MIME-Type（网络资源的媒体类型）</strong></h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/22.png" alt="0"></p>
+<h4 id="default-type-用来配置Nginx响应前端请求默认的MIME类型"><a href="#default-type-用来配置Nginx响应前端请求默认的MIME类型" class="headerlink" title="default_type:用来配置Nginx响应前端请求默认的MIME类型"></a><strong>default_type:用来配置Nginx响应前端请求默认的MIME类型</strong></h4><p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/23.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/24.png" alt="0"></p>
+<h4 id="自定义服务日志"><a href="#自定义服务日志" class="headerlink" title="自定义服务日志"></a><strong>自定义服务日志</strong></h4><p><strong>1、access_log:用来设置用户访问日志的相关属性</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/25.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/26.png" alt="0"></p>
+<p><strong>2、log_format:用来指定日志的输出格式。</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/27.png" alt="0"></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/28.png" alt="0"></p>
+<p><strong>3、sendfile:用来设置Nginx服务器是否使用sendfile()传输文件</strong></p>
+<p><strong>该属性可以大大提高Nginx处理静态资源的性能</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/29.png" alt="0"></p>
+<p><strong>4、keepalive_timeout:用来</strong> <strong>设置长连接的超时时间</strong></p>
+<p>​    <img src="/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/30.png" alt="0"></p>
+<p><strong>5、keepalive_requests:用来设置一个keep-alive</strong> <strong>连接使用的次数</strong></p>
+]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -547,29 +682,26 @@
       </tags>
   </entry>
   <entry>
-    <title>1-1-数据结构分类</title>
-    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
-<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
-</ul>
-<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
-<ul>
-<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
-</ul>
-<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
-<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
-<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
-<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
-<li>图形结构：图形结构的数据元素是多对多的关系</li>
-</ul>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
 ]]></content>
       <categories>
-        <category>数据结构与算法</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>数据结构基础知识</tag>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
