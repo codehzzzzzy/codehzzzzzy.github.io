@@ -313,29 +313,6 @@
       </tags>
   </entry>
   <entry>
-    <title>06-本地方法栈和本地方法</title>
-    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
-<p>本地方法的作用：</p>
-<p>1、Java应用与Java外面的环境交互</p>
-<p>2、与操作系统进行交互</p>
-<p>3、Sun公司解释器由C实现</p>
-<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
-<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
-<p>当某一个线程调用本地方法时</p>
-<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
-<p>可以使用本地处理器中的寄存器</p>
-<p>……（和虚拟机拥有一样的权限）</p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>05-虚拟机栈及相关问题</title>
     <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p> <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.jpg" alt="0"></p>
@@ -450,6 +427,29 @@
 <p><strong>6、代码演示：（内部产生，在内部消亡，线程安全）</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//s1的声明方式是线程安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//StringBuilder线程不安全</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s2的操作过程是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder s2)</span>&#123;</span><br><span class="line">    s2.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s3的操作是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s3.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s4的操作是线程安全的,s4其实在内部消亡了</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s4.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s4.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">        s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    method2(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>06-本地方法栈和本地方法</title>
+    <url>/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="本地方法"><a href="#本地方法" class="headerlink" title="本地方法"></a><strong>本地方法</strong></h1><p><strong>实际上是一个java调用非java代码的一个接口</strong> <strong>（</strong> <strong>使用native关键字进行修饰</strong> ）</p>
+<p>本地方法的作用：</p>
+<p>1、Java应用与Java外面的环境交互</p>
+<p>2、与操作系统进行交互</p>
+<p>3、Sun公司解释器由C实现</p>
+<h1 id="本地方法栈-（线程私有）"><a href="#本地方法栈-（线程私有）" class="headerlink" title="本地方法栈 （线程私有）"></a><strong>本地方法栈</strong> <strong>（线程私有）</strong></h1><p>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用</p>
+<p>本地方法栈中登记本地方法，然后执行引擎执行时，加载本地方法库</p>
+<p>当某一个线程调用本地方法时</p>
+<p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
+<p>可以使用本地处理器中的寄存器</p>
+<p>……（和虚拟机拥有一样的权限）</p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -644,7 +644,57 @@
   <entry>
     <title>08-方法区</title>
     <url>/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
+<br>
+
+<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
+<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
+<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
+<ul>
+<li>加载过多的jar包</li>
+<li>tomcat部署的过程过多</li>
+<li>反射类太多</li>
+</ul>
+<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
+<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
+<img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
+
+<br>
+
+<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
+<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
+<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
+<p><strong>jdk1.8及以后</strong></p>
+<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
+<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
+<br>
+
+<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
+<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
+<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
+<p>2、直接父类的完整有效名（接口和Object类没有）</p>
+<p>3、修饰符</p>
+<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
+<br>
+
+<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
+<br>
+
+<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
+<p>2、方法返回类型</p>
+<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
+<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
+<br>
+
+<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
+<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
+<p>以下代码不会报空指针异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
+]]></content>
       <categories>
         <category>JVM</category>
       </categories>
