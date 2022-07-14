@@ -250,6 +250,34 @@
       </tags>
   </entry>
   <entry>
+    <title>04-程序计数器</title>
+    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
+<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
+<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
+<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
+<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
+<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
+<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
+<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
+<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
+<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
+<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
+<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
+<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
+<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
+<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>03-数据区概述与线程</title>
     <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
@@ -275,34 +303,6 @@
 <li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
 <li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
 </ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>04-程序计数器</title>
-    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
-<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
-<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
-<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
-<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
-<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
-<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
-<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
-<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
-<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
-<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
-<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
-<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
-<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
-<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -651,6 +651,8 @@
 <p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
 <p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
 <p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
+<img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
+
 <br>
 
 <h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
@@ -729,27 +731,23 @@
 <p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
 <br>
 
-<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><p>方法区中主要回收</p>
+<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
+<p>前言：</p>
+<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
+<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
+<p>符号引用则属于编译原理方面的概念，包括</p>
+<ol>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ol>
+</blockquote>
+<p>方法区中主要回收</p>
 <p>1、常量池中废弃的常量</p>
 <p>2、不再使用的类型</p>
-<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
+<p>判断一个类是否要进行回收（*）</p>
+<p><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1031,30 +1029,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2-nginx-配置到系统服务和系统环境</title>
-    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
-<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
-<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、使配置立即生效</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3-1-冒泡排序</title>
     <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p><strong>排序原理：</strong> </p>
@@ -1093,6 +1067,30 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-nginx-配置到系统服务和系统环境</title>
+    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
+<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
+<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、使配置立即生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
