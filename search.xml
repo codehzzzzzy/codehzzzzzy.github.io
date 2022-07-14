@@ -1173,4 +1173,17 @@
         <tag>nginx</tag>
       </tags>
   </entry>
+  <entry>
+    <title>08-方法区</title>
+    <url>/2022/07/13/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<p>对象的实例化</p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
 </search>
