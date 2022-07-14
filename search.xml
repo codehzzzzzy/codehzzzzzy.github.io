@@ -643,15 +643,15 @@
   </entry>
   <entry>
     <title>08-方法区</title>
-    <url>/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
+    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
+    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
 <br>
 
 <p><strong>只有HotSpot虚拟机才有永久代</strong></p>
 <p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
 <p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
 <p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
-<img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
 
 <br>
 
@@ -672,7 +672,7 @@
 </ul>
 <p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
 <p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
-<img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
 
 <br>
 
@@ -717,7 +717,7 @@
 <br>
 
 <h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
-<img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
 
 <p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
 <br>
@@ -747,7 +747,7 @@
 <p>2、不再使用的类型</p>
 <p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
 <p>判断一个类是否要进行回收（*）</p>
-<p><img src="/2022/07/13/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
+<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1174,8 +1174,8 @@
       </tags>
   </entry>
   <entry>
-    <title>08-方法区</title>
-    <url>/2022/07/13/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <title>09-对象的实例化</title>
+    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
     <content><![CDATA[<p>对象的实例化</p>
 ]]></content>
       <categories>
