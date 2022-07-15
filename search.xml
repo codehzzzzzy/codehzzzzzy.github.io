@@ -758,6 +758,30 @@
       </tags>
   </entry>
   <entry>
+    <title>09-对象的实例化，内存布局和访问定位</title>
+    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
+<p><strong>测试对象实例化的过程</strong></p>
+<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
+<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
+<p><strong>创建的过程（字节码角度）</strong></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
+<br>
+
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
+<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
+<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1-1-数据结构分类</title>
     <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
     <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
@@ -781,30 +805,6 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>09-对象的实例化，内存布局和访问定位</title>
-    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
-<p><strong>测试对象实例化的过程</strong></p>
-<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
-<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
-<p><strong>创建的过程（字节码角度）</strong></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
-<br>
-
-<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
-<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
-<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -937,6 +937,34 @@
       </tags>
   </entry>
   <entry>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2-1-算法时间复杂度分析</title>
     <url>/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p><strong>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</strong></p>
@@ -996,25 +1024,26 @@
       </tags>
   </entry>
   <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
+    <title>2-3-算法的空间复杂度分析</title>
+    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>2.计算机访问内存的方式都是一次一个字节</p>
+<p>3.一个引用（机器地址）需要8个字节表示：</p>
+<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
+<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
+<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
+<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
+<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
+<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
+<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
+<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
+<p>算法二的空间复杂度为O(n)</p>
+<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
+<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
+<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -1045,35 +1074,6 @@
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-3-算法的空间复杂度分析</title>
-    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>2.计算机访问内存的方式都是一次一个字节</p>
-<p>3.一个引用（机器地址）需要8个字节表示：</p>
-<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
-<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
-<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
-<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
-<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
-<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
-<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
-<p>算法二的空间复杂度为O(n)</p>
-<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
-<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
-<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1109,6 +1109,40 @@
 <p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
 <p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
 <p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-2-选择排序</title>
+    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>排序原理：</strong></p>
+<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
+<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
+<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
+<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设数组长度为n</p>
+<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
+<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
+<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
+<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
+<p><strong>注意：</strong></p>
+<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
+<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
+<p><strong>选择排序的时间复杂度分析：</strong></p>
+<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
+<p>分别统计数据 交换次数和数据比较次数： </p>
+<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
+<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -1161,40 +1195,6 @@
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-2-选择排序</title>
-    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>排序原理：</strong></p>
-<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
-<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
-<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
-<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设数组长度为n</p>
-<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
-<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
-<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
-<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
-<p><strong>注意：</strong></p>
-<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
-<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
-<p><strong>选择排序的时间复杂度分析：</strong></p>
-<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
-<p>分别统计数据 交换次数和数据比较次数： </p>
-<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
-<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
