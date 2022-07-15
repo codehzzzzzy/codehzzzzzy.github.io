@@ -250,34 +250,6 @@
       </tags>
   </entry>
   <entry>
-    <title>04-程序计数器</title>
-    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
-<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
-<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
-<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
-<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
-<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
-<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
-<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
-<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
-<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
-<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
-<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
-<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
-<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
-<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>03-数据区概述与线程</title>
     <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
@@ -313,120 +285,24 @@
       </tags>
   </entry>
   <entry>
-    <title>05-虚拟机栈及相关问题</title>
-    <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p> <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.jpg" alt="0"></p>
-<p><strong>不存在GC，存在OOM</strong></p>
-<p>每个线程在创建时都会创建一个虚拟机栈，其内部保存一个个栈帧，对应着一次次的方法调用</p>
-<p>虚拟机栈的生命周期和线程一致。作用是主管java程序的运行，保存方法的局部变量（8种基本数据类型，对象的引用地址，对象实际存储在堆空间中），部分结果，并参与方法的调用和返回</p>
-<p>栈是一种快速有效的分配存储方式，访问速度仅次于程序计数器</p>
-<h2 id="JVM直接对栈的操作："><a href="#JVM直接对栈的操作：" class="headerlink" title="JVM直接对栈的操作："></a>JVM直接对栈的操作：</h2><p><strong>1、每个方法执行，伴随着进栈（入栈，压栈）</strong></p>
-<p>2、执行结束后的出栈操作</p>
-<h2 id="设置栈内存的大小"><a href="#设置栈内存的大小" class="headerlink" title="设置栈内存的大小"></a><strong>设置栈内存的大小</strong></h2><p>使用参数-Xss选项设置线程的最大栈空间，栈的大小直接决定了函数调用的最大可达深度</p>
-<h2 id="栈的存储单位"><a href="#栈的存储单位" class="headerlink" title="栈的存储单位"></a><strong>栈的存储单位</strong></h2><p><strong>1）栈中的数据都是以栈帧为基本单位存在</strong></p>
-<p><strong>2）在这个线程上正在执行的每个方法都各自对应着一个栈帧</strong></p>
-<p><strong>3）栈帧是一个内存区块，是一个数据集，****维系着方法执行过程中的各种数据信息</strong></p>
-<p><strong>4）在一条活动线程中，一个时间点上，只会有一个活动的栈帧。即只有当前正在执行的方法的栈帧（栈顶栈帧）是有效的，这个栈帧被称为当前栈帧，与当前栈帧相对应的方法就是当前方法，定义这个方法的类就是当前类。</strong></p>
-<p><strong>5）执行引擎运行的所有字节码指令只针对当前栈帧进行操作。</strong></p>
-<p><strong>6）如果在该方法中调用了其他方法，对应的新的栈帧会被创建出来，放在栈的顶端，成为新的当前帧。</strong></p>
-<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/2.jpg" alt="0"></p>
-<h2 id="栈帧的内部结构"><a href="#栈帧的内部结构" class="headerlink" title="栈帧的内部结构"></a><strong>栈帧的内部结构</strong></h2><p><strong>每个栈帧都存储着：</strong></p>
-<ol>
-<li><strong>局部变量表</strong></li>
-<li><strong>操作数栈（表达式栈）</strong></li>
-<li>动态链接（或指向运行时常量池的方法引用）</li>
-<li>方法返回地址（或方法正常退出或异常退出的定义）</li>
-<li>一些附加信息</li>
-</ol>
-<p>方法嵌套调用的次数由栈的大小决定，栈越大，方法嵌套调用的次数就越多。</p>
-<p>对于一个函数，参数和局部变量越多，局部变量表就会膨胀，栈帧就越大</p>
-<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a><strong>局部变量表</strong></h3><p>1、存放编译器的各种基本数据类型（8种）引用类型（reference）returnAddress类型的变量</p>
-<p>2、定义为一个数字数组，主要用于存储方法参数和定义在方法体内的局部变量</p>
-<p>3、由于局部变量表是建立在线程的栈上，是线程的私有数据，因此不存在数据安全问题</p>
-<p>4、局部变量表所需的容量大小是在编译器就确定下来的（一旦确定就不会更改）</p>
-<p><strong>注意：局部变量表中的变量只在当前方法调用中有效，当方法调用结束后，随着方法栈帧的销毁，局部变量表也会销毁</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> 字节码中方法内部结构的剖析</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2022/7/11 14:54</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="comment">//使用javap -v 类.class 或者使用jclasslib</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LocalVariableTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        LocalVariableTest test=<span class="keyword">new</span> <span class="title class_">LocalVariableTest</span>();</span><br><span class="line">        <span class="type">int</span> num=<span class="number">10</span>;</span><br><span class="line">        test.test1();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        String name=<span class="string">&quot;xiaozhi&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/3.jpg" alt="0"></p>
-<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/4.jpg" alt="0"></p>
-<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/5.jpg" alt="0"></p>
-<p><strong>比如此处，num对应的起始pc是8，对应代码的实际行数第14行，字节码指令长度是17</strong></p>
-<p><strong>所以起始pc加上长度就是字节码的指令长度</strong></p>
-<h4 id="textcolor-red-局部变量表的基本存储单元是Slot-变量槽"><a href="#textcolor-red-局部变量表的基本存储单元是Slot-变量槽" class="headerlink" title="textcolor{red}{局部变量表的基本存储单元是Slot(变量槽)"></a>textcolor{red}{局部变量表的基本存储单元是Slot(变量槽)</h4><ul>
-<li>32位以内的类型只占用一个Slot（包括returnAddress类型）</li>
-<li>64位的类型占用两个Slot（long和double）</li>
-<li>byte，short，char在存储前转化为int</li>
-<li>boolean也被转换为int，0表示false，1表示true</li>
-<li>JVM会为局部变量中的每一个Slot都分配一个访问索引，通过这个索引可以访问局部变量中指定的值</li>
-</ul>
-<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/6.jpg" alt="0"></p>
-<p><strong>如果需要访问一个64bit的局部变量值时，只需要使用前一个索引即可</strong></p>
-<p><strong>如果当前帧是由构造方法或者实例的方法进行创建的，那么该对象引用this将会存放在index为0的Slot处，其余的继续排列</strong></p>
-<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/7.jpg" alt="0"></p>
-<p>*<em>this代表对象实例，而static是随类的加载而加载，先于实例之前就有的，所以不存在于局部变量表中，所以不能使用。</em></p>
-<p><strong>变量的分类	一、按照数据类型分：1、基本数据类型		2、引用数据类型</strong></p>
-<p><strong>二、按照在类中声明的位置分：	1、成员变量：在使用前都经过默认初始化赋值</strong></p>
-<p>​    	  		<strong>类变量：linking的prepare阶段，给类变量默认赋值  —&gt;  initial阶段，给类变量显式赋值即静态代码块赋值</strong></p>
-<pre><code>           **实例变量：随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值**
-   
-       **2、局部变量：使用前必须进行显示赋值，否则编译不通过**
-</code></pre>
-<p><strong>局部变量表中的变量是重要的垃圾回收根节点，只要被局部变量表中的直接或间接引用的对象都不会被回收</strong></p>
-<h3 id="操作数（表达式）栈"><a href="#操作数（表达式）栈" class="headerlink" title="操作数（表达式）栈"></a><strong>操作数（表达式）栈</strong></h3><ol>
-<li>每一个独立的栈帧中除了包含局部变量表以外，还包含了一个后进先出的操作数栈，也可以称之为表达式栈</li>
-<li>在方法执行的过程中，根据字节码指令，往栈中写入数据（入栈）或提取数据（出栈）</li>
-<li>主要用于保存计算过程的中间结果，同时作为计算机过程中变量临时的存储空间</li>
-<li>当一个方法开始执行的时候，一个新的栈帧也会被创建出来，这个方法的操作数栈是空的</li>
-<li>每一个操作数栈都会拥有一个栈深度用于存储数值（max_stack）32bit类型占用一个栈单位深度，64bit类型占用两个栈单位深度</li>
-<li>操作数栈不是通过访问索引的方式来进行数据访问的，而只能通过标准的入栈出栈来进行数据访问</li>
-</ol>
-<h4 id="代码追踪"><a href="#代码追踪" class="headerlink" title="代码追踪"></a><strong>代码追踪</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddOperation</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">byte</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">15</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">8</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i + j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/8.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/9.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/10.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/11.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/12.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/13.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/14.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/15.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/16.jpg" alt="0"></p>
-<h4 id="操作数栈的最大深度"><a href="#操作数栈的最大深度" class="headerlink" title="操作数栈的最大深度"></a><strong>操作数栈的最大深度</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperandStackTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddOperation</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//byte、short、char、boolean:都以int型保存</span></span><br><span class="line">        <span class="type">byte</span> i=<span class="number">15</span>;</span><br><span class="line">        <span class="type">short</span> j=<span class="number">8</span>;</span><br><span class="line">        <span class="type">int</span> k=i+j;</span><br><span class="line">        <span class="type">long</span> m=<span class="number">12L</span>;</span><br><span class="line">        <span class="type">int</span> n=<span class="number">800</span>;</span><br><span class="line">        <span class="comment">//存在宽化类型转换</span></span><br><span class="line">        m=m*n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/17.jpg" alt="0"></p>
-<h4 id="栈顶缓存技术"><a href="#栈顶缓存技术" class="headerlink" title="栈顶缓存技术"></a><strong>栈顶缓存技术</strong></h4><p>为了解决指令过多导致频繁地执行内存读&#x2F;写操作，影响执行速度的问题</p>
-<p>将栈顶元素全部缓存在物理CPU的寄存器中,以此降低对内存的读&#x2F;写次数</p>
-<p><strong>(将计算的操作放到CPU寄存器里面去)</strong></p>
-<h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a><strong>动态链接</strong></h3><p>栈帧内部包含了一个指向运行时常量池中该栈帧所属方法的引用—动态链接</p>
-<p>每一个栈帧内部都包含一个指向运行时常量池Constant pool或该栈帧所属方法的引用。包含这个引用的目的就是为了支持当前方法的代码能够实现动态链接。比如invokedynamic指令</p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/18.jpg" alt="0"></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/19.jpg" alt="0"></p>
-<p>动态链接的作用就是为了将这些符号引用(#)最终转换为调用方法的直接引用</p>
-<h4 id="方法的调用："><a href="#方法的调用：" class="headerlink" title="方法的调用："></a><strong>方法的调用：</strong></h4><ul>
-<li>静态链接：在字节码文件装载进JVM内部时，被调用的方法在编译期可知，而且在运行的期间保持不变，这时候符号引用就会转换为直接引用。这个过程即为静态链接</li>
-<li>动态链接：被调用的方法在编译期不可确定，在程序运行的期间才将符号引用进行转换，这个过程为动态链接</li>
-<li>绑定：一个字段，方法，类在符号引用转换为直接引用的过程</li>
-<li>早期绑定：被调用的目标方法在编译期内可知，运行期间不变</li>
-<li>晚期绑定：调用方法在编译期无法确定，到运行期才确定</li>
-<li>非虚方法：在编译器确定调用的版本，这个版本运行时不变，比如：静态方法，私有方法，final方法，实例构造器，父类方法</li>
-<li>虚方法：其他</li>
-</ul>
-<h4 id="虚方法表"><a href="#虚方法表" class="headerlink" title="虚方法表"></a><strong>虚方法表</strong></h4><p><strong>每个类中都有一个虚方法表，表中存放着各个方法的实际入口。</strong></p>
-<p><strong>如果类中重写了方法，那么调用的时候，就会直接在虚方法表中查找，否则将会直接连接到Object的方法中</strong></p>
-<p><strong>虚方法表会在类加载的链接阶段被创建并开始初始化</strong> <strong>，类的变量初始值准备完成之后，JVM会把该类的方法表也初始化完毕。</strong></p>
-<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/20.jpg" alt="0"></p>
-<h3 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a><strong>方法返回地址</strong></h3><p><em><strong>存储调用该方法的PC寄存器的值</strong></em></p>
-<p><em><strong>在方法推出后都会返回到该方法被调用的位置。</strong></em></p>
-<p><em><strong>方法正常退出时，调用者的PC计数器的值作为返回地址（调用该方法的指令的下一条指令的地址）</strong></em></p>
-<p><em><strong>方法异常退出时，返回地址通过异常表来确定</strong></em></p>
-<h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a><strong>相关问题</strong></h2><p><strong>1、举例栈溢出的情况：通过-Xss设置栈的大小（OOM）</strong></p>
-<p><strong>2、调整栈大小，就能保证不出现溢出吗？不能</strong></p>
-<p><strong>3、分配的栈内存越大越好吗？不是，栈空间大了线程数就少了，栈空间和线程数目成反比</strong></p>
-<p><strong>4、垃圾回收是否会涉及到虚拟机栈？不会</strong></p>
-<p><strong>5、方法中定义的局部变量是否线程安全？看情况</strong></p>
-<p><strong>6、代码演示：（内部产生，在内部消亡，线程安全）</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//s1的声明方式是线程安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//StringBuilder线程不安全</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s2的操作过程是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder s2)</span>&#123;</span><br><span class="line">    s2.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s3的操作是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s3.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s4的操作是线程安全的,s4其实在内部消亡了</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s4.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s4.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">        s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    method2(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <title>04-程序计数器</title>
+    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
+<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
+<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
+<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
+<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
+<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
+<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
+<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
+<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
+<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
+<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
+<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
+<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
+<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
+<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -642,6 +518,130 @@
       </tags>
   </entry>
   <entry>
+    <title>05-虚拟机栈及相关问题</title>
+    <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p> <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.jpg" alt="0"></p>
+<p><strong>不存在GC，存在OOM</strong></p>
+<p>每个线程在创建时都会创建一个虚拟机栈，其内部保存一个个栈帧，对应着一次次的方法调用</p>
+<p>虚拟机栈的生命周期和线程一致。作用是主管java程序的运行，保存方法的局部变量（8种基本数据类型，对象的引用地址，对象实际存储在堆空间中），部分结果，并参与方法的调用和返回</p>
+<p>栈是一种快速有效的分配存储方式，访问速度仅次于程序计数器</p>
+<h2 id="JVM直接对栈的操作："><a href="#JVM直接对栈的操作：" class="headerlink" title="JVM直接对栈的操作："></a>JVM直接对栈的操作：</h2><p><strong>1、每个方法执行，伴随着进栈（入栈，压栈）</strong></p>
+<p>2、执行结束后的出栈操作</p>
+<h2 id="设置栈内存的大小"><a href="#设置栈内存的大小" class="headerlink" title="设置栈内存的大小"></a><strong>设置栈内存的大小</strong></h2><p>使用参数-Xss选项设置线程的最大栈空间，栈的大小直接决定了函数调用的最大可达深度</p>
+<h2 id="栈的存储单位"><a href="#栈的存储单位" class="headerlink" title="栈的存储单位"></a><strong>栈的存储单位</strong></h2><p><strong>1）栈中的数据都是以栈帧为基本单位存在</strong></p>
+<p><strong>2）在这个线程上正在执行的每个方法都各自对应着一个栈帧</strong></p>
+<p><strong>3）栈帧是一个内存区块，是一个数据集，****维系着方法执行过程中的各种数据信息</strong></p>
+<p><strong>4）在一条活动线程中，一个时间点上，只会有一个活动的栈帧。即只有当前正在执行的方法的栈帧（栈顶栈帧）是有效的，这个栈帧被称为当前栈帧，与当前栈帧相对应的方法就是当前方法，定义这个方法的类就是当前类。</strong></p>
+<p><strong>5）执行引擎运行的所有字节码指令只针对当前栈帧进行操作。</strong></p>
+<p><strong>6）如果在该方法中调用了其他方法，对应的新的栈帧会被创建出来，放在栈的顶端，成为新的当前帧。</strong></p>
+<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/2.jpg" alt="0"></p>
+<h2 id="栈帧的内部结构"><a href="#栈帧的内部结构" class="headerlink" title="栈帧的内部结构"></a><strong>栈帧的内部结构</strong></h2><p><strong>每个栈帧都存储着：</strong></p>
+<ol>
+<li><strong>局部变量表</strong></li>
+<li><strong>操作数栈（表达式栈）</strong></li>
+<li>动态链接（或指向运行时常量池的方法引用）</li>
+<li>方法返回地址（或方法正常退出或异常退出的定义）</li>
+<li>一些附加信息</li>
+</ol>
+<p>方法嵌套调用的次数由栈的大小决定，栈越大，方法嵌套调用的次数就越多。</p>
+<p>对于一个函数，参数和局部变量越多，局部变量表就会膨胀，栈帧就越大</p>
+<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a><strong>局部变量表</strong></h3><p>1、存放编译器的各种基本数据类型（8种）引用类型（reference）returnAddress类型的变量</p>
+<p>2、定义为一个数字数组，主要用于存储方法参数和定义在方法体内的局部变量</p>
+<p>3、由于局部变量表是建立在线程的栈上，是线程的私有数据，因此不存在数据安全问题</p>
+<p>4、局部变量表所需的容量大小是在编译器就确定下来的（一旦确定就不会更改）</p>
+<p><strong>注意：局部变量表中的变量只在当前方法调用中有效，当方法调用结束后，随着方法栈帧的销毁，局部变量表也会销毁</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> 字节码中方法内部结构的剖析</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2022/7/11 14:54</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="comment">//使用javap -v 类.class 或者使用jclasslib</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LocalVariableTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        LocalVariableTest test=<span class="keyword">new</span> <span class="title class_">LocalVariableTest</span>();</span><br><span class="line">        <span class="type">int</span> num=<span class="number">10</span>;</span><br><span class="line">        test.test1();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        String name=<span class="string">&quot;xiaozhi&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/3.jpg" alt="0"></p>
+<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/4.jpg" alt="0"></p>
+<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/5.jpg" alt="0"></p>
+<p><strong>比如此处，num对应的起始pc是8，对应代码的实际行数第14行，字节码指令长度是17</strong></p>
+<p><strong>所以起始pc加上长度就是字节码的指令长度</strong></p>
+<h4 id="textcolor-red-局部变量表的基本存储单元是Slot-变量槽"><a href="#textcolor-red-局部变量表的基本存储单元是Slot-变量槽" class="headerlink" title="textcolor{red}{局部变量表的基本存储单元是Slot(变量槽)"></a>textcolor{red}{局部变量表的基本存储单元是Slot(变量槽)</h4><ul>
+<li>32位以内的类型只占用一个Slot（包括returnAddress类型）</li>
+<li>64位的类型占用两个Slot（long和double）</li>
+<li>byte，short，char在存储前转化为int</li>
+<li>boolean也被转换为int，0表示false，1表示true</li>
+<li>JVM会为局部变量中的每一个Slot都分配一个访问索引，通过这个索引可以访问局部变量中指定的值</li>
+</ul>
+<p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/6.jpg" alt="0"></p>
+<p><strong>如果需要访问一个64bit的局部变量值时，只需要使用前一个索引即可</strong></p>
+<p><strong>如果当前帧是由构造方法或者实例的方法进行创建的，那么该对象引用this将会存放在index为0的Slot处，其余的继续排列</strong></p>
+<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>​    <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/7.jpg" alt="0"></p>
+<p>*<em>this代表对象实例，而static是随类的加载而加载，先于实例之前就有的，所以不存在于局部变量表中，所以不能使用。</em></p>
+<p><strong>变量的分类	一、按照数据类型分：1、基本数据类型		2、引用数据类型</strong></p>
+<p><strong>二、按照在类中声明的位置分：	1、成员变量：在使用前都经过默认初始化赋值</strong></p>
+<p>​    	  		<strong>类变量：linking的prepare阶段，给类变量默认赋值  —&gt;  initial阶段，给类变量显式赋值即静态代码块赋值</strong></p>
+<pre><code>           **实例变量：随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值**
+   
+       **2、局部变量：使用前必须进行显示赋值，否则编译不通过**
+</code></pre>
+<p><strong>局部变量表中的变量是重要的垃圾回收根节点，只要被局部变量表中的直接或间接引用的对象都不会被回收</strong></p>
+<h3 id="操作数（表达式）栈"><a href="#操作数（表达式）栈" class="headerlink" title="操作数（表达式）栈"></a><strong>操作数（表达式）栈</strong></h3><ol>
+<li>每一个独立的栈帧中除了包含局部变量表以外，还包含了一个后进先出的操作数栈，也可以称之为表达式栈</li>
+<li>在方法执行的过程中，根据字节码指令，往栈中写入数据（入栈）或提取数据（出栈）</li>
+<li>主要用于保存计算过程的中间结果，同时作为计算机过程中变量临时的存储空间</li>
+<li>当一个方法开始执行的时候，一个新的栈帧也会被创建出来，这个方法的操作数栈是空的</li>
+<li>每一个操作数栈都会拥有一个栈深度用于存储数值（max_stack）32bit类型占用一个栈单位深度，64bit类型占用两个栈单位深度</li>
+<li>操作数栈不是通过访问索引的方式来进行数据访问的，而只能通过标准的入栈出栈来进行数据访问</li>
+</ol>
+<h4 id="代码追踪"><a href="#代码追踪" class="headerlink" title="代码追踪"></a><strong>代码追踪</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddOperation</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">byte</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">15</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">8</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i + j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/8.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/9.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/10.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/11.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/12.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/13.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/14.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/15.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/16.jpg" alt="0"></p>
+<h4 id="操作数栈的最大深度"><a href="#操作数栈的最大深度" class="headerlink" title="操作数栈的最大深度"></a><strong>操作数栈的最大深度</strong></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperandStackTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddOperation</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//byte、short、char、boolean:都以int型保存</span></span><br><span class="line">        <span class="type">byte</span> i=<span class="number">15</span>;</span><br><span class="line">        <span class="type">short</span> j=<span class="number">8</span>;</span><br><span class="line">        <span class="type">int</span> k=i+j;</span><br><span class="line">        <span class="type">long</span> m=<span class="number">12L</span>;</span><br><span class="line">        <span class="type">int</span> n=<span class="number">800</span>;</span><br><span class="line">        <span class="comment">//存在宽化类型转换</span></span><br><span class="line">        m=m*n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/17.jpg" alt="0"></p>
+<h4 id="栈顶缓存技术"><a href="#栈顶缓存技术" class="headerlink" title="栈顶缓存技术"></a><strong>栈顶缓存技术</strong></h4><p>为了解决指令过多导致频繁地执行内存读&#x2F;写操作，影响执行速度的问题</p>
+<p>将栈顶元素全部缓存在物理CPU的寄存器中,以此降低对内存的读&#x2F;写次数</p>
+<p><strong>(将计算的操作放到CPU寄存器里面去)</strong></p>
+<h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a><strong>动态链接</strong></h3><p>栈帧内部包含了一个指向运行时常量池中该栈帧所属方法的引用—动态链接</p>
+<p>每一个栈帧内部都包含一个指向运行时常量池Constant pool或该栈帧所属方法的引用。包含这个引用的目的就是为了支持当前方法的代码能够实现动态链接。比如invokedynamic指令</p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/18.jpg" alt="0"></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/19.jpg" alt="0"></p>
+<p>动态链接的作用就是为了将这些符号引用(#)最终转换为调用方法的直接引用</p>
+<h4 id="方法的调用："><a href="#方法的调用：" class="headerlink" title="方法的调用："></a><strong>方法的调用：</strong></h4><ul>
+<li>静态链接：在字节码文件装载进JVM内部时，被调用的方法在编译期可知，而且在运行的期间保持不变，这时候符号引用就会转换为直接引用。这个过程即为静态链接</li>
+<li>动态链接：被调用的方法在编译期不可确定，在程序运行的期间才将符号引用进行转换，这个过程为动态链接</li>
+<li>绑定：一个字段，方法，类在符号引用转换为直接引用的过程</li>
+<li>早期绑定：被调用的目标方法在编译期内可知，运行期间不变</li>
+<li>晚期绑定：调用方法在编译期无法确定，到运行期才确定</li>
+<li>非虚方法：在编译器确定调用的版本，这个版本运行时不变，比如：静态方法，私有方法，final方法，实例构造器，父类方法</li>
+<li>虚方法：其他</li>
+</ul>
+<h4 id="虚方法表"><a href="#虚方法表" class="headerlink" title="虚方法表"></a><strong>虚方法表</strong></h4><p><strong>每个类中都有一个虚方法表，表中存放着各个方法的实际入口。</strong></p>
+<p><strong>如果类中重写了方法，那么调用的时候，就会直接在虚方法表中查找，否则将会直接连接到Object的方法中</strong></p>
+<p><strong>虚方法表会在类加载的链接阶段被创建并开始初始化</strong> <strong>，类的变量初始值准备完成之后，JVM会把该类的方法表也初始化完毕。</strong></p>
+<p><img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/20.jpg" alt="0"></p>
+<h3 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a><strong>方法返回地址</strong></h3><p><em><strong>存储调用该方法的PC寄存器的值</strong></em></p>
+<p><em><strong>在方法推出后都会返回到该方法被调用的位置。</strong></em></p>
+<p><em><strong>方法正常退出时，调用者的PC计数器的值作为返回地址（调用该方法的指令的下一条指令的地址）</strong></em></p>
+<p><em><strong>方法异常退出时，返回地址通过异常表来确定</strong></em></p>
+<h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a><strong>相关问题</strong></h2><p><strong>1、举例栈溢出的情况：通过-Xss设置栈的大小（OOM）</strong></p>
+<p><strong>2、调整栈大小，就能保证不出现溢出吗？不能</strong></p>
+<p><strong>3、分配的栈内存越大越好吗？不是，栈空间大了线程数就少了，栈空间和线程数目成反比</strong></p>
+<p><strong>4、垃圾回收是否会涉及到虚拟机栈？不会</strong></p>
+<p><strong>5、方法中定义的局部变量是否线程安全？看情况</strong></p>
+<p><strong>6、代码演示：（内部产生，在内部消亡，线程安全）</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//s1的声明方式是线程安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//StringBuilder线程不安全</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s2的操作过程是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder s2)</span>&#123;</span><br><span class="line">    s2.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s3的操作是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s3.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s4的操作是线程安全的,s4其实在内部消亡了</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s4.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s4.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">        s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    method2(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>08-方法区</title>
     <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
     <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
@@ -748,6 +748,30 @@
 <p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
 <p>判断一个类是否要进行回收（*）</p>
 <p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>09-对象的实例化，内存布局和访问定位</title>
+    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
+<p><strong>测试对象实例化的过程</strong></p>
+<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
+<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
+<p><strong>创建的过程（字节码角度）</strong></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
+<br>
+
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
+<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
+<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -913,6 +937,162 @@
       </tags>
   </entry>
   <entry>
+    <title>2-3-算法的空间复杂度分析</title>
+    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>2.计算机访问内存的方式都是一次一个字节</p>
+<p>3.一个引用（机器地址）需要8个字节表示：</p>
+<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
+<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
+<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
+<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
+<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
+<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
+<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
+<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
+<p>算法二的空间复杂度为O(n)</p>
+<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
+<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
+<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-nginx-配置到系统服务和系统环境</title>
+    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
+<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
+<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、使配置立即生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-1-冒泡排序</title>
+    <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>排序原理：</strong> </p>
+<p><strong>1. 比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。</strong></p>
+<p><strong>2. 对每一对相邻元素做同样的工作，从开始第一对元素到结尾的最后一对元素。最终最后位置的元素就是最大值。</strong></p>
+<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/1.png"></p>
+<p>**初始状态到第一次冒泡 : **</p>
+<ol>
+<li>比较 4,5，5比4大，不变。</li>
+<li>比较5,6，6比5大，不变</li>
+<li>比较6,3，3比6小，交换二者位置    4,5,3,6,2,1</li>
+<li>比较6,2，2比6小，交换二者位置    4,5,3,2,6,1</li>
+<li>比较6,1，1比6小，交换二者位置    4,5,3,2,1,6</li>
+</ol>
+<p>假设数组长度为n，冒泡排序必须实现n-1次冒泡（令k &#x3D; n）</p>
+<p>第一次冒泡要有k-1次比较</p>
+<p>第二次冒泡要有k-2次比较</p>
+<p>第n-1次冒泡要有k-n-1次比较</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用两个for循环进行遍历，第一个for循环表示冒泡的次数为：数组长度-1</strong></p>
+<p><strong>第二个for循环表示相邻数组元素依次比较，j &lt; i 表示排序完的元素放在数组的后面，不需要再次进行排序</strong></p>
+<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/2.png"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> SORT;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2022/1/14</span></span><br><span class="line"><span class="comment"> * 10:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//    1.public static void sort(Comparable[] a)：对数组内的元素进行排序</span></span><br><span class="line"><span class="comment">//    2.private static boolean greater(Comparable v,Comparable w):判断v是否大于w</span></span><br><span class="line"><span class="comment">//    3.private static void exch(Comparable[] a,int i,int j)：交换a数组中，索引i和索引j处的值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bubble</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对数组内的元素进行排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                    exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断v是否大于w</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> v.compareTo(w);</span><br><span class="line">        <span class="keyword">if</span> (result&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        return result&gt;0;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//交换a数组中，索引i和索引j处的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        Comparable temp;</span><br><span class="line">        temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>冒泡排序的时间复杂度分析 冒泡排序使用了双层for循环，其中内层循环的循环体是真正完成排序的代码</strong></p>
+<p>**所以， 分析冒泡排序的时间复杂度，主要分析一下内层循环体的执行次数即可。 **</p>
+<p>在最坏情况下，也就是假如要排序的元素为{6,5,4,3,2,1}逆序，</p>
+<p>那么： 元素比较的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2; </p>
+<p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
+<p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
+<p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-2-选择排序</title>
+    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>排序原理：</strong></p>
+<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
+<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
+<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
+<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设数组长度为n</p>
+<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
+<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
+<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
+<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
+<p><strong>注意：</strong></p>
+<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
+<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
+<p><strong>选择排序的时间复杂度分析：</strong></p>
+<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
+<p>分别统计数据 交换次数和数据比较次数： </p>
+<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
+<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2-1-算法时间复杂度分析</title>
     <url>/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p><strong>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</strong></p>
@@ -972,162 +1152,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-3-算法的空间复杂度分析</title>
-    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>2.计算机访问内存的方式都是一次一个字节</p>
-<p>3.一个引用（机器地址）需要8个字节表示：</p>
-<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
-<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
-<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
-<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
-<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
-<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
-<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
-<p>算法二的空间复杂度为O(n)</p>
-<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
-<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
-<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-1-冒泡排序</title>
-    <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>排序原理：</strong> </p>
-<p><strong>1. 比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。</strong></p>
-<p><strong>2. 对每一对相邻元素做同样的工作，从开始第一对元素到结尾的最后一对元素。最终最后位置的元素就是最大值。</strong></p>
-<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/1.png"></p>
-<p>**初始状态到第一次冒泡 : **</p>
-<ol>
-<li>比较 4,5，5比4大，不变。</li>
-<li>比较5,6，6比5大，不变</li>
-<li>比较6,3，3比6小，交换二者位置    4,5,3,6,2,1</li>
-<li>比较6,2，2比6小，交换二者位置    4,5,3,2,6,1</li>
-<li>比较6,1，1比6小，交换二者位置    4,5,3,2,1,6</li>
-</ol>
-<p>假设数组长度为n，冒泡排序必须实现n-1次冒泡（令k &#x3D; n）</p>
-<p>第一次冒泡要有k-1次比较</p>
-<p>第二次冒泡要有k-2次比较</p>
-<p>第n-1次冒泡要有k-n-1次比较</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用两个for循环进行遍历，第一个for循环表示冒泡的次数为：数组长度-1</strong></p>
-<p><strong>第二个for循环表示相邻数组元素依次比较，j &lt; i 表示排序完的元素放在数组的后面，不需要再次进行排序</strong></p>
-<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/2.png"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> SORT;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2022/1/14</span></span><br><span class="line"><span class="comment"> * 10:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//    1.public static void sort(Comparable[] a)：对数组内的元素进行排序</span></span><br><span class="line"><span class="comment">//    2.private static boolean greater(Comparable v,Comparable w):判断v是否大于w</span></span><br><span class="line"><span class="comment">//    3.private static void exch(Comparable[] a,int i,int j)：交换a数组中，索引i和索引j处的值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bubble</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对数组内的元素进行排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                    exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断v是否大于w</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> v.compareTo(w);</span><br><span class="line">        <span class="keyword">if</span> (result&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        return result&gt;0;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//交换a数组中，索引i和索引j处的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        Comparable temp;</span><br><span class="line">        temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>冒泡排序的时间复杂度分析 冒泡排序使用了双层for循环，其中内层循环的循环体是真正完成排序的代码</strong></p>
-<p>**所以， 分析冒泡排序的时间复杂度，主要分析一下内层循环体的执行次数即可。 **</p>
-<p>在最坏情况下，也就是假如要排序的元素为{6,5,4,3,2,1}逆序，</p>
-<p>那么： 元素比较的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2; </p>
-<p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
-<p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
-<p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-nginx-配置到系统服务和系统环境</title>
-    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
-<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
-<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、使配置立即生效</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-2-选择排序</title>
-    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>排序原理：</strong></p>
-<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
-<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
-<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
-<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设数组长度为n</p>
-<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
-<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
-<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
-<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
-<p><strong>注意：</strong></p>
-<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
-<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
-<p><strong>选择排序的时间复杂度分析：</strong></p>
-<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
-<p>分别统计数据 交换次数和数据比较次数： </p>
-<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
-<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3-nginx-静态资源部署</title>
     <url>/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<h1 id="静态资源的配置指令"><a href="#静态资源的配置指令" class="headerlink" title="静态资源的配置指令"></a><strong>静态资源的配置指令</strong></h1><h2 id="listen指令：-用来配置监听端口"><a href="#listen指令：-用来配置监听端口" class="headerlink" title="listen指令： 用来配置监听端口"></a><strong>listen指令：</strong> <strong>用来配置监听端口</strong></h2><p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/1.png"></p>
@@ -1174,27 +1198,97 @@
       </tags>
   </entry>
   <entry>
-    <title>09-对象的实例化，内存布局和访问定位</title>
-    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述</a></p>
-<p><strong>测试对象实例化的过程</strong></p>
-<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
-<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
-<p><strong>创建的过程（字节码角度）</strong></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
+    <title>spring源码-1-BeanFactory与ApplicationContext</title>
+    <url>/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/</url>
+    <content><![CDATA[<h1 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h1><p>1、它是ApplicationContext的父接口</p>
+<p>2、它才是Spring的核心容器，主要的ApplicationContext的实现都组合了它的功能</p>
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/1.png" style="zoom:80%;">
+
+<p>比如使用ApplicationContext的getBean方法，实际上先拿到BeanFactory对象，再去调用BeanFactory的getBean方法</p>
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/2.png" style="zoom:80%;">
+
+<p><strong>3、BeanFactory表面上只有getBean功能实际上，控制反转，基本的依赖注入，直至Bean的生命周期都是由它的实现类提供</strong></p>
 <br>
 
-<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局</a></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
-<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述</a></p>
-<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
+<h1 id="ApplicationContext功能"><a href="#ApplicationContext功能" class="headerlink" title="ApplicationContext功能"></a>ApplicationContext功能</h1><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/3.png" style="zoom:80%;">
+
+<p><strong>1、MessageSource：处理国际化资源的能力（翻译）</strong> <em><strong>比如 getMessage方法</strong></em></p>
+<p><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/5.png" style="zoom:80%;"><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/4.png" style="zoom:80%;"></p>
+<br>
+
+<p><strong>2、RessourcePatternResolver：通配符匹配资源的能力</strong> <em><strong>比如 getResources方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示在resources目录下的META-INF子目录下的spring.factories文件和jar包内的......</span></span><br><span class="line"><span class="comment">//*号表示也可以jar内进行搜索</span></span><br><span class="line">Resource[] resources = context.getResources(<span class="string">&quot;classpath*:META-INF/spring.factories&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">    System.out.println(resource);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>3、ApplicationEventPublisher：发布事件能力</strong> <em><strong>比如 publishEvent方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取Component1然后进行注册</span></span><br><span class="line">context.getBean(Component1.class).register();</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component1中进行声明</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component1.class);</span><br><span class="line"><span class="comment">//该容器对象具备发送事件的功能</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> ApplicationEventPublisher context;	<span class="comment">//事件发生器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">()</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;用户注册&quot;</span>);</span><br><span class="line">    context.publishEvent(<span class="keyword">new</span> <span class="title class_">UserRegisteredEvent</span>(<span class="built_in">this</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component2中监听该事件</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component2.class);</span><br><span class="line"><span class="meta">@EventListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">aaa</span><span class="params">(UserRegisteredEvent event)</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;&#123;&#125;&quot;</span>, event);</span><br><span class="line">    log.debug(<span class="string">&quot;发送短信&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>4、EnvironmentCapable：读取环境信息</strong> <em><strong>比如getProperty方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取properties文件和系统环境变量对应键的值</span></span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;java_home&quot;</span>));</span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;server.port&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="BeanFactory的实现"><a href="#BeanFactory的实现" class="headerlink" title="BeanFactory的实现"></a>BeanFactory的实现</h1><h2 id="1、给Bean添加定义并进行注册"><a href="#1、给Bean添加定义并进行注册" class="headerlink" title="1、给Bean添加定义并进行注册"></a><em><strong>1、给Bean添加定义并进行注册</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">DefaultListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultListableBeanFactory</span>();</span><br><span class="line"><span class="comment">// bean 的定义（class, scope, 初始化, 销毁）</span></span><br><span class="line"><span class="type">AbstractBeanDefinition</span> <span class="variable">beanDefinition</span> <span class="operator">=</span></span><br><span class="line">        BeanDefinitionBuilder.genericBeanDefinition(Config.class).setScope(<span class="string">&quot;singleton&quot;</span>).getBeanDefinition();</span><br><span class="line"><span class="comment">//注册</span></span><br><span class="line">beanFactory.registerBeanDefinition(<span class="string">&quot;config&quot;</span>, beanDefinition);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="2、添加-BeanFactory-后处理器"><a href="#2、添加-BeanFactory-后处理器" class="headerlink" title="2、添加 BeanFactory 后处理器"></a><em><strong>2、添加 BeanFactory 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给 BeanFactory 添加一些常用的后处理器</span></span><br><span class="line">AnnotationConfigUtils.registerAnnotationConfigProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果只是添加后处理器不进行扩展，则无法解析@Confident和@bean注解</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BeanFactory 后处理器主要功能，补充了一些 bean 定义</span></span><br><span class="line"><span class="comment">// getBeansOfType 根据类型获取多个bean（bean后处理器）</span></span><br><span class="line">beanFactory.getBeansOfType(BeanFactoryPostProcessor.class).values().forEach(beanFactoryPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);   <span class="comment">//执行beanFactory 后处理器</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean3 <span class="title function_">bean3</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean3</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean4 <span class="title function_">bean4</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean4</span>();&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean3</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean4</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean1.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean1</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean1()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="keyword">private</span> Bean2 bean2;</span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">getBean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean2;&#125;</span><br><span class="line">        <span class="comment">//同时添加两个注解（后处理器的顺序决定了哪个先被解析）</span></span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="meta">@Resource(name = &quot;bean4&quot;)</span></span><br><span class="line">        <span class="keyword">private</span> Inter bean3;</span><br><span class="line">        <span class="keyword">public</span> Inter <span class="title function_">getInter</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean3;&#125;&#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean2.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean2</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean2()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="3、添加-Bean-后处理器"><a href="#3、添加-Bean-后处理器" class="headerlink" title="3、添加 Bean 后处理器"></a><em><strong>3、添加 Bean 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Bean 后处理器, 针对 bean 的生命周期的各个阶段提供扩展, 例如 @Autowired @Resource ...</span></span><br><span class="line">beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream()</span><br><span class="line">        .forEach(beanPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactory.addBeanPostProcessor(beanPostProcessor);    <span class="comment">//建立Bean工厂和后处理器的关系</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="4、后处理器器顺序"><a href="#4、后处理器器顺序" class="headerlink" title="4、后处理器器顺序"></a><em><strong>4、后处理器器顺序</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认是Common的后处理器排在前面，Autowired的排在后面</span></span><br><span class="line">System.out.println(<span class="string">&quot;Common:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">3</span>));</span><br><span class="line">System.out.println(<span class="string">&quot;Autowired:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em><strong>BeanFactory总结：</strong></em></p>
+<ol>
+<li>不会主动调用 BeanFactory 后处理器</li>
+<li>不会主动添加 Bean 后处理器</li>
+<li>不会主动初始化单例</li>
+<li>不会解析beanFactory 还不会解析 ${ } 与 #{ }</li>
+</ol>
+<p><em><strong>Bean后处理器会有排序的逻辑</strong></em></p>
+<br>
+
+<h1 id="ApplicationContext的实现"><a href="#ApplicationContext的实现" class="headerlink" title="ApplicationContext的实现"></a>ApplicationContext的实现</h1><h2 id="1、ClassPathXmlApplicationContext"><a href="#1、ClassPathXmlApplicationContext" class="headerlink" title="1、ClassPathXmlApplicationContext"></a>1、ClassPathXmlApplicationContext</h2><p><strong>在类路径下读取XML配置文件</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testClassPathXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;a02.xml&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(context.getBean(Bean2.class).getBean1());</span><br><span class="line">    <span class="comment">/**	</span></span><br><span class="line"><span class="comment">     *  结果：</span></span><br><span class="line"><span class="comment">     *	bean1</span></span><br><span class="line"><span class="comment">     *	bean2</span></span><br><span class="line"><span class="comment">     *	com.itheima.a02.A02$Bean1@6392827e</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">//a02.xml</span><br><span class="line"><span class="comment">&lt;!-- 控制反转, 让 bean1和bean2 被 Spring 容器管理 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean2&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 依赖注入, 让 bean2 建立与 bean1 的依赖关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="2、FileSystemXmlApplicationContext"><a href="#2、FileSystemXmlApplicationContext" class="headerlink" title="2、FileSystemXmlApplicationContext"></a>2、FileSystemXmlApplicationContext</h2><p><strong>在磁盘路径下读取XML配置文件</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testFileSystemXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">FileSystemXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;src\\main\\resources\\a02.xml&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="3、AnnotationConfigApplicationContext"><a href="#3、AnnotationConfigApplicationContext" class="headerlink" title="3、AnnotationConfigApplicationContext"></a>3、AnnotationConfigApplicationContext</h2><p><strong>基于java配置类来完成</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(Config.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="type">Bean2</span> <span class="variable">bean2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();</span><br><span class="line">        bean2.setBean1(bean1);</span><br><span class="line">        <span class="keyword">return</span> bean2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123; &#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Bean1 bean1;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBean1</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.bean1 = bean1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">getBean1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> bean1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/6.png" style="zoom:80%;">
+
+<br>
+
+<h2 id="4、AnnotationConfigServletWebServerApplicationContext"><a href="#4、AnnotationConfigServletWebServerApplicationContext" class="headerlink" title="4、AnnotationConfigServletWebServerApplicationContext"></a>4、AnnotationConfigServletWebServerApplicationContext</h2><p><strong>基于 java 配置类来创建，用于 web 环境</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigServletWebServerApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//产生内嵌的 tomcat 容器</span></span><br><span class="line">    <span class="keyword">public</span> ServletWebServerFactory <span class="title function_">servletWebServerFactory</span><span class="params">()</span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TomcatServletWebServerFactory</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//创建 dispatcherServlet 对象</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServlet <span class="title function_">dispatcherServlet</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServlet</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//将 dispatcherServlet 注册到tomcat容器中</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServletRegistrationBean <span class="title function_">registrationBean</span><span class="params">(DispatcherServlet dispatcherServlet)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServletRegistrationBean</span>(dispatcherServlet, <span class="string">&quot;/&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Controller <span class="title function_">controller1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (request, response) -&gt; &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
 ]]></content>
       <categories>
-        <category>JVM</category>
+        <category>spring高级</category>
       </categories>
       <tags>
-        <tag>JVM</tag>
         <tag>底层源码</tag>
+        <tag>spring高级</tag>
       </tags>
   </entry>
 </search>
