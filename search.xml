@@ -137,41 +137,6 @@
       </tags>
   </entry>
   <entry>
-    <title>03-数据区概述与线程</title>
-    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
-<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
-<p><strong>运行时数据区的完整图</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
-<p><strong>Java的内存区域</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
-<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
-<p><strong>即：</strong></p>
-<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
-<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
-<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
-<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
-<p><strong>JVM线程（*）</strong></p>
-<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
-<ul>
-<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
-<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>02-类加载器和类加载过程</title>
     <url>/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a><strong>类加载过程</strong></h1><p><img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/1.png" alt="截图"></p>
@@ -275,6 +240,41 @@
 <p><strong>3）常量在编译阶段会存入调用方法所在的类的常量池中（这个例子存在F类的常量池中）</strong></p>
 <p><strong>本质上没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化</strong></p>
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03-数据区概述与线程</title>
+    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
+<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
+<p><strong>运行时数据区的完整图</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
+<p><strong>Java的内存区域</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
+<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
+<p><strong>即：</strong></p>
+<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
+<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
+<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
+<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
+<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
+<p><strong>JVM线程（*）</strong></p>
+<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
+<ul>
+<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
+<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
+<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
+<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
+</ul>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -964,57 +964,6 @@
       </tags>
   </entry>
   <entry>
-    <title>12-String相关</title>
-    <url>/2022/07/16/12-String%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="String具有不可变性"><a href="#String具有不可变性" class="headerlink" title="String具有不可变性"></a><strong>String具有不可变性</strong></h1><p><em><strong>1）当对字符串进行重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值</strong></em></p>
-<p><em><strong>2）当对现有的字符串进行连接操作的时候，也需要重新指定内存区域赋值，不能使用原有的value进行赋值</strong></em></p>
-<p><em><strong>3）当调用String的 replace() 方法修改指定字符或字符串的时候，也需要重新指定内存区域赋值，不能使用原有的value进行赋值</strong></em></p>
-<p><strong>注意：String声明为final，不可被继承</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;<span class="comment">//字面量定义的方式，&quot;abc&quot;存储在字符串常量池中</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    System.out.println(s1 == s2)	<span class="comment">//true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;<span class="comment">//字面量定义的方式，&quot;abc&quot;存储在字符串常量池中</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    s1 = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    System.out.println(s1 == s2)	<span class="comment">//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    s2 += <span class="string">&quot;def&quot;</span>;</span><br><span class="line">    System.out.println(s2);<span class="comment">//abcdef</span></span><br><span class="line">    System.out.println(s1);<span class="comment">//abc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> s1.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line">    System.out.println(s1);<span class="comment">//abc</span></span><br><span class="line">    System.out.println(s2);<span class="comment">//mbc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/1.png" style="zoom:80%;">
-
-<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/2.png" style="zoom:70%;">
-
-<br>
-
-<h1 id="字符串常量池不会存储相同内容的字符串"><a href="#字符串常量池不会存储相同内容的字符串" class="headerlink" title="字符串常量池不会存储相同内容的字符串"></a>字符串常量池不会存储相同内容的字符串</h1><p><strong>1、String的String Pool是一个固定大小的 Hashtable</strong>，如果放进String Pool的String非常多，就会造成Hash冲突严重，导致链表会很长，而链表长了之后直接会造成的影响是当调用<code>String.intern</code>时性能会下降</p>
-<p><strong>2、jdk6中StringTable的长度是固定的（1009），jdk7中StringTable的长度默认是60013，jdk8的可设置的最小值是1009。</strong>两个版本都可以**调整StringTable的值，使用 <code>-XX:StringTableSize</code> **</p>
-<br>
-
-<h1 id="String的内存分配"><a href="#String的内存分配" class="headerlink" title="String的内存分配"></a>String的内存分配</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>8种基本数据类型的常量池都是系统协调的，String类型的常量池比较特殊。它的主要使用方法有两种：<br><strong>1、直接使用双引号声明出来的String对象会直接存储在常量池中（比如： <code>String info = “abc”</code> ）</strong><br><strong>2、也可以使用String提供的intern()方法手动将字符串加入常量池中</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;<span class="comment">//line 1</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//line 2</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//line 3</span></span><br><span class="line">    <span class="type">Memory</span> <span class="variable">mem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memory</span>();<span class="comment">//line 4</span></span><br><span class="line">    mem.foo(obj);<span class="comment">//line 5</span></span><br><span class="line">&#125;<span class="comment">//line 9</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(Object param)</span> &#123;<span class="comment">//line 6</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> param.toString();<span class="comment">//line 7</span></span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;<span class="comment">//line 8</span></span><br></pre></td></tr></table></figure>
-
-<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/3.png" style="zoom:70%;">
-
-<br>
-
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><em><strong>注意：</strong></em></h2><p><strong>完全相同的字符串字面量，应该包含同样的Unicode字符序列（包含同一份码点序列的常量)</strong></p>
-<p><strong>并且必须是指向同一个String类实例。</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    System.out.println();<span class="comment">//2293</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>);<span class="comment">//2294</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>);System.out.println(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;4&quot;</span>);System.out.println(<span class="string">&quot;5&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;6&quot;</span>);System.out.println(<span class="string">&quot;7&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;8&quot;</span>);System.out.println(<span class="string">&quot;9&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>);<span class="comment">//2303</span></span><br><span class="line">    <span class="comment">//如下的字符串&quot;1&quot; 到 &quot;10&quot;不会再次加载</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;3&quot;</span>);System.out.println(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;5&quot;</span>);System.out.println(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;7&quot;</span>);System.out.println(<span class="string">&quot;8&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;9&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="字符串拼接操作"><a href="#字符串拼接操作" class="headerlink" title="字符串拼接操作"></a>字符串拼接操作</h1><p>常量与常量的拼接结果在常量池，原理是编译器优化</p>
-<p>常量池中不会存在相同内容的常量</p>
-<p><strong style="color:red;">拼接中只有其中有一个是变量，拼接后的结果就在堆中。变量拼接的原理是StringBulider</strong></p>
-<p>如果拼接的结果</p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>11-执行引擎</title>
     <url>/2022/07/15/11-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>1、执行引擎是Java虚拟机的核心组成部分之一</p>
@@ -1121,6 +1070,84 @@
 
 
 <h1 id="Graal编译器与AOT编译器（-）"><a href="#Graal编译器与AOT编译器（-）" class="headerlink" title="Graal编译器与AOT编译器（*）"></a>Graal编译器与AOT编译器（*）</h1><img src="/2022/07/15/11-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/8.png" style="zoom:90%;">
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>12-String相关</title>
+    <url>/2022/07/16/12-String%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="String具有不可变性"><a href="#String具有不可变性" class="headerlink" title="String具有不可变性"></a><strong>String具有不可变性</strong></h1><p><strong style="color:red;"><em><strong>1）当对字符串进行重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值</strong></em></strong></p>
+<p><strong style="color:red;"><em><strong>2）当对现有的字符串进行连接操作的时候，也需要重新指定内存区域赋值，不能使用原有的value进行赋值</strong></em></strong></p>
+<p><strong style="color:red;"><em><strong>3）当调用String的 replace() 方法修改指定字符或字符串的时候，也需要重新指定内存区域赋值，不能使用原有的value进行赋值</strong></em></strong></p>
+<p><strong>注意：String声明为final，不可被继承</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;<span class="comment">//字面量定义的方式，&quot;abc&quot;存储在字符串常量池中</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    System.out.println(s1 == s2)	<span class="comment">//true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;<span class="comment">//字面量定义的方式，&quot;abc&quot;存储在字符串常量池中</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    s1 = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    System.out.println(s1 == s2)	<span class="comment">//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    s2 += <span class="string">&quot;def&quot;</span>;</span><br><span class="line">    System.out.println(s2);<span class="comment">//abcdef</span></span><br><span class="line">    System.out.println(s1);<span class="comment">//abc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> s1.replace(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;m&#x27;</span>);</span><br><span class="line">    System.out.println(s1);<span class="comment">//abc</span></span><br><span class="line">    System.out.println(s2);<span class="comment">//mbc</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/1.png" style="zoom:80%;">
+
+<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/2.png" style="zoom:70%;">
+
+<br>
+
+<h1 id="字符串常量池不会存储相同内容的字符串"><a href="#字符串常量池不会存储相同内容的字符串" class="headerlink" title="字符串常量池不会存储相同内容的字符串"></a>字符串常量池不会存储相同内容的字符串</h1><p><strong>1、String的String Pool是一个固定大小的 Hashtable</strong>，如果放进String Pool的String非常多，就会造成Hash冲突严重，导致链表会很长，而链表长了之后直接会造成的影响是当调用<code>String.intern</code>时性能会下降</p>
+<p><strong>2、jdk6中StringTable的长度是固定的（1009），jdk7中StringTable的长度默认是60013，jdk8的可设置的最小值是1009。</strong>两个版本都可以**调整StringTable的值，使用 <code>-XX:StringTableSize</code> **</p>
+<br>
+
+<h1 id="String的内存分配"><a href="#String的内存分配" class="headerlink" title="String的内存分配"></a>String的内存分配</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>8种基本数据类型的常量池都是系统协调的，String类型的常量池比较特殊。它的主要使用方法有两种：<br><strong style="color:red;"><strong>1、直接使用双引号声明出来的String对象会直接存储在常量池中（比如： <code>String info = “abc”</code> ）</strong></strong><br><strong style="color:red;"><strong>2、也可以使用String提供的intern()方法手动将字符串加入常量池中</strong></strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;<span class="comment">//line 1</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//line 2</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//line 3</span></span><br><span class="line">    <span class="type">Memory</span> <span class="variable">mem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memory</span>();<span class="comment">//line 4</span></span><br><span class="line">    mem.foo(obj);<span class="comment">//line 5</span></span><br><span class="line">&#125;<span class="comment">//line 9</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(Object param)</span> &#123;<span class="comment">//line 6</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> param.toString();<span class="comment">//line 7</span></span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;<span class="comment">//line 8</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/16/12-String%E7%9B%B8%E5%85%B3/3.png" style="zoom:70%;">
+
+<br>
+
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><em><strong>注意：</strong></em></h2><p><strong>完全相同的字符串字面量，应该包含同样的Unicode字符序列（包含同一份码点序列的常量)</strong></p>
+<p><strong>并且必须是指向同一个String类实例。</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    System.out.println();<span class="comment">//2293</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>);<span class="comment">//2294</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>);System.out.println(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;4&quot;</span>);System.out.println(<span class="string">&quot;5&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;6&quot;</span>);System.out.println(<span class="string">&quot;7&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;8&quot;</span>);System.out.println(<span class="string">&quot;9&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>);<span class="comment">//2303</span></span><br><span class="line">    <span class="comment">//如下的字符串&quot;1&quot; 到 &quot;10&quot;不会再次加载</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;3&quot;</span>);System.out.println(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;5&quot;</span>);System.out.println(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;7&quot;</span>);System.out.println(<span class="string">&quot;8&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;9&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>);<span class="comment">//2304</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="字符串拼接操作"><a href="#字符串拼接操作" class="headerlink" title="字符串拼接操作"></a>字符串拼接操作</h1><p><strong>常量与常量的拼接结果在常量池，原理是编译器优化常量池中不会存在相同内容的常量</strong></p>
+<p><em><strong style="color:red;">拼接中只有其中有一个是变量，拼接后的结果就在堆中。变量拼接的原理是 StringBulider</strong></em></p>
+<p><em><strong style="color:red;">如果拼接的结果调用 intern方法，则主动将常量池中还没有的字符串对象放到池中，并返回此对象的地址</strong></em></p>
+<h2 id="测试1"><a href="#测试1" class="headerlink" title="测试1"></a>测试1</h2><p><em><strong>常量与常量拼接</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在反编译出来后的文件中也可以看到s1是“abc”</span></span><br><span class="line"><span class="comment">//从字节码文件中也可以看出开始就将abc放到字符串常量池里面</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span> + <span class="string">&quot;b&quot;</span> + <span class="string">&quot;c&quot;</span>;<span class="comment">//编译期优化：等同于&quot;abc&quot;</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>; <span class="comment">//&quot;abc&quot;一定是放在字符串常量池中，将此地址赋给s2</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 最终.java编译成.class,再执行.class</span></span><br><span class="line"><span class="comment">     * String s1 = &quot;abc&quot;;</span></span><br><span class="line"><span class="comment">     * String s2 = &quot;abc&quot;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    System.out.println(s1 == s2); <span class="comment">//true</span></span><br><span class="line">    System.out.println(s1.equals(s2)); <span class="comment">//true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="测试2"><a href="#测试2" class="headerlink" title="测试2"></a>测试2</h2><p><em><strong>常量与常量，常量与变量，变量与变量拼接</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;javaEEhadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span> + <span class="string">&quot;hadoop&quot;</span>;<span class="comment">//编译期优化</span></span><br><span class="line">    <span class="comment">//如果拼接符号的前后出现了变量，则相当于在堆空间中new String()</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> s1 + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span> + s2;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s7</span> <span class="operator">=</span> s1 + s2;</span><br><span class="line"></span><br><span class="line">    System.out.println(s3 == s4);<span class="comment">//true</span></span><br><span class="line">    System.out.println(s3 == s5);<span class="comment">//false</span></span><br><span class="line">    System.out.println(s3 == s6);<span class="comment">//false</span></span><br><span class="line">    System.out.println(s3 == s7);<span class="comment">//false</span></span><br><span class="line">    System.out.println(s5 == s6);<span class="comment">//false</span></span><br><span class="line">    System.out.println(s5 == s7);<span class="comment">//false</span></span><br><span class="line">    System.out.println(s6 == s7);<span class="comment">//false</span></span><br><span class="line">    <span class="comment">//intern():判断字符串常量池中是否存在javaEEhadoop值</span></span><br><span class="line">    <span class="comment">//如果存在，则返回常量池中javaEEhadoop的地址；</span></span><br><span class="line">    <span class="comment">//如果字符串常量池中不存在javaEEhadoop，则在常量池中加载一份javaEEhadoop，并返回次对象的地址。</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s8</span> <span class="operator">=</span> s6.intern();</span><br><span class="line">    System.out.println(s3 == s8);<span class="comment">//true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1383,6 +1410,91 @@
 <p><em><strong>3、通配符在结束时匹配</strong></em></p>
 <p><em><strong>4、正则表达式匹配</strong></em></p>
 <p><em><strong>5、被默认的default_server处理，如果没有指定默认找第一个server</strong></em></p>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4-nginx-反向代理</title>
+    <url>/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Nginx反向代理的配置语法"><a href="#Nginx反向代理的配置语法" class="headerlink" title="Nginx反向代理的配置语法"></a><strong>Nginx反向代理的配置语法</strong></h1><p><strong style="color:red;"><strong>Nginx反向代理模块的指令是由ngx_http_proxy_module模块进行解析</strong></strong></p>
+<h2 id="proxy-pass"><a href="#proxy-pass" class="headerlink" title="proxy_pass"></a><strong>proxy_pass</strong></h2><p><strong style="color:red;"><strong>用来设置被代理服务器地址，可以是主机名称、IP地址加端口号形式</strong></strong></p>
+<p><strong>URL：需要进行设置的被代理服务器地址，包含传输协议(http,https:&#x2F;&#x2F;)、主机名称或IP地址加端口号、URI等要素</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/1.png"></p>
+<p><strong>当proxy_pass时，要注意是否要在URL后面加</strong> <strong>&#x2F;</strong> <strong>的问题：</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/2.png"></p>
+<p><strong>当客户端访问</strong> <strong><a href="http://localhost/index.html%EF%BC%8C%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84">http://localhost/index.html，效果是一样的</a></strong></p>
+<br>
+
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/3.png"></p>
+<p><strong>当客户端访问</strong> <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong> <strong>的时候</strong></p>
+<p>第一个proxy_pass就变成了  <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong></p>
+<p>第二个proxy_pass就变成了  <strong><a href="http://localhost/index.html">http://localhost/index.html</a></strong>  效果就不一样了</p>
+<p><strong>当没有斜杠时，location后的路径会加上去，有斜杠时，则不会。</strong></p>
+<br>
+
+<h2 id="proxy-set-header"><a href="#proxy-set-header" class="headerlink" title="proxy_set_header"></a><strong>proxy_set_header</strong></h2><p><strong style="color:red;"><strong>更改Nginx服务器接收到的客户端请求的请求头信息，然后将新的请求头发送给代理的服务器</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/4.png"></p>
+<p><strong>测试案例：以140为代理服务器，141为被代理服务器，发送请求头信息username为HZY</strong></p>
+<p><strong>代理服务器</strong> [192.168.174.140]</p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/5.png"></p>
+<p><strong>被代理服务器</strong> [192.168.174.141]</p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/6.png"></p>
+<br>
+
+<h2 id="proxy-redirect"><a href="#proxy-redirect" class="headerlink" title="proxy_redirect"></a><strong>proxy_redirect</strong></h2><p><strong style="color:red;"><strong>重置头信息中的”Location”和”Refresh”的值</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7.png"></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/8.png"></p>
+<p><strong>测试案例：</strong></p>
+<p><strong>当发送192.168.174.140:8081&#x2F;add.html请求时，代理服务端（140）将请求代理到 141</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/9.png"></p>
+<p><strong>服务端（141）判断当前请求的资源路径是否为空，如果为空，则返回状态码302，临时重定向到192.168.174.141:80，访问默认的index.html</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/10.png"></p>
+<br>
+
+<h2 id="反向代理案例"><a href="#反向代理案例" class="headerlink" title="反向代理案例"></a><strong>反向代理案例</strong></h2><p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/11.png"></p>
+<p><strong>如图所示，当用户发送请求到代理服务器端，<a href="http://192.168.174.140:8082/server1%EF%BC%8C%E8%AF%B7%E6%B1%82%E5%B0%86%E4%BC%9A%E8%A2%AB%E4%BB%A3%E7%90%86%E5%88%B0http://192.168.174.141:9001/%E4%B8%8A%E9%9D%A2">http://192.168.174.140:8082/server1，请求将会被代理到http://192.168.174.141:9001/上面</a></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/12.png"></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/13.png"></p>
+<br>
+
+<h1 id="反向代理系统调优"><a href="#反向代理系统调优" class="headerlink" title="反向代理系统调优"></a><strong>反向代理系统调优</strong></h1><p><strong>反向代理值：Buffer（缓冲）和Cache（缓存）</strong></p>
+<p><strong style="color:red;"><strong>相同点：两种方式都是提高IO吞吐效率，提升nginx代理的性能</strong></strong></p>
+<p><strong style="color:red;"><strong>不同点：</strong></strong></p>
+<p><strong style="color:red;"><strong>Buffer是用来解决不同设备之间数据传递速度不一致导致的性能低的问题，BUffer中的数据一旦此次操作完成后，就可以删除</strong></strong></p>
+<p><strong style="color:red;"><em><strong>Cache主要是备份，将被代理服务器的数据缓存一份到代理服务器上去。当客户端再次获取相同的数据时，就只需要从代理服务器上去获取，而不需要再次通过被代理服务器，效率高，缓存中的数据可以重复使用，只有满足特定的条件才会删除</strong></em></strong></p>
+<h2 id="Proxy-Buffer相关指令"><a href="#Proxy-Buffer相关指令" class="headerlink" title="Proxy Buffer相关指令"></a><strong>Proxy Buffer相关指令</strong></h2><h3 id="1）proxy-buffering"><a href="#1）proxy-buffering" class="headerlink" title="1）proxy_buffering"></a><strong>1）proxy_buffering</strong></h3><p><strong style="color:red;"><strong>该指令用来开启或者关闭代理服务器的缓冲区</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/14.png"></p>
+<br>
+
+<h3 id="2）proxy-buffers"><a href="#2）proxy-buffers" class="headerlink" title="2）proxy_buffers"></a><strong>2）proxy_buffers</strong></h3><p><strong style="color:red;"><strong>指定单个连接从代理服务器读取响应的缓存区的个数和大小</strong></strong></p>
+<p><strong>number：缓存区的个数</strong></p>
+<p><strong>size：每个缓存区的大小，缓存区的总大小为number*size</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/15.png"></p>
+<br>
+
+<h3 id="3）proxy-buffer-size"><a href="#3）proxy-buffer-size" class="headerlink" title="3）proxy_buffer_size"></a><strong>3）proxy_buffer_size</strong></h3><p><strong style="color:red;"><strong>设置从被代理服务器获取的第一部分响应数据的大小。保持与proxy_buffers中的size一致即可，当然也可以更小。</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/16.png"></p>
+<br>
+
+<h3 id="4）proxy-busy-buffers-size"><a href="#4）proxy-busy-buffers-size" class="headerlink" title="4）proxy_busy_buffers_size"></a><strong>4）proxy_busy_buffers_size</strong></h3><p><strong style="color:red;"><strong>用来限制同时处于BUSY状态的缓冲总大小。</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/17.png"></p>
+<br>
+
+<h3 id="5）proxy-temp-path"><a href="#5）proxy-temp-path" class="headerlink" title="5）proxy_temp_path"></a><strong>5）proxy_temp_path</strong></h3><p><strong style="color:red;"><strong>当缓冲区存满后，仍未被Nginx服务器完全接受，响应数据就会被临时存放在磁盘文件上，该指令设置文件路径</strong></strong></p>
+<p><strong>注意path最多设置三层</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/18.png"></p>
+<br>
+
+<h3 id="6）proxy-temp-file-write-size"><a href="#6）proxy-temp-file-write-size" class="headerlink" title="6）proxy_temp_file_write_size"></a><strong>6）proxy_temp_file_write_size</strong></h3><p><strong style="color:red;"><strong>用来设置磁盘上缓冲文件的大小</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/19.png"></p>
+<br>
+
+<h1 id="通用网站的配置"><a href="#通用网站的配置" class="headerlink" title="通用网站的配置"></a><strong>通用网站的配置</strong></h1><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">proxy_buffering</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">proxy_buffer_size</span> <span class="number">4</span> <span class="number">32k</span>;</span><br><span class="line"><span class="attribute">proxy_busy_buffers_size</span> <span class="number">64k</span>;</span><br><span class="line"><span class="attribute">proxy_temp_file_write_size</span> <span class="number">64k</span>;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>nginx</category>
