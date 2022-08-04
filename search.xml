@@ -1,65 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>01-什么是JVM?</title>
-    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
-    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
-<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
-<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
-<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
-<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
-<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
-<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
-<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
-<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
-<p><strong>基于栈式架构的特点</strong></p>
-<ul>
-<li>跨平台性</li>
-<li>指令集小</li>
-<li>指令多</li>
-<li>执行性能比寄存器差</li>
-</ul>
-<p><strong>基于寄存器架构的特点</strong></p>
-<ul>
-<li>指令集架构则完全依赖硬件，可移植性差</li>
-<li>性能优秀和执行更高效</li>
-</ul>
-<p><strong>举例</strong></p>
-<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
-<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
-<p><strong>2、基于寄存器的计算流程</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
-<p><strong>总结</strong></p>
-<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
-<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
-<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
-<p><strong>虚拟机的执行</strong></p>
-<ul>
-<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
-<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
-<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
-</ul>
-<p><strong>虚拟机的退出</strong></p>
-<ul>
-<li><strong>程序正常执行结束</strong></li>
-<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
-<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
-<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
-<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>01-设计模式的原则</title>
     <url>/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h1 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a><strong>设计模式的目的</strong></h1><p><strong>1、代码重用性</strong></p>
@@ -134,6 +75,41 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03-数据区概述与线程</title>
+    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
+<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
+<p><strong>运行时数据区的完整图</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
+<p><strong>Java的内存区域</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
+<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
+<p><strong>即：</strong></p>
+<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
+<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
+<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
+<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
+<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
+<p><strong>JVM线程（*）</strong></p>
+<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
+<ul>
+<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
+<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
+<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
+<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -240,41 +216,6 @@
 <p><strong>3）常量在编译阶段会存入调用方法所在的类的常量池中（这个例子存在F类的常量池中）</strong></p>
 <p><strong>本质上没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化</strong></p>
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>03-数据区概述与线程</title>
-    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
-<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
-<p><strong>运行时数据区的完整图</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
-<p><strong>Java的内存区域</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
-<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
-<p><strong>即：</strong></p>
-<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
-<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
-<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
-<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
-<p><strong>JVM线程（*）</strong></p>
-<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
-<ul>
-<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
-<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -460,6 +401,181 @@
       </tags>
   </entry>
   <entry>
+    <title>08-方法区</title>
+    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
+    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
+<br>
+
+<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
+<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
+<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
+<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
+
+<br>
+
+<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
+<p>2、对永久代调优困难</p>
+<br>
+
+<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
+<br>
+
+<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
+<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
+<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
+<ul>
+<li>加载过多的jar包</li>
+<li>tomcat部署的过程过多</li>
+<li>反射类太多</li>
+</ul>
+<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
+<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
+
+<br>
+
+<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
+<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
+<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
+<p><strong>jdk1.8及以后</strong></p>
+<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
+<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
+<br>
+
+<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
+<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
+<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
+<p>2、直接父类的完整有效名（接口和Object类没有）</p>
+<p>3、修饰符</p>
+<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
+<br>
+
+<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
+<br>
+
+<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
+<p>2、方法返回类型</p>
+<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
+<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
+<br>
+
+<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
+<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
+<p>以下代码不会报空指针异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
+<br>
+
+<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
+<p><em><strong>字节码文件中包含了常量池</strong></em></p>
+<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<br>
+
+<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
+
+<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
+<br>
+
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
+<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<p><strong>注意：</strong></p>
+<p>1、运行时常量池是方法区的一部分。</p>
+<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
+<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
+<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
+<br>
+
+<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
+<p>前言：</p>
+<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
+<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
+<p>符号引用则属于编译原理方面的概念，包括</p>
+<ol>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ol>
+</blockquote>
+<p>方法区中主要回收</p>
+<p>1、常量池中废弃的常量</p>
+<p>2、不再使用的类型</p>
+<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
+<p>判断一个类是否要进行回收（*）</p>
+<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01-什么是JVM?</title>
+    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
+    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
+<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
+<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
+<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
+<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
+<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
+<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
+<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
+<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>跨平台性</li>
+<li>指令集小</li>
+<li>指令多</li>
+<li>执行性能比寄存器差</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
+<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
+<p><strong>2、基于寄存器的计算流程</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
+<p><strong>总结</strong></p>
+<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
+<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
+<p><strong>虚拟机的执行</strong></p>
+<ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
+<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
+</ul>
+<p><strong>虚拟机的退出</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
+<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
+<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>07-堆</title>
     <url>/2022/07/13/07-%E5%A0%86/</url>
     <content><![CDATA[<h1 id="堆的核心概述"><a href="#堆的核心概述" class="headerlink" title="堆的核心概述"></a><strong>堆的核心概述</strong></h1><p>一个进程对应一个JVM实例，一个JVM实例中有一个运行时数据区，一个运行时数据区中只有一个堆空间</p>
@@ -632,122 +748,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123; alloc();&#125;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">       System.out.println(<span class="string">&quot;x&quot;</span> + point.x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + point.y);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> x;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> y;</span><br><span class="line">       <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> i1)</span> &#123;&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;x&quot;</span> + x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>08-方法区</title>
-    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
-<br>
-
-<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
-<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
-<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
-<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
-
-<br>
-
-<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
-<p>2、对永久代调优困难</p>
-<br>
-
-<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
-<br>
-
-<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
-<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
-<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
-<ul>
-<li>加载过多的jar包</li>
-<li>tomcat部署的过程过多</li>
-<li>反射类太多</li>
-</ul>
-<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
-<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
-
-<br>
-
-<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
-<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
-<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
-<p><strong>jdk1.8及以后</strong></p>
-<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
-<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
-<br>
-
-<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
-<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
-<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
-<p>2、直接父类的完整有效名（接口和Object类没有）</p>
-<p>3、修饰符</p>
-<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
-<br>
-
-<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
-<br>
-
-<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
-<p>2、方法返回类型</p>
-<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
-<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
-<br>
-
-<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
-<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
-<p>以下代码不会报空指针异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
-<br>
-
-<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
-<p><em><strong>字节码文件中包含了常量池</strong></em></p>
-<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<br>
-
-<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
-
-<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
-<br>
-
-<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
-<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<p><strong>注意：</strong></p>
-<p>1、运行时常量池是方法区的一部分。</p>
-<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
-<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
-<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
-<br>
-
-<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
-<p>前言：</p>
-<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
-<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
-<p>符号引用则属于编译原理方面的概念，包括</p>
-<ol>
-<li>类和接口的全限定名</li>
-<li>字段的名称和描述符</li>
-<li>方法的名称和描述符</li>
-</ol>
-</blockquote>
-<p>方法区中主要回收</p>
-<p>1、常量池中废弃的常量</p>
-<p>2、不再使用的类型</p>
-<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
-<p>判断一个类是否要进行回收（*）</p>
-<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1438,9 +1438,21 @@
 
 <br>
 
-<p><strong style="color:green">终结器引用（*）：</strong>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
+<h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
 <br>
 ]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>14-垃圾回收器</title>
+    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1>]]></content>
       <categories>
         <category>JVM</category>
       </categories>
@@ -2179,18 +2191,6 @@
       <tags>
         <tag>底层源码</tag>
         <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>14-垃圾回收器</title>
-    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1>]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
 </search>
