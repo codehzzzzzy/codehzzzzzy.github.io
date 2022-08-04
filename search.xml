@@ -1,65 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>01-什么是JVM?</title>
-    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
-    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
-<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
-<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
-<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
-<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
-<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
-<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
-<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
-<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
-<p><strong>基于栈式架构的特点</strong></p>
-<ul>
-<li>跨平台性</li>
-<li>指令集小</li>
-<li>指令多</li>
-<li>执行性能比寄存器差</li>
-</ul>
-<p><strong>基于寄存器架构的特点</strong></p>
-<ul>
-<li>指令集架构则完全依赖硬件，可移植性差</li>
-<li>性能优秀和执行更高效</li>
-</ul>
-<p><strong>举例</strong></p>
-<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
-<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
-<p><strong>2、基于寄存器的计算流程</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
-<p><strong>总结</strong></p>
-<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
-<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
-<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
-<p><strong>虚拟机的执行</strong></p>
-<ul>
-<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
-<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
-<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
-</ul>
-<p><strong>虚拟机的退出</strong></p>
-<ul>
-<li><strong>程序正常执行结束</strong></li>
-<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
-<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
-<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
-<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>01-设计模式的原则</title>
     <url>/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h1 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a><strong>设计模式的目的</strong></h1><p><strong>1、代码重用性</strong></p>
@@ -134,6 +75,65 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01-什么是JVM?</title>
+    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
+    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
+<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
+<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
+<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
+<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
+<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
+<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
+<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
+<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>跨平台性</li>
+<li>指令集小</li>
+<li>指令多</li>
+<li>执行性能比寄存器差</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
+<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
+<p><strong>2、基于寄存器的计算流程</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
+<p><strong>总结</strong></p>
+<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
+<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
+<p><strong>虚拟机的执行</strong></p>
+<ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
+<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
+</ul>
+<p><strong>虚拟机的退出</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
+<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
+<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,84 +1215,6 @@
       </tags>
   </entry>
   <entry>
-    <title>14-垃圾回收器</title>
-    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
-<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
-<p>按碎片处理方式：分为</p>
-<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
-<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
-<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
-<br>
-
-<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
-<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
-<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
-<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
-<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
-<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
-<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
-<p>快速：一个对象从诞生到被回收所经历的时间</p>
-<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
-<br>
-
-<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
-<br>
-
-<p>GC发展阶段：<br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
-<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
-<br>
-
-<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
-<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
-<p>优势：简单，高效</p>
-<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
-<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
-<p><strong>在Server模式下的用途：</strong></p>
-<p>1、与新生代的Parallel Scavenge配合使用</p>
-<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
-<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
-<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
-<br>
-
-<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。*<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>*</p>
-<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
-<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器, 不影响老年代</strong></p>
-<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量,默认开启和CPU数据相同的线程数</strong></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
-<br>
-
-<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
-<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
-<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
-<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
-<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
-<br>
-
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
-<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
-<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
-<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
-<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
-<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
-<blockquote>
-<p><strong>在这种模式下,年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>13-垃圾回收</title>
     <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
     <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
@@ -1518,6 +1440,86 @@
 
 <h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
 <br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>14-垃圾回收器</title>
+    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
+<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
+<p>按碎片处理方式：分为</p>
+<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
+<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
+<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
+<br>
+
+<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
+<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
+<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
+<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
+<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
+<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
+<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
+<p>快速：一个对象从诞生到被回收所经历的时间</p>
+<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
+<br>
+
+<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
+<br>
+
+<p><em><strong>GC发展阶段：</strong></em><br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
+<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
+<br>
+
+<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
+<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
+<p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
+<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
+<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
+<p><strong>在Server模式下的用途：</strong></p>
+<p>1、与新生代的Parallel Scavenge配合使用</p>
+<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">2、作为老年代CMS收集器的后备垃圾收集方法</a></p>
+<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
+<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
+<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
+<br>
+
+<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。*<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>*</p>
+<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
+<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
+<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器, 不影响老年代</strong></p>
+<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量,默认开启和CPU数据相同的线程数</strong></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
+<br>
+
+<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
+<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
+<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
+<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
+<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
+<br>
+
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
+<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
+<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
+<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
+<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
+<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
+<blockquote>
+<p><strong>在这种模式下,年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>JVM</category>
