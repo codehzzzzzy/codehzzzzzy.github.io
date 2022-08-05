@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>01-什么是JVM?</title>
+    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
+    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
+<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
+<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
+<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
+<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
+<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
+<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
+<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
+<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>跨平台性</li>
+<li>指令集小</li>
+<li>指令多</li>
+<li>执行性能比寄存器差</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
+<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
+<p><strong>2、基于寄存器的计算流程</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
+<p><strong>总结</strong></p>
+<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
+<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
+<p><strong>虚拟机的执行</strong></p>
+<ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
+<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
+</ul>
+<p><strong>虚拟机的退出</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
+<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
+<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>01-设计模式的原则</title>
     <url>/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h1 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a><strong>设计模式的目的</strong></h1><p><strong>1、代码重用性</strong></p>
@@ -75,65 +134,6 @@
       </categories>
       <tags>
         <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01-什么是JVM?</title>
-    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
-    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
-<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
-<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
-<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
-<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
-<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
-<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
-<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
-<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
-<p><strong>基于栈式架构的特点</strong></p>
-<ul>
-<li>跨平台性</li>
-<li>指令集小</li>
-<li>指令多</li>
-<li>执行性能比寄存器差</li>
-</ul>
-<p><strong>基于寄存器架构的特点</strong></p>
-<ul>
-<li>指令集架构则完全依赖硬件，可移植性差</li>
-<li>性能优秀和执行更高效</li>
-</ul>
-<p><strong>举例</strong></p>
-<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
-<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
-<p><strong>2、基于寄存器的计算流程</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
-<p><strong>总结</strong></p>
-<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
-<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
-<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
-<p><strong>虚拟机的执行</strong></p>
-<ul>
-<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
-<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
-<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
-</ul>
-<p><strong>虚拟机的退出</strong></p>
-<ul>
-<li><strong>程序正常执行结束</strong></li>
-<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
-<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
-<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
-<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -460,6 +460,122 @@
       </tags>
   </entry>
   <entry>
+    <title>08-方法区</title>
+    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
+    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
+<br>
+
+<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
+<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
+<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
+<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
+
+<br>
+
+<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
+<p>2、对永久代调优困难</p>
+<br>
+
+<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
+<br>
+
+<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
+<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
+<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
+<ul>
+<li>加载过多的jar包</li>
+<li>tomcat部署的过程过多</li>
+<li>反射类太多</li>
+</ul>
+<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
+<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
+
+<br>
+
+<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
+<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
+<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
+<p><strong>jdk1.8及以后</strong></p>
+<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
+<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
+<br>
+
+<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
+<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
+<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
+<p>2、直接父类的完整有效名（接口和Object类没有）</p>
+<p>3、修饰符</p>
+<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
+<br>
+
+<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
+<br>
+
+<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
+<p>2、方法返回类型</p>
+<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
+<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
+<br>
+
+<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
+<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
+<p>以下代码不会报空指针异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
+<br>
+
+<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
+<p><em><strong>字节码文件中包含了常量池</strong></em></p>
+<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<br>
+
+<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
+
+<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
+<br>
+
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
+<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<p><strong>注意：</strong></p>
+<p>1、运行时常量池是方法区的一部分。</p>
+<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
+<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
+<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
+<br>
+
+<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
+<p>前言：</p>
+<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
+<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
+<p>符号引用则属于编译原理方面的概念，包括</p>
+<ol>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ol>
+</blockquote>
+<p>方法区中主要回收</p>
+<p>1、常量池中废弃的常量</p>
+<p>2、不再使用的类型</p>
+<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
+<p>判断一个类是否要进行回收（*）</p>
+<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>07-堆</title>
     <url>/2022/07/13/07-%E5%A0%86/</url>
     <content><![CDATA[<h1 id="堆的核心概述"><a href="#堆的核心概述" class="headerlink" title="堆的核心概述"></a><strong>堆的核心概述</strong></h1><p>一个进程对应一个JVM实例，一个JVM实例中有一个运行时数据区，一个运行时数据区中只有一个堆空间</p>
@@ -632,122 +748,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123; alloc();&#125;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">       System.out.println(<span class="string">&quot;x&quot;</span> + point.x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + point.y);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> x;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> y;</span><br><span class="line">       <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> i1)</span> &#123;&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;x&quot;</span> + x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>08-方法区</title>
-    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
-<br>
-
-<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
-<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
-<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
-<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
-
-<br>
-
-<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
-<p>2、对永久代调优困难</p>
-<br>
-
-<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
-<br>
-
-<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
-<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
-<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
-<ul>
-<li>加载过多的jar包</li>
-<li>tomcat部署的过程过多</li>
-<li>反射类太多</li>
-</ul>
-<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
-<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
-
-<br>
-
-<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
-<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
-<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
-<p><strong>jdk1.8及以后</strong></p>
-<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
-<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
-<br>
-
-<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
-<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
-<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
-<p>2、直接父类的完整有效名（接口和Object类没有）</p>
-<p>3、修饰符</p>
-<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
-<br>
-
-<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
-<br>
-
-<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
-<p>2、方法返回类型</p>
-<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
-<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
-<br>
-
-<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
-<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
-<p>以下代码不会报空指针异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
-<br>
-
-<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
-<p><em><strong>字节码文件中包含了常量池</strong></em></p>
-<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<br>
-
-<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
-
-<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
-<br>
-
-<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
-<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<p><strong>注意：</strong></p>
-<p>1、运行时常量池是方法区的一部分。</p>
-<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
-<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
-<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
-<br>
-
-<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
-<p>前言：</p>
-<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
-<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
-<p>符号引用则属于编译原理方面的概念，包括</p>
-<ol>
-<li>类和接口的全限定名</li>
-<li>字段的名称和描述符</li>
-<li>方法的名称和描述符</li>
-</ol>
-</blockquote>
-<p>方法区中主要回收</p>
-<p>1、常量池中废弃的常量</p>
-<p>2、不再使用的类型</p>
-<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
-<p>判断一个类是否要进行回收（*）</p>
-<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -938,29 +938,6 @@
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>10-直接内存</title>
-    <url>/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
-    <content><![CDATA[<p><strong>1、直接内存不是虚拟机运行时数据区的一部分，而是在Java堆外，直接向系统申请的内存空间</strong></p>
-<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/1.png"></p>
-<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/2.png"></p>
-<p>2、来源于NIO，通过存在堆中的 <code>DirectByteBuffer</code> 操作本地内存</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">BUFFER</span> <span class="operator">=</span> <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//1GB</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">//直接分配本地内存空间</span></span><br><span class="line">    <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocateDirect(BUFFER);</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存分配完毕&quot;</span>);</span><br><span class="line">    byteBuffer = <span class="literal">null</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存开始释放！&quot;</span>);</span><br><span class="line">    System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3、通常访问直接内存的速度会优于访问java堆的速度<strong>（读写性能更高，适用于读写频繁的场合）</strong></p>
-<p><strong>4、java的NIO库运行java程序使用直接内存用于数据缓冲</strong></p>
-<p>5、直接内存大小可以通过<code>MaxDirectMemorySize</code>设置，如果不指定，默认与堆的最大值<code>-Xmx</code>参数值一致，但是<strong>由于直接内存在java堆外，因此它不会直接受限于-Xmx指定的最大堆大小，它和java堆受限于操作系统能给出的最大内存</strong></p>
-<p><strong>6、简单理解： <code>java process memory = java heap + native memory</code></strong></p>
-<br>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -1484,6 +1461,8 @@
 <h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
 <p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
 <p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
+<br>
+
 <h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
 <p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
 <p><strong>在Server模式下的用途：</strong></p>
@@ -1495,17 +1474,18 @@
 <p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
 <br>
 
-<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。*<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>*</p>
-<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
+<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>。<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
 <p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
-<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器, 不影响老年代</strong></p>
-<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量,默认开启和CPU数据相同的线程数</strong></p>
+<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器， 不影响老年代</strong></p>
+<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量，默认开启和CPU数据相同的线程数</strong></p>
 <p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
 <br>
 
-<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
+<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><em><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></em></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
 <p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
 <p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
+<br>
+
 <h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
 <p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
 <p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
@@ -1518,8 +1498,82 @@
 <p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
 <p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
 <blockquote>
-<p><strong>在这种模式下,年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
+<p><strong>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
 </blockquote>
+<br>
+
+<h1 id="CMS：低延迟"><a href="#CMS：低延迟" class="headerlink" title="CMS：低延迟"></a>CMS：低延迟</h1><p><em><strong style="color:red">HotSpot虚拟机中第一款真正意义上的并发收集器。第一次实现了让垃圾收集线程与用户线程同时工作</strong>，</em> <strong>也采用标记-清除算法和STW机制。</strong>在G1出现之前，CMS使用还是非常广泛的</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png"></p>
+<br>
+
+<h2 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a><em>初始标记</em></h2><p><em><strong style="color:red">标记出和GCRoots能直接关联到的对象，有STW现象（暂时时间非常短）</strong></em></p>
+<br>
+
+<h2 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a><em>并发标记阶段</em></h2><p><em><strong style="color:red">从GC Roots的直接关联对象开始遍历整个对象图的过程</strong><em>，这个过程耗时较长但是<strong>不用STW</strong>。**可以与垃圾收集线程一起并发运行</em></em></p>
+<br>
+
+<h2 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a><em>重新标记阶段</em></h2><p><strong>有些对象可能开始是垃圾，在并发标记阶段，由于用户线程的影响，导致不是垃圾了，这里需要重新标记的是这部分对象，<em>这个阶段的STW通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短</em></strong></p>
+<p><em><strong style="color:red">注意：重新标记是对已标记过的垃圾进行检测，此时会产生浮动垃圾</strong></em></p>
+<br>
+
+<h2 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h2><p><em><strong style="color:red">清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。</strong><em>由于不需要移动存活对象，所以这个阶段也是**可以与用户线程同时并发的</em></em></p>
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p><strong>在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。</strong>因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是<strong>当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。</strong></p>
+<p>要是<strong>CMS运行期间预留的内存无法满足程序需要</strong>，就会出现一次“Concurrent Mode Failure”失败，这时<strong>虚拟机将启动后备预案：临时启用Serial 0ld收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。</strong></p>
+</blockquote>
+<p><em><strong style="color:red">CMS收集器的垃圾收集算法采用的是标记一清除算法，这意味着不可避免地将会产生一些内存碎片。 那么CMS在为新对象分配内存空间时，将无法使用指针碰撞，而只能够选择空闲列表执行内存分配。</strong></em></p>
+<br>
+
+<blockquote>
+<p><em><strong>最小化使用内存和并行开销：Serial GC（young）+ Serial Old GC（old）</strong></em></p>
+<p><em><strong>最大化应用程序吞吐量：Parallel GC（young）+ Parallel Old GC（old）</strong></em></p>
+<p><em><strong>最小化GC中断或停顿时间：Parallel New GC（young）+ CMS GC（old）</strong></em></p>
+</blockquote>
+<br>
+
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h3><p><strong>1）低延迟（最耗费时间的并发标记和并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</strong>）</p>
+<p><em>2）并发收集</em></p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1）产生内存碎片</strong></p>
+<p><strong>2）CMS收集器对CPU资源很敏感（<a href="https://img-blog.csdnimg.cn/20210621212300976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RaODQ1MTk1NDg1,size_16,color_FFFFFF,t_70">并发阶段，占用一部分线程，吞吐量降低</a>）</strong></p>
+<p><strong>3）CMS收集器无法处理浮动垃圾</strong></p>
+<blockquote>
+<p>在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间</p>
+</blockquote>
+<br>
+
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p><code> -XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务（老年代）<br><em>（开启该参数后会自动将<code>-XX:+UseParNewGc</code>打开。即: ParNew (Young区用) +CMS (0ld区用) +Serial 0ld的组合）</em></p>
+<p><code>-XX:CMSlnitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收</p>
+<p><strong>JDK5以前默认为68，即当老年代的空间使用率达到68%时，会执行一次CMS 回收。JDK6及以上默认为92%</strong></p>
+<p><strong>通过该选项便可以有效降低Full GC的执行次数</strong></p>
+<p><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理,以此避免内存碎片的产生</p>
+<p><code>-XX:CMSFullGCsBeforeCompaction</code>：设置在执行多少次Full GC后对内存空间进行压缩整理</p>
+<p><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数量</p>
+<br>
+
+<h1 id="G1：区域化分代式"><a href="#G1：区域化分代式" class="headerlink" title="G1：区域化分代式"></a><em><strong style="color:red">G1：区域化分代式</strong></em></h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><p><em><strong style="color:red">并行性：</strong>G1在回收期间，可以有多个GC线程同时工作（此时用户线程STW）</em></p>
+<p><em><strong style="color:red">并发性：</strong>G1拥有与应用程序交替执行的能力， 部分工作可以和应用程序同时执行，因此，不会在整个回收阶段发生完全阻塞应用程序的情况</em></p>
+<br>
+
+<h2 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h2><br>
+
+<h2 id="空间整合"><a href="#空间整合" class="headerlink" title="空间整合"></a>空间整合</h2><br>
+
+<h2 id="可预测的停顿时间模型"><a href="#可预测的停顿时间模型" class="headerlink" title="可预测的停顿时间模型"></a>可预测的停顿时间模型</h2><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1527,6 +1581,63 @@
       <tags>
         <tag>JVM</tag>
         <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-3-算法的空间复杂度分析</title>
+    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>2.计算机访问内存的方式都是一次一个字节</p>
+<p>3.一个引用（机器地址）需要8个字节表示：</p>
+<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
+<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
+<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
+<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
+<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
+<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
+<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
+<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
+<p>算法二的空间复杂度为O(n)</p>
+<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
+<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
+<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1580,63 +1691,6 @@
 <p>他们的复杂程度从低到高依次为：</p>
 <p>​    <img src="/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
 <p>所以，我们的算法，尽可能的<strong>追求的是O(1),O(logn),O(n),O(nlogn)这几种时间复杂度</strong>，而如果发现算法的时间复杂度为平方阶、 立方阶或者更复杂的，那我们可以分为这种算法是不可取的，需要优化。</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-3-算法的空间复杂度分析</title>
-    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>2.计算机访问内存的方式都是一次一个字节</p>
-<p>3.一个引用（机器地址）需要8个字节表示：</p>
-<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
-<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
-<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
-<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
-<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
-<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
-<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
-<p>算法二的空间复杂度为O(n)</p>
-<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
-<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
-<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -2259,6 +2313,29 @@
       <tags>
         <tag>底层源码</tag>
         <tag>spring高级</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>10-直接内存</title>
+    <url>/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
+    <content><![CDATA[<p><strong>1、直接内存不是虚拟机运行时数据区的一部分，而是在Java堆外，直接向系统申请的内存空间</strong></p>
+<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/1.png"></p>
+<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/2.png"></p>
+<p>2、来源于NIO，通过存在堆中的 <code>DirectByteBuffer</code> 操作本地内存</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">BUFFER</span> <span class="operator">=</span> <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//1GB</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">//直接分配本地内存空间</span></span><br><span class="line">    <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocateDirect(BUFFER);</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存分配完毕&quot;</span>);</span><br><span class="line">    byteBuffer = <span class="literal">null</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存开始释放！&quot;</span>);</span><br><span class="line">    System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、通常访问直接内存的速度会优于访问java堆的速度<strong>（读写性能更高，适用于读写频繁的场合）</strong></p>
+<p><strong>4、java的NIO库运行java程序使用直接内存用于数据缓冲</strong></p>
+<p>5、直接内存大小可以通过<code>MaxDirectMemorySize</code>设置，如果不指定，默认与堆的最大值<code>-Xmx</code>参数值一致，但是<strong>由于直接内存在java堆外，因此它不会直接受限于-Xmx指定的最大堆大小，它和java堆受限于操作系统能给出的最大内存</strong></p>
+<p><strong>6、简单理解： <code>java process memory = java heap + native memory</code></strong></p>
+<br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
 </search>
