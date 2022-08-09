@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>15-类的生命周期（详细） | Z.yang</title><meta name="keywords" content="JVM,底层源码"><meta name="author" content="Z.yang"><meta name="copyright" content="Z.yang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概述从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段 注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载    程序使用类的过程     1、加载将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）  类模板对象：java类在JVM中的一个快照。JVM从字节码文件中解析出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15-类的生命周期（详细）">
+<meta property="og:url" content="http://www.hzzzzzy.icu/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/index.html">
+<meta property="og:site_name" content="Z.yang">
+<meta property="og:description" content="概述从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段 注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载    程序使用类的过程     1、加载将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）  类模板对象：java类在JVM中的一个快照。JVM从字节码文件中解析出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png">
+<meta property="article:published_time" content="2022-08-08T00:58:27.000Z">
+<meta property="article:modified_time" content="2022-08-09T00:12:22.473Z">
+<meta property="article:author" content="Z.yang">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="底层源码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png"><link rel="shortcut icon" href="https://i.postimg.cc/3x9LfnT5/01.jpg"><link rel="canonical" href="http://www.hzzzzzy.icu/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '15-类的生命周期（详细）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-09 08:12:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><script src="https://cyan-blog.oss-cn-shenzhen.aliyuncs.com/cdn/js/three.min.js"></script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.postimg.cc/3x9LfnT5/01.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Z.yang</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">15-类的生命周期（详细）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-08T00:58:27.000Z" title="发表于 2022-08-08 08:58:27">2022-08-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-09T00:12:22.473Z" title="更新于 2022-08-09 08:12:22">2022-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="15-类的生命周期（详细）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
+<p><strong style="color:red">注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载</strong></p>
+<p><img src="/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/1.png"></p>
+<br>
+
+<p><em><strong>程序使用类的过程</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/2.png" style="zoom: 60%;">
+
+<br>
+
+<h1 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h1><p><em><strong style="color:red">将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）</strong></em></p>
+<blockquote>
+<p>类模板对象：<strong>java类在JVM中的一个快照。JVM从字节码文件中解析出常量池、类字段、类方法等存储在类模板中</strong>，如此JVM就可以在运行期通过类模板获取java中的任意信息，能够对java类的成员变量进行遍历，也能对方法进行调用<strong>（反射机制基于这一基础）</strong></p>
+</blockquote>
+<br>
+
+<h2 id="加载的步骤"><a href="#加载的步骤" class="headerlink" title="加载的步骤"></a>加载的步骤</h2><p><em><strong style="color:red">1、通过类的全名，获取类的二进制数据流</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/4.png" style="zoom: 70%;">
+
+<p><em><strong style="color:red">2、解析类的二进制数据流为方法区内的数据结构（java类模型）</strong></em></p>
+<p><em><strong style="color:red">3、创建<code>java.lang.Class</code>类的实例（作为方法区这个类的各个数据的访问入口）</strong></em></p>
+<br>
+
+<h2 id="类模型与Class实例位置"><a href="#类模型与Class实例位置" class="headerlink" title="类模型与Class实例位置"></a>类模型与Class实例位置</h2><p><strong>类模型的位置：加载的类在JVM中创建相应的类结构，类结构存储在方法区</strong>（1.8之前：永久代；1.8之后：元空间）</p>
+<p><strong>Class实例的位置</strong>： .class文件加载后，在堆中创建一个Java.lang.Class对象，<strong>封装类位于方法区的数据结构</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/3.png" style="zoom: 50%;">
+
+<br>
+
+<h2 id="数组类加载"><a href="#数组类加载" class="headerlink" title="数组类加载"></a>数组类加载</h2><p><em><strong>数组类本身并不是由类加载器负责创建，而是JVM在运行时根据需要而直接创建的，但数组的元素类型仍然需要依靠类加载器去创建</strong></em></p>
+<p>1、数组元素类型是引用类型，遵循定义的加载过程递归加载和创建数组的元素类型</p>
+<p>2、JVM使用指定元素类型和数组维度来创建新的数组类</p>
+<p><em><strong>数组元素类型是引用类型，数据类的可访问性由元素类型决定，如果为基本数据类型，可访问性为pubilc</strong></em></p>
+<br>
+
+<h1 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h1><h2 id="1）验证"><a href="#1）验证" class="headerlink" title="1）验证"></a>1）验证</h2><p><strong style="color:red">确保Class文件的字节流中包含信息符合当前虚拟机要求,保证被加载类的正确性</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/5.png" style="zoom: 50%;">
+
+<h3 id="格式检查"><a href="#格式检查" class="headerlink" title="格式检查"></a>格式检查</h3><p><strong>1、是否以魔术oxCAFEBABE开头</strong>，主版本和副版本是否在当前Java虚拟机的支持范围内，数据中每一项是否都拥有正确的长度等</p>
+<p><strong style="color:red">2、格式检查与类的加载阶段一起执行，验证通过后，类加载器才会成功将类的二进制信息加载到方法区中</strong></p>
+<p><strong style="color:red">3、格式检查之外的验证操作会在方法区中进行</strong></p>
+<h3 id="语义检查"><a href="#语义检查" class="headerlink" title="语义检查"></a>语义检查</h3><p>java虚拟机会进行语义的检查，语义上不通过的，虚拟机也不会给予验证通过</p>
+<h3 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h3><p>验证过程中最复杂的一个过程，通过对字节码流的分析，判断字节码是否可以被正确地执行</p>
+<p><strong>栈映射帧（StackMapTbale）就是在这个阶段实现的，用于检测在特定的字节码处，局部变量表和操作数栈是否有正确的数据类型（尽可能检查出可以预知的问题，不能100%）</strong></p>
+<h3 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h3><p><strong>Class文件在其常量池会通过字符串来记录自己将要使用的其他类或方法</strong>，因此在验证阶段，虚拟机就会检查这些类或方法确实是存在的（类没找到：NoClassDefFoundError，方法没找到：NoSuchMethodError）</p>
+<br>
+
+<h2 id="2）准备"><a href="#2）准备" class="headerlink" title="2）准备"></a>2）准备</h2><p><strong style="color:red">为类变量分配内存并且设置该类变量的默认初始化值</strong></p>
+<blockquote>
+<p><em><strong>非final修饰的变量，解析环节进行默认初始化赋值</strong></em></p>
+<p><em><strong>这里不包含用final修饰的static，final在编译时就进行分配了，准备阶段会显式赋值</strong></em></p>
+<p><em><strong>这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量会随着对象一起分配到Java堆</strong></em></p>
+</blockquote>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/8.png" style="zoom: 80%;">
+
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/7.png" style="zoom: 80%;">
+
+<p><strong style="color:red">注意：Java并不支持boolean类型，对于boolean类型，内部实现是int，由于int的默认值是0，故对应boolean的默认值就是false</strong><br><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/6.png" style="zoom: 80%;"></p>
+<br>
+
+<h2 id="3）解析"><a href="#3）解析" class="headerlink" title="3）解析"></a>3）解析</h2><p>将常量池中的符号引号转换为直接引用的过程（将类、接口、字段和方法的符号引用转为直接引用）</p>
+<p>1、实际上，解析操作往往会伴随着JVM在执行完初始化之后再执行</p>
+<p>2、直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄（与虚拟机实现的内存布局相关）</p>
+<p>3、符号引用是以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可（符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到了内存中）</p>
+<p>4、主要解析动作针对类或接口、字段、类方法、接口方法、方法类型等</p>
+<br>
+
+<h1 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h1><p><strong style="color:red">为类变量赋予正确的初始化值</strong></p>
+<p><strong style="color:red">初始化阶段就是执行类构造器方法&lt; clinit &gt;()的过程。</strong>此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来</p>
+<p><em><strong>若该类具有父类，Jvm会保证子类的<clinit>() 执行前，父类的&lt; clinit &gt;() 已经执行完成。clinit 不同于类的构造方法(init) （由父及子，静态先行）</clinit></strong></em></p>
+<h2 id="Java编译器不会在以下情况下生成clinit方法"><a href="#Java编译器不会在以下情况下生成clinit方法" class="headerlink" title="Java编译器不会在以下情况下生成clinit方法"></a>Java编译器不会在以下情况下生成clinit方法</h2><p>一个类中并没有声明任何的类变量，也没有静态代码块时</p>
+<p>一个类中声明类变量，但是没有明确使用类变量的初始化语句以及静态代码块来执行初始化操作时</p>
+<p>一个类中包含static final修饰的基本数据类型的字段，这些类字段初始化语句采用编译时常量表达式 </p>
+<p>(如果这个static final 不是通过方法或者构造器,则在链接阶段)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest1</span> &#123;</span><br><span class="line">    <span class="comment">//场景1：对应非静态的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//场景2：静态的字段,没有显式的赋值,不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num1;</span><br><span class="line">    <span class="comment">//场景3：比如对于声明为static final的基本数据类型的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="static-final进行修饰"><a href="#static-final进行修饰" class="headerlink" title="static+final进行修饰"></a>static+final进行修饰</h2><p>1、在链接阶段的准备环节赋值</p>
+<p>2、在初始化阶段赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *1. 对于基本数据类型的字段来说,如果使用static final修饰,则显式赋值(直接赋值常量,而非调用方法)通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> * 2. 对于String来说,如果使用字面量的方式赋值,使用static final修饰的话,则显式赋值通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在初始化阶段&lt;clinit&gt;()中赋值的情况:</span></span><br><span class="line"><span class="comment"> * 排除上述的在准备环节赋值的情况之外的情况。</span></span><br><span class="line"><span class="comment"> * 最终结论:使用static + final修饰,且显示赋值中不涉及到方法或构造器调用的基本数据类型或String类型的显式赋值,是在链接阶段的准备环节进行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INT_CONSTANT</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT1</span> <span class="operator">=</span> Integer.valueOf(<span class="number">100</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1000</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;helloworld0&quot;</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;helloworld1&quot;</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;helloworld2&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUM1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">10</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="client线程安全性问题"><a href="#client线程安全性问题" class="headerlink" title="client线程安全性问题"></a>client线程安全性问题</h2><blockquote>
+<p>虚拟机会保证一个类的clinit方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的方法，其他线程都需要阻塞等待，直到活动线程执行clinit方法结束</p>
+</blockquote>
+<p><strong style="color:red">如果在一个类的clinit方法中有耗时很长的操作，就可能造成多个线程阻塞，引发死锁。</strong></p>
+<br>
+
+<h1 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h1><h2 id="主动使用"><a href="#主动使用" class="headerlink" title="主动使用"></a>主动使用</h2><p><strong style="color:red">Class只有在必须要首次使用的时候才会被装载。一个类或接口在初次主动使用前，必须要进行初始化。</strong></p>
+<p><strong>1、创建一个类的实例时（使用new关键字，通过反射、克隆，反序列化）即使用字节码invokestatic指令</strong></p>
+<p><strong>2、使用当前类的静态方法，使用getstatic或者putstatic指令（对应访问变量、赋值变量操作）</strong></p>
+<p><strong>3、使用类、接口的静态字段时（final修饰特殊考虑）</strong></p>
+<p><strong>4、当使用java.lang.reflect包中的方法反射类的方法时。比如：Class.forName(“xxx.xxx.xxx.test”)</strong></p>
+<p><strong>5、当初始化子类时，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</strong></p>
+<p>6、如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类的初始化，<strong style="color:red">该接口要在其之前被初始化。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Father类的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> <span class="keyword">implements</span> <span class="title class_">CompareB</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Son类的初始化过程&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">CompareA</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">        &#123;System.out.println(<span class="string">&quot;CompareA的初始化&quot;</span>);&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span></span><br><span class="line">    &#123;System.out.println(<span class="string">&quot;你好！&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(Son.num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>7、当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</strong></p>
+<p><strong>8、当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</strong></p>
+<p><strong style="color:red">注意： 初始化一个类的子类这条规则，不适用于接口，即：初始化一个类的子类，会先初始化它的父类，但是不一定会初始化它的接口。只有当首次使用该接口的静态变量时，才会初始化。</strong></p>
+<br>
+
+<h2 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.hzzzzzy.icu">Z.yang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.hzzzzzy.icu/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/">http://www.hzzzzzy.icu/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.hzzzzzy.icu" target="_blank">Z.yang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JVM/">JVM</a><a class="post-meta__tags" href="/tags/%E5%BA%95%E5%B1%82%E6%BA%90%E7%A0%81/">底层源码</a></div><div class="post_share"><div class="social-share" data-image="http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/"><img class="next-cover" src="http://pic.yupoo.com/hzzzzzy/799f3a9a/1f656da2.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">14-垃圾回收器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/" title="01-什么是JVM?"><img class="cover" src="https://img.zcool.cn/community/018f505b680d72a801206a35ae08b4.jpg?x-oss-process=image/auto-orient,1/resize,m_lfit,w_1280,limit_1/sharpen,100/format,webp/quality,Q_100" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-10</div><div class="title">01-什么是JVM?</div></div></a></div><div><a href="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/" title="03-数据区概述与线程"><img class="cover" src="http://pic.yupoo.com/hzzzzzy/f73747f2/e0af2823.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-12</div><div class="title">03-数据区概述与线程</div></div></a></div><div><a href="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" title="02-类加载器和类加载过程"><img class="cover" src="http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-11</div><div class="title">02-类加载器和类加载过程</div></div></a></div><div><a href="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" title="04-程序计数器"><img class="cover" src="http://pic.yupoo.com/hzzzzzy/f73747f2/e0af2823.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-12</div><div class="title">04-程序计数器</div></div></a></div><div><a href="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="05-虚拟机栈及相关问题"><img class="cover" src="http://pic.yupoo.com/hzzzzzy/799f3a9a/1f656da2.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-12</div><div class="title">05-虚拟机栈及相关问题</div></div></a></div><div><a href="/2022/07/12/06-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95/" title="06-本地方法栈和本地方法"><img class="cover" src="http://pic.yupoo.com/hzzzzzy/799f3a9a/1f656da2.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-12</div><div class="title">06-本地方法栈和本地方法</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.postimg.cc/3x9LfnT5/01.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Z.yang</div><div class="author-info__description">欢迎访问Z.yang的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hzzzzzy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://i.postimg.cc/WzyLPdsw/wechat.png" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客，该博客使用hexo，github pages进行搭建，vercel进行网站托管。 本博客持续更新java学习上的笔记与技术文章，欢迎关注，有事请通过微信或邮箱联系我!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.</span> <span class="toc-text">1、加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.1.</span> <span class="toc-text">加载的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E6%A8%A1%E5%9E%8B%E4%B8%8EClass%E5%AE%9E%E4%BE%8B%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">类模型与Class实例位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.3.</span> <span class="toc-text">数组类加载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text">2、链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%BC%89%E9%AA%8C%E8%AF%81"><span class="toc-number">3.1.</span> <span class="toc-text">1）验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E6%A3%80%E6%9F%A5"><span class="toc-number">3.1.1.</span> <span class="toc-text">格式检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E6%A3%80%E6%9F%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">语义检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%AA%8C%E8%AF%81"><span class="toc-number">3.1.3.</span> <span class="toc-text">字节码验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E5%BC%95%E7%94%A8%E9%AA%8C%E8%AF%81"><span class="toc-number">3.1.4.</span> <span class="toc-text">符号引用验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%BC%89%E5%87%86%E5%A4%87"><span class="toc-number">3.2.</span> <span class="toc-text">2）准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%EF%BC%89%E8%A7%A3%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text">3）解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">3、初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%8D%E4%BC%9A%E5%9C%A8%E4%BB%A5%E4%B8%8B%E6%83%85%E5%86%B5%E4%B8%8B%E7%94%9F%E6%88%90clinit%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">Java编译器不会在以下情况下生成clinit方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-final%E8%BF%9B%E8%A1%8C%E4%BF%AE%E9%A5%B0"><span class="toc-number">4.2.</span> <span class="toc-text">static+final进行修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#client%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">4.3.</span> <span class="toc-text">client线程安全性问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">4、使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%8A%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">主动使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A2%AB%E5%8A%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">5.2.</span> <span class="toc-text">被动使用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/" title="15-类的生命周期（详细）"><img src="http://pic.yupoo.com/hzzzzzy/4b43d712/e3b1b4d2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="15-类的生命周期（详细）"/></a><div class="content"><a class="title" href="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/" title="15-类的生命周期（详细）">15-类的生命周期（详细）</a><time datetime="2022-08-08T00:58:27.000Z" title="发表于 2022-08-08 08:58:27">2022-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" title="14-垃圾回收器"><img src="http://pic.yupoo.com/hzzzzzy/799f3a9a/1f656da2.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="14-垃圾回收器"/></a><div class="content"><a class="title" href="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" title="14-垃圾回收器">14-垃圾回收器</a><time datetime="2022-08-04T15:08:05.000Z" title="发表于 2022-08-04 23:08:05">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="13-垃圾回收"><img src="http://pic.yupoo.com/hzzzzzy/799f3a9a/1f656da2.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="13-垃圾回收"/></a><div class="content"><a class="title" href="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="13-垃圾回收">13-垃圾回收</a><time datetime="2022-08-04T14:05:02.000Z" title="发表于 2022-08-04 22:05:02">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" title="5-nginx-负载均衡"><img src="https://bu.dusays.com/2022/05/01/626e8fc2c9cb8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="5-nginx-负载均衡"/></a><div class="content"><a class="title" href="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" title="5-nginx-负载均衡">5-nginx-负载均衡</a><time datetime="2022-07-18T16:03:38.000Z" title="发表于 2022-07-19 00:03:38">2022-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="4-nginx-反向代理"><img src="https://bu.dusays.com/2022/05/01/626e8fc2c9cb8.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="4-nginx-反向代理"/></a><div class="content"><a class="title" href="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="4-nginx-反向代理">4-nginx-反向代理</a><time datetime="2022-07-18T15:34:35.000Z" title="发表于 2022-07-18 23:34:35">2022-07-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Z.yang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="2089623328" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><script async data-pjax src="/js/sky.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="ture"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
