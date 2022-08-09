@@ -1215,230 +1215,137 @@
       </tags>
   </entry>
   <entry>
-    <title>13-垃圾回收</title>
-    <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
-    <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
-<p><strong style="color:red;"><em>GC的作用：</em></strong><strong>释放没用的对象，清楚内存里的记录碎片，以便JVM可以将整理出来的内存分配给新的对象，没有GC就不能保证应用程序的正常进行</strong></p>
-<p><strong style="color:red;"><em>内存泄露：</em></strong><strong>对象在程序运行期间无法被回收</strong></p>
-<p><strong style="color:red;"><em>java自动内存管理：</em></strong><strong>降低内存泄漏和内存溢出的风险</strong></p>
-<p><strong style="color:red;"><em>GC的作用范围：</em></strong><strong>方法区和堆区（重点）</strong></p>
-<p><strong style="color:red;"><em>分类：</em></strong><strong>频繁收集Young区，较少收集Old区，基本不动Perm区（元空间）</strong></p>
+    <title>15-类的生命周期（详细）</title>
+    <url>/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
+<p><strong style="color:red">注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载</strong></p>
+<p><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/1.png"></p>
 <br>
 
-<h1 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h1><p><strong style="color:red;"><em>注意：</em></strong><strong>在GC执行垃圾回收之前，需要先区分出内存中哪些是存活的对象，哪些是死亡的对象，只有被标记为已经死亡的对象，GC才会在执行垃圾回收的时候，释放掉它的内存空间。</strong><strong style="color:red;">当一个对象已经不再被任何存活的对象继续引用时，就可以宣判为死亡</strong></p>
-<h2 id="标记阶段：引用计数算法"><a href="#标记阶段：引用计数算法" class="headerlink" title="标记阶段：引用计数算法"></a>标记阶段：引用计数算法</h2><p><strong style="color:red;">对每个对象保留一个整型的引用计数器属性。用来记录对象被引用的情况</strong></p>
+<p><em><strong>程序使用类的过程</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/2.png" style="zoom: 60%;">
+
+<br>
+
+<h1 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h1><p><em><strong style="color:red">将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）</strong></em></p>
 <blockquote>
-<p>对于一个对象A，只要任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收</p>
+<p>类模板对象：<strong>java类在JVM中的一个快照。JVM从字节码文件中解析出常量池、类字段、类方法等存储在类模板中</strong>，如此JVM就可以在运行期通过类模板获取java中的任意信息，能够对java类的成员变量进行遍历，也能对方法进行调用<strong>（反射机制基于这一基础）</strong></p>
 </blockquote>
-<p><strong style="color:red;">优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong></p>
-<p><strong style="color:red;">缺点：</strong><br><strong>1、需要单独的字段存储计数器，增加存储空间的开销</strong><br><strong>2、每次赋值都需要更新计数器，增加时间的开销</strong><br><em><strong>3、无法处理循环引用（致命缺陷）</strong></em></p>
 <br>
 
-<h2 id="标记阶段：可达性分析算法"><a href="#标记阶段：可达性分析算法" class="headerlink" title="标记阶段：可达性分析算法"></a>标记阶段：可达性分析算法</h2><p><strong style="color:red;">以根对象集合（GC Roots：一组必须活跃的引用）为起始点，按照从上至下的方式搜索被根对象集合所连接的目标对象是否可达</strong></p>
+<h2 id="加载的步骤"><a href="#加载的步骤" class="headerlink" title="加载的步骤"></a>加载的步骤</h2><p><em><strong style="color:red">1、通过类的全名，获取类的二进制数据流</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/4.png" style="zoom: 70%;">
+
+<p><em><strong style="color:red">2、解析类的二进制数据流为方法区内的数据结构（java类模型）</strong></em></p>
+<p><em><strong style="color:red">3、创建<code>java.lang.Class</code>类的实例（作为方法区这个类的各个数据的访问入口）</strong></em></p>
+<br>
+
+<h2 id="类模型与Class实例位置"><a href="#类模型与Class实例位置" class="headerlink" title="类模型与Class实例位置"></a>类模型与Class实例位置</h2><p><strong>类模型的位置：加载的类在JVM中创建相应的类结构，类结构存储在方法区</strong>（1.8之前：永久代；1.8之后：元空间）</p>
+<p><strong>Class实例的位置</strong>： .class文件加载后，在堆中创建一个Java.lang.Class对象，<strong>封装类位于方法区的数据结构</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/3.png" style="zoom: 50%;">
+
+<br>
+
+<h2 id="数组类加载"><a href="#数组类加载" class="headerlink" title="数组类加载"></a>数组类加载</h2><p><em><strong>数组类本身并不是由类加载器负责创建，而是JVM在运行时根据需要而直接创建的，但数组的元素类型仍然需要依靠类加载器去创建</strong></em></p>
+<p>1、数组元素类型是引用类型，遵循定义的加载过程递归加载和创建数组的元素类型</p>
+<p>2、JVM使用指定元素类型和数组维度来创建新的数组类</p>
+<p><em><strong>数组元素类型是引用类型，数据类的可访问性由元素类型决定，如果为基本数据类型，可访问性为pubilc</strong></em></p>
+<br>
+
+<h1 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h1><h2 id="1）验证"><a href="#1）验证" class="headerlink" title="1）验证"></a>1）验证</h2><p><strong style="color:red">确保Class文件的字节流中包含信息符合当前虚拟机要求,保证被加载类的正确性</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/5.png" style="zoom: 50%;">
+
+<h3 id="格式检查"><a href="#格式检查" class="headerlink" title="格式检查"></a>格式检查</h3><p><strong>1、是否以魔术oxCAFEBABE开头</strong>，主版本和副版本是否在当前Java虚拟机的支持范围内，数据中每一项是否都拥有正确的长度等</p>
+<p><strong style="color:red">2、格式检查与类的加载阶段一起执行，验证通过后，类加载器才会成功将类的二进制信息加载到方法区中</strong></p>
+<p><strong style="color:red">3、格式检查之外的验证操作会在方法区中进行</strong></p>
+<h3 id="语义检查"><a href="#语义检查" class="headerlink" title="语义检查"></a>语义检查</h3><p>java虚拟机会进行语义的检查，语义上不通过的，虚拟机也不会给予验证通过</p>
+<h3 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h3><p>验证过程中最复杂的一个过程，通过对字节码流的分析，判断字节码是否可以被正确地执行</p>
+<p><strong>栈映射帧（StackMapTbale）就是在这个阶段实现的，用于检测在特定的字节码处，局部变量表和操作数栈是否有正确的数据类型（尽可能检查出可以预知的问题，不能100%）</strong></p>
+<h3 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h3><p><strong>Class文件在其常量池会通过字符串来记录自己将要使用的其他类或方法</strong>，因此在验证阶段，虚拟机就会检查这些类或方法确实是存在的（类没找到：NoClassDefFoundError，方法没找到：NoSuchMethodError）</p>
+<br>
+
+<h2 id="2）准备"><a href="#2）准备" class="headerlink" title="2）准备"></a>2）准备</h2><p><strong style="color:red">为类变量分配内存并且设置该类变量的默认初始化值</strong></p>
 <blockquote>
-<p>使用该算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索所走过的路径（引用链），如果目标对象没有任何引用链相连，则不可达，也就意味着该对象已经死亡。<strong style="color:red;">只有能够被根对象集合直接或者间接连接的对象才是存活对象</strong></p>
+<p><em><strong>非final修饰的变量，解析环节进行默认初始化赋值</strong></em></p>
+<p><em><strong>这里不包含用final修饰的static，final在编译时就进行分配了，准备阶段会显式赋值</strong></em></p>
+<p><em><strong>这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量会随着对象一起分配到Java堆</strong></em></p>
 </blockquote>
-<p><strong style="color:red;">有效地解决了在引用技术算法中循环引用的问题，防止内存泄露的发生</strong></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/1.png" style="zoom:67%;">
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/8.png" style="zoom: 80%;">
 
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/2.png" style="zoom: 85%;">
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/7.png" style="zoom: 80%;">
 
-<p><strong style="color:red;"><em>注意：由于栈方式存放变量和指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那么它就是一个Root</em></strong></p>
-<p><strong style="color:red;"><em>扩展：除了固定的GC Roots集合以外，还可以有其他对象”临时性“地加入，共同构成完整GC Roots集合。比如：分代收集和局部回收</em></strong></p>
+<p><strong style="color:red">注意：Java并不支持boolean类型，对于boolean类型，内部实现是int，由于int的默认值是0，故对应boolean的默认值就是false</strong><br><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/6.png" style="zoom: 80%;"></p>
+<br>
+
+<h2 id="3）解析"><a href="#3）解析" class="headerlink" title="3）解析"></a>3）解析</h2><p>将常量池中的符号引号转换为直接引用的过程（将类、接口、字段和方法的符号引用转为直接引用）</p>
+<p>1、实际上，解析操作往往会伴随着JVM在执行完初始化之后再执行</p>
+<p>2、直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄（与虚拟机实现的内存布局相关）</p>
+<p>3、符号引用是以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可（符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到了内存中）</p>
+<p>4、主要解析动作针对类或接口、字段、类方法、接口方法、方法类型等</p>
+<br>
+
+<h1 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h1><p><strong style="color:red">为类变量赋予正确的初始化值</strong></p>
+<p><strong style="color:red">初始化阶段就是执行类构造器方法&lt; clinit &gt;()的过程。</strong>此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来</p>
+<p><em><strong>若该类具有父类，Jvm会保证子类的<clinit>() 执行前，父类的&lt; clinit &gt;() 已经执行完成。clinit 不同于类的构造方法(init) （由父及子，静态先行）</clinit></strong></em></p>
+<h2 id="Java编译器不会在以下情况下生成clinit方法"><a href="#Java编译器不会在以下情况下生成clinit方法" class="headerlink" title="Java编译器不会在以下情况下生成clinit方法"></a>Java编译器不会在以下情况下生成clinit方法</h2><p>一个类中并没有声明任何的类变量，也没有静态代码块时</p>
+<p>一个类中声明类变量，但是没有明确使用类变量的初始化语句以及静态代码块来执行初始化操作时</p>
+<p>一个类中包含static final修饰的基本数据类型的字段，这些类字段初始化语句采用编译时常量表达式 </p>
+<p>(如果这个static final 不是通过方法或者构造器,则在链接阶段)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest1</span> &#123;</span><br><span class="line">    <span class="comment">//场景1：对应非静态的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//场景2：静态的字段,没有显式的赋值,不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num1;</span><br><span class="line">    <span class="comment">//场景3：比如对于声明为static final的基本数据类型的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="static-final进行修饰"><a href="#static-final进行修饰" class="headerlink" title="static+final进行修饰"></a>static+final进行修饰</h2><p>1、在链接阶段的准备环节赋值</p>
+<p>2、在初始化阶段赋值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *1. 对于基本数据类型的字段来说,如果使用static final修饰,则显式赋值(直接赋值常量,而非调用方法)通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> * 2. 对于String来说,如果使用字面量的方式赋值,使用static final修饰的话,则显式赋值通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在初始化阶段&lt;clinit&gt;()中赋值的情况:</span></span><br><span class="line"><span class="comment"> * 排除上述的在准备环节赋值的情况之外的情况。</span></span><br><span class="line"><span class="comment"> * 最终结论:使用static + final修饰,且显示赋值中不涉及到方法或构造器调用的基本数据类型或String类型的显式赋值,是在链接阶段的准备环节进行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INT_CONSTANT</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT1</span> <span class="operator">=</span> Integer.valueOf(<span class="number">100</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1000</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;helloworld0&quot;</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;helloworld1&quot;</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;helloworld2&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUM1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">10</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="client线程安全性问题"><a href="#client线程安全性问题" class="headerlink" title="client线程安全性问题"></a>client线程安全性问题</h2><blockquote>
+<p>虚拟机会保证一个类的clinit方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的方法，其他线程都需要阻塞等待，直到活动线程执行clinit方法结束</p>
+</blockquote>
+<p><strong style="color:red">如果在一个类的clinit方法中有耗时很长的操作，就可能造成多个线程阻塞，引发死锁。</strong></p>
+<br>
+
+<h1 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h1><p>使用参数<code>-XX:+TraceClassLoading</code>：可以追踪类的加载信息并打印出来</p>
+<h2 id="主动使用"><a href="#主动使用" class="headerlink" title="主动使用"></a>主动使用</h2><p><strong style="color:red">Class只有在必须要首次使用的时候才会被装载。一个类或接口在初次主动使用前，必须要进行初始化。</strong></p>
+<p><strong>1、创建一个类的实例时（使用new关键字，通过反射、克隆，反序列化）即使用字节码invokestatic指令</strong></p>
+<p><strong>2、使用当前类的静态方法，使用getstatic或者putstatic指令（对应访问变量、赋值变量操作）</strong></p>
+<p><strong>3、使用类、接口的静态字段时（final修饰特殊考虑）</strong></p>
+<p><strong>4、当使用java.lang.reflect包中的方法反射类的方法时。比如：Class.forName(“xxx.xxx.xxx.test”)</strong></p>
+<p><strong>5、当初始化子类时，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</strong></p>
+<p>6、如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类的初始化，<strong style="color:red">该接口要在其之前被初始化。</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Father类的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> <span class="keyword">implements</span> <span class="title class_">CompareB</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Son类的初始化过程&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">CompareA</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">        &#123;System.out.println(<span class="string">&quot;CompareA的初始化&quot;</span>);&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span></span><br><span class="line">    &#123;System.out.println(<span class="string">&quot;你好！&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(Son.num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>7、当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</strong></p>
+<p><strong>8、当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</strong></p>
+<p><strong style="color:red">注意： 初始化一个类的子类这条规则，不适用于接口，即：初始化一个类的子类，会先初始化它的父类，但是不一定会初始化它的接口。只有当首次使用该接口的静态变量时，才会初始化。</strong></p>
+<br>
+
+<h2 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h2><p><strong style="color:red">被动使用不会引起类的初始化，即不会调用clinit方法</strong></p>
+<p><strong>1、当访问一个静态字段时，只有真正声明这个字段的类才会被初始化。</strong></p>
+<p><strong>2、当通过子类引用父类的静态变量，不会导致子类初始化</strong></p>
+<p><strong>3、通过数组定义类引用，不会触发此类的初始化</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">    Parent[] parents = <span class="keyword">new</span> <span class="title class_">Parent</span>[<span class="number">10</span>];</span><br><span class="line">    System.out.println(parents.getClass());	<span class="comment">//不进行初始化</span></span><br><span class="line">    System.out.println(parents.getClass().getSuperclass());	<span class="comment">//不进行初始化</span></span><br><span class="line">    parents[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Parent</span>();	<span class="comment">//进行Parent的初始化</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Parent</span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;System.out.println(<span class="string">&quot;Parent的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_">Parent</span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;System.out.println(<span class="string">&quot;Child的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、引用常量不会触发此类或接口的初始化。因为常量在链接阶段就已经被显式赋值了</strong></p>
+<p><strong>5、调用ClassLoader类的loadClass()方法加载一个类，并不是对类的主动使用，不会导致类的初始化</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> ClassLoader.getSystemClassLoader().loadClass(<span class="string">&quot;xxx.xxx.xxx&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123; e.printStackTrace();&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong style="color:red">注意：没有初始化的类，不意味着没有加载</strong></p>
+<br>
+
+<h1 id="5、卸载"><a href="#5、卸载" class="headerlink" title="5、卸载"></a>5、卸载</h1><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/9.png" style="zoom:80%;">
+
+<p><strong style="color:red">在类加载器的内部实现中，用一个Java集合来存放所加载类的引用。</strong>另外一个Class对象总是会引用它的类加载器，调用Class对象的<code>getClassLoader()</code>方法，就能获得它的类加载器。所以，二者之间是双向关联的</p>
+<p><strong>一个类的实例总是引用代表这个类的Class对象，一个类的实例总是引用代表这个类的Class对象</strong></p>
+<br>
+
+<p><em><strong>判断一个类是否属于不再使用的类</strong></em></p>
 <blockquote>
-<p><strong style="color:red;">1、如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能保障一致性的快照中进行。</strong>这点不满足的话分析结果的准确性就无法保证</p>
-<p>2、这也是GC进行时必须STW的一个重要原因，<strong>枚举根节点时也是必须要停顿</strong></p>
+<p>1、该类所有的实例都已经被回收。也就是]ava堆中不存在该类及其任何派生子类的实例。<br>2、加载该类的类加载器己经被回收。这个条件除非是经过精心设计的可替换类加载器的场景，如QSGi、SP的重加载等，否则通常是很难达成的。<br>3、该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</p>
 </blockquote>
-<br>
-
-<h3 id="对象的finalization机制"><a href="#对象的finalization机制" class="headerlink" title="对象的finalization机制"></a>对象的finalization机制</h3><blockquote>
-<p>1、java提供了对象终止机制来允许开发人员提供对象被销毁之前的自定义处理逻辑</p>
-<p><strong style="color:red;">2、垃圾回收该对象之前（垃圾回收器发现没有引用指向一个对象），总会先调用这个对象的finalize()方法</strong></p>
-<p>3、finalize()方法允许在子类中被重写，用于在对象被回收时进行资源的释放（通常在这个方法内进行一些资源释放和清理工作）</p>
-</blockquote>
-<p><strong style="color:red;"><em>注意：永远不要主动调用某个对象的 finalize方法，应该交给垃圾回收机制调用</em></strong></p>
-<br>
-
-<p><em><strong style="color:red;">理由：</strong></em></p>
-<p><strong style="color:red;">1、在调用时可能会导致对象复活</strong></p>
-<p><strong style="color:red;">2、在方法的执行时间是没有保障，它完全由GC线程决定，极端情况下，如果不发生GC，则finalize方法将没有执行机会</strong></p>
-<br>
-
-<h3 id="对象的三种状态"><a href="#对象的三种状态" class="headerlink" title="对象的三种状态"></a>对象的三种状态</h3><p><em><strong>由于finalize方法的存在，虚拟机中的对象一般处于三种可能的状态</strong></em></p>
-<p><em><strong>一个无法触及的对象有可能在某一个条件下“复活”自己</strong></em></p>
-<p>1、可触及的：从根节点开始，可以到达这个对象</p>
-<p>2、可复活的：对象的所有引用都被释放，但是对象有可能在调用finalize方法后复活</p>
-<p>3、不可触及的：对象的finalize方法被调用，并且没有复活，那么就会进入不可触及的状态。不可触及的对象不可能被复活，因为finalize方法只会被调用一次（对象只有在这个状态才能被回收）</p>
-<h3 id="判断对象回收的具体过程"><a href="#判断对象回收的具体过程" class="headerlink" title="判断对象回收的具体过程"></a><strong style="color:red">判断对象回收的具体过程</strong></h3><p>1、判断对象到 GC Roots 是否有引用链，没有则进行第一次标记</p>
-<p>2、判断对象是否执行finalize方法</p>
-<p>1）如果对象没有重写或者finalize方法已经被虚拟机调用过，则该对象判定为不可触及</p>
-<p>2）如果对象重写了finalize方法，但是还没有执行过，那么对象将插入到F-Queue队列中，执行方法</p>
-<p>3）GC将会对F-Queue队列中的对象进行第二次标记，如果对象在finalize方法中与引用链中的任何一个对象建立了联系，那么在第二次回收时，将会被移除队列。任何对象会再次出现没有引用的情况，直接变成不可触及的状态</p>
-<br>
-
-<h2 id="清除阶段：标记-清除算法"><a href="#清除阶段：标记-清除算法" class="headerlink" title="清除阶段：标记-清除算法"></a>清除阶段：标记-清除算法</h2><p><em><strong><strong style="color:red">基础且常见的垃圾收集算法</strong>，当堆中有效内存空间被耗尽的时候，就会进行STW，任何进行标记和清除</strong></em></p>
-<p>标记：Collector从引用根节点进行遍历，标记所有被引用的对象，一般是在对象的Header中记录为可达的对象</p>
-<p>清除：Collector对堆内存从头到尾进行线性的遍历，如果发现某个对象在Header中没有标记为可达对象，则将其回收</p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/3.png" style="zoom: 90%;">
-
-<p><em><strong style="color:red">缺点：</strong></em></p>
-<p>1、效率不高</p>
-<p>2、在进行GC的时候，需要STW</p>
-<p>3、清理出来的空间内存是不连续的，产生内存碎片。需要维护一个空闲列表</p>
-<p><strong style="color:red">注意：</strong><em><strong>此处清除的本质是将需要清除的对象地址保存在空闲的地址列表中，当下次有新对象加载时，判断垃圾的位置空间是否够，如果够，就进行存放</strong></em></p>
-<br>
-
-<h2 id="清除阶段：复制算法"><a href="#清除阶段：复制算法" class="headerlink" title="清除阶段：复制算法"></a>清除阶段：复制算法</h2><p><em><strong>将活着的内存空间分为两块,每次只使用其中一块,在垃圾回收时将正在.使用的内存中的存活对象复制到未被使用的内存块中,之后清除正在使用的内存块中的所有对象,交换两个内存的角色,最后完成垃圾回收。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/4.png" style="zoom: 75%;">
-
-<p><em><strong style="color:red">优点：</strong></em></p>
-<p>1、没有标记和清除过程,，实现简单，运行高效</p>
-<p>2、不会产生内存碎片，且对象完整不丢<br><em><strong style="color:red">缺点：</strong></em></p>
-<p>1、浪费空间</p>
-<p>2、对于G1这种分拆成为大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用和时间开销大。</p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/5.png" style="zoom: 80%;">
-
-<p><strong style="color:red">注意：如果垃圾对象很多，复制算法则不太理想。所以在 <em>新生代</em> 中使用复制算法是非常好的</strong></p>
-<br>
-
-<h2 id="清除阶段：标记-压缩算法"><a href="#清除阶段：标记-压缩算法" class="headerlink" title="清除阶段：标记-压缩算法"></a>清除阶段：标记-压缩算法</h2><img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/6.png" style="zoom: 80%;">
-
-<p>1、从根节点开始标记所有被引用对象.</p>
-<p>2、将所有的存活对象压缩到内存的一端,按顺序排放。</p>
-<p>3、清理边界外所有的空间。</p>
-<p><strong style="color:red"><em>优点：</em></strong></p>
-<p>消除了标记一清除算法当中，内存区域分散的缺点，<em><strong>我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可</strong></em></p>
-<p>消除了复制算法当中，内存减半的代价</p>
-<p><em><strong style="color:red">缺点：</strong></em></p>
-<p>从效率上来说，<em><strong>标记一整理算法要低于复制算法。</strong></em></p>
-<p><em><strong>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。移动过程中需要进行STW</strong></em></p>
-<br>
-
-<h2 id="总结清除阶段"><a href="#总结清除阶段" class="headerlink" title="总结清除阶段"></a>总结清除阶段</h2><table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">Mark-Sweep</th>
-<th align="center">Mark-Compact</th>
-<th align="center">Copying</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>速度</strong></td>
-<td align="center">中等</td>
-<td align="center">最慢</td>
-<td align="center">最快</td>
-</tr>
-<tr>
-<td align="center"><strong>空间开销</strong></td>
-<td align="center">少（会存在堆积碎片）</td>
-<td align="center">少（不堆积碎片）</td>
-<td align="center">通常需要或对象的两倍大小（不堆积碎片）</td>
-</tr>
-<tr>
-<td align="center"><strong>移动对象</strong></td>
-<td align="center">多</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-</tbody></table>
-<br>
-
-<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p><em><strong>分代算法是针对对象的不同特征，而使用合适的算法，实际上没有新算法产生，而是对前三个算法的实际应用，在新生代使用复制算法，老年代使用标记清除&#x2F;标记压缩算法清除</strong></em></p>
-<p><em><strong>老年代中：</strong></em></p>
-<p>Mark阶段的开销与存活对象的数量成正比</p>
-<p>Sweep阶段的开销与所管理区域的大小成正相关</p>
-<p>Compact阶段的开销与存活对象的数据成正比</p>
-<br>
-
-<h2 id="增量收集算法"><a href="#增量收集算法" class="headerlink" title="增量收集算法"></a>增量收集算法</h2><p><em><strong>为了避免STW影响用户体验或者系统的稳定性，让垃圾收集线程和应用程序线程交替执行，每次垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程，直到垃圾收集完成</strong></em></p>
-<p><strong style="color:red">注意：增量收集算法基础还是传统的标记—清除和复制算法，只是通过对线程冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</strong></p>
-<p><strong style="color:red">缺点：因为线程切换和上下文转换的小号，使得垃圾回收的总体成本上升，造成系统吞吐量下降</strong>、</p>
-<br>
-
-<h2 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h2><p><em><strong>一般堆空间越大，一次GC的时间就越长，GC产生的停顿就越长，为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据停顿时间去回收小区间，而不是整个堆空间，从而减少一个GC所产生的停顿。</strong></em></p>
-<br>
-
-<h1 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h1><h2 id="System-gc"><a href="#System-gc" class="headerlink" title="System.gc()"></a>System.gc()</h2><p><strong style="color:red">通过System.gc()或Runtime.getRuntime().gc()的调用，会显式触发Full GC同时对新生代和老年代进行回收（无法保证马上执行GC）</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">SystemGCTest</span>();</span><br><span class="line">    System.gc();<span class="comment">//无法保证马上执行GC</span></span><br><span class="line">	<span class="comment">//System.runFinalization();//强制调用使用引用的对象的finalize()方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="built_in">super</span>.finalize();</span><br><span class="line">    System.out.println(<span class="string">&quot;SystemGCTest 重写了finalize()&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h2><p>1）java虚拟机堆内存设置不够</p>
-<p><strong>2）代码中创建了大量对象，并且长时间不能被垃圾收集器收集（存在或被引用）</strong></p>
-<p>3）在OOM之前，通常垃圾收集器会被触发，尽可能去清理出空间</p>
-<br>
-
-<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p><em><strong style="color:red">严格来说：只有对象不会再被程序用到了，但是GC又不能回收他们的情况，才叫内存泄露</strong></em></p>
-<p><em><strong style="color:red">实际上：一些操作会导致对象的生命周期变得很长甚至导致OOM，也可以叫做宽泛意义的内存泄露</strong></em></p>
-<p>发生内存泄漏，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现0utOfMemory异常，导致程序崩溃。</p>
-<br>
-
-<p>比如：</p>
-<p>单例模式的生命周期和应用程序是一样的，如果在单例程序中持有堆外部对象的引用的话，那么这个外部对象是不能被回收的，则会导致内存泄露的产生</p>
-<br>
-
-<h2 id="STW"><a href="#STW" class="headerlink" title="STW"></a>STW</h2><p>在GC事件发生的过程中会产生应用程序的停顿。<em><strong>停顿产生时整个应用程序都会被暂停，没有任何响应</strong></em></p>
-<p>所有GC都有这个事件，<em><strong>是由JVM在后台自动发起和完成的</strong></em></p>
-<br>
-
-<h2 id="程序的并行和并发"><a href="#程序的并行和并发" class="headerlink" title="程序的并行和并发"></a>程序的并行和并发</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>一个时间段中有几个程序都是在同一个处理器上运行，<em><strong>并发不是真正意义上的“同时进行”，只是CPU把一个时间段划分成几个时间片段，然后在这几个时间区间之间来回切换。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/7.png" style="zoom: 70%;">
-
-<br>
-
-<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行</p>
-<p><em><strong>取决于CPU的核心数量</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/8.png" style="zoom: 80%;">
-
-<br>
-
-<h2 id="垃圾回收的并行和并发"><a href="#垃圾回收的并行和并发" class="headerlink" title="垃圾回收的并行和并发"></a>垃圾回收的并行和并发</h2><p><em><strong>并行：指多条垃圾收集线程并行工作,但此时用户线程仍处于等待状态</strong></em></p>
-<p><em><strong>串行：单线程执行。如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/9.png" style="zoom: 80%;">
-
-<p><em><strong>并发：用户线程和垃圾收集线程同时执行（不一定是并行的，可能会交替执行）垃圾回收线程在执行时不会停顿用户程序的运行</strong></em></p>
-<br>
-
-<h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p><strong style="color:red">程序执行时只有在特定位置才能停顿下来开始GC，这些位置被称为安全点</strong></p>
-<p>安全点如果太少可能会导致GC等待的时间太长，如果太频繁可能导致运行时的性能问题。</p>
-<p><em><strong>如何在GC发生时，检查所有线程都跑到最近的安全点停顿下来？</strong></em> （*）</p>
-<ul>
-<li><p>抢先式中断（没有虚拟机采用）：中断所有线程，如果还有线程不在安全点，就恢复线程，让线程跑到安全点</p>
-</li>
-<li><p>主动式中断：设置一个中断标志，各个线程运行到Safe Point的时候主动轮询这个标志，如果中断标志为真，则将自己进行中断挂起</p>
-</li>
-</ul>
-<br>
-
-<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>在一段代码片段中，对象的引用关系不会发生变化，在这个区域中的任何位置开始GC都是安全的。</p>
-<br>
-
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong style="color:red">强引用</strong></h3><p>最传统的“引用”的定义，是<em><strong>指在程序代码之中普遍存在的引用赋值</strong></em>。即<em><strong>类似“0bject obj&#x3D;new object( )”这种引用关系。</strong></em>只要强引用关系还存在，<em><strong>垃圾收集器就永远不会回收掉被引用的对象。（强引用可以直接访问目标对象）</strong></em></p>
-<p><code>StringBuffer str = new StringBuffer(&quot;hello&quot;);</code></p>
-<p><strong style="color:red">局部变量str指向Stringbuffer实例所在堆空间，通过str可操作该实例，那么str就是StringBuffer实例的强引用</strong></p>
-<br>
-
-<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a><strong style="color:red">软引用</strong></h3><p><em><strong>在系统将要发生内存溢出之前，</strong></em>将会把这些对象列入回收范围之中进行第<em><strong>二次回收</strong></em>。如果这次<em><strong>回收后还没有足够的内存，才会抛出内存溢出异常内存不足即回收</strong></em></p>
-<p>内存足够时，不会回收软引用的可达对象；内存不足时，会回收软引用的可达对象</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a><strong style="color:red">弱引用</strong></h3><p><em><strong>只被弱引用关联的对象只能生存到下一次垃圾收集之前。</strong></em>当垃圾收集器工作时，无论内存空间是否足够，都会回收掉被弱引用关联的对象。但是由于垃圾回收器的线程通常优先级很低，因此不一定能很快发现持有弱引用的对象，这种情况下，弱引用对象可以存在较长时间。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; wr = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a><strong style="color:red">虚引用</strong></h3><p>一个对象是否有虛引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获得一个对象的实例。<em><strong>为一个对象设置虛引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知（跟踪垃圾回收过程）</strong></em></p>
-<blockquote>
-<p>虚引用必须和引用队列一起使用。虚引用在创建时必须提供一个引用队列作为参数。当垃圾回收器准备回收一个对象时，如果发现它还有虛引用，就会在回收对象后，将这个虚引用加入引用队列，以通知应用程序对象的回收情况。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">object</span>();</span><br><span class="line">ReferenceQueuephantomQueue = <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>( ) ;</span><br><span class="line">PhantomReference&lt;object&gt; pf = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;object&gt;(obj, phantomQueue); </span><br><span class="line">obj = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
+<p><strong style="color:red">注意：通常情况下，一个已经加载的类型被卸载的概率很小，而且卸载时间不确定</strong></p>
 <br>
 ]]></content>
       <categories>
@@ -1447,6 +1354,187 @@
       <tags>
         <tag>JVM</tag>
         <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-1-算法时间复杂度分析</title>
+    <url>/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p><strong>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</strong></p>
+<p><strong>算法函数中n最高次幂越小，算法效率越高</strong></p>
+<p>1.算法函数中的常数可以忽略； </p>
+<p>2.算法函数中最高次幂的常数因子可以忽略； </p>
+<p>3.算法函数中最高次幂越小，算法效率越高。</p>
+<h2 id="大O记法"><a href="#大O记法" class="headerlink" title="大O记法"></a><strong>大O记法</strong></h2><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随着n的变化情况并确定T(n)的 量级。算法的时间复杂度，就是算法的时间量度，记作:T(n)&#x3D;O(f(n))。</p>
+<p><strong>它表示随着问题规模n的增大，算法执行时间 的增长率和f(n)的增长率相同，称作算法的渐近时间复杂度，简称时间复杂度，其中f(n)是问题规模n的某个函数。</strong></p>
+<p><strong>执行次数&#x3D;执行时间</strong></p>
+<h3 id="算法一："><a href="#算法一：" class="headerlink" title="算法一："></a>算法一：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法二："><a href="#算法二：" class="headerlink" title="算法二："></a>算法二：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"></span><br><span class="line">    	sum += i;<span class="comment">//执行了n次</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	System.out.println(<span class="string">&quot;sum=&quot;</span> + sum);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法三："><a href="#算法三：" class="headerlink" title="算法三："></a>算法三：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;=n ; i++) &#123;</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;=n ; j++) &#123;</span><br><span class="line"></span><br><span class="line">     	sum+=i;<span class="comment">//执行n^2次</span></span><br><span class="line"></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**算法一：3次 **</p>
+<p>**算法二：n+3次 **</p>
+<p><strong>算法三：n^2+2次</strong></p>
+<h3 id="推导大O阶-的表示法"><a href="#推导大O阶-的表示法" class="headerlink" title="推导大O阶 的表示法"></a><strong>推导大O阶</strong> 的表示法</h3><p>以下几个规则可以使用： </p>
+<p>**1.用常数1取代运行时间中的所有加法常数； **</p>
+<p><strong>2.在修改后的运行次数中，只保留高阶项；</strong></p>
+<p><strong>3.如果最高阶项存在，且常数因子不为1，则去除与这个项相乘的常数；</strong></p>
+<p>所以，上述算法的大O记法分别为： </p>
+<p>​	算法一：O(1) </p>
+<p>​	算法二：O(n) </p>
+<p>​	算法三：O(n^2)</p>
+<h2 id="常见的大O阶"><a href="#常见的大O阶" class="headerlink" title="常见的大O阶"></a><strong>常见的大O阶</strong></h2><h3 id="1-线性阶"><a href="#1-线性阶" class="headerlink" title="1.线性阶"></a>1.线性阶</h3><p>一般含有非嵌套循环涉及线性阶，线性阶就是随着输入规模的扩大，对应计算次数呈直线增长，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line">    sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;<span class="comment">//执行1次</span></span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>上面这段代码，它的循环的时间复杂度为O(n)</strong>,因为循环体中的代码需要执行n次</p>
+<h3 id="2-平方阶"><a href="#2-平方阶" class="headerlink" title="2.平方阶"></a>2.平方阶</h3><p>一般嵌套循环属于这种时间复杂度</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>,n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;=n ; j++) &#123;</span><br><span class="line">            sum+=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码，n&#x3D;100，也就是说，外层循环每执行一次，内层循环就执行100次，那总共程序想要从这两个循环 中出来，就需要执行100<em>100次，也就是n的平方次，所以*<em>这段代码的时间复杂度是O(n^2).</em></em></p>
+<h3 id="3-立方阶"><a href="#3-立方阶" class="headerlink" title="3.立方阶"></a>3.立方阶</h3><p>一般三层嵌套循环属于这种时间复杂度</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">0</span>, n = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt;= n; j++) &#123;</span><br><span class="line">                x++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码，n&#x3D;100，也就是说，外层循环每执行一次，中间循环循环就执行100次，中间循环每执行一次，最 内层循环需要执行100次，那总共程序想要从这三个循环中出来，就需要执行100100100次，也就是n的立方，所 以<strong>这段代码的时间复杂度是O(n^3).</strong></p>
+<h3 id="4-对数阶"><a href="#4-对数阶" class="headerlink" title="4.对数阶"></a>4.对数阶</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">1</span>,n=<span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(i&lt;n)&#123;</span><br><span class="line">    i = i * <span class="number">2</span>; 	   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于每次i<em>2之后，就距离n更近一步，假设有x个2相乘后大于n，则会退出循环。由于是2^x&#x3D;n,得到x&#x3D;log(2)n,所 以*<em>这个循环的时间复杂度为O(logn);</em></em> 对于对数阶，<strong>由于随着输入规模n的增大，不管底数为多少，他们的增长趋势是一样的，所以我们会忽略底数。</strong></p>
+<h3 id="5-常数阶"><a href="#5-常数阶" class="headerlink" title="5.常数阶"></a>5.常数阶</h3><p>一般不涉及循环操作的都是常数阶，因为它不会随着n的增长而增加操作次数。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="type">int</span> i=n+<span class="number">2</span>;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码，不管输入规模n是多少，都执行2次，根据大O推导法则，常数用1来替换，所以<strong>上述代码的时间复杂度为O(1)</strong></p>
+<p>​    <img src="/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>他们的复杂程度从低到高依次为：</p>
+<p>​    <img src="/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>所以，我们的算法，尽可能的<strong>追求的是O(1),O(logn),O(n),O(nlogn)这几种时间复杂度</strong>，而如果发现算法的时间复杂度为平方阶、 立方阶或者更复杂的，那我们可以分为这种算法是不可取的，需要优化。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-3-算法的空间复杂度分析</title>
+    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
+<p>2.计算机访问内存的方式都是一次一个字节</p>
+<p>3.一个引用（机器地址）需要8个字节表示：</p>
+<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
+<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
+<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
+<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
+<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
+<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
+<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
+<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
+<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
+<p>算法二的空间复杂度为O(n)</p>
+<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
+<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
+<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-nginx-配置到系统服务和系统环境</title>
+    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
+<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
+<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、使配置立即生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-1-冒泡排序</title>
+    <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>排序原理：</strong> </p>
+<p><strong>1. 比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。</strong></p>
+<p><strong>2. 对每一对相邻元素做同样的工作，从开始第一对元素到结尾的最后一对元素。最终最后位置的元素就是最大值。</strong></p>
+<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/1.png"></p>
+<p>**初始状态到第一次冒泡 : **</p>
+<ol>
+<li>比较 4,5，5比4大，不变。</li>
+<li>比较5,6，6比5大，不变</li>
+<li>比较6,3，3比6小，交换二者位置    4,5,3,6,2,1</li>
+<li>比较6,2，2比6小，交换二者位置    4,5,3,2,6,1</li>
+<li>比较6,1，1比6小，交换二者位置    4,5,3,2,1,6</li>
+</ol>
+<p>假设数组长度为n，冒泡排序必须实现n-1次冒泡（令k &#x3D; n）</p>
+<p>第一次冒泡要有k-1次比较</p>
+<p>第二次冒泡要有k-2次比较</p>
+<p>第n-1次冒泡要有k-n-1次比较</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用两个for循环进行遍历，第一个for循环表示冒泡的次数为：数组长度-1</strong></p>
+<p><strong>第二个for循环表示相邻数组元素依次比较，j &lt; i 表示排序完的元素放在数组的后面，不需要再次进行排序</strong></p>
+<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/2.png"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> SORT;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2022/1/14</span></span><br><span class="line"><span class="comment"> * 10:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//    1.public static void sort(Comparable[] a)：对数组内的元素进行排序</span></span><br><span class="line"><span class="comment">//    2.private static boolean greater(Comparable v,Comparable w):判断v是否大于w</span></span><br><span class="line"><span class="comment">//    3.private static void exch(Comparable[] a,int i,int j)：交换a数组中，索引i和索引j处的值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bubble</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对数组内的元素进行排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                    exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断v是否大于w</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> v.compareTo(w);</span><br><span class="line">        <span class="keyword">if</span> (result&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        return result&gt;0;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//交换a数组中，索引i和索引j处的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        Comparable temp;</span><br><span class="line">        temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>冒泡排序的时间复杂度分析 冒泡排序使用了双层for循环，其中内层循环的循环体是真正完成排序的代码</strong></p>
+<p>**所以， 分析冒泡排序的时间复杂度，主要分析一下内层循环体的执行次数即可。 **</p>
+<p>在最坏情况下，也就是假如要排序的元素为{6,5,4,3,2,1}逆序，</p>
+<p>那么： 元素比较的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2; </p>
+<p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
+<p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
+<p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1680,305 +1768,6 @@
       <tags>
         <tag>JVM</tag>
         <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-1-算法时间复杂度分析</title>
-    <url>/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p><strong>最高次项的指数大的，随着n的增长，结果也会变得增长特别快</strong></p>
-<p><strong>算法函数中n最高次幂越小，算法效率越高</strong></p>
-<p>1.算法函数中的常数可以忽略； </p>
-<p>2.算法函数中最高次幂的常数因子可以忽略； </p>
-<p>3.算法函数中最高次幂越小，算法效率越高。</p>
-<h2 id="大O记法"><a href="#大O记法" class="headerlink" title="大O记法"></a><strong>大O记法</strong></h2><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随着n的变化情况并确定T(n)的 量级。算法的时间复杂度，就是算法的时间量度，记作:T(n)&#x3D;O(f(n))。</p>
-<p><strong>它表示随着问题规模n的增大，算法执行时间 的增长率和f(n)的增长率相同，称作算法的渐近时间复杂度，简称时间复杂度，其中f(n)是问题规模n的某个函数。</strong></p>
-<p><strong>执行次数&#x3D;执行时间</strong></p>
-<h3 id="算法一："><a href="#算法一：" class="headerlink" title="算法一："></a>算法一：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="算法二："><a href="#算法二：" class="headerlink" title="算法二："></a>算法二：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"></span><br><span class="line">    	sum += i;<span class="comment">//执行了n次</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	System.out.println(<span class="string">&quot;sum=&quot;</span> + sum);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="算法三："><a href="#算法三：" class="headerlink" title="算法三："></a>算法三：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;=n ; i++) &#123;</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;=n ; j++) &#123;</span><br><span class="line"></span><br><span class="line">     	sum+=i;<span class="comment">//执行n^2次</span></span><br><span class="line"></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>**算法一：3次 **</p>
-<p>**算法二：n+3次 **</p>
-<p><strong>算法三：n^2+2次</strong></p>
-<h3 id="推导大O阶-的表示法"><a href="#推导大O阶-的表示法" class="headerlink" title="推导大O阶 的表示法"></a><strong>推导大O阶</strong> 的表示法</h3><p>以下几个规则可以使用： </p>
-<p>**1.用常数1取代运行时间中的所有加法常数； **</p>
-<p><strong>2.在修改后的运行次数中，只保留高阶项；</strong></p>
-<p><strong>3.如果最高阶项存在，且常数因子不为1，则去除与这个项相乘的常数；</strong></p>
-<p>所以，上述算法的大O记法分别为： </p>
-<p>​	算法一：O(1) </p>
-<p>​	算法二：O(n) </p>
-<p>​	算法三：O(n^2)</p>
-<h2 id="常见的大O阶"><a href="#常见的大O阶" class="headerlink" title="常见的大O阶"></a><strong>常见的大O阶</strong></h2><h3 id="1-线性阶"><a href="#1-线性阶" class="headerlink" title="1.线性阶"></a>1.线性阶</h3><p>一般含有非嵌套循环涉及线性阶，线性阶就是随着输入规模的扩大，对应计算次数呈直线增长，例如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">//执行1次</span></span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;<span class="comment">//执行1次</span></span><br><span class="line">    sum = (n+<span class="number">1</span>)*n/<span class="number">2</span>;<span class="comment">//执行1次</span></span><br><span class="line">    System.out.println(<span class="string">&quot;sum=&quot;</span>+sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>上面这段代码，它的循环的时间复杂度为O(n)</strong>,因为循环体中的代码需要执行n次</p>
-<h3 id="2-平方阶"><a href="#2-平方阶" class="headerlink" title="2.平方阶"></a>2.平方阶</h3><p>一般嵌套循环属于这种时间复杂度</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>,n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;=n ; j++) &#123;</span><br><span class="line">            sum+=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面这段代码，n&#x3D;100，也就是说，外层循环每执行一次，内层循环就执行100次，那总共程序想要从这两个循环 中出来，就需要执行100<em>100次，也就是n的平方次，所以*<em>这段代码的时间复杂度是O(n^2).</em></em></p>
-<h3 id="3-立方阶"><a href="#3-立方阶" class="headerlink" title="3.立方阶"></a>3.立方阶</h3><p>一般三层嵌套循环属于这种时间复杂度</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">0</span>, n = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt;= n; j++) &#123;</span><br><span class="line">                x++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面这段代码，n&#x3D;100，也就是说，外层循环每执行一次，中间循环循环就执行100次，中间循环每执行一次，最 内层循环需要执行100次，那总共程序想要从这三个循环中出来，就需要执行100100100次，也就是n的立方，所 以<strong>这段代码的时间复杂度是O(n^3).</strong></p>
-<h3 id="4-对数阶"><a href="#4-对数阶" class="headerlink" title="4.对数阶"></a>4.对数阶</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">1</span>,n=<span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(i&lt;n)&#123;</span><br><span class="line">    i = i * <span class="number">2</span>; 	   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于每次i<em>2之后，就距离n更近一步，假设有x个2相乘后大于n，则会退出循环。由于是2^x&#x3D;n,得到x&#x3D;log(2)n,所 以*<em>这个循环的时间复杂度为O(logn);</em></em> 对于对数阶，<strong>由于随着输入规模n的增大，不管底数为多少，他们的增长趋势是一样的，所以我们会忽略底数。</strong></p>
-<h3 id="5-常数阶"><a href="#5-常数阶" class="headerlink" title="5.常数阶"></a>5.常数阶</h3><p>一般不涉及循环操作的都是常数阶，因为它不会随着n的增长而增加操作次数。例如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="type">int</span> i=n+<span class="number">2</span>;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述代码，不管输入规模n是多少，都执行2次，根据大O推导法则，常数用1来替换，所以<strong>上述代码的时间复杂度为O(1)</strong></p>
-<p>​    <img src="/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>他们的复杂程度从低到高依次为：</p>
-<p>​    <img src="/2022/07/12/2-1-%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>所以，我们的算法，尽可能的<strong>追求的是O(1),O(logn),O(n),O(nlogn)这几种时间复杂度</strong>，而如果发现算法的时间复杂度为平方阶、 立方阶或者更复杂的，那我们可以分为这种算法是不可取的，需要优化。</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>15-类的生命周期（详细）</title>
-    <url>/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
-<p><strong style="color:red">注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载</strong></p>
-<p><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/1.png"></p>
-<br>
-
-<p><em><strong>程序使用类的过程</strong></em></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/2.png" style="zoom: 60%;">
-
-<br>
-
-<h1 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h1><p><em><strong style="color:red">将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）</strong></em></p>
-<blockquote>
-<p>类模板对象：<strong>java类在JVM中的一个快照。JVM从字节码文件中解析出常量池、类字段、类方法等存储在类模板中</strong>，如此JVM就可以在运行期通过类模板获取java中的任意信息，能够对java类的成员变量进行遍历，也能对方法进行调用<strong>（反射机制基于这一基础）</strong></p>
-</blockquote>
-<br>
-
-<h2 id="加载的步骤"><a href="#加载的步骤" class="headerlink" title="加载的步骤"></a>加载的步骤</h2><p><em><strong style="color:red">1、通过类的全名，获取类的二进制数据流</strong></em></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/4.png" style="zoom: 70%;">
-
-<p><em><strong style="color:red">2、解析类的二进制数据流为方法区内的数据结构（java类模型）</strong></em></p>
-<p><em><strong style="color:red">3、创建<code>java.lang.Class</code>类的实例（作为方法区这个类的各个数据的访问入口）</strong></em></p>
-<br>
-
-<h2 id="类模型与Class实例位置"><a href="#类模型与Class实例位置" class="headerlink" title="类模型与Class实例位置"></a>类模型与Class实例位置</h2><p><strong>类模型的位置：加载的类在JVM中创建相应的类结构，类结构存储在方法区</strong>（1.8之前：永久代；1.8之后：元空间）</p>
-<p><strong>Class实例的位置</strong>： .class文件加载后，在堆中创建一个Java.lang.Class对象，<strong>封装类位于方法区的数据结构</strong></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/3.png" style="zoom: 50%;">
-
-<br>
-
-<h2 id="数组类加载"><a href="#数组类加载" class="headerlink" title="数组类加载"></a>数组类加载</h2><p><em><strong>数组类本身并不是由类加载器负责创建，而是JVM在运行时根据需要而直接创建的，但数组的元素类型仍然需要依靠类加载器去创建</strong></em></p>
-<p>1、数组元素类型是引用类型，遵循定义的加载过程递归加载和创建数组的元素类型</p>
-<p>2、JVM使用指定元素类型和数组维度来创建新的数组类</p>
-<p><em><strong>数组元素类型是引用类型，数据类的可访问性由元素类型决定，如果为基本数据类型，可访问性为pubilc</strong></em></p>
-<br>
-
-<h1 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h1><h2 id="1）验证"><a href="#1）验证" class="headerlink" title="1）验证"></a>1）验证</h2><p><strong style="color:red">确保Class文件的字节流中包含信息符合当前虚拟机要求,保证被加载类的正确性</strong></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/5.png" style="zoom: 50%;">
-
-<h3 id="格式检查"><a href="#格式检查" class="headerlink" title="格式检查"></a>格式检查</h3><p><strong>1、是否以魔术oxCAFEBABE开头</strong>，主版本和副版本是否在当前Java虚拟机的支持范围内，数据中每一项是否都拥有正确的长度等</p>
-<p><strong style="color:red">2、格式检查与类的加载阶段一起执行，验证通过后，类加载器才会成功将类的二进制信息加载到方法区中</strong></p>
-<p><strong style="color:red">3、格式检查之外的验证操作会在方法区中进行</strong></p>
-<h3 id="语义检查"><a href="#语义检查" class="headerlink" title="语义检查"></a>语义检查</h3><p>java虚拟机会进行语义的检查，语义上不通过的，虚拟机也不会给予验证通过</p>
-<h3 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h3><p>验证过程中最复杂的一个过程，通过对字节码流的分析，判断字节码是否可以被正确地执行</p>
-<p><strong>栈映射帧（StackMapTbale）就是在这个阶段实现的，用于检测在特定的字节码处，局部变量表和操作数栈是否有正确的数据类型（尽可能检查出可以预知的问题，不能100%）</strong></p>
-<h3 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h3><p><strong>Class文件在其常量池会通过字符串来记录自己将要使用的其他类或方法</strong>，因此在验证阶段，虚拟机就会检查这些类或方法确实是存在的（类没找到：NoClassDefFoundError，方法没找到：NoSuchMethodError）</p>
-<br>
-
-<h2 id="2）准备"><a href="#2）准备" class="headerlink" title="2）准备"></a>2）准备</h2><p><strong style="color:red">为类变量分配内存并且设置该类变量的默认初始化值</strong></p>
-<blockquote>
-<p><em><strong>非final修饰的变量，解析环节进行默认初始化赋值</strong></em></p>
-<p><em><strong>这里不包含用final修饰的static，final在编译时就进行分配了，准备阶段会显式赋值</strong></em></p>
-<p><em><strong>这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量会随着对象一起分配到Java堆</strong></em></p>
-</blockquote>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/8.png" style="zoom: 80%;">
-
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/7.png" style="zoom: 80%;">
-
-<p><strong style="color:red">注意：Java并不支持boolean类型，对于boolean类型，内部实现是int，由于int的默认值是0，故对应boolean的默认值就是false</strong><br><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/6.png" style="zoom: 80%;"></p>
-<br>
-
-<h2 id="3）解析"><a href="#3）解析" class="headerlink" title="3）解析"></a>3）解析</h2><p>将常量池中的符号引号转换为直接引用的过程（将类、接口、字段和方法的符号引用转为直接引用）</p>
-<p>1、实际上，解析操作往往会伴随着JVM在执行完初始化之后再执行</p>
-<p>2、直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄（与虚拟机实现的内存布局相关）</p>
-<p>3、符号引用是以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可（符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到了内存中）</p>
-<p>4、主要解析动作针对类或接口、字段、类方法、接口方法、方法类型等</p>
-<br>
-
-<h1 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h1><p><strong style="color:red">为类变量赋予正确的初始化值</strong></p>
-<p><strong style="color:red">初始化阶段就是执行类构造器方法&lt; clinit &gt;()的过程。</strong>此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来</p>
-<p><em><strong>若该类具有父类，Jvm会保证子类的<clinit>() 执行前，父类的&lt; clinit &gt;() 已经执行完成。clinit 不同于类的构造方法(init) （由父及子，静态先行）</clinit></strong></em></p>
-<h2 id="Java编译器不会在以下情况下生成clinit方法"><a href="#Java编译器不会在以下情况下生成clinit方法" class="headerlink" title="Java编译器不会在以下情况下生成clinit方法"></a>Java编译器不会在以下情况下生成clinit方法</h2><p>一个类中并没有声明任何的类变量，也没有静态代码块时</p>
-<p>一个类中声明类变量，但是没有明确使用类变量的初始化语句以及静态代码块来执行初始化操作时</p>
-<p>一个类中包含static final修饰的基本数据类型的字段，这些类字段初始化语句采用编译时常量表达式 </p>
-<p>(如果这个static final 不是通过方法或者构造器,则在链接阶段)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest1</span> &#123;</span><br><span class="line">    <span class="comment">//场景1：对应非静态的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//场景2：静态的字段,没有显式的赋值,不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num1;</span><br><span class="line">    <span class="comment">//场景3：比如对于声明为static final的基本数据类型的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="static-final进行修饰"><a href="#static-final进行修饰" class="headerlink" title="static+final进行修饰"></a>static+final进行修饰</h2><p>1、在链接阶段的准备环节赋值</p>
-<p>2、在初始化阶段赋值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *1. 对于基本数据类型的字段来说,如果使用static final修饰,则显式赋值(直接赋值常量,而非调用方法)通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> * 2. 对于String来说,如果使用字面量的方式赋值,使用static final修饰的话,则显式赋值通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在初始化阶段&lt;clinit&gt;()中赋值的情况:</span></span><br><span class="line"><span class="comment"> * 排除上述的在准备环节赋值的情况之外的情况。</span></span><br><span class="line"><span class="comment"> * 最终结论:使用static + final修饰,且显示赋值中不涉及到方法或构造器调用的基本数据类型或String类型的显式赋值,是在链接阶段的准备环节进行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INT_CONSTANT</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT1</span> <span class="operator">=</span> Integer.valueOf(<span class="number">100</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1000</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;helloworld0&quot;</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;helloworld1&quot;</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;helloworld2&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUM1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">10</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="client线程安全性问题"><a href="#client线程安全性问题" class="headerlink" title="client线程安全性问题"></a>client线程安全性问题</h2><blockquote>
-<p>虚拟机会保证一个类的clinit方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的方法，其他线程都需要阻塞等待，直到活动线程执行clinit方法结束</p>
-</blockquote>
-<p><strong style="color:red">如果在一个类的clinit方法中有耗时很长的操作，就可能造成多个线程阻塞，引发死锁。</strong></p>
-<br>
-
-<h1 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h1><h2 id="主动使用"><a href="#主动使用" class="headerlink" title="主动使用"></a>主动使用</h2><p><strong style="color:red">Class只有在必须要首次使用的时候才会被装载。一个类或接口在初次主动使用前，必须要进行初始化。</strong></p>
-<p><strong>1、创建一个类的实例时（使用new关键字，通过反射、克隆，反序列化）即使用字节码invokestatic指令</strong></p>
-<p><strong>2、使用当前类的静态方法，使用getstatic或者putstatic指令（对应访问变量、赋值变量操作）</strong></p>
-<p><strong>3、使用类、接口的静态字段时（final修饰特殊考虑）</strong></p>
-<p><strong>4、当使用java.lang.reflect包中的方法反射类的方法时。比如：Class.forName(“xxx.xxx.xxx.test”)</strong></p>
-<p><strong>5、当初始化子类时，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</strong></p>
-<p>6、如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类的初始化，<strong style="color:red">该接口要在其之前被初始化。</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Father类的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> <span class="keyword">implements</span> <span class="title class_">CompareB</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Son类的初始化过程&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">CompareA</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">        &#123;System.out.println(<span class="string">&quot;CompareA的初始化&quot;</span>);&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span></span><br><span class="line">    &#123;System.out.println(<span class="string">&quot;你好！&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(Son.num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>7、当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</strong></p>
-<p><strong>8、当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</strong></p>
-<p><strong style="color:red">注意： 初始化一个类的子类这条规则，不适用于接口，即：初始化一个类的子类，会先初始化它的父类，但是不一定会初始化它的接口。只有当首次使用该接口的静态变量时，才会初始化。</strong></p>
-<br>
-
-<h2 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h2>]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-3-算法的空间复杂度分析</title>
-    <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/1.png" alt="0"></p>
-<p>2.计算机访问内存的方式都是一次一个字节</p>
-<p>3.一个引用（机器地址）需要8个字节表示：</p>
-<p>例如： Date date &#x3D; new Date(),则date这个变量需要占用8个字节来表示</p>
-<p>4.创建一个对象，比如new Date()，除了Date对象内部存储的数据(例如年月日等信息)占用的内存，该对象本身也 有内存开销，每个对象的自身开销是16个字节，用来保存对象的头信息。 </p>
-<p>5.一般内存的使用，如果不够8个字节，都会被自动填充为8字节</p>
-<p>6.java中数组被被限定为对象，他们一般都会因为记录长度而需要额外的内存，一个原始数据类型的数组一般需要<strong>24字节的头信息</strong></p>
-<p>(16个自己的对象开销，4字节用于保存长度以及4个填充字节)再加上保存值所需的内存。</p>
-<h2 id="二、算法的空间复杂度"><a href="#二、算法的空间复杂度" class="headerlink" title="二、算法的空间复杂度"></a><strong>二、算法的空间复杂度</strong></h2><p>算法的空间复杂度计算公式记作：S(n)&#x3D;O(f(n)),其中n为输入规模，f(n)为语句关于n所占存储空间的函数。</p>
-<p>案例： 对指定的数组元素进行反转，并返回反转的内容。</p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/2.png" alt="0"></p>
-<p>​    <img src="/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/3.png" alt="0"></p>
-<p>根据大O推导法则，算法一的空间复杂度为O(1)</p>
-<p>算法二的空间复杂度为O(n)</p>
-<p>所以从空间占用的角度讲，算法一要优于算法二。</p>
-<p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
-<p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-nginx-配置到系统服务和系统环境</title>
-    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
-<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
-<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、使配置立即生效</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-1-冒泡排序</title>
-    <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>排序原理：</strong> </p>
-<p><strong>1. 比较相邻的元素。如果前一个元素比后一个元素大，就交换这两个元素的位置。</strong></p>
-<p><strong>2. 对每一对相邻元素做同样的工作，从开始第一对元素到结尾的最后一对元素。最终最后位置的元素就是最大值。</strong></p>
-<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/1.png"></p>
-<p>**初始状态到第一次冒泡 : **</p>
-<ol>
-<li>比较 4,5，5比4大，不变。</li>
-<li>比较5,6，6比5大，不变</li>
-<li>比较6,3，3比6小，交换二者位置    4,5,3,6,2,1</li>
-<li>比较6,2，2比6小，交换二者位置    4,5,3,2,6,1</li>
-<li>比较6,1，1比6小，交换二者位置    4,5,3,2,1,6</li>
-</ol>
-<p>假设数组长度为n，冒泡排序必须实现n-1次冒泡（令k &#x3D; n）</p>
-<p>第一次冒泡要有k-1次比较</p>
-<p>第二次冒泡要有k-2次比较</p>
-<p>第n-1次冒泡要有k-n-1次比较</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用两个for循环进行遍历，第一个for循环表示冒泡的次数为：数组长度-1</strong></p>
-<p><strong>第二个for循环表示相邻数组元素依次比较，j &lt; i 表示排序完的元素放在数组的后面，不需要再次进行排序</strong></p>
-<p><img src="/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/2.png"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> SORT;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Hzy</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2022/1/14</span></span><br><span class="line"><span class="comment"> * 10:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//    1.public static void sort(Comparable[] a)：对数组内的元素进行排序</span></span><br><span class="line"><span class="comment">//    2.private static boolean greater(Comparable v,Comparable w):判断v是否大于w</span></span><br><span class="line"><span class="comment">//    3.private static void exch(Comparable[] a,int i,int j)：交换a数组中，索引i和索引j处的值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bubble</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对数组内的元素进行排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> a.length-<span class="number">1</span>;i &gt; <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (greater(a[j],a[j+<span class="number">1</span>]))&#123;</span><br><span class="line">                    exch(a,j,j+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断v是否大于w</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> v.compareTo(w);</span><br><span class="line">        <span class="keyword">if</span> (result&gt;<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        return result&gt;0;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//交换a数组中，索引i和索引j处的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        Comparable temp;</span><br><span class="line">        temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>冒泡排序的时间复杂度分析 冒泡排序使用了双层for循环，其中内层循环的循环体是真正完成排序的代码</strong></p>
-<p>**所以， 分析冒泡排序的时间复杂度，主要分析一下内层循环体的执行次数即可。 **</p>
-<p>在最坏情况下，也就是假如要排序的元素为{6,5,4,3,2,1}逆序，</p>
-<p>那么： 元素比较的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2; </p>
-<p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
-<p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
-<p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -2279,6 +2068,241 @@
 <p><strong>该指令提供在其中指定流服务器指令的配置文件上下文。和http指令同级</strong></p>
 <p><strong>案例：</strong></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>13-垃圾回收</title>
+    <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
+    <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
+<p><strong style="color:red;"><em>GC的作用：</em></strong><strong>释放没用的对象，清楚内存里的记录碎片，以便JVM可以将整理出来的内存分配给新的对象，没有GC就不能保证应用程序的正常进行</strong></p>
+<p><strong style="color:red;"><em>内存泄露：</em></strong><strong>对象在程序运行期间无法被回收</strong></p>
+<p><strong style="color:red;"><em>java自动内存管理：</em></strong><strong>降低内存泄漏和内存溢出的风险</strong></p>
+<p><strong style="color:red;"><em>GC的作用范围：</em></strong><strong>方法区和堆区（重点）</strong></p>
+<p><strong style="color:red;"><em>分类：</em></strong><strong>频繁收集Young区，较少收集Old区，基本不动Perm区（元空间）</strong></p>
+<br>
+
+<h1 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h1><p><strong style="color:red;"><em>注意：</em></strong><strong>在GC执行垃圾回收之前，需要先区分出内存中哪些是存活的对象，哪些是死亡的对象，只有被标记为已经死亡的对象，GC才会在执行垃圾回收的时候，释放掉它的内存空间。</strong><strong style="color:red;">当一个对象已经不再被任何存活的对象继续引用时，就可以宣判为死亡</strong></p>
+<h2 id="标记阶段：引用计数算法"><a href="#标记阶段：引用计数算法" class="headerlink" title="标记阶段：引用计数算法"></a>标记阶段：引用计数算法</h2><p><strong style="color:red;">对每个对象保留一个整型的引用计数器属性。用来记录对象被引用的情况</strong></p>
+<blockquote>
+<p>对于一个对象A，只要任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收</p>
+</blockquote>
+<p><strong style="color:red;">优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong></p>
+<p><strong style="color:red;">缺点：</strong><br><strong>1、需要单独的字段存储计数器，增加存储空间的开销</strong><br><strong>2、每次赋值都需要更新计数器，增加时间的开销</strong><br><em><strong>3、无法处理循环引用（致命缺陷）</strong></em></p>
+<br>
+
+<h2 id="标记阶段：可达性分析算法"><a href="#标记阶段：可达性分析算法" class="headerlink" title="标记阶段：可达性分析算法"></a>标记阶段：可达性分析算法</h2><p><strong style="color:red;">以根对象集合（GC Roots：一组必须活跃的引用）为起始点，按照从上至下的方式搜索被根对象集合所连接的目标对象是否可达</strong></p>
+<blockquote>
+<p>使用该算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索所走过的路径（引用链），如果目标对象没有任何引用链相连，则不可达，也就意味着该对象已经死亡。<strong style="color:red;">只有能够被根对象集合直接或者间接连接的对象才是存活对象</strong></p>
+</blockquote>
+<p><strong style="color:red;">有效地解决了在引用技术算法中循环引用的问题，防止内存泄露的发生</strong></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/1.png" style="zoom:67%;">
+
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/2.png" style="zoom: 85%;">
+
+<p><strong style="color:red;"><em>注意：由于栈方式存放变量和指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那么它就是一个Root</em></strong></p>
+<p><strong style="color:red;"><em>扩展：除了固定的GC Roots集合以外，还可以有其他对象”临时性“地加入，共同构成完整GC Roots集合。比如：分代收集和局部回收</em></strong></p>
+<blockquote>
+<p><strong style="color:red;">1、如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能保障一致性的快照中进行。</strong>这点不满足的话分析结果的准确性就无法保证</p>
+<p>2、这也是GC进行时必须STW的一个重要原因，<strong>枚举根节点时也是必须要停顿</strong></p>
+</blockquote>
+<br>
+
+<h3 id="对象的finalization机制"><a href="#对象的finalization机制" class="headerlink" title="对象的finalization机制"></a>对象的finalization机制</h3><blockquote>
+<p>1、java提供了对象终止机制来允许开发人员提供对象被销毁之前的自定义处理逻辑</p>
+<p><strong style="color:red;">2、垃圾回收该对象之前（垃圾回收器发现没有引用指向一个对象），总会先调用这个对象的finalize()方法</strong></p>
+<p>3、finalize()方法允许在子类中被重写，用于在对象被回收时进行资源的释放（通常在这个方法内进行一些资源释放和清理工作）</p>
+</blockquote>
+<p><strong style="color:red;"><em>注意：永远不要主动调用某个对象的 finalize方法，应该交给垃圾回收机制调用</em></strong></p>
+<br>
+
+<p><em><strong style="color:red;">理由：</strong></em></p>
+<p><strong style="color:red;">1、在调用时可能会导致对象复活</strong></p>
+<p><strong style="color:red;">2、在方法的执行时间是没有保障，它完全由GC线程决定，极端情况下，如果不发生GC，则finalize方法将没有执行机会</strong></p>
+<br>
+
+<h3 id="对象的三种状态"><a href="#对象的三种状态" class="headerlink" title="对象的三种状态"></a>对象的三种状态</h3><p><em><strong>由于finalize方法的存在，虚拟机中的对象一般处于三种可能的状态</strong></em></p>
+<p><em><strong>一个无法触及的对象有可能在某一个条件下“复活”自己</strong></em></p>
+<p>1、可触及的：从根节点开始，可以到达这个对象</p>
+<p>2、可复活的：对象的所有引用都被释放，但是对象有可能在调用finalize方法后复活</p>
+<p>3、不可触及的：对象的finalize方法被调用，并且没有复活，那么就会进入不可触及的状态。不可触及的对象不可能被复活，因为finalize方法只会被调用一次（对象只有在这个状态才能被回收）</p>
+<h3 id="判断对象回收的具体过程"><a href="#判断对象回收的具体过程" class="headerlink" title="判断对象回收的具体过程"></a><strong style="color:red">判断对象回收的具体过程</strong></h3><p>1、判断对象到 GC Roots 是否有引用链，没有则进行第一次标记</p>
+<p>2、判断对象是否执行finalize方法</p>
+<p>1）如果对象没有重写或者finalize方法已经被虚拟机调用过，则该对象判定为不可触及</p>
+<p>2）如果对象重写了finalize方法，但是还没有执行过，那么对象将插入到F-Queue队列中，执行方法</p>
+<p>3）GC将会对F-Queue队列中的对象进行第二次标记，如果对象在finalize方法中与引用链中的任何一个对象建立了联系，那么在第二次回收时，将会被移除队列。任何对象会再次出现没有引用的情况，直接变成不可触及的状态</p>
+<br>
+
+<h2 id="清除阶段：标记-清除算法"><a href="#清除阶段：标记-清除算法" class="headerlink" title="清除阶段：标记-清除算法"></a>清除阶段：标记-清除算法</h2><p><em><strong><strong style="color:red">基础且常见的垃圾收集算法</strong>，当堆中有效内存空间被耗尽的时候，就会进行STW，任何进行标记和清除</strong></em></p>
+<p>标记：Collector从引用根节点进行遍历，标记所有被引用的对象，一般是在对象的Header中记录为可达的对象</p>
+<p>清除：Collector对堆内存从头到尾进行线性的遍历，如果发现某个对象在Header中没有标记为可达对象，则将其回收</p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/3.png" style="zoom: 90%;">
+
+<p><em><strong style="color:red">缺点：</strong></em></p>
+<p>1、效率不高</p>
+<p>2、在进行GC的时候，需要STW</p>
+<p>3、清理出来的空间内存是不连续的，产生内存碎片。需要维护一个空闲列表</p>
+<p><strong style="color:red">注意：</strong><em><strong>此处清除的本质是将需要清除的对象地址保存在空闲的地址列表中，当下次有新对象加载时，判断垃圾的位置空间是否够，如果够，就进行存放</strong></em></p>
+<br>
+
+<h2 id="清除阶段：复制算法"><a href="#清除阶段：复制算法" class="headerlink" title="清除阶段：复制算法"></a>清除阶段：复制算法</h2><p><em><strong>将活着的内存空间分为两块,每次只使用其中一块,在垃圾回收时将正在.使用的内存中的存活对象复制到未被使用的内存块中,之后清除正在使用的内存块中的所有对象,交换两个内存的角色,最后完成垃圾回收。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/4.png" style="zoom: 75%;">
+
+<p><em><strong style="color:red">优点：</strong></em></p>
+<p>1、没有标记和清除过程,，实现简单，运行高效</p>
+<p>2、不会产生内存碎片，且对象完整不丢<br><em><strong style="color:red">缺点：</strong></em></p>
+<p>1、浪费空间</p>
+<p>2、对于G1这种分拆成为大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用和时间开销大。</p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/5.png" style="zoom: 80%;">
+
+<p><strong style="color:red">注意：如果垃圾对象很多，复制算法则不太理想。所以在 <em>新生代</em> 中使用复制算法是非常好的</strong></p>
+<br>
+
+<h2 id="清除阶段：标记-压缩算法"><a href="#清除阶段：标记-压缩算法" class="headerlink" title="清除阶段：标记-压缩算法"></a>清除阶段：标记-压缩算法</h2><img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/6.png" style="zoom: 80%;">
+
+<p>1、从根节点开始标记所有被引用对象.</p>
+<p>2、将所有的存活对象压缩到内存的一端,按顺序排放。</p>
+<p>3、清理边界外所有的空间。</p>
+<p><strong style="color:red"><em>优点：</em></strong></p>
+<p>消除了标记一清除算法当中，内存区域分散的缺点，<em><strong>我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可</strong></em></p>
+<p>消除了复制算法当中，内存减半的代价</p>
+<p><em><strong style="color:red">缺点：</strong></em></p>
+<p>从效率上来说，<em><strong>标记一整理算法要低于复制算法。</strong></em></p>
+<p><em><strong>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。移动过程中需要进行STW</strong></em></p>
+<br>
+
+<h2 id="总结清除阶段"><a href="#总结清除阶段" class="headerlink" title="总结清除阶段"></a>总结清除阶段</h2><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Mark-Sweep</th>
+<th align="center">Mark-Compact</th>
+<th align="center">Copying</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>速度</strong></td>
+<td align="center">中等</td>
+<td align="center">最慢</td>
+<td align="center">最快</td>
+</tr>
+<tr>
+<td align="center"><strong>空间开销</strong></td>
+<td align="center">少（会存在堆积碎片）</td>
+<td align="center">少（不堆积碎片）</td>
+<td align="center">通常需要或对象的两倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td align="center"><strong>移动对象</strong></td>
+<td align="center">多</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+</tbody></table>
+<br>
+
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p><em><strong>分代算法是针对对象的不同特征，而使用合适的算法，实际上没有新算法产生，而是对前三个算法的实际应用，在新生代使用复制算法，老年代使用标记清除&#x2F;标记压缩算法清除</strong></em></p>
+<p><em><strong>老年代中：</strong></em></p>
+<p>Mark阶段的开销与存活对象的数量成正比</p>
+<p>Sweep阶段的开销与所管理区域的大小成正相关</p>
+<p>Compact阶段的开销与存活对象的数据成正比</p>
+<br>
+
+<h2 id="增量收集算法"><a href="#增量收集算法" class="headerlink" title="增量收集算法"></a>增量收集算法</h2><p><em><strong>为了避免STW影响用户体验或者系统的稳定性，让垃圾收集线程和应用程序线程交替执行，每次垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程，直到垃圾收集完成</strong></em></p>
+<p><strong style="color:red">注意：增量收集算法基础还是传统的标记—清除和复制算法，只是通过对线程冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</strong></p>
+<p><strong style="color:red">缺点：因为线程切换和上下文转换的小号，使得垃圾回收的总体成本上升，造成系统吞吐量下降</strong>、</p>
+<br>
+
+<h2 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h2><p><em><strong>一般堆空间越大，一次GC的时间就越长，GC产生的停顿就越长，为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据停顿时间去回收小区间，而不是整个堆空间，从而减少一个GC所产生的停顿。</strong></em></p>
+<br>
+
+<h1 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h1><h2 id="System-gc"><a href="#System-gc" class="headerlink" title="System.gc()"></a>System.gc()</h2><p><strong style="color:red">通过System.gc()或Runtime.getRuntime().gc()的调用，会显式触发Full GC同时对新生代和老年代进行回收（无法保证马上执行GC）</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">SystemGCTest</span>();</span><br><span class="line">    System.gc();<span class="comment">//无法保证马上执行GC</span></span><br><span class="line">	<span class="comment">//System.runFinalization();//强制调用使用引用的对象的finalize()方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="built_in">super</span>.finalize();</span><br><span class="line">    System.out.println(<span class="string">&quot;SystemGCTest 重写了finalize()&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h2><p>1）java虚拟机堆内存设置不够</p>
+<p><strong>2）代码中创建了大量对象，并且长时间不能被垃圾收集器收集（存在或被引用）</strong></p>
+<p>3）在OOM之前，通常垃圾收集器会被触发，尽可能去清理出空间</p>
+<br>
+
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p><em><strong style="color:red">严格来说：只有对象不会再被程序用到了，但是GC又不能回收他们的情况，才叫内存泄露</strong></em></p>
+<p><em><strong style="color:red">实际上：一些操作会导致对象的生命周期变得很长甚至导致OOM，也可以叫做宽泛意义的内存泄露</strong></em></p>
+<p>发生内存泄漏，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现0utOfMemory异常，导致程序崩溃。</p>
+<br>
+
+<p>比如：</p>
+<p>单例模式的生命周期和应用程序是一样的，如果在单例程序中持有堆外部对象的引用的话，那么这个外部对象是不能被回收的，则会导致内存泄露的产生</p>
+<br>
+
+<h2 id="STW"><a href="#STW" class="headerlink" title="STW"></a>STW</h2><p>在GC事件发生的过程中会产生应用程序的停顿。<em><strong>停顿产生时整个应用程序都会被暂停，没有任何响应</strong></em></p>
+<p>所有GC都有这个事件，<em><strong>是由JVM在后台自动发起和完成的</strong></em></p>
+<br>
+
+<h2 id="程序的并行和并发"><a href="#程序的并行和并发" class="headerlink" title="程序的并行和并发"></a>程序的并行和并发</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>一个时间段中有几个程序都是在同一个处理器上运行，<em><strong>并发不是真正意义上的“同时进行”，只是CPU把一个时间段划分成几个时间片段，然后在这几个时间区间之间来回切换。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/7.png" style="zoom: 70%;">
+
+<br>
+
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行</p>
+<p><em><strong>取决于CPU的核心数量</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/8.png" style="zoom: 80%;">
+
+<br>
+
+<h2 id="垃圾回收的并行和并发"><a href="#垃圾回收的并行和并发" class="headerlink" title="垃圾回收的并行和并发"></a>垃圾回收的并行和并发</h2><p><em><strong>并行：指多条垃圾收集线程并行工作,但此时用户线程仍处于等待状态</strong></em></p>
+<p><em><strong>串行：单线程执行。如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/9.png" style="zoom: 80%;">
+
+<p><em><strong>并发：用户线程和垃圾收集线程同时执行（不一定是并行的，可能会交替执行）垃圾回收线程在执行时不会停顿用户程序的运行</strong></em></p>
+<br>
+
+<h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p><strong style="color:red">程序执行时只有在特定位置才能停顿下来开始GC，这些位置被称为安全点</strong></p>
+<p>安全点如果太少可能会导致GC等待的时间太长，如果太频繁可能导致运行时的性能问题。</p>
+<p><em><strong>如何在GC发生时，检查所有线程都跑到最近的安全点停顿下来？</strong></em> （*）</p>
+<ul>
+<li><p>抢先式中断（没有虚拟机采用）：中断所有线程，如果还有线程不在安全点，就恢复线程，让线程跑到安全点</p>
+</li>
+<li><p>主动式中断：设置一个中断标志，各个线程运行到Safe Point的时候主动轮询这个标志，如果中断标志为真，则将自己进行中断挂起</p>
+</li>
+</ul>
+<br>
+
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>在一段代码片段中，对象的引用关系不会发生变化，在这个区域中的任何位置开始GC都是安全的。</p>
+<br>
+
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong style="color:red">强引用</strong></h3><p>最传统的“引用”的定义，是<em><strong>指在程序代码之中普遍存在的引用赋值</strong></em>。即<em><strong>类似“0bject obj&#x3D;new object( )”这种引用关系。</strong></em>只要强引用关系还存在，<em><strong>垃圾收集器就永远不会回收掉被引用的对象。（强引用可以直接访问目标对象）</strong></em></p>
+<p><code>StringBuffer str = new StringBuffer(&quot;hello&quot;);</code></p>
+<p><strong style="color:red">局部变量str指向Stringbuffer实例所在堆空间，通过str可操作该实例，那么str就是StringBuffer实例的强引用</strong></p>
+<br>
+
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a><strong style="color:red">软引用</strong></h3><p><em><strong>在系统将要发生内存溢出之前，</strong></em>将会把这些对象列入回收范围之中进行第<em><strong>二次回收</strong></em>。如果这次<em><strong>回收后还没有足够的内存，才会抛出内存溢出异常内存不足即回收</strong></em></p>
+<p>内存足够时，不会回收软引用的可达对象；内存不足时，会回收软引用的可达对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a><strong style="color:red">弱引用</strong></h3><p><em><strong>只被弱引用关联的对象只能生存到下一次垃圾收集之前。</strong></em>当垃圾收集器工作时，无论内存空间是否足够，都会回收掉被弱引用关联的对象。但是由于垃圾回收器的线程通常优先级很低，因此不一定能很快发现持有弱引用的对象，这种情况下，弱引用对象可以存在较长时间。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; wr = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a><strong style="color:red">虚引用</strong></h3><p>一个对象是否有虛引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获得一个对象的实例。<em><strong>为一个对象设置虛引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知（跟踪垃圾回收过程）</strong></em></p>
+<blockquote>
+<p>虚引用必须和引用队列一起使用。虚引用在创建时必须提供一个引用队列作为参数。当垃圾回收器准备回收一个对象时，如果发现它还有虛引用，就会在回收对象后，将这个虚引用加入引用队列，以通知应用程序对象的回收情况。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">object</span>();</span><br><span class="line">ReferenceQueuephantomQueue = <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>( ) ;</span><br><span class="line">PhantomReference&lt;object&gt; pf = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;object&gt;(obj, phantomQueue); </span><br><span class="line">obj = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
+<br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
   </entry>
   <entry>
     <title>ComponentScan的模拟实现</title>
