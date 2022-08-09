@@ -1,65 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>01-什么是JVM?</title>
-    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
-    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
-<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
-<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
-<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
-<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
-<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
-<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
-<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
-<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
-<p><strong>基于栈式架构的特点</strong></p>
-<ul>
-<li>跨平台性</li>
-<li>指令集小</li>
-<li>指令多</li>
-<li>执行性能比寄存器差</li>
-</ul>
-<p><strong>基于寄存器架构的特点</strong></p>
-<ul>
-<li>指令集架构则完全依赖硬件，可移植性差</li>
-<li>性能优秀和执行更高效</li>
-</ul>
-<p><strong>举例</strong></p>
-<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
-<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
-<p><strong>2、基于寄存器的计算流程</strong></p>
-<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
-<p><strong>总结</strong></p>
-<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
-<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
-<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
-<p><strong>虚拟机的执行</strong></p>
-<ul>
-<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
-<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
-<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
-</ul>
-<p><strong>虚拟机的退出</strong></p>
-<ul>
-<li><strong>程序正常执行结束</strong></li>
-<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
-<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
-<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
-<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>01-设计模式的原则</title>
     <url>/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/</url>
     <content><![CDATA[<h1 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a><strong>设计模式的目的</strong></h1><p><strong>1、代码重用性</strong></p>
@@ -336,6 +277,65 @@
       </tags>
   </entry>
   <entry>
+    <title>01-什么是JVM?</title>
+    <url>/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/</url>
+    <content><![CDATA[<h2 id="什么是JVM？"><a href="#什么是JVM？" class="headerlink" title="什么是JVM？"></a><strong>什么是JVM？</strong></h2><p><strong>①. JVM 是 java虚拟机，是用来执行java字节码(二进制的形式)的虚拟计算机</strong></p>
+<p><strong>②. jvm是运行在操作系统之上的，与硬件没有任何关系</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/1.png" alt="1"></p>
+<h2 id="Java的跨平台及原理"><a href="#Java的跨平台及原理" class="headerlink" title="Java的跨平台及原理"></a><strong>Java的跨平台及原理</strong></h2><p><strong>①. 跨平台：由Java编写的程序可以在不同的操作系统上运行：一次编写，多处运行</strong></p>
+<p><strong>②. 原理：编译之后的字节码文件和平台无关，需要在不同的操作系统上安装一个对应版本的虚拟机(JVM)</strong></p>
+<h2 id="JVM的整体的理解"><a href="#JVM的整体的理解" class="headerlink" title="JVM的整体的理解"></a><strong>JVM的整体的理解</strong></h2><p><strong>①. 类加载子系统</strong></p>
+<p><strong>②. 运行时数据区(我们核心关注这里 的栈、堆、方法区)</strong></p>
+<p><strong>③. 执行引擎(一般都是JIT编译器和解释器共存)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/2.png" alt="2"></p>
+<h2 id="java代码执行流程"><a href="#java代码执行流程" class="headerlink" title="java代码执行流程"></a><strong>java代码执行流程</strong></h2><p>​	<strong>java源码—java编译器—生成字节码—进入java虚拟机（类加载器—字节码校验器—翻译字节码—JIT编译器）</strong></p>
+<h2 id="JVM的架构模型"><a href="#JVM的架构模型" class="headerlink" title="JVM的架构模型"></a><strong>JVM的架构模型</strong></h2><p><strong>Java编译器输入的指令流基木上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</strong></p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>跨平台性</li>
+<li>指令集小</li>
+<li>指令多</li>
+<li>执行性能比寄存器差</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+</ul>
+<p><strong>举例</strong></p>
+<p><strong>同样执行2+3这种逻辑操作，其指令分别如下：</strong></p>
+<p><strong>1、基于栈的计算流程（以Java虚拟机为例)</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/3.png" alt="3"></p>
+<p><strong>2、基于寄存器的计算流程</strong></p>
+<p><img src="/2022/07/10/01-%E4%BB%80%E4%B9%88%E6%98%AFJVM/4.png" alt="4"></p>
+<p><strong>总结</strong></p>
+<p>由于跨平台性的设计，Java的指令都是根据栈来设计的。不同平台CPU架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a><strong>JVM的生命周期</strong></h2><p><strong>虚拟机的启动</strong></p>
+<p><strong>Java虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</strong></p>
+<p><strong>虚拟机的执行</strong></p>
+<ul>
+<li><strong>一个运行中的Java虚拟机有着一个清晰的任务：执行Java程序。</strong></li>
+<li><strong>程序开始执行时他才运行，程序结束时他就停止。</strong></li>
+<li><strong>执行一个所谓的Java程序的时候，真真正正在执行的是一个叫做Java虚拟机的进程。</strong></li>
+</ul>
+<p><strong>虚拟机的退出</strong></p>
+<ul>
+<li><strong>程序正常执行结束</strong></li>
+<li><strong>程序在执行过程中遇到了异常或错误而异常终止</strong></li>
+<li><strong>由于操作系统用现错误而导致Java虚拟机进程终止</strong></li>
+<li><strong>某线程调用Runtime类或system类的exit方法，或Runtime类的halt方法，并且Java安全管理器也允许这次exit或halt操作。</strong></li>
+<li><strong>除此之外，JNI（Java Native Interface）规范描述了用JNI Invocation API来加载或卸载 Java虚拟机时，Java虚拟机的退出情况。</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>05-虚拟机栈及相关问题</title>
     <url>/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="虚拟机栈-（线程私有）"><a href="#虚拟机栈-（线程私有）" class="headerlink" title="虚拟机栈 （线程私有）"></a><strong>虚拟机栈</strong> <strong>（线程私有）</strong></h1><p> <img src="/2022/07/12/05-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.jpg" alt="0"></p>
@@ -450,6 +450,122 @@
 <p><strong>6、代码演示：（内部产生，在内部消亡，线程安全）</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//s1的声明方式是线程安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//StringBuilder线程不安全</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s2的操作过程是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder s2)</span>&#123;</span><br><span class="line">    s2.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s3的操作是线程不安全的</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s3.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s3;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//s4的操作是线程安全的,s4其实在内部消亡了</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    s4.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> s4.toString();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt; &#123;</span><br><span class="line">        s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">    &#125;).start();</span><br><span class="line"></span><br><span class="line">    method2(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>08-方法区</title>
+    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
+    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
+<br>
+
+<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
+<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
+<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
+<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
+
+<br>
+
+<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
+<p>2、对永久代调优困难</p>
+<br>
+
+<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
+<br>
+
+<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
+<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
+<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
+<ul>
+<li>加载过多的jar包</li>
+<li>tomcat部署的过程过多</li>
+<li>反射类太多</li>
+</ul>
+<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
+<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
+
+<br>
+
+<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
+<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
+<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
+<p><strong>jdk1.8及以后</strong></p>
+<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
+<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
+<br>
+
+<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
+<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
+<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
+<p>2、直接父类的完整有效名（接口和Object类没有）</p>
+<p>3、修饰符</p>
+<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
+<br>
+
+<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
+<br>
+
+<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
+<p>2、方法返回类型</p>
+<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
+<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
+<br>
+
+<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
+<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
+<p>以下代码不会报空指针异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
+<br>
+
+<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
+<p><em><strong>字节码文件中包含了常量池</strong></em></p>
+<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<br>
+
+<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
+<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
+
+<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
+<br>
+
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
+<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
+<p><strong>注意：</strong></p>
+<p>1、运行时常量池是方法区的一部分。</p>
+<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
+<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
+<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
+<br>
+
+<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
+<p>前言：</p>
+<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
+<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
+<p>符号引用则属于编译原理方面的概念，包括</p>
+<ol>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ol>
+</blockquote>
+<p>方法区中主要回收</p>
+<p>1、常量池中废弃的常量</p>
+<p>2、不再使用的类型</p>
+<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
+<p>判断一个类是否要进行回收（*）</p>
+<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -632,122 +748,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123; alloc();&#125;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">       System.out.println(<span class="string">&quot;x&quot;</span> + point.x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + point.y);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> x;</span><br><span class="line">       <span class="keyword">private</span> <span class="type">int</span> y;</span><br><span class="line">       <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> i1)</span> &#123;&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">alloc</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;x&quot;</span> + x + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;y&quot;</span> + y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>08-方法区</title>
-    <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
-<br>
-
-<p><strong>只有HotSpot虚拟机才有永久代</strong></p>
-<p>1、jdk1.6之前：又永久代，静态变量存储在永久代上</p>
-<p>2、jdk1.7：又永久代，字符串常量池，静态变量移除，保存在堆中</p>
-<p>3、jdk1.8以后：无永久代，类型信息、字段、方法、常量池保存在本地内存的元空间，但字符串常量池，静态变量仍在堆</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/8.png" style="zoom: 75%;">
-
-<br>
-
-<h2 id="永久代为什么要被元空间替换？"><a href="#永久代为什么要被元空间替换？" class="headerlink" title="永久代为什么要被元空间替换？"></a>永久代为什么要被元空间替换？</h2><p>1、为永久代设置空间大小是很难确定的如果动态加载类过多，容易产生永久代的OOM，而元空间使用本地内存，只受本地内存的影响</p>
-<p>2、对永久代调优困难</p>
-<br>
-
-<h2 id="字符串常量池为什么要放到堆空间？"><a href="#字符串常量池为什么要放到堆空间？" class="headerlink" title="字符串常量池为什么要放到堆空间？"></a>字符串常量池为什么要放到堆空间？</h2><p>因为永久代的回收率很低，在进行full GC的时候才会触发，而full GC是老年代空间不足、永久代不足时才会触发，所以导致回收效率不高。但是<em><strong>实际中又有大量字符会被创建，回收效率低导致永久代空间不足。放到堆里，可以及时回收。</strong></em></p>
-<br>
-
-<h1 id="方法区的概述"><a href="#方法区的概述" class="headerlink" title="方法区的概述"></a>方法区的概述</h1><p>1、方法区在JVM启动的时候被创建，它的实际的物理内存空间可以是不连续的<em><strong>（关闭 JVM 就会释放这个区域的内存）</strong></em></p>
-<p><em><strong>2、方法区时逻辑上是堆的一个组成部分</strong></em>，但是在不同虚拟机里头实现是不一样的，最典型的就是永久代(PermGen space)和元空间(Metaspace)<br><em><strong>（注意：方法区是一种规范，而永久代和元空间是它的一种实现方式）</strong></em></p>
-<p>3、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类,导致方法区溢出，虚拟机同样会抛出内存溢出错误：(<code>java.lang.OutOfMemoryError:PermGen space</code>、<code>java.lang.OutOfMemoryError:Metaspace</code>)</p>
-<ul>
-<li>加载过多的jar包</li>
-<li>tomcat部署的过程过多</li>
-<li>反射类太多</li>
-</ul>
-<p>4、jdk7及以前，将方法区的实现称为永久代，jdk8之后，使用元空间取代了永久代</p>
-<p><em><strong>5、元空间和永久代的区别：元空间不在虚拟机设置的内存中，而是使用本地内存</strong></em></p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/5.png" style="zoom: 67%;">
-
-<br>
-
-<h1 id="设置方法区大小与OOM"><a href="#设置方法区大小与OOM" class="headerlink" title="设置方法区大小与OOM"></a>设置方法区大小与OOM</h1><p><strong>jdk7及以前</strong></p>
-<p><code>-XX:PermSize=100m</code>（默认值是20.75M）</p>
-<p><code>-XX:MaxPermSize=100m</code>（32位机器默认是64M，64位是82M）</p>
-<p><strong>jdk1.8及以后</strong></p>
-<p><code>-XX:MetaspaceSize=100m</code>（windows默认约等于21M）</p>
-<p><code>-XX:MaxMetaspaceSize=100m</code>（默认是-1,即没有限制）</p>
-<br>
-
-<h1 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h1><p><em><strong>存储已被虚拟机记载的类型信息、常量、静态变量、即时编译器编译后的代码缓存、域信息、方法信息</strong></em></p>
-<h2 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h2><p><strong>对每个加载的类型（类，接口，枚举，注解）JVM 必须在方法区中存储以下类型信息</strong></p>
-<p>1、类型的完整有效名称（全名&#x3D;包名.类名）</p>
-<p>2、直接父类的完整有效名（接口和Object类没有）</p>
-<p>3、修饰符</p>
-<p><em><strong>4、直接接口的一个有序列表</strong></em></p>
-<br>
-
-<h2 id="域信息"><a href="#域信息" class="headerlink" title="域信息"></a>域信息</h2><p><em><strong>域名称，域修饰符（public，private……），域类型</strong></em></p>
-<br>
-
-<h2 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h2><p>1、方法名称</p>
-<p>2、方法返回类型</p>
-<p>3、方法参数的数量和类型<strong>（按顺序）</strong></p>
-<p>4、方法的字节码，操作数栈和局部变量表的大小</p>
-<br>
-
-<h2 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h2><p>1、静态变量和类关联在一起，<em><strong>随着类的加载而加载</strong></em></p>
-<p><em><strong>2、类变量被所有类的实例共享，即使没有类实例也可以访问它</strong></em></p>
-<p>以下代码不会报空指针异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="全局常量：static-final"><a href="#全局常量：static-final" class="headerlink" title="全局常量：static final"></a>全局常量：static final</h2><p><em><strong>每个全局常量在编译的时候就会被分配</strong></em></p>
-<br>
-
-<h2 id="常量池与运行时常量池"><a href="#常量池与运行时常量池" class="headerlink" title="常量池与运行时常量池"></a>常量池与运行时常量池</h2><p><em><strong>方法区内部包含了运行时常量池</strong></em></p>
-<p><em><strong>字节码文件中包含了常量池</strong></em></p>
-<p><em><strong>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<br>
-
-<h3 id="常量池的理解"><a href="#常量池的理解" class="headerlink" title="常量池的理解"></a>常量池的理解</h3><p>常量池，可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名，方法名，参数类型、字面量等信息（主要是字面量和符号引用）</p>
-<img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/6.png" style="zoom: 90%;">
-
-<p><em><strong>一个 java 程序编译生成字节码文件后，字节码文件需要大量数据支持进行解析，如果将数据直接存进字节码，文件过大所以将数据存进常量池，字节码中包含了指向常量池的引用</strong></em></p>
-<br>
-
-<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p><em><strong>字节码文件中的常量池表经过类加载器放到方法区后，对应的结构就称为运行时常量池</strong></em></p>
-<p><em><strong>当该类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址</strong></em></p>
-<p><strong>注意：</strong></p>
-<p>1、运行时常量池是方法区的一部分。</p>
-<p>2、运行时常量池中包含多种不同的常量，包括<em><strong>编译期就已经明确的数值字面量</strong></em>，也包括到<em><strong>运行期解析后才能够获得的方法或者字段引用</strong></em> <em><strong>此时不再是常量池中的符号地址了，这里换为真实地址。</strong></em></p>
-<p>3、运行时常量池相较于Class文件中的常量池的特征：<em><strong>动态性</strong></em></p>
-<p><em><strong>4、符号地址变为真实地址其实就是，在<code>*.class文件</code>被加载到内存以后，将<code>*.class文件</code>中常量池中的<code>#x</code>符号地址，转化为内存中的地址。</strong></em></p>
-<br>
-
-<h1 id="方法区的垃圾收集"><a href="#方法区的垃圾收集" class="headerlink" title="方法区的垃圾收集"></a>方法区的垃圾收集</h1><blockquote>
-<p>前言：</p>
-<p>方法区内常量池之中主要存放的两大类常量：字面量和符号引用。 </p>
-<p>字面量比较接近Java语言层次的常量概念，如文本字符串、被声明为final的常量值等。</p>
-<p>符号引用则属于编译原理方面的概念，包括</p>
-<ol>
-<li>类和接口的全限定名</li>
-<li>字段的名称和描述符</li>
-<li>方法的名称和描述符</li>
-</ol>
-</blockquote>
-<p>方法区中主要回收</p>
-<p>1、常量池中废弃的常量</p>
-<p>2、不再使用的类型</p>
-<p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
-<p>判断一个类是否要进行回收（*）</p>
-<p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1893,7 +1893,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="keyword">throws</span> ClassNotFoundException</span><br></pre></td></tr></table></figure>
 
-<p><strong style="color:red">加载名称为name的类，返回结果为<code>java.lang.Class</code>类的实例。</strong>如果找不到类，则返回<code>ClassNot FoundException</code> 异常。<strong style="color:red">该方法中的逻辑就是双亲委派模式的实现</strong></p>
+<p><a href="https://www.hzzzzzy.icu/2022/08/08/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90">加载名称为name的类，返回结果为<code>java.lang.Class</code>类的实例。</a>如果找不到类，则返回<code>ClassNot FoundException</code> 异常。<strong style="color:red">该方法中的逻辑就是双亲委派模式的实现</strong></p>
 <br>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass (String name) <span class="keyword">throws</span> ClassNotFoundException</span><br></pre></td></tr></table></figure>
@@ -2059,40 +2059,6 @@
       </tags>
   </entry>
   <entry>
-    <title>3-2-选择排序</title>
-    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>排序原理：</strong></p>
-<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
-<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
-<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
-<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
-<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设数组长度为n</p>
-<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
-<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
-<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
-<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
-<p><strong>注意：</strong></p>
-<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
-<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
-<p><strong>选择排序的时间复杂度分析：</strong></p>
-<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
-<p>分别统计数据 交换次数和数据比较次数： </p>
-<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
-<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3-1-冒泡排序</title>
     <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p><strong>排序原理：</strong> </p>
@@ -2125,6 +2091,40 @@
 <p>元素交换的次数为： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
 <p>总执行次数为： (N^2&#x2F;2-N&#x2F;2)+(N^2&#x2F;2-N&#x2F;2)&#x3D;N^2-N;</p>
 <p>按照大O推导法则，保留函数中的最高阶项那么<strong>最终冒泡排序的时间复杂度为O(N^2)</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-2-选择排序</title>
+    <url>/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>排序原理：</strong></p>
+<p><strong>1.每一次遍历的过程中，都假定第一个索引处的元素是最小值，和其他索引处的值依次进行比较</strong></p>
+<p>​	**如果当前索引处的值大于其他某个索引处的值，则假定其他某个索引出的值为最小值，最后可以找到最小值所在的索引 **</p>
+<p><strong>2.交换第一个索引处和最小值所在的索引处的值</strong></p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/1.png" alt="0"></p>
+<p>原始数据到第一趟排序：假定4是最小值，让4分别与数据的其他7位元素进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>第六趟到第7趟排序：假定8是最小值，与后面的10，9进行比较，如果有比4小的数，交换二者位置让那个数成为最小值放在第一位，然后继续比较，直到到了元素的最后一位</p>
+<p>​    <img src="/2022/07/12/3-2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/2.png" alt="0"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//定义一个变量，记录最小元素所在的索引，默认为参与选择排序的第一个元素所在的位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">            <span class="comment">//需要比较最小索引min处的值和j索引处的值</span></span><br><span class="line">            <span class="keyword">if</span> (greater(a[min],a[j]))&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//交换最小元素所在的索引min处的值和j索引处的值</span></span><br><span class="line">        exch(a, i, min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">greater</span><span class="params">(Comparable v,Comparable w)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> v.compareTo(w)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exch</span><span class="params">(Comparable[] a,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">    Comparable temp;</span><br><span class="line">    temp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设数组长度为n</p>
+<p>最开始，将数组的第一个元素作为最小值所在的索引，定义为min</p>
+<p>用两个for循环进行嵌套，第一个for循环表示，需要进行n-1趟排序</p>
+<p>第二个for循环为了比较最小索引的值min 与 后面元素的索引值。</p>
+<p>如果存在比最小索引min的值小的元素，则交换min与该元素的索引，使其成为最小值的索引</p>
+<p><strong>注意：</strong></p>
+<p><strong>第二个for循环中定义 j &#x3D; i + 1 是为了在排好顺序的元素的后一位才开始进行比较</strong></p>
+<p><strong>而且 j 不能越界访问，所以 j 要小于数组的长度</strong></p>
+<p><strong>选择排序的时间复杂度分析：</strong></p>
+<p>选择排序使用了双层for循环，其中外层循环完成了数据交换，内层循环完成了数据比较，</p>
+<p>分别统计数据 交换次数和数据比较次数： </p>
+<p>数据比较次数： (N-1)+(N-2)+(N-3)+…+2+1&#x3D;((N-1)+1)*(N-1)&#x2F;2&#x3D;N^2&#x2F;2-N&#x2F;2;</p>
+<p>数据交换次数： N-1 时间复杂度：N^2&#x2F;2-N&#x2F;2+（N-1）&#x3D;N^2&#x2F;2+N&#x2F;2-1; 根据大O推导法则，保留最高阶项，去除常数因子，<strong>时间复杂度为O(N^2);</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -2416,6 +2416,115 @@
       </tags>
   </entry>
   <entry>
+    <title>loadClass方法源码剖析</title>
+    <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/08/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">       <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">           <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                       c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                   <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                   <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">                   <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                   <span class="comment">// to find the class.</span></span><br><span class="line">                   <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>spring源码-1-BeanFactory与ApplicationContext</title>
+    <url>/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/</url>
+    <content><![CDATA[<h1 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h1><p>1、它是ApplicationContext的父接口</p>
+<p>2、它才是Spring的核心容器，主要的ApplicationContext的实现都组合了它的功能</p>
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/1.png" style="zoom:80%;">
+
+<p>比如使用ApplicationContext的getBean方法，实际上先拿到BeanFactory对象，再去调用BeanFactory的getBean方法</p>
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/2.png" style="zoom:80%;">
+
+<p><strong>3、BeanFactory表面上只有getBean功能实际上，控制反转，基本的依赖注入，直至Bean的生命周期都是由它的实现类提供</strong></p>
+<br>
+
+<h1 id="ApplicationContext功能"><a href="#ApplicationContext功能" class="headerlink" title="ApplicationContext功能"></a>ApplicationContext功能</h1><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/3.png" style="zoom:80%;">
+
+<p><strong>1、MessageSource：处理国际化资源的能力（翻译）</strong> <em><strong>比如 getMessage方法</strong></em></p>
+<p><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/5.png" style="zoom:80%;"><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/4.png" style="zoom:80%;"></p>
+<br>
+
+<p><strong>2、RessourcePatternResolver：通配符匹配资源的能力</strong> <em><strong>比如 getResources方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示在resources目录下的META-INF子目录下的spring.factories文件和jar包内的......</span></span><br><span class="line"><span class="comment">//*号表示也可以jar内进行搜索</span></span><br><span class="line">Resource[] resources = context.getResources(<span class="string">&quot;classpath*:META-INF/spring.factories&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">    System.out.println(resource);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>3、ApplicationEventPublisher：发布事件能力</strong> <em><strong>比如 publishEvent方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取Component1然后进行注册</span></span><br><span class="line">context.getBean(Component1.class).register();</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component1中进行声明</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component1.class);</span><br><span class="line"><span class="comment">//该容器对象具备发送事件的功能</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> ApplicationEventPublisher context;	<span class="comment">//事件发生器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">()</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;用户注册&quot;</span>);</span><br><span class="line">    context.publishEvent(<span class="keyword">new</span> <span class="title class_">UserRegisteredEvent</span>(<span class="built_in">this</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component2中监听该事件</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component2.class);</span><br><span class="line"><span class="meta">@EventListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">aaa</span><span class="params">(UserRegisteredEvent event)</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;&#123;&#125;&quot;</span>, event);</span><br><span class="line">    log.debug(<span class="string">&quot;发送短信&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>4、EnvironmentCapable：读取环境信息</strong> <em><strong>比如getProperty方法</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取properties文件和系统环境变量对应键的值</span></span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;java_home&quot;</span>));</span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;server.port&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="BeanFactory的实现"><a href="#BeanFactory的实现" class="headerlink" title="BeanFactory的实现"></a>BeanFactory的实现</h1><h2 id="1、给Bean添加定义并进行注册"><a href="#1、给Bean添加定义并进行注册" class="headerlink" title="1、给Bean添加定义并进行注册"></a><em><strong>1、给Bean添加定义并进行注册</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">DefaultListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultListableBeanFactory</span>();</span><br><span class="line"><span class="comment">// bean 的定义（class, scope, 初始化, 销毁）</span></span><br><span class="line"><span class="type">AbstractBeanDefinition</span> <span class="variable">beanDefinition</span> <span class="operator">=</span></span><br><span class="line">        BeanDefinitionBuilder.genericBeanDefinition(Config.class).setScope(<span class="string">&quot;singleton&quot;</span>).getBeanDefinition();</span><br><span class="line"><span class="comment">//注册</span></span><br><span class="line">beanFactory.registerBeanDefinition(<span class="string">&quot;config&quot;</span>, beanDefinition);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="2、添加-BeanFactory-后处理器"><a href="#2、添加-BeanFactory-后处理器" class="headerlink" title="2、添加 BeanFactory 后处理器"></a><em><strong>2、添加 BeanFactory 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给 BeanFactory 添加一些常用的后处理器</span></span><br><span class="line">AnnotationConfigUtils.registerAnnotationConfigProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果只是添加后处理器不进行扩展，则无法解析@Confident和@bean注解</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BeanFactory 后处理器主要功能，补充了一些 bean 定义</span></span><br><span class="line"><span class="comment">// getBeansOfType 根据类型获取多个bean（bean后处理器）</span></span><br><span class="line">beanFactory.getBeansOfType(BeanFactoryPostProcessor.class).values().forEach(beanFactoryPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);   <span class="comment">//执行beanFactory 后处理器</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean3 <span class="title function_">bean3</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean3</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean4 <span class="title function_">bean4</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean4</span>();&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean3</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean4</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean1.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean1</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean1()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="keyword">private</span> Bean2 bean2;</span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">getBean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean2;&#125;</span><br><span class="line">        <span class="comment">//同时添加两个注解（后处理器的顺序决定了哪个先被解析）</span></span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="meta">@Resource(name = &quot;bean4&quot;)</span></span><br><span class="line">        <span class="keyword">private</span> Inter bean3;</span><br><span class="line">        <span class="keyword">public</span> Inter <span class="title function_">getInter</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean3;&#125;&#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean2.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean2</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean2()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="3、添加-Bean-后处理器"><a href="#3、添加-Bean-后处理器" class="headerlink" title="3、添加 Bean 后处理器"></a><em><strong>3、添加 Bean 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Bean 后处理器, 针对 bean 的生命周期的各个阶段提供扩展, 例如 @Autowired @Resource ...</span></span><br><span class="line">beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream()</span><br><span class="line">        .forEach(beanPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactory.addBeanPostProcessor(beanPostProcessor);    <span class="comment">//建立Bean工厂和后处理器的关系</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="4、后处理器器顺序"><a href="#4、后处理器器顺序" class="headerlink" title="4、后处理器器顺序"></a><em><strong>4、后处理器器顺序</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认是Common的后处理器排在前面，Autowired的排在后面</span></span><br><span class="line">System.out.println(<span class="string">&quot;Common:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">3</span>));</span><br><span class="line">System.out.println(<span class="string">&quot;Autowired:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em><strong>BeanFactory总结：</strong></em></p>
+<ol>
+<li>不会主动调用 BeanFactory 后处理器</li>
+<li>不会主动添加 Bean 后处理器</li>
+<li>不会主动初始化单例</li>
+<li>不会解析beanFactory 还不会解析 ${ } 与 #{ }</li>
+</ol>
+<p><em><strong>Bean后处理器会有排序的逻辑</strong></em></p>
+<br>
+
+<h1 id="ApplicationContext的实现"><a href="#ApplicationContext的实现" class="headerlink" title="ApplicationContext的实现"></a>ApplicationContext的实现</h1><h2 id="1、ClassPathXmlApplicationContext"><a href="#1、ClassPathXmlApplicationContext" class="headerlink" title="1、ClassPathXmlApplicationContext"></a>1、ClassPathXmlApplicationContext</h2><p><strong>在类路径下读取XML配置文件</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testClassPathXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;a02.xml&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(context.getBean(Bean2.class).getBean1());</span><br><span class="line">    <span class="comment">/**	</span></span><br><span class="line"><span class="comment">     *  结果：</span></span><br><span class="line"><span class="comment">     *	bean1</span></span><br><span class="line"><span class="comment">     *	bean2</span></span><br><span class="line"><span class="comment">     *	com.itheima.a02.A02$Bean1@6392827e</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">//a02.xml</span><br><span class="line"><span class="comment">&lt;!-- 控制反转, 让 bean1和bean2 被 Spring 容器管理 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean2&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 依赖注入, 让 bean2 建立与 bean1 的依赖关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="2、FileSystemXmlApplicationContext"><a href="#2、FileSystemXmlApplicationContext" class="headerlink" title="2、FileSystemXmlApplicationContext"></a>2、FileSystemXmlApplicationContext</h2><p><strong>在磁盘路径下读取XML配置文件</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testFileSystemXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">FileSystemXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;src\\main\\resources\\a02.xml&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="3、AnnotationConfigApplicationContext"><a href="#3、AnnotationConfigApplicationContext" class="headerlink" title="3、AnnotationConfigApplicationContext"></a>3、AnnotationConfigApplicationContext</h2><p><strong>基于java配置类来完成</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(Config.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="type">Bean2</span> <span class="variable">bean2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();</span><br><span class="line">        bean2.setBean1(bean1);</span><br><span class="line">        <span class="keyword">return</span> bean2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123; &#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Bean1 bean1;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBean1</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.bean1 = bean1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">getBean1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> bean1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/6.png" style="zoom:80%;">
+
+<br>
+
+<h2 id="4、AnnotationConfigServletWebServerApplicationContext"><a href="#4、AnnotationConfigServletWebServerApplicationContext" class="headerlink" title="4、AnnotationConfigServletWebServerApplicationContext"></a>4、AnnotationConfigServletWebServerApplicationContext</h2><p><strong>基于 java 配置类来创建，用于 web 环境</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigServletWebServerApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//产生内嵌的 tomcat 容器</span></span><br><span class="line">    <span class="keyword">public</span> ServletWebServerFactory <span class="title function_">servletWebServerFactory</span><span class="params">()</span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TomcatServletWebServerFactory</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//创建 dispatcherServlet 对象</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServlet <span class="title function_">dispatcherServlet</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServlet</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//将 dispatcherServlet 注册到tomcat容器中</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServletRegistrationBean <span class="title function_">registrationBean</span><span class="params">(DispatcherServlet dispatcherServlet)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServletRegistrationBean</span>(dispatcherServlet, <span class="string">&quot;/&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Controller <span class="title function_">controller1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (request, response) -&gt; &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+]]></content>
+      <categories>
+        <category>spring高级</category>
+      </categories>
+      <tags>
+        <tag>底层源码</tag>
+        <tag>spring高级</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>spring源码-2-Bean的生命周期</title>
     <url>/2022/07/15/spring%E6%BA%90%E7%A0%81-2-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
     <content><![CDATA[<h1 id="bean生命周期"><a href="#bean生命周期" class="headerlink" title="bean生命周期"></a>bean生命周期</h1><p><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-2-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/3.png"></p>
@@ -2547,100 +2656,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>spring高级</category>
-      </categories>
-      <tags>
-        <tag>底层源码</tag>
-        <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spring源码-1-BeanFactory与ApplicationContext</title>
-    <url>/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/</url>
-    <content><![CDATA[<h1 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h1><p>1、它是ApplicationContext的父接口</p>
-<p>2、它才是Spring的核心容器，主要的ApplicationContext的实现都组合了它的功能</p>
-<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/1.png" style="zoom:80%;">
-
-<p>比如使用ApplicationContext的getBean方法，实际上先拿到BeanFactory对象，再去调用BeanFactory的getBean方法</p>
-<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/2.png" style="zoom:80%;">
-
-<p><strong>3、BeanFactory表面上只有getBean功能实际上，控制反转，基本的依赖注入，直至Bean的生命周期都是由它的实现类提供</strong></p>
-<br>
-
-<h1 id="ApplicationContext功能"><a href="#ApplicationContext功能" class="headerlink" title="ApplicationContext功能"></a>ApplicationContext功能</h1><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/3.png" style="zoom:80%;">
-
-<p><strong>1、MessageSource：处理国际化资源的能力（翻译）</strong> <em><strong>比如 getMessage方法</strong></em></p>
-<p><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/5.png" style="zoom:80%;"><img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/4.png" style="zoom:80%;"></p>
-<br>
-
-<p><strong>2、RessourcePatternResolver：通配符匹配资源的能力</strong> <em><strong>比如 getResources方法</strong></em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示在resources目录下的META-INF子目录下的spring.factories文件和jar包内的......</span></span><br><span class="line"><span class="comment">//*号表示也可以jar内进行搜索</span></span><br><span class="line">Resource[] resources = context.getResources(<span class="string">&quot;classpath*:META-INF/spring.factories&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">    System.out.println(resource);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p><strong>3、ApplicationEventPublisher：发布事件能力</strong> <em><strong>比如 publishEvent方法</strong></em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取Component1然后进行注册</span></span><br><span class="line">context.getBean(Component1.class).register();</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component1中进行声明</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component1.class);</span><br><span class="line"><span class="comment">//该容器对象具备发送事件的功能</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> ApplicationEventPublisher context;	<span class="comment">//事件发生器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">()</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;用户注册&quot;</span>);</span><br><span class="line">    context.publishEvent(<span class="keyword">new</span> <span class="title class_">UserRegisteredEvent</span>(<span class="built_in">this</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Component2中监听该事件</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Component2.class);</span><br><span class="line"><span class="meta">@EventListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">aaa</span><span class="params">(UserRegisteredEvent event)</span> &#123;</span><br><span class="line">    log.debug(<span class="string">&quot;&#123;&#125;&quot;</span>, event);</span><br><span class="line">    log.debug(<span class="string">&quot;发送短信&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p><strong>4、EnvironmentCapable：读取环境信息</strong> <em><strong>比如getProperty方法</strong></em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取properties文件和系统环境变量对应键的值</span></span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;java_home&quot;</span>));</span><br><span class="line">System.out.println(context.getEnvironment().getProperty(<span class="string">&quot;server.port&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="BeanFactory的实现"><a href="#BeanFactory的实现" class="headerlink" title="BeanFactory的实现"></a>BeanFactory的实现</h1><h2 id="1、给Bean添加定义并进行注册"><a href="#1、给Bean添加定义并进行注册" class="headerlink" title="1、给Bean添加定义并进行注册"></a><em><strong>1、给Bean添加定义并进行注册</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">DefaultListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultListableBeanFactory</span>();</span><br><span class="line"><span class="comment">// bean 的定义（class, scope, 初始化, 销毁）</span></span><br><span class="line"><span class="type">AbstractBeanDefinition</span> <span class="variable">beanDefinition</span> <span class="operator">=</span></span><br><span class="line">        BeanDefinitionBuilder.genericBeanDefinition(Config.class).setScope(<span class="string">&quot;singleton&quot;</span>).getBeanDefinition();</span><br><span class="line"><span class="comment">//注册</span></span><br><span class="line">beanFactory.registerBeanDefinition(<span class="string">&quot;config&quot;</span>, beanDefinition);</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2、添加-BeanFactory-后处理器"><a href="#2、添加-BeanFactory-后处理器" class="headerlink" title="2、添加 BeanFactory 后处理器"></a><em><strong>2、添加 BeanFactory 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给 BeanFactory 添加一些常用的后处理器</span></span><br><span class="line">AnnotationConfigUtils.registerAnnotationConfigProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果只是添加后处理器不进行扩展，则无法解析@Confident和@bean注解</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BeanFactory 后处理器主要功能，补充了一些 bean 定义</span></span><br><span class="line"><span class="comment">// getBeansOfType 根据类型获取多个bean（bean后处理器）</span></span><br><span class="line">beanFactory.getBeansOfType(BeanFactoryPostProcessor.class).values().forEach(beanFactoryPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);   <span class="comment">//执行beanFactory 后处理器</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean3 <span class="title function_">bean3</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean3</span>();&#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="keyword">public</span> Bean4 <span class="title function_">bean4</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean4</span>();&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean3</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean4</span> <span class="keyword">implements</span> <span class="title class_">Inter</span> &#123; &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean1.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean1</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean1()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="keyword">private</span> Bean2 bean2;</span><br><span class="line">        <span class="keyword">public</span> Bean2 <span class="title function_">getBean2</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean2;&#125;</span><br><span class="line">        <span class="comment">//同时添加两个注解（后处理器的顺序决定了哪个先被解析）</span></span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        <span class="meta">@Resource(name = &quot;bean4&quot;)</span></span><br><span class="line">        <span class="keyword">private</span> Inter bean3;</span><br><span class="line">        <span class="keyword">public</span> Inter <span class="title function_">getInter</span><span class="params">()</span> &#123;<span class="keyword">return</span> bean3;&#125;&#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(Bean2.class);</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Bean2</span><span class="params">()</span> &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;构造 Bean2()&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="3、添加-Bean-后处理器"><a href="#3、添加-Bean-后处理器" class="headerlink" title="3、添加 Bean 后处理器"></a><em><strong>3、添加 Bean 后处理器</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Bean 后处理器, 针对 bean 的生命周期的各个阶段提供扩展, 例如 @Autowired @Resource ...</span></span><br><span class="line">beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream()</span><br><span class="line">        .forEach(beanPostProcessor -&gt; &#123;</span><br><span class="line">    beanFactory.addBeanPostProcessor(beanPostProcessor);    <span class="comment">//建立Bean工厂和后处理器的关系</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="4、后处理器器顺序"><a href="#4、后处理器器顺序" class="headerlink" title="4、后处理器器顺序"></a><em><strong>4、后处理器器顺序</strong></em></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//默认是Common的后处理器排在前面，Autowired的排在后面</span></span><br><span class="line">System.out.println(<span class="string">&quot;Common:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">3</span>));</span><br><span class="line">System.out.println(<span class="string">&quot;Autowired:&quot;</span> + (Ordered.LOWEST_PRECEDENCE - <span class="number">2</span>));</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em><strong>BeanFactory总结：</strong></em></p>
-<ol>
-<li>不会主动调用 BeanFactory 后处理器</li>
-<li>不会主动添加 Bean 后处理器</li>
-<li>不会主动初始化单例</li>
-<li>不会解析beanFactory 还不会解析 ${ } 与 #{ }</li>
-</ol>
-<p><em><strong>Bean后处理器会有排序的逻辑</strong></em></p>
-<br>
-
-<h1 id="ApplicationContext的实现"><a href="#ApplicationContext的实现" class="headerlink" title="ApplicationContext的实现"></a>ApplicationContext的实现</h1><h2 id="1、ClassPathXmlApplicationContext"><a href="#1、ClassPathXmlApplicationContext" class="headerlink" title="1、ClassPathXmlApplicationContext"></a>1、ClassPathXmlApplicationContext</h2><p><strong>在类路径下读取XML配置文件</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testClassPathXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;a02.xml&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(context.getBean(Bean2.class).getBean1());</span><br><span class="line">    <span class="comment">/**	</span></span><br><span class="line"><span class="comment">     *  结果：</span></span><br><span class="line"><span class="comment">     *	bean1</span></span><br><span class="line"><span class="comment">     *	bean2</span></span><br><span class="line"><span class="comment">     *	com.itheima.a02.A02$Bean1@6392827e</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">//a02.xml</span><br><span class="line"><span class="comment">&lt;!-- 控制反转, 让 bean1和bean2 被 Spring 容器管理 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bean2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.itheima.a02.A02.Bean2&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 依赖注入, 让 bean2 建立与 bean1 的依赖关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bean1&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;bean1&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2、FileSystemXmlApplicationContext"><a href="#2、FileSystemXmlApplicationContext" class="headerlink" title="2、FileSystemXmlApplicationContext"></a>2、FileSystemXmlApplicationContext</h2><p><strong>在磁盘路径下读取XML配置文件</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testFileSystemXmlApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">FileSystemXmlApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">FileSystemXmlApplicationContext</span>(<span class="string">&quot;src\\main\\resources\\a02.xml&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="3、AnnotationConfigApplicationContext"><a href="#3、AnnotationConfigApplicationContext" class="headerlink" title="3、AnnotationConfigApplicationContext"></a>3、AnnotationConfigApplicationContext</h2><p><strong>基于java配置类来完成</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(Config.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">bean1</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Bean1</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Bean2 <span class="title function_">bean2</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="type">Bean2</span> <span class="variable">bean2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bean2</span>();</span><br><span class="line">        bean2.setBean1(bean1);</span><br><span class="line">        <span class="keyword">return</span> bean2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean1</span> &#123; &#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Bean1 bean1;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBean1</span><span class="params">(Bean1 bean1)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.bean1 = bean1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Bean1 <span class="title function_">getBean1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> bean1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<img src="/2022/07/15/spring%E6%BA%90%E7%A0%81-1-BeanFactory%E4%B8%8EApplicationContext/6.png" style="zoom:80%;">
-
-<br>
-
-<h2 id="4、AnnotationConfigServletWebServerApplicationContext"><a href="#4、AnnotationConfigServletWebServerApplicationContext" class="headerlink" title="4、AnnotationConfigServletWebServerApplicationContext"></a>4、AnnotationConfigServletWebServerApplicationContext</h2><p><strong>基于 java 配置类来创建，用于 web 环境</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAnnotationConfigServletWebServerApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">    <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//产生内嵌的 tomcat 容器</span></span><br><span class="line">    <span class="keyword">public</span> ServletWebServerFactory <span class="title function_">servletWebServerFactory</span><span class="params">()</span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TomcatServletWebServerFactory</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//创建 dispatcherServlet 对象</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServlet <span class="title function_">dispatcherServlet</span><span class="params">()</span> &#123;<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServlet</span>();&#125;</span><br><span class="line">    <span class="meta">@Bean</span>   <span class="comment">//将 dispatcherServlet 注册到tomcat容器中</span></span><br><span class="line">    <span class="keyword">public</span> DispatcherServletRegistrationBean <span class="title function_">registrationBean</span><span class="params">(DispatcherServlet dispatcherServlet)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServletRegistrationBean</span>(dispatcherServlet, <span class="string">&quot;/&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Controller <span class="title function_">controller1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (request, response) -&gt; &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
 ]]></content>
       <categories>
         <category>spring高级</category>
