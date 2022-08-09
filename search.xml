@@ -137,41 +137,6 @@
       </tags>
   </entry>
   <entry>
-    <title>03-数据区概述与线程</title>
-    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
-<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
-<p><strong>运行时数据区的完整图</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
-<p><strong>Java的内存区域</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
-<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
-<p><strong>即：</strong></p>
-<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
-<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
-<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
-<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
-<p><strong>JVM线程（*）</strong></p>
-<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
-<ul>
-<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
-<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>02-类加载器和类加载过程</title>
     <url>/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a><strong>类加载过程</strong></h1><p><img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/1.png" alt="截图"></p>
@@ -275,6 +240,41 @@
 <p><strong>3）常量在编译阶段会存入调用方法所在的类的常量池中（这个例子存在F类的常量池中）</strong></p>
 <p><strong>本质上没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化</strong></p>
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03-数据区概述与线程</title>
+    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
+<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
+<p><strong>运行时数据区的完整图</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
+<p><strong>Java的内存区域</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
+<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
+<p><strong>即：</strong></p>
+<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
+<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
+<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
+<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
+<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
+<p><strong>JVM线程（*）</strong></p>
+<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
+<ul>
+<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
+<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
+<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
+<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
+</ul>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -450,34 +450,6 @@
 <p>本地方法可通过本地方法接口来访问虚拟机内部的运行时数据区</p>
 <p>可以使用本地处理器中的寄存器</p>
 <p>……（和虚拟机拥有一样的权限）</p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>09-对象的实例化，内存布局和访问定位</title>
-    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
-<p><strong>测试对象实例化的过程</strong></p>
-<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
-<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
-<p><strong>创建的过程（字节码角度）</strong></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
-<br>
-
-<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
-<br>
-
-<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
-<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
-
-<br>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -670,32 +642,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1-1-数据结构分类</title>
-    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
-<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
-</ul>
-<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
-<ul>
-<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
-</ul>
-<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
-<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
-<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
-<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
-<li>图形结构：图形结构的数据元素是多对多的关系</li>
-</ul>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>08-方法区</title>
     <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
     <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
@@ -809,6 +755,60 @@
       <tags>
         <tag>JVM</tag>
         <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>09-对象的实例化，内存布局和访问定位</title>
+    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
+<p><strong>测试对象实例化的过程</strong></p>
+<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
+<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
+<p><strong>创建的过程（字节码角度）</strong></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
+<br>
+
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
+<br>
+
+<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
+<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
+
+<br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-1-数据结构分类</title>
+    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
+<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
+</ul>
+<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
+<ul>
+<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
+</ul>
+<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
+<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
+<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
+<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
+<li>图形结构：图形结构的数据元素是多对多的关系</li>
+</ul>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1450,124 +1450,6 @@
       </tags>
   </entry>
   <entry>
-    <title>15-类的生命周期（详细）</title>
-    <url>/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
-<p><strong style="color:red">注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载</strong></p>
-<p><img src="/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/1.png"></p>
-<br>
-
-<p><em><strong>程序使用类的过程</strong></em></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/2.png" style="zoom: 60%;">
-
-<br>
-
-<h1 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h1><p><em><strong style="color:red">将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）</strong></em></p>
-<blockquote>
-<p>类模板对象：<strong>java类在JVM中的一个快照。JVM从字节码文件中解析出常量池、类字段、类方法等存储在类模板中</strong>，如此JVM就可以在运行期通过类模板获取java中的任意信息，能够对java类的成员变量进行遍历，也能对方法进行调用<strong>（反射机制基于这一基础）</strong></p>
-</blockquote>
-<br>
-
-<h2 id="加载的步骤"><a href="#加载的步骤" class="headerlink" title="加载的步骤"></a>加载的步骤</h2><p><em><strong style="color:red">1、通过类的全名，获取类的二进制数据流</strong></em></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/4.png" style="zoom: 70%;">
-
-<p><em><strong style="color:red">2、解析类的二进制数据流为方法区内的数据结构（java类模型）</strong></em></p>
-<p><em><strong style="color:red">3、创建<code>java.lang.Class</code>类的实例（作为方法区这个类的各个数据的访问入口）</strong></em></p>
-<br>
-
-<h2 id="类模型与Class实例位置"><a href="#类模型与Class实例位置" class="headerlink" title="类模型与Class实例位置"></a>类模型与Class实例位置</h2><p><strong>类模型的位置：加载的类在JVM中创建相应的类结构，类结构存储在方法区</strong>（1.8之前：永久代；1.8之后：元空间）</p>
-<p><strong>Class实例的位置</strong>： .class文件加载后，在堆中创建一个Java.lang.Class对象，<strong>封装类位于方法区的数据结构</strong></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/3.png" style="zoom: 50%;">
-
-<br>
-
-<h2 id="数组类加载"><a href="#数组类加载" class="headerlink" title="数组类加载"></a>数组类加载</h2><p><em><strong>数组类本身并不是由类加载器负责创建，而是JVM在运行时根据需要而直接创建的，但数组的元素类型仍然需要依靠类加载器去创建</strong></em></p>
-<p>1、数组元素类型是引用类型，遵循定义的加载过程递归加载和创建数组的元素类型</p>
-<p>2、JVM使用指定元素类型和数组维度来创建新的数组类</p>
-<p><em><strong>数组元素类型是引用类型，数据类的可访问性由元素类型决定，如果为基本数据类型，可访问性为pubilc</strong></em></p>
-<br>
-
-<h1 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h1><h2 id="1）验证"><a href="#1）验证" class="headerlink" title="1）验证"></a>1）验证</h2><p><strong style="color:red">确保Class文件的字节流中包含信息符合当前虚拟机要求,保证被加载类的正确性</strong></p>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/5.png" style="zoom: 50%;">
-
-<h3 id="格式检查"><a href="#格式检查" class="headerlink" title="格式检查"></a>格式检查</h3><p><strong>1、是否以魔术oxCAFEBABE开头</strong>，主版本和副版本是否在当前Java虚拟机的支持范围内，数据中每一项是否都拥有正确的长度等</p>
-<p><strong style="color:red">2、格式检查与类的加载阶段一起执行，验证通过后，类加载器才会成功将类的二进制信息加载到方法区中</strong></p>
-<p><strong style="color:red">3、格式检查之外的验证操作会在方法区中进行</strong></p>
-<h3 id="语义检查"><a href="#语义检查" class="headerlink" title="语义检查"></a>语义检查</h3><p>java虚拟机会进行语义的检查，语义上不通过的，虚拟机也不会给予验证通过</p>
-<h3 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h3><p>验证过程中最复杂的一个过程，通过对字节码流的分析，判断字节码是否可以被正确地执行</p>
-<p><strong>栈映射帧（StackMapTbale）就是在这个阶段实现的，用于检测在特定的字节码处，局部变量表和操作数栈是否有正确的数据类型（尽可能检查出可以预知的问题，不能100%）</strong></p>
-<h3 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h3><p><strong>Class文件在其常量池会通过字符串来记录自己将要使用的其他类或方法</strong>，因此在验证阶段，虚拟机就会检查这些类或方法确实是存在的（类没找到：NoClassDefFoundError，方法没找到：NoSuchMethodError）</p>
-<br>
-
-<h2 id="2）准备"><a href="#2）准备" class="headerlink" title="2）准备"></a>2）准备</h2><p><strong style="color:red">为类变量分配内存并且设置该类变量的默认初始化值</strong></p>
-<blockquote>
-<p><em><strong>非final修饰的变量，解析环节进行默认初始化赋值</strong></em></p>
-<p><em><strong>这里不包含用final修饰的static，final在编译时就进行分配了，准备阶段会显式赋值</strong></em></p>
-<p><em><strong>这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量会随着对象一起分配到Java堆</strong></em></p>
-</blockquote>
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/8.png" style="zoom: 80%;">
-
-<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/7.png" style="zoom: 80%;">
-
-<p><strong style="color:red">注意：Java并不支持boolean类型，对于boolean类型，内部实现是int，由于int的默认值是0，故对应boolean的默认值就是false</strong><br><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/6.png" style="zoom: 80%;"></p>
-<br>
-
-<h2 id="3）解析"><a href="#3）解析" class="headerlink" title="3）解析"></a>3）解析</h2><p>将常量池中的符号引号转换为直接引用的过程（将类、接口、字段和方法的符号引用转为直接引用）</p>
-<p>1、实际上，解析操作往往会伴随着JVM在执行完初始化之后再执行</p>
-<p>2、直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄（与虚拟机实现的内存布局相关）</p>
-<p>3、符号引用是以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可（符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到了内存中）</p>
-<p>4、主要解析动作针对类或接口、字段、类方法、接口方法、方法类型等</p>
-<br>
-
-<h1 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h1><p><strong style="color:red">为类变量赋予正确的初始化值</strong></p>
-<p><strong style="color:red">初始化阶段就是执行类构造器方法&lt; clinit &gt;()的过程。</strong>此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来</p>
-<p><em><strong>若该类具有父类，Jvm会保证子类的<clinit>() 执行前，父类的&lt; clinit &gt;() 已经执行完成。clinit 不同于类的构造方法(init) （由父及子，静态先行）</clinit></strong></em></p>
-<h2 id="Java编译器不会在以下情况下生成clinit方法"><a href="#Java编译器不会在以下情况下生成clinit方法" class="headerlink" title="Java编译器不会在以下情况下生成clinit方法"></a>Java编译器不会在以下情况下生成clinit方法</h2><p>一个类中并没有声明任何的类变量，也没有静态代码块时</p>
-<p>一个类中声明类变量，但是没有明确使用类变量的初始化语句以及静态代码块来执行初始化操作时</p>
-<p>一个类中包含static final修饰的基本数据类型的字段，这些类字段初始化语句采用编译时常量表达式 </p>
-<p>(如果这个static final 不是通过方法或者构造器,则在链接阶段)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest1</span> &#123;</span><br><span class="line">    <span class="comment">//场景1：对应非静态的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//场景2：静态的字段,没有显式的赋值,不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num1;</span><br><span class="line">    <span class="comment">//场景3：比如对于声明为static final的基本数据类型的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="static-final进行修饰"><a href="#static-final进行修饰" class="headerlink" title="static+final进行修饰"></a>static+final进行修饰</h2><p>1、在链接阶段的准备环节赋值</p>
-<p>2、在初始化阶段赋值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *1. 对于基本数据类型的字段来说,如果使用static final修饰,则显式赋值(直接赋值常量,而非调用方法)通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> * 2. 对于String来说,如果使用字面量的方式赋值,使用static final修饰的话,则显式赋值通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在初始化阶段&lt;clinit&gt;()中赋值的情况:</span></span><br><span class="line"><span class="comment"> * 排除上述的在准备环节赋值的情况之外的情况。</span></span><br><span class="line"><span class="comment"> * 最终结论:使用static + final修饰,且显示赋值中不涉及到方法或构造器调用的基本数据类型或String类型的显式赋值,是在链接阶段的准备环节进行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INT_CONSTANT</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT1</span> <span class="operator">=</span> Integer.valueOf(<span class="number">100</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1000</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;helloworld0&quot;</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;helloworld1&quot;</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;helloworld2&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUM1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">10</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="client线程安全性问题"><a href="#client线程安全性问题" class="headerlink" title="client线程安全性问题"></a>client线程安全性问题</h2><blockquote>
-<p>虚拟机会保证一个类的clinit方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的方法，其他线程都需要阻塞等待，直到活动线程执行clinit方法结束</p>
-</blockquote>
-<p><strong style="color:red">如果在一个类的clinit方法中有耗时很长的操作，就可能造成多个线程阻塞，引发死锁。</strong></p>
-<br>
-
-<h1 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h1><h2 id="主动使用"><a href="#主动使用" class="headerlink" title="主动使用"></a>主动使用</h2><p><strong style="color:red">Class只有在必须要首次使用的时候才会被装载。一个类或接口在初次主动使用前，必须要进行初始化。</strong></p>
-<p><strong>1、创建一个类的实例时（使用new关键字，通过反射、克隆，反序列化）即使用字节码invokestatic指令</strong></p>
-<p><strong>2、使用当前类的静态方法，使用getstatic或者putstatic指令（对应访问变量、赋值变量操作）</strong></p>
-<p><strong>3、使用类、接口的静态字段时（final修饰特殊考虑）</strong></p>
-<p><strong>4、当使用java.lang.reflect包中的方法反射类的方法时。比如：Class.forName(“xxx.xxx.xxx.test”)</strong></p>
-<p><strong>5、当初始化子类时，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</strong></p>
-<p>6、如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类的初始化，<strong style="color:red">该接口要在其之前被初始化。</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Father类的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> <span class="keyword">implements</span> <span class="title class_">CompareB</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Son类的初始化过程&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">CompareA</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">        &#123;System.out.println(<span class="string">&quot;CompareA的初始化&quot;</span>);&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span></span><br><span class="line">    &#123;System.out.println(<span class="string">&quot;你好！&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(Son.num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>7、当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</strong></p>
-<p><strong>8、当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</strong></p>
-<p><strong style="color:red">注意： 初始化一个类的子类这条规则，不适用于接口，即：初始化一个类的子类，会先初始化它的父类，但是不一定会初始化它的接口。只有当首次使用该接口的静态变量时，才会初始化。</strong></p>
-<br>
-
-<h2 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h2>]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>14-垃圾回收器</title>
     <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
     <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
@@ -1857,6 +1739,124 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>15-类的生命周期（详细）</title>
+    <url>/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
+<p><strong style="color:red">注意：基本数据类型由虚拟机预先定义，引用数据类型需要进行类的加载</strong></p>
+<p><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/1.png"></p>
+<br>
+
+<p><em><strong>程序使用类的过程</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/2.png" style="zoom: 60%;">
+
+<br>
+
+<h1 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h1><p><em><strong style="color:red">将类的.class文件中的二进制数据读取到内存中，存放在运行时数据区的方法区中，并在内存中创建一个Java类原型（类模板对象）</strong></em></p>
+<blockquote>
+<p>类模板对象：<strong>java类在JVM中的一个快照。JVM从字节码文件中解析出常量池、类字段、类方法等存储在类模板中</strong>，如此JVM就可以在运行期通过类模板获取java中的任意信息，能够对java类的成员变量进行遍历，也能对方法进行调用<strong>（反射机制基于这一基础）</strong></p>
+</blockquote>
+<br>
+
+<h2 id="加载的步骤"><a href="#加载的步骤" class="headerlink" title="加载的步骤"></a>加载的步骤</h2><p><em><strong style="color:red">1、通过类的全名，获取类的二进制数据流</strong></em></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/4.png" style="zoom: 70%;">
+
+<p><em><strong style="color:red">2、解析类的二进制数据流为方法区内的数据结构（java类模型）</strong></em></p>
+<p><em><strong style="color:red">3、创建<code>java.lang.Class</code>类的实例（作为方法区这个类的各个数据的访问入口）</strong></em></p>
+<br>
+
+<h2 id="类模型与Class实例位置"><a href="#类模型与Class实例位置" class="headerlink" title="类模型与Class实例位置"></a>类模型与Class实例位置</h2><p><strong>类模型的位置：加载的类在JVM中创建相应的类结构，类结构存储在方法区</strong>（1.8之前：永久代；1.8之后：元空间）</p>
+<p><strong>Class实例的位置</strong>： .class文件加载后，在堆中创建一个Java.lang.Class对象，<strong>封装类位于方法区的数据结构</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/3.png" style="zoom: 50%;">
+
+<br>
+
+<h2 id="数组类加载"><a href="#数组类加载" class="headerlink" title="数组类加载"></a>数组类加载</h2><p><em><strong>数组类本身并不是由类加载器负责创建，而是JVM在运行时根据需要而直接创建的，但数组的元素类型仍然需要依靠类加载器去创建</strong></em></p>
+<p>1、数组元素类型是引用类型，遵循定义的加载过程递归加载和创建数组的元素类型</p>
+<p>2、JVM使用指定元素类型和数组维度来创建新的数组类</p>
+<p><em><strong>数组元素类型是引用类型，数据类的可访问性由元素类型决定，如果为基本数据类型，可访问性为pubilc</strong></em></p>
+<br>
+
+<h1 id="2、链接"><a href="#2、链接" class="headerlink" title="2、链接"></a>2、链接</h1><h2 id="1）验证"><a href="#1）验证" class="headerlink" title="1）验证"></a>1）验证</h2><p><strong style="color:red">确保Class文件的字节流中包含信息符合当前虚拟机要求,保证被加载类的正确性</strong></p>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/5.png" style="zoom: 50%;">
+
+<h3 id="格式检查"><a href="#格式检查" class="headerlink" title="格式检查"></a>格式检查</h3><p><strong>1、是否以魔术oxCAFEBABE开头</strong>，主版本和副版本是否在当前Java虚拟机的支持范围内，数据中每一项是否都拥有正确的长度等</p>
+<p><strong style="color:red">2、格式检查与类的加载阶段一起执行，验证通过后，类加载器才会成功将类的二进制信息加载到方法区中</strong></p>
+<p><strong style="color:red">3、格式检查之外的验证操作会在方法区中进行</strong></p>
+<h3 id="语义检查"><a href="#语义检查" class="headerlink" title="语义检查"></a>语义检查</h3><p>java虚拟机会进行语义的检查，语义上不通过的，虚拟机也不会给予验证通过</p>
+<h3 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h3><p>验证过程中最复杂的一个过程，通过对字节码流的分析，判断字节码是否可以被正确地执行</p>
+<p><strong>栈映射帧（StackMapTbale）就是在这个阶段实现的，用于检测在特定的字节码处，局部变量表和操作数栈是否有正确的数据类型（尽可能检查出可以预知的问题，不能100%）</strong></p>
+<h3 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h3><p><strong>Class文件在其常量池会通过字符串来记录自己将要使用的其他类或方法</strong>，因此在验证阶段，虚拟机就会检查这些类或方法确实是存在的（类没找到：NoClassDefFoundError，方法没找到：NoSuchMethodError）</p>
+<br>
+
+<h2 id="2）准备"><a href="#2）准备" class="headerlink" title="2）准备"></a>2）准备</h2><p><strong style="color:red">为类变量分配内存并且设置该类变量的默认初始化值</strong></p>
+<blockquote>
+<p><em><strong>非final修饰的变量，解析环节进行默认初始化赋值</strong></em></p>
+<p><em><strong>这里不包含用final修饰的static，final在编译时就进行分配了，准备阶段会显式赋值</strong></em></p>
+<p><em><strong>这里不会为实例变量分配初始化，类变量会分配在方法区中，而实例变量会随着对象一起分配到Java堆</strong></em></p>
+</blockquote>
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/8.png" style="zoom: 80%;">
+
+<img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/7.png" style="zoom: 80%;">
+
+<p><strong style="color:red">注意：Java并不支持boolean类型，对于boolean类型，内部实现是int，由于int的默认值是0，故对应boolean的默认值就是false</strong><br><img src="/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/6.png" style="zoom: 80%;"></p>
+<br>
+
+<h2 id="3）解析"><a href="#3）解析" class="headerlink" title="3）解析"></a>3）解析</h2><p>将常量池中的符号引号转换为直接引用的过程（将类、接口、字段和方法的符号引用转为直接引用）</p>
+<p>1、实际上，解析操作往往会伴随着JVM在执行完初始化之后再执行</p>
+<p>2、直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄（与虚拟机实现的内存布局相关）</p>
+<p>3、符号引用是以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可（符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到了内存中）</p>
+<p>4、主要解析动作针对类或接口、字段、类方法、接口方法、方法类型等</p>
+<br>
+
+<h1 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h1><p><strong style="color:red">为类变量赋予正确的初始化值</strong></p>
+<p><strong style="color:red">初始化阶段就是执行类构造器方法&lt; clinit &gt;()的过程。</strong>此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来</p>
+<p><em><strong>若该类具有父类，Jvm会保证子类的<clinit>() 执行前，父类的&lt; clinit &gt;() 已经执行完成。clinit 不同于类的构造方法(init) （由父及子，静态先行）</clinit></strong></em></p>
+<h2 id="Java编译器不会在以下情况下生成clinit方法"><a href="#Java编译器不会在以下情况下生成clinit方法" class="headerlink" title="Java编译器不会在以下情况下生成clinit方法"></a>Java编译器不会在以下情况下生成clinit方法</h2><p>一个类中并没有声明任何的类变量，也没有静态代码块时</p>
+<p>一个类中声明类变量，但是没有明确使用类变量的初始化语句以及静态代码块来执行初始化操作时</p>
+<p>一个类中包含static final修饰的基本数据类型的字段，这些类字段初始化语句采用编译时常量表达式 </p>
+<p>(如果这个static final 不是通过方法或者构造器,则在链接阶段)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest1</span> &#123;</span><br><span class="line">    <span class="comment">//场景1：对应非静态的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//场景2：静态的字段,没有显式的赋值,不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> num1;</span><br><span class="line">    <span class="comment">//场景3：比如对于声明为static final的基本数据类型的字段,不管是否进行了显式赋值,都不会生成&lt;clinit&gt;()方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="static-final进行修饰"><a href="#static-final进行修饰" class="headerlink" title="static+final进行修饰"></a>static+final进行修饰</h2><p>1、在链接阶段的准备环节赋值</p>
+<p>2、在初始化阶段赋值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *1. 对于基本数据类型的字段来说,如果使用static final修饰,则显式赋值(直接赋值常量,而非调用方法)通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> * 2. 对于String来说,如果使用字面量的方式赋值,使用static final修饰的话,则显式赋值通常是在链接阶段的准备环节进行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在初始化阶段&lt;clinit&gt;()中赋值的情况:</span></span><br><span class="line"><span class="comment"> * 排除上述的在准备环节赋值的情况之外的情况。</span></span><br><span class="line"><span class="comment"> * 最终结论:使用static + final修饰,且显示赋值中不涉及到方法或构造器调用的基本数据类型或String类型的显式赋值,是在链接阶段的准备环节进行。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InitializationTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INT_CONSTANT</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT1</span> <span class="operator">=</span> Integer.valueOf(<span class="number">100</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INTEGER_CONSTANT2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1000</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;helloworld0&quot;</span>;<span class="comment">//在链接阶段的准备环节赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;helloworld1&quot;</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;helloworld2&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">NUM1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">10</span>);<span class="comment">//在初始化阶段&lt;clinit&gt;()中赋值</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="client线程安全性问题"><a href="#client线程安全性问题" class="headerlink" title="client线程安全性问题"></a>client线程安全性问题</h2><blockquote>
+<p>虚拟机会保证一个类的clinit方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的方法，其他线程都需要阻塞等待，直到活动线程执行clinit方法结束</p>
+</blockquote>
+<p><strong style="color:red">如果在一个类的clinit方法中有耗时很长的操作，就可能造成多个线程阻塞，引发死锁。</strong></p>
+<br>
+
+<h1 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h1><h2 id="主动使用"><a href="#主动使用" class="headerlink" title="主动使用"></a>主动使用</h2><p><strong style="color:red">Class只有在必须要首次使用的时候才会被装载。一个类或接口在初次主动使用前，必须要进行初始化。</strong></p>
+<p><strong>1、创建一个类的实例时（使用new关键字，通过反射、克隆，反序列化）即使用字节码invokestatic指令</strong></p>
+<p><strong>2、使用当前类的静态方法，使用getstatic或者putstatic指令（对应访问变量、赋值变量操作）</strong></p>
+<p><strong>3、使用类、接口的静态字段时（final修饰特殊考虑）</strong></p>
+<p><strong>4、当使用java.lang.reflect包中的方法反射类的方法时。比如：Class.forName(“xxx.xxx.xxx.test”)</strong></p>
+<p><strong>5、当初始化子类时，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</strong></p>
+<p>6、如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类的初始化，<strong style="color:red">该接口要在其之前被初始化。</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Father类的初始化过程&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> <span class="keyword">implements</span> <span class="title class_">CompareB</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;System.out.println(<span class="string">&quot;Son类的初始化过程&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">CompareA</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">        &#123;System.out.println(<span class="string">&quot;CompareA的初始化&quot;</span>);&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span></span><br><span class="line">    &#123;System.out.println(<span class="string">&quot;你好！&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println(Son.num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>7、当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类。</strong></p>
+<p><strong>8、当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</strong></p>
+<p><strong style="color:red">注意： 初始化一个类的子类这条规则，不适用于接口，即：初始化一个类的子类，会先初始化它的父类，但是不一定会初始化它的接口。只有当首次使用该接口的静态变量时，才会初始化。</strong></p>
+<br>
+
+<h2 id="被动使用"><a href="#被动使用" class="headerlink" title="被动使用"></a>被动使用</h2>]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
