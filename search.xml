@@ -2544,11 +2544,13 @@
 <br>
 
 <h3 id="cglib避免反射调用"><a href="#cglib避免反射调用" class="headerlink" title="cglib避免反射调用"></a><strong style="color:red">cglib避免反射调用</strong></h3><p><strong>MethodProxy在调用invoke和invokeSuper时不会走反射途经，而是通过FastClass来避免反射，cglib在调用方法时，生成两个代理类（为FastClass的子类），代理类中的方法能避免反射</strong></p>
-<p><img src="/AOP/5.png"></p>
+<img src="/2022/08/16/AOP/5.png" style="zoom:80%;">
+
 <br>
 
 <p><strong>在调用MethodProxy的create静态方法时，底层会创建一个FastClass子类（以下称代理类）来避免反射的调用</strong>（因为该代理类实现了fastClas太多功能，所以不直接继承FastClass类，而是选择其中两个功能进行实现）</p>
-<p><img src="/AOP/6.png"></p>
+<img src="/2022/08/16/AOP/6.png" style="zoom:80%;">
+
 <p><strong style="color:red">1、当我们创建MethodProxy时，会传入signature（包括方法名字和参数返回值）</strong></p>
 <p><strong style="color:red">2、代理类中会根据传入的signature编写目标方法的编号（将传入的signature与自定义的signature进行比较）</strong></p>
 <p><strong style="color:red">3、代理类中根据获取方法的编号去调用方法</strong></p>
