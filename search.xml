@@ -3287,9 +3287,9 @@
 <img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/1.png" style="zoom:70%;">
 
 <p><strong>ArrayList有参构造的初始容量根据所给的长度进行创建（如果是集合，就根据集合的大小进行创建）</strong></p>
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/2.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/2.png" style="zoom:90%;">
 
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/3.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/3.png" style="zoom:90%;">
 
 <br>
 
@@ -3306,21 +3306,21 @@
 <h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><h2 id="Fail-Fast策略"><a href="#Fail-Fast策略" class="headerlink" title="Fail-Fast策略"></a>Fail-Fast策略</h2><p><strong style="color:red">在通过迭代器遍历的同时如果有人对集合进行修改，那么就抛出异常</strong></p>
 <p><strong>ArrayList的迭代器采用了Fail-Fast策略</strong></p>
 <h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><strong style="color:red">源码分析</strong></h3><p><strong style="color:green">增强for循环在首次调用内部会生成一个迭代器，在执行过程中，expectedModCount作为迭代器的成员变量，记录了迭代器刚开始迭代时的修改次数。modCount作为list的成员变量，记录list修改次数，该数会记录在expectedModCount里</strong></p>
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/4.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/4.png" style="zoom:90%;">
 
 <p><strong style="color:green">接下来调用hasNext方法和next方法，调用next方法之前会进行一次校验（checkForComodification方法）</strong></p>
 <p><strong style="color:green">当在迭代的过程中，对集合进行了修改，此时expectedModCount的值就会变换，导致二者不等，那么就会直接抛出异常</strong></p>
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/5.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/5.png" style="zoom:90%;">
 
 <br>
 
 <h2 id="Fail-Save策略"><a href="#Fail-Save策略" class="headerlink" title="Fail-Save策略"></a>Fail-Save策略</h2><p><strong style="color:red">在通过迭代器遍历的同时如果有人对集合进行修改，可以采取应对策略而不是抛出异常，如牺牲一致性来让整个遍历正常完成</strong></p>
 <p><strong>CopyOnWriteArrayList采用了Fail-Save策略</strong></p>
 <h3 id="源码分析-1"><a href="#源码分析-1" class="headerlink" title="源码分析"></a><strong style="color:red">源码分析</strong></h3><p><strong style="color:green">在迭代器内部会首先创建一个数组，将要遍历的数组复制过去，然后遍历该数组</strong></p>
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/6.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/6.png" style="zoom:90%;">
 
 <p><strong style="color:green">当我们在迭代的过程中调用add方法添加新元素的时候，实际上在add方法的内部是先将原来的数组复制一份，然后让长度加一，而新添加的元素加到了新的数组的最后一位，所以遍历的时候使用的是旧数组，而添加元素的时候使用的是新数组，二者互不干扰</strong></p>
-<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/7.png" style="zoom:70%;">
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/7.png" style="zoom:90%;">
 
 <br>
 
