@@ -3324,10 +3324,34 @@
 
 <br>
 
+<h1 id="LinkedList与ArrayList的比较"><a href="#LinkedList与ArrayList的比较" class="headerlink" title="LinkedList与ArrayList的比较"></a>LinkedList与ArrayList的比较</h1><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a><strong>LinkedList</strong></h2><p><strong style="color:red">基于双向链表，无需连续内存</strong></p>
+<p><strong style="color:red">随机访问慢（要沿着链表遍历）</strong></p>
+<p><strong style="color:red">头尾插入删除性能高</strong></p>
+<p>占用内存多</p>
+<h2 id="ArrayList-1"><a href="#ArrayList-1" class="headerlink" title="ArrayList"></a><strong>ArrayList</strong></h2><p><strong style="color:red">基于数组，需要连续内存</strong></p>
+<p><strong style="color:red">随机访问快（指根据下标访问）</strong></p>
+<p><strong style="color:red">尾部插入、删除性能可以，其它部分插入、删除都会移动数据，因此性能会低</strong></p>
+<p>可以利用 cpu 缓存，局部性原理</p>
+<br>
 
+<h2 id="随机访问速度"><a href="#随机访问速度" class="headerlink" title="随机访问速度"></a>随机访问速度</h2><img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/8.png" style="zoom:70%;">
 
+<p><strong style="color:red">ArrayList内部实现了RandomAccess接口（LinkedList没有），该接口是一个标识接口，如果实现了该接口，那么当获取其中某个元素时就直接根据下标get就行。如果没有实现该接口，那么只能通过迭代器的next方法获取下一个元素</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/9.png" style="zoom:80%;">
 
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/10.png" style="zoom:90%;">
 
+<br>
+
+<h2 id="增删速度"><a href="#增删速度" class="headerlink" title="增删速度"></a>增删速度</h2><p><strong style="color:red">LinkedList：头尾插入删除性能高</strong></p>
+<p><strong style="color:red">ArrayList：尾部插入、删除性能可以，其它部分插入、删除都会移动数据，因此性能会低</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/11.png" style="zoom:60%;">
+
+<br>
+
+<h2 id="局部性"><a href="#局部性" class="headerlink" title="局部性"></a><strong style="color:red">局部性</strong></h2><p><strong>cpu读取数据是按照缓存行读取到缓存的，就是cpu会把需要的数据加载到缓存中，查找数据时，会先从缓存找，找不到再到内存中去找。</strong></p>
+<p><strong>数组作为连续内存，而cpu缓存会把一片连续的内存空间读入，这样连续内存的数组更容易整块读取到缓存中，当进行遍历时，直接命中缓存。</strong></p>
+<p><strong>链表是跳跃式的地址，很轻易就会跳出缓存，跑到内存中去查找数据。所以会慢很多。</strong></p>
 ]]></content>
       <tags>
         <tag>面试</tag>
