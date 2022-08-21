@@ -642,34 +642,6 @@
       </tags>
   </entry>
   <entry>
-    <title>09-对象的实例化，内存布局和访问定位</title>
-    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
-<p><strong>测试对象实例化的过程</strong></p>
-<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
-<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
-<p><strong>创建的过程（字节码角度）</strong></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
-<br>
-
-<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
-<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
-<br>
-
-<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
-<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
-
-<br>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>08-方法区</title>
     <url>/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
     <content><![CDATA[<h1 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h1><p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/1.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/2.png" style="zoom: 67%;"><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/3.png" style="zoom: 67%;"></p>
@@ -776,6 +748,34 @@
 <p>只要常量池中的常量没有被任何地方引用，就可以被回收（与堆中回收对象类似）</p>
 <p>判断一个类是否要进行回收（*）</p>
 <p><img src="/2022/07/14/08-%E6%96%B9%E6%B3%95%E5%8C%BA/7.png"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>09-对象的实例化，内存布局和访问定位</title>
+    <url>/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="对象实例化与创建"><a href="#对象实例化与创建" class="headerlink" title="对象实例化与创建"></a>对象实例化与创建</h1><p><a href="https://www.processon.com/view/link/62d003731e08530a891e2b9b">对象实例化的概述（点我）</a></p>
+<p><strong>测试对象实例化的过程</strong></p>
+<p><em><strong>①加载类元信息	②为对象分配内存	③处理并发问题	④属性的默认初始化（零值初始化）</strong></em></p>
+<p><em><strong>⑤设置对象头信息	⑥属性的显示初始化、代码块中初始化、构造器中初始化</strong></em></p>
+<p><strong>创建的过程（字节码角度）</strong></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/2.png"></p>
+<br>
+
+<h1 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h1><p><a href="https://www.processon.com/view/link/62d02000e401fd259600c5d5">内存布局（点我）</a></p>
+<p><img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/3.png"></p>
+<br>
+
+<h1 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h1><p><a href="https://www.processon.com/view/link/62d0267e0e3e746072708d8c">对象访问定位概述（点我）</a></p>
+<img src="/2022/07/14/09-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%8C%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%92%8C%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/4.png" style="zoom:67%;">
+
+<br>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1215,6 +1215,474 @@
       </tags>
   </entry>
   <entry>
+    <title>13-垃圾回收</title>
+    <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
+    <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
+<p><strong style="color:red;"><em>GC的作用：</em></strong><strong>释放没用的对象，清楚内存里的记录碎片，以便JVM可以将整理出来的内存分配给新的对象，没有GC就不能保证应用程序的正常进行</strong></p>
+<p><strong style="color:red;"><em>内存泄露：</em></strong><strong>对象在程序运行期间无法被回收</strong></p>
+<p><strong style="color:red;"><em>java自动内存管理：</em></strong><strong>降低内存泄漏和内存溢出的风险</strong></p>
+<p><strong style="color:red;"><em>GC的作用范围：</em></strong><strong>方法区和堆区（重点）</strong></p>
+<p><strong style="color:red;"><em>分类：</em></strong><strong>频繁收集Young区，较少收集Old区，基本不动Perm区（元空间）</strong></p>
+<br>
+
+<h1 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h1><p><strong style="color:red;"><em>注意：</em></strong><strong>在GC执行垃圾回收之前，需要先区分出内存中哪些是存活的对象，哪些是死亡的对象，只有被标记为已经死亡的对象，GC才会在执行垃圾回收的时候，释放掉它的内存空间。</strong><strong style="color:red;">当一个对象已经不再被任何存活的对象继续引用时，就可以宣判为死亡</strong></p>
+<h2 id="标记阶段：引用计数算法"><a href="#标记阶段：引用计数算法" class="headerlink" title="标记阶段：引用计数算法"></a>标记阶段：引用计数算法</h2><p><strong style="color:red;">对每个对象保留一个整型的引用计数器属性。用来记录对象被引用的情况</strong></p>
+<blockquote>
+<p>对于一个对象A，只要任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收</p>
+</blockquote>
+<p><strong style="color:red;">优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong></p>
+<p><strong style="color:red;">缺点：</strong><br><strong>1、需要单独的字段存储计数器，增加存储空间的开销</strong><br><strong>2、每次赋值都需要更新计数器，增加时间的开销</strong><br><em><strong>3、无法处理循环引用（致命缺陷）</strong></em></p>
+<br>
+
+<h2 id="标记阶段：可达性分析算法"><a href="#标记阶段：可达性分析算法" class="headerlink" title="标记阶段：可达性分析算法"></a>标记阶段：可达性分析算法</h2><p><strong style="color:red;">以根对象集合（GC Roots：一组必须活跃的引用）为起始点，按照从上至下的方式搜索被根对象集合所连接的目标对象是否可达</strong></p>
+<blockquote>
+<p>使用该算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索所走过的路径（引用链），如果目标对象没有任何引用链相连，则不可达，也就意味着该对象已经死亡。<strong style="color:red;">只有能够被根对象集合直接或者间接连接的对象才是存活对象</strong></p>
+</blockquote>
+<p><strong style="color:red;">有效地解决了在引用技术算法中循环引用的问题，防止内存泄露的发生</strong></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/1.png" style="zoom:67%;">
+
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/2.png" style="zoom: 85%;">
+
+<p><strong style="color:red;"><em>注意：由于栈方式存放变量和指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那么它就是一个Root</em></strong></p>
+<p><strong style="color:red;"><em>扩展：除了固定的GC Roots集合以外，还可以有其他对象”临时性“地加入，共同构成完整GC Roots集合。比如：分代收集和局部回收</em></strong></p>
+<blockquote>
+<p><strong style="color:red;">1、如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能保障一致性的快照中进行。</strong>这点不满足的话分析结果的准确性就无法保证</p>
+<p>2、这也是GC进行时必须STW的一个重要原因，<strong>枚举根节点时也是必须要停顿</strong></p>
+</blockquote>
+<br>
+
+<h3 id="对象的finalization机制"><a href="#对象的finalization机制" class="headerlink" title="对象的finalization机制"></a>对象的finalization机制</h3><blockquote>
+<p>1、java提供了对象终止机制来允许开发人员提供对象被销毁之前的自定义处理逻辑</p>
+<p><strong style="color:red;">2、垃圾回收该对象之前（垃圾回收器发现没有引用指向一个对象），总会先调用这个对象的finalize()方法</strong></p>
+<p>3、finalize()方法允许在子类中被重写，用于在对象被回收时进行资源的释放（通常在这个方法内进行一些资源释放和清理工作）</p>
+</blockquote>
+<p><strong style="color:red;"><em>注意：永远不要主动调用某个对象的 finalize方法，应该交给垃圾回收机制调用</em></strong></p>
+<br>
+
+<p><em><strong style="color:red;">理由：</strong></em></p>
+<p><strong style="color:red;">1、在调用时可能会导致对象复活</strong></p>
+<p><strong style="color:red;">2、在方法的执行时间是没有保障，它完全由GC线程决定，极端情况下，如果不发生GC，则finalize方法将没有执行机会</strong></p>
+<br>
+
+<h3 id="对象的三种状态"><a href="#对象的三种状态" class="headerlink" title="对象的三种状态"></a>对象的三种状态</h3><p><em><strong>由于finalize方法的存在，虚拟机中的对象一般处于三种可能的状态</strong></em></p>
+<p><em><strong>一个无法触及的对象有可能在某一个条件下“复活”自己</strong></em></p>
+<p>1、可触及的：从根节点开始，可以到达这个对象</p>
+<p>2、可复活的：对象的所有引用都被释放，但是对象有可能在调用finalize方法后复活</p>
+<p>3、不可触及的：对象的finalize方法被调用，并且没有复活，那么就会进入不可触及的状态。不可触及的对象不可能被复活，因为finalize方法只会被调用一次（对象只有在这个状态才能被回收）</p>
+<h3 id="判断对象回收的具体过程"><a href="#判断对象回收的具体过程" class="headerlink" title="判断对象回收的具体过程"></a><strong style="color:red">判断对象回收的具体过程</strong></h3><p>1、判断对象到 GC Roots 是否有引用链，没有则进行第一次标记</p>
+<p>2、判断对象是否执行finalize方法</p>
+<p>1）如果对象没有重写或者finalize方法已经被虚拟机调用过，则该对象判定为不可触及</p>
+<p>2）如果对象重写了finalize方法，但是还没有执行过，那么对象将插入到F-Queue队列中，执行方法</p>
+<p>3）GC将会对F-Queue队列中的对象进行第二次标记，如果对象在finalize方法中与引用链中的任何一个对象建立了联系，那么在第二次回收时，将会被移除队列。任何对象会再次出现没有引用的情况，直接变成不可触及的状态</p>
+<br>
+
+<h2 id="清除阶段：标记-清除算法"><a href="#清除阶段：标记-清除算法" class="headerlink" title="清除阶段：标记-清除算法"></a>清除阶段：标记-清除算法</h2><p><em><strong><strong style="color:red">基础且常见的垃圾收集算法</strong>，当堆中有效内存空间被耗尽的时候，就会进行STW，任何进行标记和清除</strong></em></p>
+<p>标记：Collector从引用根节点进行遍历，标记所有被引用的对象，一般是在对象的Header中记录为可达的对象</p>
+<p>清除：Collector对堆内存从头到尾进行线性的遍历，如果发现某个对象在Header中没有标记为可达对象，则将其回收</p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/3.png" style="zoom: 90%;">
+
+<p><em><strong style="color:red">缺点：</strong></em></p>
+<p>1、效率不高</p>
+<p>2、在进行GC的时候，需要STW</p>
+<p>3、清理出来的空间内存是不连续的，产生内存碎片。需要维护一个空闲列表</p>
+<p><strong style="color:red">注意：</strong><em><strong>此处清除的本质是将需要清除的对象地址保存在空闲的地址列表中，当下次有新对象加载时，判断垃圾的位置空间是否够，如果够，就进行存放</strong></em></p>
+<br>
+
+<h2 id="清除阶段：复制算法"><a href="#清除阶段：复制算法" class="headerlink" title="清除阶段：复制算法"></a>清除阶段：复制算法</h2><p><em><strong>将活着的内存空间分为两块,每次只使用其中一块,在垃圾回收时将正在.使用的内存中的存活对象复制到未被使用的内存块中,之后清除正在使用的内存块中的所有对象,交换两个内存的角色,最后完成垃圾回收。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/4.png" style="zoom: 75%;">
+
+<p><em><strong style="color:red">优点：</strong></em></p>
+<p>1、没有标记和清除过程,，实现简单，运行高效</p>
+<p>2、不会产生内存碎片，且对象完整不丢<br><em><strong style="color:red">缺点：</strong></em></p>
+<p>1、浪费空间</p>
+<p>2、对于G1这种分拆成为大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用和时间开销大。</p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/5.png" style="zoom: 80%;">
+
+<p><strong style="color:red">注意：如果垃圾对象很多，复制算法则不太理想。所以在 <em>新生代</em> 中使用复制算法是非常好的</strong></p>
+<br>
+
+<h2 id="清除阶段：标记-压缩算法"><a href="#清除阶段：标记-压缩算法" class="headerlink" title="清除阶段：标记-压缩算法"></a>清除阶段：标记-压缩算法</h2><img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/6.png" style="zoom: 80%;">
+
+<p>1、从根节点开始标记所有被引用对象.</p>
+<p>2、将所有的存活对象压缩到内存的一端,按顺序排放。</p>
+<p>3、清理边界外所有的空间。</p>
+<p><strong style="color:red"><em>优点：</em></strong></p>
+<p>消除了标记一清除算法当中，内存区域分散的缺点，<em><strong>我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可</strong></em></p>
+<p>消除了复制算法当中，内存减半的代价</p>
+<p><em><strong style="color:red">缺点：</strong></em></p>
+<p>从效率上来说，<em><strong>标记一整理算法要低于复制算法。</strong></em></p>
+<p><em><strong>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。移动过程中需要进行STW</strong></em></p>
+<br>
+
+<h2 id="总结清除阶段"><a href="#总结清除阶段" class="headerlink" title="总结清除阶段"></a>总结清除阶段</h2><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Mark-Sweep</th>
+<th align="center">Mark-Compact</th>
+<th align="center">Copying</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>速度</strong></td>
+<td align="center">中等</td>
+<td align="center">最慢</td>
+<td align="center">最快</td>
+</tr>
+<tr>
+<td align="center"><strong>空间开销</strong></td>
+<td align="center">少（会存在堆积碎片）</td>
+<td align="center">少（不堆积碎片）</td>
+<td align="center">通常需要或对象的两倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td align="center"><strong>移动对象</strong></td>
+<td align="center">多</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+</tbody></table>
+<br>
+
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p><em><strong>分代算法是针对对象的不同特征，而使用合适的算法，实际上没有新算法产生，而是对前三个算法的实际应用，在新生代使用复制算法，老年代使用标记清除&#x2F;标记压缩算法清除</strong></em></p>
+<p><em><strong>老年代中：</strong></em></p>
+<p>Mark阶段的开销与存活对象的数量成正比</p>
+<p>Sweep阶段的开销与所管理区域的大小成正相关</p>
+<p>Compact阶段的开销与存活对象的数据成正比</p>
+<br>
+
+<h2 id="增量收集算法"><a href="#增量收集算法" class="headerlink" title="增量收集算法"></a>增量收集算法</h2><p><em><strong>为了避免STW影响用户体验或者系统的稳定性，让垃圾收集线程和应用程序线程交替执行，每次垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程，直到垃圾收集完成</strong></em></p>
+<p><strong style="color:red">注意：增量收集算法基础还是传统的标记—清除和复制算法，只是通过对线程冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</strong></p>
+<p><strong style="color:red">缺点：因为线程切换和上下文转换的小号，使得垃圾回收的总体成本上升，造成系统吞吐量下降</strong>、</p>
+<br>
+
+<h2 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h2><p><em><strong>一般堆空间越大，一次GC的时间就越长，GC产生的停顿就越长，为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据停顿时间去回收小区间，而不是整个堆空间，从而减少一个GC所产生的停顿。</strong></em></p>
+<br>
+
+<h1 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h1><h2 id="System-gc"><a href="#System-gc" class="headerlink" title="System.gc()"></a>System.gc()</h2><p><strong style="color:red">通过System.gc()或Runtime.getRuntime().gc()的调用，会显式触发Full GC同时对新生代和老年代进行回收（无法保证马上执行GC）</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">SystemGCTest</span>();</span><br><span class="line">    System.gc();<span class="comment">//无法保证马上执行GC</span></span><br><span class="line">	<span class="comment">//System.runFinalization();//强制调用使用引用的对象的finalize()方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="built_in">super</span>.finalize();</span><br><span class="line">    System.out.println(<span class="string">&quot;SystemGCTest 重写了finalize()&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h2><p>1）java虚拟机堆内存设置不够</p>
+<p><strong>2）代码中创建了大量对象，并且长时间不能被垃圾收集器收集（存在或被引用）</strong></p>
+<p>3）在OOM之前，通常垃圾收集器会被触发，尽可能去清理出空间</p>
+<br>
+
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p><em><strong style="color:red">严格来说：只有对象不会再被程序用到了，但是GC又不能回收他们的情况，才叫内存泄露</strong></em></p>
+<p><em><strong style="color:red">实际上：一些操作会导致对象的生命周期变得很长甚至导致OOM，也可以叫做宽泛意义的内存泄露</strong></em></p>
+<p>发生内存泄漏，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现0utOfMemory异常，导致程序崩溃。</p>
+<br>
+
+<p>比如：</p>
+<p>单例模式的生命周期和应用程序是一样的，如果在单例程序中持有堆外部对象的引用的话，那么这个外部对象是不能被回收的，则会导致内存泄露的产生</p>
+<br>
+
+<h2 id="STW"><a href="#STW" class="headerlink" title="STW"></a>STW</h2><p>在GC事件发生的过程中会产生应用程序的停顿。<em><strong>停顿产生时整个应用程序都会被暂停，没有任何响应</strong></em></p>
+<p>所有GC都有这个事件，<em><strong>是由JVM在后台自动发起和完成的</strong></em></p>
+<br>
+
+<h2 id="程序的并行和并发"><a href="#程序的并行和并发" class="headerlink" title="程序的并行和并发"></a>程序的并行和并发</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>一个时间段中有几个程序都是在同一个处理器上运行，<em><strong>并发不是真正意义上的“同时进行”，只是CPU把一个时间段划分成几个时间片段，然后在这几个时间区间之间来回切换。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/7.png" style="zoom: 70%;">
+
+<br>
+
+<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行</p>
+<p><em><strong>取决于CPU的核心数量</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/8.png" style="zoom: 80%;">
+
+<br>
+
+<h2 id="垃圾回收的并行和并发"><a href="#垃圾回收的并行和并发" class="headerlink" title="垃圾回收的并行和并发"></a>垃圾回收的并行和并发</h2><p><em><strong>并行：指多条垃圾收集线程并行工作,但此时用户线程仍处于等待状态</strong></em></p>
+<p><em><strong>串行：单线程执行。如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</strong></em></p>
+<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/9.png" style="zoom: 80%;">
+
+<p><em><strong>并发：用户线程和垃圾收集线程同时执行（不一定是并行的，可能会交替执行）垃圾回收线程在执行时不会停顿用户程序的运行</strong></em></p>
+<br>
+
+<h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p><strong style="color:red">程序执行时只有在特定位置才能停顿下来开始GC，这些位置被称为安全点</strong></p>
+<p>安全点如果太少可能会导致GC等待的时间太长，如果太频繁可能导致运行时的性能问题。</p>
+<p><em><strong>如何在GC发生时，检查所有线程都跑到最近的安全点停顿下来？</strong></em> （*）</p>
+<ul>
+<li><p>抢先式中断（没有虚拟机采用）：中断所有线程，如果还有线程不在安全点，就恢复线程，让线程跑到安全点</p>
+</li>
+<li><p>主动式中断：设置一个中断标志，各个线程运行到Safe Point的时候主动轮询这个标志，如果中断标志为真，则将自己进行中断挂起</p>
+</li>
+</ul>
+<br>
+
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>在一段代码片段中，对象的引用关系不会发生变化，在这个区域中的任何位置开始GC都是安全的。</p>
+<br>
+
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong style="color:red">强引用</strong></h3><p>最传统的“引用”的定义，是<em><strong>指在程序代码之中普遍存在的引用赋值</strong></em>。即<em><strong>类似“0bject obj&#x3D;new object( )”这种引用关系。</strong></em>只要强引用关系还存在，<em><strong>垃圾收集器就永远不会回收掉被引用的对象。（强引用可以直接访问目标对象）</strong></em></p>
+<p><code>StringBuffer str = new StringBuffer(&quot;hello&quot;);</code></p>
+<p><strong style="color:red">局部变量str指向Stringbuffer实例所在堆空间，通过str可操作该实例，那么str就是StringBuffer实例的强引用</strong></p>
+<br>
+
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a><strong style="color:red">软引用</strong></h3><p><em><strong>在系统将要发生内存溢出之前，</strong></em>将会把这些对象列入回收范围之中进行第<em><strong>二次回收</strong></em>。如果这次<em><strong>回收后还没有足够的内存，才会抛出内存溢出异常内存不足即回收</strong></em></p>
+<p>内存足够时，不会回收软引用的可达对象；内存不足时，会回收软引用的可达对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a><strong style="color:red">弱引用</strong></h3><p><em><strong>只被弱引用关联的对象只能生存到下一次垃圾收集之前。</strong></em>当垃圾收集器工作时，无论内存空间是否足够，都会回收掉被弱引用关联的对象。但是由于垃圾回收器的线程通常优先级很低，因此不一定能很快发现持有弱引用的对象，这种情况下，弱引用对象可以存在较长时间。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; wr = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a><strong style="color:red">虚引用</strong></h3><p>一个对象是否有虛引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获得一个对象的实例。<em><strong>为一个对象设置虛引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知（跟踪垃圾回收过程）</strong></em></p>
+<blockquote>
+<p>虚引用必须和引用队列一起使用。虚引用在创建时必须提供一个引用队列作为参数。当垃圾回收器准备回收一个对象时，如果发现它还有虛引用，就会在回收对象后，将这个虚引用加入引用队列，以通知应用程序对象的回收情况。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">object</span>();</span><br><span class="line">ReferenceQueuephantomQueue = <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>( ) ;</span><br><span class="line">PhantomReference&lt;object&gt; pf = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;object&gt;(obj, phantomQueue); </span><br><span class="line">obj = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
+<br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>14-垃圾回收器</title>
+    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
+<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
+<p>按碎片处理方式：分为</p>
+<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
+<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
+<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
+<br>
+
+<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
+<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
+<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
+<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
+<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
+<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
+<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
+<p>快速：一个对象从诞生到被回收所经历的时间</p>
+<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
+<br>
+
+<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
+<br>
+
+<p><em><strong>GC发展阶段：</strong></em><br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
+<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
+<br>
+
+<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
+<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
+<p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
+<br>
+
+<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
+<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
+<p><strong>在Server模式下的用途：</strong></p>
+<p>1、与新生代的Parallel Scavenge配合使用</p>
+<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">2、作为老年代CMS收集器的后备垃圾收集方法</a></p>
+<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
+<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
+<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
+<br>
+
+<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>。<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
+<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
+<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器， 不影响老年代</strong></p>
+<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量，默认开启和CPU数据相同的线程数</strong></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
+<br>
+
+<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><em><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></em></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
+<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
+<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
+<br>
+
+<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
+<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
+<br>
+
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
+<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
+<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
+<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
+<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
+<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
+<blockquote>
+<p><strong>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
+</blockquote>
+<br>
+
+<h1 id="CMS：低延迟"><a href="#CMS：低延迟" class="headerlink" title="CMS：低延迟"></a>CMS：低延迟</h1><p><em><strong style="color:red">HotSpot虚拟机中第一款真正意义上的并发收集器。第一次实现了让垃圾收集线程与用户线程同时工作</strong>，</em> <strong>也采用标记-清除算法和STW机制。</strong>在G1出现之前，CMS使用还是非常广泛的</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png"></p>
+<br>
+
+<h2 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a><em>初始标记</em></h2><p><em><strong style="color:red">标记出和GCRoots能直接关联到的对象，有STW现象（暂时时间非常短）</strong></em></p>
+<br>
+
+<h2 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a><em>并发标记阶段</em></h2><p><em><strong style="color:red">从GC Roots的直接关联对象开始遍历整个对象图的过程</strong><em>，这个过程耗时较长但是<strong>不用STW</strong>。**可以与垃圾收集线程一起并发运行</em></em></p>
+<br>
+
+<h2 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a><em>重新标记阶段</em></h2><p><strong>有些对象可能开始是垃圾，在并发标记阶段，由于用户线程的影响，导致不是垃圾了，这里需要重新标记的是这部分对象，<em>这个阶段的STW通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短</em></strong></p>
+<p><em><strong style="color:red">注意：重新标记是对已标记过的垃圾进行检测，此时会产生浮动垃圾</strong></em></p>
+<br>
+
+<h2 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h2><p><em><strong style="color:red">清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。</strong></em> <strong>由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的</strong></p>
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p><strong>在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。</strong>因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是<strong>当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。</strong></p>
+<p>要是<strong>CMS运行期间预留的内存无法满足程序需要</strong>，就会出现一次“Concurrent Mode Failure”失败，这时<strong>虚拟机将启动后备预案：临时启用Serial 0ld收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。</strong></p>
+</blockquote>
+<p><em><strong style="color:red">CMS收集器的垃圾收集算法采用的是标记一清除算法，这意味着不可避免地将会产生一些内存碎片。 那么CMS在为新对象分配内存空间时，将无法使用指针碰撞，而只能够选择空闲列表执行内存分配。</strong></em></p>
+<br>
+
+<blockquote>
+<p><em><strong>最小化使用内存和并行开销：Serial GC（young）+ Serial Old GC（old）</strong></em></p>
+<p><em><strong>最大化应用程序吞吐量：Parallel GC（young）+ Parallel Old GC（old）</strong></em></p>
+<p><em><strong>最小化GC中断或停顿时间：Parallel New GC（young）+ CMS GC（old）</strong></em></p>
+</blockquote>
+<br>
+
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h3><p><strong>1）低延迟（最耗费时间的并发标记和并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</strong>）</p>
+<p><em>2）并发收集</em></p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1）产生内存碎片</strong></p>
+<p><strong>2）CMS收集器对CPU资源很敏感（<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png">并发阶段，占用一部分线程，吞吐量降低</a>）</strong></p>
+<p><strong>3）CMS收集器无法处理浮动垃圾</strong></p>
+<blockquote>
+<p>在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间</p>
+</blockquote>
+<br>
+
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p><code> -XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务（老年代）<br><em>（开启该参数后会自动将<code>-XX:+UseParNewGc</code>打开。即: ParNew (Young区用) +CMS (0ld区用) +Serial 0ld的组合）</em></p>
+<p><code>-XX:CMSlnitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收</p>
+<p><strong>JDK5以前默认为68，即当老年代的空间使用率达到68%时，会执行一次CMS 回收。JDK6及以上默认为92%</strong></p>
+<p><strong>通过该选项便可以有效降低Full GC的执行次数</strong></p>
+<p><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生</p>
+<p><code>-XX:CMSFullGCsBeforeCompaction</code>：设置在执行多少次Full GC后对内存空间进行压缩整理</p>
+<p><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数量</p>
+<br>
+
+<h1 id="G1：区域化分代式"><a href="#G1：区域化分代式" class="headerlink" title="G1：区域化分代式"></a><em><strong style="color:red">G1：区域化分代式</strong></em></h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><p><em><strong style="color:red">并行性：</strong>G1在回收期间，可以有多个GC线程同时工作（此时用户线程STW）</em></p>
+<p><em><strong style="color:red">并发性：</strong>G1拥有与应用程序交替执行的能力， 部分工作可以和应用程序同时执行，因此，不会在整个回收阶段发生完全阻塞应用程序的情况</em></p>
+<br>
+
+<h2 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h2><p><em><strong style="color:red">G1仍然属于分代型垃圾回收器。它区分年轻代和老年代，年轻代依然有Eden区和Survivor区。但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是连续的，也不再有固定大小和固定数量</strong></em></p>
+<p><strong>将堆空间分为若干个区域（region），这些区域中包含了逻辑上的年轻代和老年代。</strong></p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/8.png" style="zoom:60%;">
+
+<br>
+
+<h2 id="空间整合"><a href="#空间整合" class="headerlink" title="空间整合"></a>空间整合</h2><p><em><strong>G1将内存划分为一个个region，内存的回收以region为单位，region之间是复制算法。整体上可看作标记-压缩算法，两种算法都可以避免内存碎片。而且当分配大对象时不会因为无法找到连续内存空间而提前触发下一次GC。</strong></em></p>
+<br>
+
+<h2 id="可预测的停顿时间模型"><a href="#可预测的停顿时间模型" class="headerlink" title="可预测的停顿时间模型"></a><strong style="color:red">可预测的停顿时间模型</strong></h2><p><em><strong>软实时（soft real-time）</strong></em></p>
+<p>G1能建立可预测的停顿时间模型，让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒，可以通过参数<code>-XX:MaxGCPauseMillis</code>进行设置</p>
+<p><strong>由于分区的原因，G1可以只选取部分区域进行内存回收，缩小了回收的范围，对于全局停顿情况的发生也能得到较好的控制。</strong></p>
+<p><strong>G1 跟踪各个Region 里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。保证了G1收集器在有限的时间内可以获取尽可能高的收集效率。</strong></p>
+<p><strong style="color:red">注意：在小内存应用上CMS的表现大概率会优于G1，而G1在大内存应用上则发挥其优势。平衡点在6-8GB之间</strong></p>
+<br>
+
+<h2 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h2><p><code>-XX:+UseG1GC</code>：手动指定使用G1收集器执行内存回收任务</p>
+<p><code>-XX:G1HeapRegionSize</code>：设置每个Region的大小。值是2的幂，范围是1MB到32MB之间，目标是根据最小的Java堆大小划分出约2048个区域。默认是堆内存的1&#x2F;2000</p>
+<p><code>-XX:MaxGCPauseMillis</code>：<strong>设置期望达到的最大GC停顿时间指标（JVM会尽力实现,但不保证达到）</strong>默认200ms**(如果这个值设置很小，如20ms，那么它收集的region会少，这样长时间后，堆内存会满。产生FullGC从而出现STW)**</p>
+<p><code>-XX:ParallelGCThread</code>：设置STW时GC线程数的值。最多设置为8（垃圾回收线程）</p>
+<p><code>-XX:ConcGCThreads</code>：设置并发标记的线程数。将n设置为并行垃圾回收线程数的1&#x2F;4左右</p>
+<p><code>-XX:InitiatingHeapOccupancyPercent</code>：设置触发并发GC周期的Java堆占用率阈值。超过此值,就触发GC（默认45）</p>
+<blockquote>
+<ol>
+<li>开启G1垃圾收集器</li>
+<li>设置堆的最大内存</li>
+<li>设置最大的停顿时间</li>
+</ol>
+</blockquote>
+<br>
+
+<h2 id="region"><a href="#region" class="headerlink" title="region"></a><strong style="color:red">region</strong></h2><p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/9.png"></p>
+<p>1、<strong>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小为2的N次幂。可以通过<code>-XX:G1HeapRegionSize</code>设定。<strong style="color:red">所有的Region大小相同，且在JVM生命周期内不会被改变</strong></strong></p>
+<p><em>2、一个region 有可能属于任何一块内存区域。但是一个region只可能属于一个角色。</em></p>
+<p><strong style="color:red">3、Humongous内存区域（图中的H块）主要用于存储大对象，如果超过1. 5个region，就放到Humongous区</strong></p>
+<blockquote>
+<p>对于堆中的大对象，默认直接会被分配到老年代，但是如果它是一个短期存在的大对象，就会对垃圾收集器造成负面影响。为了解决这个问题，G1划分了一个<strong style="color:red">Humongous区,它用来专门存放大对象。如果一个H区装不下一个大对象，那么G1会寻找连续的H区来存储。为了能找到连续的H区，可以启动Full GC。</strong>G1的大多数行为都把H区作为老年代的一部分来看待</p>
+</blockquote>
+<br>
+
+<h2 id="记忆集"><a href="#记忆集" class="headerlink" title="记忆集"></a>记忆集</h2><blockquote>
+<p>一个region中的对象可能被其他任意region中对象引用，因此在判断对象是否存活的时候，需要扫描整个堆才能保证准确（出现STW）。所以使用每一个region对应一个记忆集（Remembered Set）来避免全局扫描</p>
+</blockquote>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/11.png"></p>
+<p><em><strong>每次Reference类型数据写操作时，都会产生一个写屏障（Write Barrier）暂时中止操作，然后检查将要写入的引用指向的对象是否和该Reference类型数据在不同的Region （其他收集器：检查老年代对象是否引用了新生代对象）</strong></em><br><em><strong>如果不同，通过CardTable把相关引用信息记录到引用指向对象的所在Region对应的Remembered Set中<br>当进行垃圾收集时，在GC根节点的枚举范围加入Remembered Set</strong></em></p>
+<br>
+
+<h2 id="G1回收过程"><a href="#G1回收过程" class="headerlink" title="G1回收过程"></a><strong style="color:red">G1回收过程</strong></h2><p><em><strong>1、YoungGC</strong></em></p>
+<p><em><strong>2、老年代并发标记过程</strong></em></p>
+<p><em><strong>3、混合回收</strong></em></p>
+<p><em><strong>（作为一种失败保护机制，Full GC还是存在的）</strong></em></p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/10.png" style="zoom:67%;">
+
+<br>
+
+<h3 id="年轻代GC"><a href="#年轻代GC" class="headerlink" title="年轻代GC"></a>年轻代GC</h3><blockquote>
+<p>当Eden空间耗尽时,G1会启动一次年轻代垃圾回收过程<br>年轻代垃圾回收只会回收Eden区和Survivor区</p>
+</blockquote>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/12.png" style="zoom:67%;">
+
+<p><strong style="color:red">1、扫描根</strong>（根引用连同RSet记录的外部引用作为扫描存活对象的入口）</p>
+<p><strong style="color:red">2、更新RSet</strong>（ 此阶段完成后,RSet可以准确的反映老年代对所在的内存分段中对象的引用）</p>
+<p><strong style="color:red">3、处理RSet</strong>（t:识别被老年代对象指向的Eden中的对象，这些被指向的Eden中的对象被认为是存活的对象）</p>
+<p><strong style="color:red">4、复制对象</strong>（对象树被遍历，Eden区内存中存活的对象复制到Survivor区中空的内存分段，Survivor区内存段中存活的对象如果年龄未达阈值，年龄+1，达到阈值则被复制到Old区中空的内存分段。如果Survivor空间不够，Eden的部分数据会直接晋升到Old区）</p>
+<p><strong style="color:red">5、处理引用</strong></p>
+<br>
+
+<h3 id="并发标记过程"><a href="#并发标记过程" class="headerlink" title="并发标记过程"></a>并发标记过程</h3><p><strong style="color:red">1、初始标记阶段</strong>：标记从根节点直接可达的对象（STW+一次YoungGC）</p>
+<p><strong style="color:red">2、根区域扫描</strong>：扫描Survivor区直接可达的老年代区域对象，并标记被引用的对象。这一过程必须在young GC之前完成（YoungGC时，会动Survivor区，所以这一过程必须在YoungGC之前完成）</p>
+<p><strong style="color:red">3、并发标记</strong>：在整个堆中进行并发标记（和应用程序并发执行），此过程可能被YoungGC中断。在并发标记阶段,若发现区域对象中的所有对象都是垃圾，那这个区域会被立即回收。同时，并发标记过程中，会计算每个区域的对象活性（区域中存活对象的比例）</p>
+<p><strong style="color:red">4、再次标记</strong>：由于应用程序持续进行，需要修正上一次的标记结果（STW）</p>
+<p><strong style="color:red">5、独占清理</strong>：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域（STW，不会实际上去做垃圾的收集）</p>
+<p><strong style="color:red">6、并发清理阶段</strong>：识别并清理完全空闲的区域</p>
+<br>
+
+<h3 id="混合回收"><a href="#混合回收" class="headerlink" title="混合回收"></a>混合回收</h3><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/13.png" style="zoom:70%;">
+
+<blockquote>
+<p>当越来越多对象晋升到老年代时，为避免堆内存耗尽，虚拟机会触发一个混合的垃圾收集器</p>
+</blockquote>
+<p><strong style="color:red">混合回收除了回收整个Young region外，还会回收一部分的Old Region（可以选择哪些Old region被回收，从而对整个垃圾回收的耗时进行控制）</strong></p>
+<br>
+
+<h3 id="G1优化建议"><a href="#G1优化建议" class="headerlink" title="G1优化建议"></a>G1优化建议</h3><p>1、年轻代发送GC频率高，避免使用<code>-Xmn</code>或<code>-XX:NewRatio</code></p>
+<p>2、暂停时间目标不要太过严苛（影响吞吐量）</p>
+<br>
+
+<h1 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h1><p>-XX:+PrintGC：输出GC日志</p>
+<p>-XX:+PrintGCDetails：输出GC详细日志</p>
+<p>-XX:+PrintGCTimeStamps：输出GC时间戳（以基准时间形式）</p>
+<p>-XX:+PrintGCDateStamps：输出GC时间戳（以日期的形式）</p>
+<p>-XX:+PrintHeapAtGC：在GC前后打印堆信息</p>
+<p>-Xloggc:..&#x2F;logs&#x2F;gc.log：日志文件的输出路径</p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/14.png" style="zoom:100%;">
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>15-类的生命周期（详细）</title>
     <url>/2022/08/08/15-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%AF%A6%E7%BB%86%EF%BC%89/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><em><strong>从class文件到加载到内存中的类,到类卸载出内存为止,它的整个生命周期包括如下7个阶段</strong></em></p>
@@ -1553,239 +2021,6 @@
       </tags>
   </entry>
   <entry>
-    <title>14-垃圾回收器</title>
-    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
-<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
-<p>按碎片处理方式：分为</p>
-<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
-<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
-<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
-<br>
-
-<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
-<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
-<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
-<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
-<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
-<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
-<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
-<p>快速：一个对象从诞生到被回收所经历的时间</p>
-<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
-<br>
-
-<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
-<br>
-
-<p><em><strong>GC发展阶段：</strong></em><br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
-<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
-<br>
-
-<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
-<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
-<p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
-<br>
-
-<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
-<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
-<p><strong>在Server模式下的用途：</strong></p>
-<p>1、与新生代的Parallel Scavenge配合使用</p>
-<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">2、作为老年代CMS收集器的后备垃圾收集方法</a></p>
-<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
-<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
-<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
-<br>
-
-<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>。<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
-<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
-<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器， 不影响老年代</strong></p>
-<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量，默认开启和CPU数据相同的线程数</strong></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
-<br>
-
-<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><em><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></em></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
-<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
-<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
-<br>
-
-<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
-<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
-<br>
-
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
-<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
-<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
-<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
-<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
-<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
-<blockquote>
-<p><strong>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
-</blockquote>
-<br>
-
-<h1 id="CMS：低延迟"><a href="#CMS：低延迟" class="headerlink" title="CMS：低延迟"></a>CMS：低延迟</h1><p><em><strong style="color:red">HotSpot虚拟机中第一款真正意义上的并发收集器。第一次实现了让垃圾收集线程与用户线程同时工作</strong>，</em> <strong>也采用标记-清除算法和STW机制。</strong>在G1出现之前，CMS使用还是非常广泛的</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png"></p>
-<br>
-
-<h2 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a><em>初始标记</em></h2><p><em><strong style="color:red">标记出和GCRoots能直接关联到的对象，有STW现象（暂时时间非常短）</strong></em></p>
-<br>
-
-<h2 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a><em>并发标记阶段</em></h2><p><em><strong style="color:red">从GC Roots的直接关联对象开始遍历整个对象图的过程</strong><em>，这个过程耗时较长但是<strong>不用STW</strong>。**可以与垃圾收集线程一起并发运行</em></em></p>
-<br>
-
-<h2 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a><em>重新标记阶段</em></h2><p><strong>有些对象可能开始是垃圾，在并发标记阶段，由于用户线程的影响，导致不是垃圾了，这里需要重新标记的是这部分对象，<em>这个阶段的STW通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短</em></strong></p>
-<p><em><strong style="color:red">注意：重新标记是对已标记过的垃圾进行检测，此时会产生浮动垃圾</strong></em></p>
-<br>
-
-<h2 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h2><p><em><strong style="color:red">清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。</strong></em> <strong>由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的</strong></p>
-<br>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<p><strong>在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。</strong>因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是<strong>当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。</strong></p>
-<p>要是<strong>CMS运行期间预留的内存无法满足程序需要</strong>，就会出现一次“Concurrent Mode Failure”失败，这时<strong>虚拟机将启动后备预案：临时启用Serial 0ld收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。</strong></p>
-</blockquote>
-<p><em><strong style="color:red">CMS收集器的垃圾收集算法采用的是标记一清除算法，这意味着不可避免地将会产生一些内存碎片。 那么CMS在为新对象分配内存空间时，将无法使用指针碰撞，而只能够选择空闲列表执行内存分配。</strong></em></p>
-<br>
-
-<blockquote>
-<p><em><strong>最小化使用内存和并行开销：Serial GC（young）+ Serial Old GC（old）</strong></em></p>
-<p><em><strong>最大化应用程序吞吐量：Parallel GC（young）+ Parallel Old GC（old）</strong></em></p>
-<p><em><strong>最小化GC中断或停顿时间：Parallel New GC（young）+ CMS GC（old）</strong></em></p>
-</blockquote>
-<br>
-
-<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h3><p><strong>1）低延迟（最耗费时间的并发标记和并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</strong>）</p>
-<p><em>2）并发收集</em></p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1）产生内存碎片</strong></p>
-<p><strong>2）CMS收集器对CPU资源很敏感（<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png">并发阶段，占用一部分线程，吞吐量降低</a>）</strong></p>
-<p><strong>3）CMS收集器无法处理浮动垃圾</strong></p>
-<blockquote>
-<p>在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间</p>
-</blockquote>
-<br>
-
-<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p><code> -XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务（老年代）<br><em>（开启该参数后会自动将<code>-XX:+UseParNewGc</code>打开。即: ParNew (Young区用) +CMS (0ld区用) +Serial 0ld的组合）</em></p>
-<p><code>-XX:CMSlnitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收</p>
-<p><strong>JDK5以前默认为68，即当老年代的空间使用率达到68%时，会执行一次CMS 回收。JDK6及以上默认为92%</strong></p>
-<p><strong>通过该选项便可以有效降低Full GC的执行次数</strong></p>
-<p><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生</p>
-<p><code>-XX:CMSFullGCsBeforeCompaction</code>：设置在执行多少次Full GC后对内存空间进行压缩整理</p>
-<p><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数量</p>
-<br>
-
-<h1 id="G1：区域化分代式"><a href="#G1：区域化分代式" class="headerlink" title="G1：区域化分代式"></a><em><strong style="color:red">G1：区域化分代式</strong></em></h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><p><em><strong style="color:red">并行性：</strong>G1在回收期间，可以有多个GC线程同时工作（此时用户线程STW）</em></p>
-<p><em><strong style="color:red">并发性：</strong>G1拥有与应用程序交替执行的能力， 部分工作可以和应用程序同时执行，因此，不会在整个回收阶段发生完全阻塞应用程序的情况</em></p>
-<br>
-
-<h2 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h2><p><em><strong style="color:red">G1仍然属于分代型垃圾回收器。它区分年轻代和老年代，年轻代依然有Eden区和Survivor区。但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是连续的，也不再有固定大小和固定数量</strong></em></p>
-<p><strong>将堆空间分为若干个区域（region），这些区域中包含了逻辑上的年轻代和老年代。</strong></p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/8.png" style="zoom:60%;">
-
-<br>
-
-<h2 id="空间整合"><a href="#空间整合" class="headerlink" title="空间整合"></a>空间整合</h2><p><em><strong>G1将内存划分为一个个region，内存的回收以region为单位，region之间是复制算法。整体上可看作标记-压缩算法，两种算法都可以避免内存碎片。而且当分配大对象时不会因为无法找到连续内存空间而提前触发下一次GC。</strong></em></p>
-<br>
-
-<h2 id="可预测的停顿时间模型"><a href="#可预测的停顿时间模型" class="headerlink" title="可预测的停顿时间模型"></a><strong style="color:red">可预测的停顿时间模型</strong></h2><p><em><strong>软实时（soft real-time）</strong></em></p>
-<p>G1能建立可预测的停顿时间模型，让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒，可以通过参数<code>-XX:MaxGCPauseMillis</code>进行设置</p>
-<p><strong>由于分区的原因，G1可以只选取部分区域进行内存回收，缩小了回收的范围，对于全局停顿情况的发生也能得到较好的控制。</strong></p>
-<p><strong>G1 跟踪各个Region 里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。保证了G1收集器在有限的时间内可以获取尽可能高的收集效率。</strong></p>
-<p><strong style="color:red">注意：在小内存应用上CMS的表现大概率会优于G1，而G1在大内存应用上则发挥其优势。平衡点在6-8GB之间</strong></p>
-<br>
-
-<h2 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h2><p><code>-XX:+UseG1GC</code>：手动指定使用G1收集器执行内存回收任务</p>
-<p><code>-XX:G1HeapRegionSize</code>：设置每个Region的大小。值是2的幂，范围是1MB到32MB之间，目标是根据最小的Java堆大小划分出约2048个区域。默认是堆内存的1&#x2F;2000</p>
-<p><code>-XX:MaxGCPauseMillis</code>：<strong>设置期望达到的最大GC停顿时间指标（JVM会尽力实现,但不保证达到）</strong>默认200ms**(如果这个值设置很小，如20ms，那么它收集的region会少，这样长时间后，堆内存会满。产生FullGC从而出现STW)**</p>
-<p><code>-XX:ParallelGCThread</code>：设置STW时GC线程数的值。最多设置为8（垃圾回收线程）</p>
-<p><code>-XX:ConcGCThreads</code>：设置并发标记的线程数。将n设置为并行垃圾回收线程数的1&#x2F;4左右</p>
-<p><code>-XX:InitiatingHeapOccupancyPercent</code>：设置触发并发GC周期的Java堆占用率阈值。超过此值,就触发GC（默认45）</p>
-<blockquote>
-<ol>
-<li>开启G1垃圾收集器</li>
-<li>设置堆的最大内存</li>
-<li>设置最大的停顿时间</li>
-</ol>
-</blockquote>
-<br>
-
-<h2 id="region"><a href="#region" class="headerlink" title="region"></a><strong style="color:red">region</strong></h2><p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/9.png"></p>
-<p>1、<strong>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小为2的N次幂。可以通过<code>-XX:G1HeapRegionSize</code>设定。<strong style="color:red">所有的Region大小相同，且在JVM生命周期内不会被改变</strong></strong></p>
-<p><em>2、一个region 有可能属于任何一块内存区域。但是一个region只可能属于一个角色。</em></p>
-<p><strong style="color:red">3、Humongous内存区域（图中的H块）主要用于存储大对象，如果超过1. 5个region，就放到Humongous区</strong></p>
-<blockquote>
-<p>对于堆中的大对象，默认直接会被分配到老年代，但是如果它是一个短期存在的大对象，就会对垃圾收集器造成负面影响。为了解决这个问题，G1划分了一个<strong style="color:red">Humongous区,它用来专门存放大对象。如果一个H区装不下一个大对象，那么G1会寻找连续的H区来存储。为了能找到连续的H区，可以启动Full GC。</strong>G1的大多数行为都把H区作为老年代的一部分来看待</p>
-</blockquote>
-<br>
-
-<h2 id="记忆集"><a href="#记忆集" class="headerlink" title="记忆集"></a>记忆集</h2><blockquote>
-<p>一个region中的对象可能被其他任意region中对象引用，因此在判断对象是否存活的时候，需要扫描整个堆才能保证准确（出现STW）。所以使用每一个region对应一个记忆集（Remembered Set）来避免全局扫描</p>
-</blockquote>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/11.png"></p>
-<p><em><strong>每次Reference类型数据写操作时，都会产生一个写屏障（Write Barrier）暂时中止操作，然后检查将要写入的引用指向的对象是否和该Reference类型数据在不同的Region （其他收集器：检查老年代对象是否引用了新生代对象）</strong></em><br><em><strong>如果不同，通过CardTable把相关引用信息记录到引用指向对象的所在Region对应的Remembered Set中<br>当进行垃圾收集时，在GC根节点的枚举范围加入Remembered Set</strong></em></p>
-<br>
-
-<h2 id="G1回收过程"><a href="#G1回收过程" class="headerlink" title="G1回收过程"></a><strong style="color:red">G1回收过程</strong></h2><p><em><strong>1、YoungGC</strong></em></p>
-<p><em><strong>2、老年代并发标记过程</strong></em></p>
-<p><em><strong>3、混合回收</strong></em></p>
-<p><em><strong>（作为一种失败保护机制，Full GC还是存在的）</strong></em></p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/10.png" style="zoom:67%;">
-
-<br>
-
-<h3 id="年轻代GC"><a href="#年轻代GC" class="headerlink" title="年轻代GC"></a>年轻代GC</h3><blockquote>
-<p>当Eden空间耗尽时,G1会启动一次年轻代垃圾回收过程<br>年轻代垃圾回收只会回收Eden区和Survivor区</p>
-</blockquote>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/12.png" style="zoom:67%;">
-
-<p><strong style="color:red">1、扫描根</strong>（根引用连同RSet记录的外部引用作为扫描存活对象的入口）</p>
-<p><strong style="color:red">2、更新RSet</strong>（ 此阶段完成后,RSet可以准确的反映老年代对所在的内存分段中对象的引用）</p>
-<p><strong style="color:red">3、处理RSet</strong>（t:识别被老年代对象指向的Eden中的对象，这些被指向的Eden中的对象被认为是存活的对象）</p>
-<p><strong style="color:red">4、复制对象</strong>（对象树被遍历，Eden区内存中存活的对象复制到Survivor区中空的内存分段，Survivor区内存段中存活的对象如果年龄未达阈值，年龄+1，达到阈值则被复制到Old区中空的内存分段。如果Survivor空间不够，Eden的部分数据会直接晋升到Old区）</p>
-<p><strong style="color:red">5、处理引用</strong></p>
-<br>
-
-<h3 id="并发标记过程"><a href="#并发标记过程" class="headerlink" title="并发标记过程"></a>并发标记过程</h3><p><strong style="color:red">1、初始标记阶段</strong>：标记从根节点直接可达的对象（STW+一次YoungGC）</p>
-<p><strong style="color:red">2、根区域扫描</strong>：扫描Survivor区直接可达的老年代区域对象，并标记被引用的对象。这一过程必须在young GC之前完成（YoungGC时，会动Survivor区，所以这一过程必须在YoungGC之前完成）</p>
-<p><strong style="color:red">3、并发标记</strong>：在整个堆中进行并发标记（和应用程序并发执行），此过程可能被YoungGC中断。在并发标记阶段,若发现区域对象中的所有对象都是垃圾，那这个区域会被立即回收。同时，并发标记过程中，会计算每个区域的对象活性（区域中存活对象的比例）</p>
-<p><strong style="color:red">4、再次标记</strong>：由于应用程序持续进行，需要修正上一次的标记结果（STW）</p>
-<p><strong style="color:red">5、独占清理</strong>：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域（STW，不会实际上去做垃圾的收集）</p>
-<p><strong style="color:red">6、并发清理阶段</strong>：识别并清理完全空闲的区域</p>
-<br>
-
-<h3 id="混合回收"><a href="#混合回收" class="headerlink" title="混合回收"></a>混合回收</h3><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/13.png" style="zoom:70%;">
-
-<blockquote>
-<p>当越来越多对象晋升到老年代时，为避免堆内存耗尽，虚拟机会触发一个混合的垃圾收集器</p>
-</blockquote>
-<p><strong style="color:red">混合回收除了回收整个Young region外，还会回收一部分的Old Region（可以选择哪些Old region被回收，从而对整个垃圾回收的耗时进行控制）</strong></p>
-<br>
-
-<h3 id="G1优化建议"><a href="#G1优化建议" class="headerlink" title="G1优化建议"></a>G1优化建议</h3><p>1、年轻代发送GC频率高，避免使用<code>-Xmn</code>或<code>-XX:NewRatio</code></p>
-<p>2、暂停时间目标不要太过严苛（影响吞吐量）</p>
-<br>
-
-<h1 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h1><p>-XX:+PrintGC：输出GC日志</p>
-<p>-XX:+PrintGCDetails：输出GC详细日志</p>
-<p>-XX:+PrintGCTimeStamps：输出GC时间戳（以基准时间形式）</p>
-<p>-XX:+PrintGCDateStamps：输出GC时间戳（以日期的形式）</p>
-<p>-XX:+PrintHeapAtGC：在GC前后打印堆信息</p>
-<p>-Xloggc:..&#x2F;logs&#x2F;gc.log：日志文件的输出路径</p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/14.png" style="zoom:100%;">
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2-2-函数调用时间复杂度分析</title>
     <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1864,241 +2099,6 @@
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>13-垃圾回收</title>
-    <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
-    <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
-<p><strong style="color:red;"><em>GC的作用：</em></strong><strong>释放没用的对象，清楚内存里的记录碎片，以便JVM可以将整理出来的内存分配给新的对象，没有GC就不能保证应用程序的正常进行</strong></p>
-<p><strong style="color:red;"><em>内存泄露：</em></strong><strong>对象在程序运行期间无法被回收</strong></p>
-<p><strong style="color:red;"><em>java自动内存管理：</em></strong><strong>降低内存泄漏和内存溢出的风险</strong></p>
-<p><strong style="color:red;"><em>GC的作用范围：</em></strong><strong>方法区和堆区（重点）</strong></p>
-<p><strong style="color:red;"><em>分类：</em></strong><strong>频繁收集Young区，较少收集Old区，基本不动Perm区（元空间）</strong></p>
-<br>
-
-<h1 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h1><p><strong style="color:red;"><em>注意：</em></strong><strong>在GC执行垃圾回收之前，需要先区分出内存中哪些是存活的对象，哪些是死亡的对象，只有被标记为已经死亡的对象，GC才会在执行垃圾回收的时候，释放掉它的内存空间。</strong><strong style="color:red;">当一个对象已经不再被任何存活的对象继续引用时，就可以宣判为死亡</strong></p>
-<h2 id="标记阶段：引用计数算法"><a href="#标记阶段：引用计数算法" class="headerlink" title="标记阶段：引用计数算法"></a>标记阶段：引用计数算法</h2><p><strong style="color:red;">对每个对象保留一个整型的引用计数器属性。用来记录对象被引用的情况</strong></p>
-<blockquote>
-<p>对于一个对象A，只要任何一个对象引用了A，则A的引用计数器就加1；当引用失效时，引用计数器就减1。只要对象A的引用计数器的值为0，即表示对象A不可能再被使用，可进行回收</p>
-</blockquote>
-<p><strong style="color:red;">优点：实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong></p>
-<p><strong style="color:red;">缺点：</strong><br><strong>1、需要单独的字段存储计数器，增加存储空间的开销</strong><br><strong>2、每次赋值都需要更新计数器，增加时间的开销</strong><br><em><strong>3、无法处理循环引用（致命缺陷）</strong></em></p>
-<br>
-
-<h2 id="标记阶段：可达性分析算法"><a href="#标记阶段：可达性分析算法" class="headerlink" title="标记阶段：可达性分析算法"></a>标记阶段：可达性分析算法</h2><p><strong style="color:red;">以根对象集合（GC Roots：一组必须活跃的引用）为起始点，按照从上至下的方式搜索被根对象集合所连接的目标对象是否可达</strong></p>
-<blockquote>
-<p>使用该算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索所走过的路径（引用链），如果目标对象没有任何引用链相连，则不可达，也就意味着该对象已经死亡。<strong style="color:red;">只有能够被根对象集合直接或者间接连接的对象才是存活对象</strong></p>
-</blockquote>
-<p><strong style="color:red;">有效地解决了在引用技术算法中循环引用的问题，防止内存泄露的发生</strong></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/1.png" style="zoom:67%;">
-
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/2.png" style="zoom: 85%;">
-
-<p><strong style="color:red;"><em>注意：由于栈方式存放变量和指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那么它就是一个Root</em></strong></p>
-<p><strong style="color:red;"><em>扩展：除了固定的GC Roots集合以外，还可以有其他对象”临时性“地加入，共同构成完整GC Roots集合。比如：分代收集和局部回收</em></strong></p>
-<blockquote>
-<p><strong style="color:red;">1、如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能保障一致性的快照中进行。</strong>这点不满足的话分析结果的准确性就无法保证</p>
-<p>2、这也是GC进行时必须STW的一个重要原因，<strong>枚举根节点时也是必须要停顿</strong></p>
-</blockquote>
-<br>
-
-<h3 id="对象的finalization机制"><a href="#对象的finalization机制" class="headerlink" title="对象的finalization机制"></a>对象的finalization机制</h3><blockquote>
-<p>1、java提供了对象终止机制来允许开发人员提供对象被销毁之前的自定义处理逻辑</p>
-<p><strong style="color:red;">2、垃圾回收该对象之前（垃圾回收器发现没有引用指向一个对象），总会先调用这个对象的finalize()方法</strong></p>
-<p>3、finalize()方法允许在子类中被重写，用于在对象被回收时进行资源的释放（通常在这个方法内进行一些资源释放和清理工作）</p>
-</blockquote>
-<p><strong style="color:red;"><em>注意：永远不要主动调用某个对象的 finalize方法，应该交给垃圾回收机制调用</em></strong></p>
-<br>
-
-<p><em><strong style="color:red;">理由：</strong></em></p>
-<p><strong style="color:red;">1、在调用时可能会导致对象复活</strong></p>
-<p><strong style="color:red;">2、在方法的执行时间是没有保障，它完全由GC线程决定，极端情况下，如果不发生GC，则finalize方法将没有执行机会</strong></p>
-<br>
-
-<h3 id="对象的三种状态"><a href="#对象的三种状态" class="headerlink" title="对象的三种状态"></a>对象的三种状态</h3><p><em><strong>由于finalize方法的存在，虚拟机中的对象一般处于三种可能的状态</strong></em></p>
-<p><em><strong>一个无法触及的对象有可能在某一个条件下“复活”自己</strong></em></p>
-<p>1、可触及的：从根节点开始，可以到达这个对象</p>
-<p>2、可复活的：对象的所有引用都被释放，但是对象有可能在调用finalize方法后复活</p>
-<p>3、不可触及的：对象的finalize方法被调用，并且没有复活，那么就会进入不可触及的状态。不可触及的对象不可能被复活，因为finalize方法只会被调用一次（对象只有在这个状态才能被回收）</p>
-<h3 id="判断对象回收的具体过程"><a href="#判断对象回收的具体过程" class="headerlink" title="判断对象回收的具体过程"></a><strong style="color:red">判断对象回收的具体过程</strong></h3><p>1、判断对象到 GC Roots 是否有引用链，没有则进行第一次标记</p>
-<p>2、判断对象是否执行finalize方法</p>
-<p>1）如果对象没有重写或者finalize方法已经被虚拟机调用过，则该对象判定为不可触及</p>
-<p>2）如果对象重写了finalize方法，但是还没有执行过，那么对象将插入到F-Queue队列中，执行方法</p>
-<p>3）GC将会对F-Queue队列中的对象进行第二次标记，如果对象在finalize方法中与引用链中的任何一个对象建立了联系，那么在第二次回收时，将会被移除队列。任何对象会再次出现没有引用的情况，直接变成不可触及的状态</p>
-<br>
-
-<h2 id="清除阶段：标记-清除算法"><a href="#清除阶段：标记-清除算法" class="headerlink" title="清除阶段：标记-清除算法"></a>清除阶段：标记-清除算法</h2><p><em><strong><strong style="color:red">基础且常见的垃圾收集算法</strong>，当堆中有效内存空间被耗尽的时候，就会进行STW，任何进行标记和清除</strong></em></p>
-<p>标记：Collector从引用根节点进行遍历，标记所有被引用的对象，一般是在对象的Header中记录为可达的对象</p>
-<p>清除：Collector对堆内存从头到尾进行线性的遍历，如果发现某个对象在Header中没有标记为可达对象，则将其回收</p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/3.png" style="zoom: 90%;">
-
-<p><em><strong style="color:red">缺点：</strong></em></p>
-<p>1、效率不高</p>
-<p>2、在进行GC的时候，需要STW</p>
-<p>3、清理出来的空间内存是不连续的，产生内存碎片。需要维护一个空闲列表</p>
-<p><strong style="color:red">注意：</strong><em><strong>此处清除的本质是将需要清除的对象地址保存在空闲的地址列表中，当下次有新对象加载时，判断垃圾的位置空间是否够，如果够，就进行存放</strong></em></p>
-<br>
-
-<h2 id="清除阶段：复制算法"><a href="#清除阶段：复制算法" class="headerlink" title="清除阶段：复制算法"></a>清除阶段：复制算法</h2><p><em><strong>将活着的内存空间分为两块,每次只使用其中一块,在垃圾回收时将正在.使用的内存中的存活对象复制到未被使用的内存块中,之后清除正在使用的内存块中的所有对象,交换两个内存的角色,最后完成垃圾回收。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/4.png" style="zoom: 75%;">
-
-<p><em><strong style="color:red">优点：</strong></em></p>
-<p>1、没有标记和清除过程,，实现简单，运行高效</p>
-<p>2、不会产生内存碎片，且对象完整不丢<br><em><strong style="color:red">缺点：</strong></em></p>
-<p>1、浪费空间</p>
-<p>2、对于G1这种分拆成为大量region的GC，复制而不是移动，意味着GC需要维护region之间对象引用关系，内存占用和时间开销大。</p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/5.png" style="zoom: 80%;">
-
-<p><strong style="color:red">注意：如果垃圾对象很多，复制算法则不太理想。所以在 <em>新生代</em> 中使用复制算法是非常好的</strong></p>
-<br>
-
-<h2 id="清除阶段：标记-压缩算法"><a href="#清除阶段：标记-压缩算法" class="headerlink" title="清除阶段：标记-压缩算法"></a>清除阶段：标记-压缩算法</h2><img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/6.png" style="zoom: 80%;">
-
-<p>1、从根节点开始标记所有被引用对象.</p>
-<p>2、将所有的存活对象压缩到内存的一端,按顺序排放。</p>
-<p>3、清理边界外所有的空间。</p>
-<p><strong style="color:red"><em>优点：</em></strong></p>
-<p>消除了标记一清除算法当中，内存区域分散的缺点，<em><strong>我们需要给新对象分配内存时，JVM只需要持有一个内存的起始地址即可</strong></em></p>
-<p>消除了复制算法当中，内存减半的代价</p>
-<p><em><strong style="color:red">缺点：</strong></em></p>
-<p>从效率上来说，<em><strong>标记一整理算法要低于复制算法。</strong></em></p>
-<p><em><strong>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。移动过程中需要进行STW</strong></em></p>
-<br>
-
-<h2 id="总结清除阶段"><a href="#总结清除阶段" class="headerlink" title="总结清除阶段"></a>总结清除阶段</h2><table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">Mark-Sweep</th>
-<th align="center">Mark-Compact</th>
-<th align="center">Copying</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>速度</strong></td>
-<td align="center">中等</td>
-<td align="center">最慢</td>
-<td align="center">最快</td>
-</tr>
-<tr>
-<td align="center"><strong>空间开销</strong></td>
-<td align="center">少（会存在堆积碎片）</td>
-<td align="center">少（不堆积碎片）</td>
-<td align="center">通常需要或对象的两倍大小（不堆积碎片）</td>
-</tr>
-<tr>
-<td align="center"><strong>移动对象</strong></td>
-<td align="center">多</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-</tbody></table>
-<br>
-
-<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p><em><strong>分代算法是针对对象的不同特征，而使用合适的算法，实际上没有新算法产生，而是对前三个算法的实际应用，在新生代使用复制算法，老年代使用标记清除&#x2F;标记压缩算法清除</strong></em></p>
-<p><em><strong>老年代中：</strong></em></p>
-<p>Mark阶段的开销与存活对象的数量成正比</p>
-<p>Sweep阶段的开销与所管理区域的大小成正相关</p>
-<p>Compact阶段的开销与存活对象的数据成正比</p>
-<br>
-
-<h2 id="增量收集算法"><a href="#增量收集算法" class="headerlink" title="增量收集算法"></a>增量收集算法</h2><p><em><strong>为了避免STW影响用户体验或者系统的稳定性，让垃圾收集线程和应用程序线程交替执行，每次垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程，直到垃圾收集完成</strong></em></p>
-<p><strong style="color:red">注意：增量收集算法基础还是传统的标记—清除和复制算法，只是通过对线程冲突的妥善处理，允许垃圾收集线程以分阶段的方式完成标记、清理或复制工作</strong></p>
-<p><strong style="color:red">缺点：因为线程切换和上下文转换的小号，使得垃圾回收的总体成本上升，造成系统吞吐量下降</strong>、</p>
-<br>
-
-<h2 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h2><p><em><strong>一般堆空间越大，一次GC的时间就越长，GC产生的停顿就越长，为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据停顿时间去回收小区间，而不是整个堆空间，从而减少一个GC所产生的停顿。</strong></em></p>
-<br>
-
-<h1 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h1><h2 id="System-gc"><a href="#System-gc" class="headerlink" title="System.gc()"></a>System.gc()</h2><p><strong style="color:red">通过System.gc()或Runtime.getRuntime().gc()的调用，会显式触发Full GC同时对新生代和老年代进行回收（无法保证马上执行GC）</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">SystemGCTest</span>();</span><br><span class="line">    System.gc();<span class="comment">//无法保证马上执行GC</span></span><br><span class="line">	<span class="comment">//System.runFinalization();//强制调用使用引用的对象的finalize()方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    <span class="built_in">super</span>.finalize();</span><br><span class="line">    System.out.println(<span class="string">&quot;SystemGCTest 重写了finalize()&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h2><p>1）java虚拟机堆内存设置不够</p>
-<p><strong>2）代码中创建了大量对象，并且长时间不能被垃圾收集器收集（存在或被引用）</strong></p>
-<p>3）在OOM之前，通常垃圾收集器会被触发，尽可能去清理出空间</p>
-<br>
-
-<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p><em><strong style="color:red">严格来说：只有对象不会再被程序用到了，但是GC又不能回收他们的情况，才叫内存泄露</strong></em></p>
-<p><em><strong style="color:red">实际上：一些操作会导致对象的生命周期变得很长甚至导致OOM，也可以叫做宽泛意义的内存泄露</strong></em></p>
-<p>发生内存泄漏，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现0utOfMemory异常，导致程序崩溃。</p>
-<br>
-
-<p>比如：</p>
-<p>单例模式的生命周期和应用程序是一样的，如果在单例程序中持有堆外部对象的引用的话，那么这个外部对象是不能被回收的，则会导致内存泄露的产生</p>
-<br>
-
-<h2 id="STW"><a href="#STW" class="headerlink" title="STW"></a>STW</h2><p>在GC事件发生的过程中会产生应用程序的停顿。<em><strong>停顿产生时整个应用程序都会被暂停，没有任何响应</strong></em></p>
-<p>所有GC都有这个事件，<em><strong>是由JVM在后台自动发起和完成的</strong></em></p>
-<br>
-
-<h2 id="程序的并行和并发"><a href="#程序的并行和并发" class="headerlink" title="程序的并行和并发"></a>程序的并行和并发</h2><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><p>一个时间段中有几个程序都是在同一个处理器上运行，<em><strong>并发不是真正意义上的“同时进行”，只是CPU把一个时间段划分成几个时间片段，然后在这几个时间区间之间来回切换。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/7.png" style="zoom: 70%;">
-
-<br>
-
-<h3 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h3><p>当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行</p>
-<p><em><strong>取决于CPU的核心数量</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/8.png" style="zoom: 80%;">
-
-<br>
-
-<h2 id="垃圾回收的并行和并发"><a href="#垃圾回收的并行和并发" class="headerlink" title="垃圾回收的并行和并发"></a>垃圾回收的并行和并发</h2><p><em><strong>并行：指多条垃圾收集线程并行工作,但此时用户线程仍处于等待状态</strong></em></p>
-<p><em><strong>串行：单线程执行。如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</strong></em></p>
-<img src="/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/9.png" style="zoom: 80%;">
-
-<p><em><strong>并发：用户线程和垃圾收集线程同时执行（不一定是并行的，可能会交替执行）垃圾回收线程在执行时不会停顿用户程序的运行</strong></em></p>
-<br>
-
-<h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p><strong style="color:red">程序执行时只有在特定位置才能停顿下来开始GC，这些位置被称为安全点</strong></p>
-<p>安全点如果太少可能会导致GC等待的时间太长，如果太频繁可能导致运行时的性能问题。</p>
-<p><em><strong>如何在GC发生时，检查所有线程都跑到最近的安全点停顿下来？</strong></em> （*）</p>
-<ul>
-<li><p>抢先式中断（没有虚拟机采用）：中断所有线程，如果还有线程不在安全点，就恢复线程，让线程跑到安全点</p>
-</li>
-<li><p>主动式中断：设置一个中断标志，各个线程运行到Safe Point的时候主动轮询这个标志，如果中断标志为真，则将自己进行中断挂起</p>
-</li>
-</ul>
-<br>
-
-<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>在一段代码片段中，对象的引用关系不会发生变化，在这个区域中的任何位置开始GC都是安全的。</p>
-<br>
-
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong style="color:red">强引用</strong></h3><p>最传统的“引用”的定义，是<em><strong>指在程序代码之中普遍存在的引用赋值</strong></em>。即<em><strong>类似“0bject obj&#x3D;new object( )”这种引用关系。</strong></em>只要强引用关系还存在，<em><strong>垃圾收集器就永远不会回收掉被引用的对象。（强引用可以直接访问目标对象）</strong></em></p>
-<p><code>StringBuffer str = new StringBuffer(&quot;hello&quot;);</code></p>
-<p><strong style="color:red">局部变量str指向Stringbuffer实例所在堆空间，通过str可操作该实例，那么str就是StringBuffer实例的强引用</strong></p>
-<br>
-
-<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a><strong style="color:red">软引用</strong></h3><p><em><strong>在系统将要发生内存溢出之前，</strong></em>将会把这些对象列入回收范围之中进行第<em><strong>二次回收</strong></em>。如果这次<em><strong>回收后还没有足够的内存，才会抛出内存溢出异常内存不足即回收</strong></em></p>
-<p>内存足够时，不会回收软引用的可达对象；内存不足时，会回收软引用的可达对象</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a><strong style="color:red">弱引用</strong></h3><p><em><strong>只被弱引用关联的对象只能生存到下一次垃圾收集之前。</strong></em>当垃圾收集器工作时，无论内存空间是否足够，都会回收掉被弱引用关联的对象。但是由于垃圾回收器的线程通常优先级很低，因此不一定能很快发现持有弱引用的对象，这种情况下，弱引用对象可以存在较长时间。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();	<span class="comment">//声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; wr = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;Object&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>;	<span class="comment">//销毁强引用</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a><strong style="color:red">虚引用</strong></h3><p>一个对象是否有虛引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获得一个对象的实例。<em><strong>为一个对象设置虛引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知（跟踪垃圾回收过程）</strong></em></p>
-<blockquote>
-<p>虚引用必须和引用队列一起使用。虚引用在创建时必须提供一个引用队列作为参数。当垃圾回收器准备回收一个对象时，如果发现它还有虛引用，就会在回收对象后，将这个虚引用加入引用队列，以通知应用程序对象的回收情况。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">object</span>();</span><br><span class="line">ReferenceQueuephantomQueue = <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>( ) ;</span><br><span class="line">PhantomReference&lt;object&gt; pf = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;object&gt;(obj, phantomQueue); </span><br><span class="line">obj = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
-<br>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -2306,6 +2306,140 @@
       <tags>
         <tag>nginx</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>5-nginx-负载均衡</title>
+    <url>/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</url>
+    <content><![CDATA[<h1 id="Nginx八层负载均衡"><a href="#Nginx八层负载均衡" class="headerlink" title="Nginx八层负载均衡"></a>Nginx八层负载均衡</h1><h2 id="upstream指令"><a href="#upstream指令" class="headerlink" title="upstream指令"></a><strong>upstream指令</strong></h2><p><strong>该指令是用来定义一组服务器，它们可以是监听不同端口的服务器，并且也可以是同时监听TCP和<code>Unix socket</code>的服务器。</strong></p>
+<p><strong>服务器可以指定不同的权重，默认为1</strong></p>
+<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/1.png"></p>
+<br>
+
+<h2 id="server指令"><a href="#server指令" class="headerlink" title="server指令"></a><strong>server指令</strong></h2><p><strong>该指令用来指定后端服务器的名称和一些参数，可以使用域名、IP、端口或者<code>Unix socket</code></strong></p>
+<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/2.png"></p>
+<br>
+
+<h2 id="负载均衡案例"><a href="#负载均衡案例" class="headerlink" title="负载均衡案例"></a><strong>负载均衡案例</strong></h2><p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/3.png"></p>
+<p><strong>客户端发送请求，通过nginx进行负载均衡到各个服务器上（proxy_pass指令）</strong></p>
+<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/4.png"><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/5.png"></p>
+<br>
+
+<h2 id="负载均衡状态"><a href="#负载均衡状态" class="headerlink" title="负载均衡状态"></a><strong>负载均衡状态</strong></h2><p><strong>代理服务器在负责均衡调度中的状态有以下几个：</strong></p>
+<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/3.png"></p>
+<h3 id="1）down："><a href="#1）down：" class="headerlink" title="1）down："></a><strong>1）down：</strong></h3><p><strong>将该服务器标记为永久不可用，该代理服务器不参与负载均衡</strong></p>
+<p><strong>down状态一般会对需要停机维护的服务器进行设置</strong></p>
+<br>
+
+<h3 id="2）backup"><a href="#2）backup" class="headerlink" title="2）backup"></a><strong>2）backup</strong></h3><p><strong>将该服务器标记为备份服务器，当主服务器不可用时，将用来传递请求</strong></p>
+<br>
+
+<p><strong>当正常访问时，因为此时9002已经作为了备份服务器，所以nginx只负载均衡到9003端口。</strong></p>
+<p><strong>当9003端口不可用时，9002将传递请求，此时nginx负载均衡到9002端口</strong></p>
+<br>
+
+<h3 id="3）max-fails-和-fail-timeout"><a href="#3）max-fails-和-fail-timeout" class="headerlink" title="3）max_fails 和 fail_timeout"></a><strong>3）max_fails 和 fail_timeout</strong></h3><ul>
+<li><strong><code>max_fails=number</code></strong></li>
+</ul>
+<p><em>设置允许请求代理服务器失败的次数，默认为1</em></p>
+<ul>
+<li><strong><code>fail_timeout=time</code></strong></li>
+</ul>
+<p><em>设置经过max_fails失败后，服务暂停的时间，默认为10s</em></p>
+<ul>
+<li><strong>案例</strong></li>
+</ul>
+<p><strong>当9003服务器出问题后，如果访问失败的次数达到3次后，在15s内 9003服务器将不再提供服务</strong></p>
+<br>
+
+<h3 id="4）max-conns"><a href="#4）max-conns" class="headerlink" title="4）max_conns"></a><strong>4）max_conns</strong></h3><p><strong><code>max_conns=number</code></strong></p>
+<p><strong>用来设置代理服务器同时活动链接的最大数量，默认为0，表示不限制</strong></p>
+<p><strong>使用该配置可以根据后端服务器处理请求的并发量来进行设置，防止后端服务器被压垮。</strong></p>
+<br>
+
+<h2 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a><strong>负载均衡策略</strong></h2><table>
+<thead>
+<tr>
+<th align="center"><strong>算法名称</strong></th>
+<th align="center"><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>轮询</strong></td>
+<td align="center"><strong>默认方式</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>weight</strong></td>
+<td align="center"><strong>权重方式</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>ip_hash</strong></td>
+<td align="center"><strong>依据ip分配方式</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>least_conn</strong></td>
+<td align="center"><strong>依据最少连接方式</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>url_hash</strong></td>
+<td align="center"><strong>依据URL分配方式</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>fair</strong></td>
+<td align="center"><strong>依据响应时间方式</strong></td>
+</tr>
+</tbody></table>
+<h2 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a><strong>轮询</strong></h2><p><strong>是upstream模块负载均衡默认的策略，每个请求会按时间顺序注意分配到不同的后端服务器</strong></p>
+<br>
+
+<h2 id="weight加权-加权轮询"><a href="#weight加权-加权轮询" class="headerlink" title="weight加权[加权轮询]"></a><strong>weight加权[加权轮询]</strong></h2><p><strong><code>weight=number</code>：用来设置服务器的权重</strong></p>
+<p><strong>权重数据越大，被分配到的概率就越高</strong></p>
+<br>
+
+<h2 id="ip-hash"><a href="#ip-hash" class="headerlink" title="ip_hash"></a><strong>ip_hash</strong></h2><p><strong>当对后端的多台动态应用服务器做负载均衡时，ip_hash指令能够将某个客户端IP的请求通过哈希算法定位到同一台后端服务器上</strong></p>
+<br>
+
+<h2 id="least-conn"><a href="#least-conn" class="headerlink" title="least_conn"></a><strong>least_conn</strong></h2><p><strong>最少连接，把请求转发给连接数较少的后端服务器。轮询算法是把请求平均的转发给各个后端，使它们的负载大致相同</strong></p>
+<p><strong>但是，有些请求占用的时间很长，会导致其所在的后端负载较高</strong></p>
+<p><strong>在这种情况下，使用least_conn可以达到更好的方法（适合请求长短不一导致服务器过载的情况）</strong></p>
+<br>
+
+<h2 id="url-hash"><a href="#url-hash" class="headerlink" title="url_hash"></a><strong>url_hash</strong></h2><p><strong>按访问的url的hash结果来分配请求，使某个url定向到同一个后端服务器，要配合缓存命中来使用。</strong></p>
+<p><strong>使用url_hash，可以使得同一个url（也就是同一个资源请求）会到达同一台服务器，一旦缓存住了资源，再此收到请求，就可以从缓存中读取</strong></p>
+<h2 id="fair"><a href="#fair" class="headerlink" title="fair"></a><strong>fair</strong></h2><p><strong>fair采用的不是内建负载均衡使用的轮换的均衡算法，而是可以根据页面大小、加载时间长短智能的进行负载均衡。</strong></p>
+<p><strong>安装</strong>  <strong>nginx-upstream-fair</strong>  <strong>模块</strong></p>
+<ol>
+<li><strong>下载nginx-upstream-fair模块：</strong><a href="https://github.com/gnosek/nginx-upstream-fair"><strong>https://github.com/gnosek/nginx-upstream-fair</strong></a></li>
+<li><strong>将下载的文件上传到服务器并进行解压缩：<code>unzip nginx-upstream-fair-master.zip</code></strong></li>
+<li><strong>重命名资源：<code>mv nginx-upstream-fair-master fair</code></strong></li>
+<li><strong>将资源添加到Nginx模块中：<code>./configure --add-module=/root/fair</code></strong></li>
+<li><strong>编译：<code>make</code></strong></li>
+</ol>
+<br>
+
+<p><strong>案例一：对所有请求实现一般轮询规则的负载均衡</strong></p>
+<p><strong>案例二：对所有请求实现加权轮询规则的负载均衡</strong></p>
+<p><strong>案例三：对特定资源实现负载均衡</strong></p>
+<br>
+
+<p><strong>案例四：对不同域名实现负载均衡</strong></p>
+<br>
+
+<p><strong>案例五：实现带有URL重写的负载均衡</strong></p>
+<br>
+
+<h1 id="Nginx四层负载均衡"><a href="#Nginx四层负载均衡" class="headerlink" title="Nginx四层负载均衡"></a><strong>Nginx四层负载均衡</strong></h1><p><strong>需要添加stream模块的支持</strong></p>
+<ol>
+<li><strong>将原有&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx进行备份</strong></li>
+<li><strong>拷贝nginx之前的配置信息</strong></li>
+<li><strong>在nginx的安装源码进行配置指定对应模块  .&#x2F;configure –with-stream</strong></li>
+<li><strong>通过make模板进行编译</strong></li>
+<li><strong>将objs下面的nginx移动到&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin下</strong></li>
+<li><strong>在源码目录下执行  make upgrade进行升级，这个可以实现不停机添加新模块的功能</strong></li>
+</ol>
+<p><strong>stream指令和upstream指令</strong></p>
+<p><strong>该指令提供在其中指定流服务器指令的配置文件上下文。和http指令同级</strong></p>
+<p><strong>案例：</strong></p>
+]]></content>
   </entry>
   <entry>
     <title>AOP</title>
@@ -2623,20 +2757,6 @@
       </tags>
   </entry>
   <entry>
-    <title>defineClass源码</title>
-    <url>/2022/08/09/defineClass%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; defineClass(String name, Resource res) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> name.lastIndexOf(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> res.getCodeSourceURL();</span><br><span class="line">    <span class="keyword">if</span> (i != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">pkgname</span> <span class="operator">=</span> name.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="comment">// Check if package already loaded.</span></span><br><span class="line">        <span class="type">Manifest</span> <span class="variable">man</span> <span class="operator">=</span> res.getManifest();</span><br><span class="line">        definePackageInternal(pkgname, man, url);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now read the class bytes and define the class</span></span><br><span class="line">    java.nio.<span class="type">ByteBuffer</span> <span class="variable">bb</span> <span class="operator">=</span> res.getByteBuffer();</span><br><span class="line">    <span class="keyword">if</span> (bb != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Use (direct) ByteBuffer:</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bb, cs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] b = res.getBytes();</span><br><span class="line">        <span class="comment">// must read certificates AFTER reading bytes.</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length, cs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringMVC</title>
     <url>/2022/08/19/SpringMVC/</url>
     <content><![CDATA[<h1 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h1><h2 id="初始化时机"><a href="#初始化时机" class="headerlink" title="初始化时机"></a>初始化时机</h2><blockquote>
@@ -2747,144 +2867,24 @@
       </tags>
   </entry>
   <entry>
-    <title>5-nginx-负载均衡</title>
-    <url>/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</url>
-    <content><![CDATA[<h1 id="Nginx八层负载均衡"><a href="#Nginx八层负载均衡" class="headerlink" title="Nginx八层负载均衡"></a>Nginx八层负载均衡</h1><h2 id="upstream指令"><a href="#upstream指令" class="headerlink" title="upstream指令"></a><strong>upstream指令</strong></h2><p><strong>该指令是用来定义一组服务器，它们可以是监听不同端口的服务器，并且也可以是同时监听TCP和<code>Unix socket</code>的服务器。</strong></p>
-<p><strong>服务器可以指定不同的权重，默认为1</strong></p>
-<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/1.png"></p>
-<br>
-
-<h2 id="server指令"><a href="#server指令" class="headerlink" title="server指令"></a><strong>server指令</strong></h2><p><strong>该指令用来指定后端服务器的名称和一些参数，可以使用域名、IP、端口或者<code>Unix socket</code></strong></p>
-<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/2.png"></p>
-<br>
-
-<h2 id="负载均衡案例"><a href="#负载均衡案例" class="headerlink" title="负载均衡案例"></a><strong>负载均衡案例</strong></h2><p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/3.png"></p>
-<p><strong>客户端发送请求，通过nginx进行负载均衡到各个服务器上（proxy_pass指令）</strong></p>
-<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/4.png"><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/5.png"></p>
-<br>
-
-<h2 id="负载均衡状态"><a href="#负载均衡状态" class="headerlink" title="负载均衡状态"></a><strong>负载均衡状态</strong></h2><p><strong>代理服务器在负责均衡调度中的状态有以下几个：</strong></p>
-<p><img src="/2022/07/19/5-nginx-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/3.png"></p>
-<h3 id="1）down："><a href="#1）down：" class="headerlink" title="1）down："></a><strong>1）down：</strong></h3><p><strong>将该服务器标记为永久不可用，该代理服务器不参与负载均衡</strong></p>
-<p><strong>down状态一般会对需要停机维护的服务器进行设置</strong></p>
-<br>
-
-<h3 id="2）backup"><a href="#2）backup" class="headerlink" title="2）backup"></a><strong>2）backup</strong></h3><p><strong>将该服务器标记为备份服务器，当主服务器不可用时，将用来传递请求</strong></p>
-<br>
-
-<p><strong>当正常访问时，因为此时9002已经作为了备份服务器，所以nginx只负载均衡到9003端口。</strong></p>
-<p><strong>当9003端口不可用时，9002将传递请求，此时nginx负载均衡到9002端口</strong></p>
-<br>
-
-<h3 id="3）max-fails-和-fail-timeout"><a href="#3）max-fails-和-fail-timeout" class="headerlink" title="3）max_fails 和 fail_timeout"></a><strong>3）max_fails 和 fail_timeout</strong></h3><ul>
-<li><strong><code>max_fails=number</code></strong></li>
-</ul>
-<p><em>设置允许请求代理服务器失败的次数，默认为1</em></p>
-<ul>
-<li><strong><code>fail_timeout=time</code></strong></li>
-</ul>
-<p><em>设置经过max_fails失败后，服务暂停的时间，默认为10s</em></p>
-<ul>
-<li><strong>案例</strong></li>
-</ul>
-<p><strong>当9003服务器出问题后，如果访问失败的次数达到3次后，在15s内 9003服务器将不再提供服务</strong></p>
-<br>
-
-<h3 id="4）max-conns"><a href="#4）max-conns" class="headerlink" title="4）max_conns"></a><strong>4）max_conns</strong></h3><p><strong><code>max_conns=number</code></strong></p>
-<p><strong>用来设置代理服务器同时活动链接的最大数量，默认为0，表示不限制</strong></p>
-<p><strong>使用该配置可以根据后端服务器处理请求的并发量来进行设置，防止后端服务器被压垮。</strong></p>
-<br>
-
-<h2 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a><strong>负载均衡策略</strong></h2><table>
-<thead>
-<tr>
-<th align="center"><strong>算法名称</strong></th>
-<th align="center"><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>轮询</strong></td>
-<td align="center"><strong>默认方式</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>weight</strong></td>
-<td align="center"><strong>权重方式</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>ip_hash</strong></td>
-<td align="center"><strong>依据ip分配方式</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>least_conn</strong></td>
-<td align="center"><strong>依据最少连接方式</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>url_hash</strong></td>
-<td align="center"><strong>依据URL分配方式</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>fair</strong></td>
-<td align="center"><strong>依据响应时间方式</strong></td>
-</tr>
-</tbody></table>
-<h2 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a><strong>轮询</strong></h2><p><strong>是upstream模块负载均衡默认的策略，每个请求会按时间顺序注意分配到不同的后端服务器</strong></p>
-<br>
-
-<h2 id="weight加权-加权轮询"><a href="#weight加权-加权轮询" class="headerlink" title="weight加权[加权轮询]"></a><strong>weight加权[加权轮询]</strong></h2><p><strong><code>weight=number</code>：用来设置服务器的权重</strong></p>
-<p><strong>权重数据越大，被分配到的概率就越高</strong></p>
-<br>
-
-<h2 id="ip-hash"><a href="#ip-hash" class="headerlink" title="ip_hash"></a><strong>ip_hash</strong></h2><p><strong>当对后端的多台动态应用服务器做负载均衡时，ip_hash指令能够将某个客户端IP的请求通过哈希算法定位到同一台后端服务器上</strong></p>
-<br>
-
-<h2 id="least-conn"><a href="#least-conn" class="headerlink" title="least_conn"></a><strong>least_conn</strong></h2><p><strong>最少连接，把请求转发给连接数较少的后端服务器。轮询算法是把请求平均的转发给各个后端，使它们的负载大致相同</strong></p>
-<p><strong>但是，有些请求占用的时间很长，会导致其所在的后端负载较高</strong></p>
-<p><strong>在这种情况下，使用least_conn可以达到更好的方法（适合请求长短不一导致服务器过载的情况）</strong></p>
-<br>
-
-<h2 id="url-hash"><a href="#url-hash" class="headerlink" title="url_hash"></a><strong>url_hash</strong></h2><p><strong>按访问的url的hash结果来分配请求，使某个url定向到同一个后端服务器，要配合缓存命中来使用。</strong></p>
-<p><strong>使用url_hash，可以使得同一个url（也就是同一个资源请求）会到达同一台服务器，一旦缓存住了资源，再此收到请求，就可以从缓存中读取</strong></p>
-<h2 id="fair"><a href="#fair" class="headerlink" title="fair"></a><strong>fair</strong></h2><p><strong>fair采用的不是内建负载均衡使用的轮换的均衡算法，而是可以根据页面大小、加载时间长短智能的进行负载均衡。</strong></p>
-<p><strong>安装</strong>  <strong>nginx-upstream-fair</strong>  <strong>模块</strong></p>
-<ol>
-<li><strong>下载nginx-upstream-fair模块：</strong><a href="https://github.com/gnosek/nginx-upstream-fair"><strong>https://github.com/gnosek/nginx-upstream-fair</strong></a></li>
-<li><strong>将下载的文件上传到服务器并进行解压缩：<code>unzip nginx-upstream-fair-master.zip</code></strong></li>
-<li><strong>重命名资源：<code>mv nginx-upstream-fair-master fair</code></strong></li>
-<li><strong>将资源添加到Nginx模块中：<code>./configure --add-module=/root/fair</code></strong></li>
-<li><strong>编译：<code>make</code></strong></li>
-</ol>
-<br>
-
-<p><strong>案例一：对所有请求实现一般轮询规则的负载均衡</strong></p>
-<p><strong>案例二：对所有请求实现加权轮询规则的负载均衡</strong></p>
-<p><strong>案例三：对特定资源实现负载均衡</strong></p>
-<br>
-
-<p><strong>案例四：对不同域名实现负载均衡</strong></p>
-<br>
-
-<p><strong>案例五：实现带有URL重写的负载均衡</strong></p>
-<br>
-
-<h1 id="Nginx四层负载均衡"><a href="#Nginx四层负载均衡" class="headerlink" title="Nginx四层负载均衡"></a><strong>Nginx四层负载均衡</strong></h1><p><strong>需要添加stream模块的支持</strong></p>
-<ol>
-<li><strong>将原有&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx进行备份</strong></li>
-<li><strong>拷贝nginx之前的配置信息</strong></li>
-<li><strong>在nginx的安装源码进行配置指定对应模块  .&#x2F;configure –with-stream</strong></li>
-<li><strong>通过make模板进行编译</strong></li>
-<li><strong>将objs下面的nginx移动到&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin下</strong></li>
-<li><strong>在源码目录下执行  make upgrade进行升级，这个可以实现不停机添加新模块的功能</strong></li>
-</ol>
-<p><strong>stream指令和upstream指令</strong></p>
-<p><strong>该指令提供在其中指定流服务器指令的配置文件上下文。和http指令同级</strong></p>
-<p><strong>案例：</strong></p>
-]]></content>
-  </entry>
-  <entry>
     <title>findClass方法源码</title>
     <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>defineClass源码</title>
+    <url>/2022/08/09/defineClass%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; defineClass(String name, Resource res) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> name.lastIndexOf(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> res.getCodeSourceURL();</span><br><span class="line">    <span class="keyword">if</span> (i != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">pkgname</span> <span class="operator">=</span> name.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="comment">// Check if package already loaded.</span></span><br><span class="line">        <span class="type">Manifest</span> <span class="variable">man</span> <span class="operator">=</span> res.getManifest();</span><br><span class="line">        definePackageInternal(pkgname, man, url);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now read the class bytes and define the class</span></span><br><span class="line">    java.nio.<span class="type">ByteBuffer</span> <span class="variable">bb</span> <span class="operator">=</span> res.getByteBuffer();</span><br><span class="line">    <span class="keyword">if</span> (bb != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Use (direct) ByteBuffer:</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bb, cs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] b = res.getBytes();</span><br><span class="line">        <span class="comment">// must read certificates AFTER reading bytes.</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length, cs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -2916,6 +2916,24 @@
       <tags>
         <tag>JVM</tag>
         <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模拟实现@ComponentScan</title>
+    <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0@ComponentScan/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0-ComponentScan%E6%B3%A8%E8%A7%A3">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模拟 @ComponentScan 注解的解析</span></span><br><span class="line"><span class="comment">//1、让自定义类实现 BeanDefinitionRegistryPostProcessor 接口</span></span><br><span class="line"><span class="comment">//		并重写 postProcessBeanFactory 方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ComponentScanPostProcessor</span> <span class="keyword">implements</span> <span class="title class_">BeanDefinitionRegistryPostProcessor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="comment">// context.refresh</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postProcessBeanFactory</span></span><br><span class="line">        <span class="params">(ConfigurableListableBeanFactory configurableListableBeanFactory)</span></span><br><span class="line">        <span class="keyword">throws</span> BeansException &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//2、使用 AnnotationUtils 工具类从Config类中找到 @ComponentScan 注解对象</span></span><br><span class="line">            <span class="type">ComponentScan</span> <span class="variable">componentScan</span> <span class="operator">=</span> AnnotationUtils</span><br><span class="line">                .findAnnotation(Config.class, ComponentScan.class);</span><br><span class="line">            <span class="keyword">if</span> (componentScan != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//3、不为空，获取包名（包名转换为classpath下的资源路径）</span></span><br><span class="line">                <span class="comment">//	com.itheima.a05.component </span></span><br><span class="line">                <span class="comment">//	-&gt; classpath*:com/itheima/a05/component/**/*.class</span></span><br><span class="line">                <span class="keyword">for</span> (String p : componentScan.basePackages()) &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;classpath*:&quot;</span> + p.replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;/&quot;</span>) + <span class="string">&quot;/**/*.class&quot;</span>;</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">//4、读取类的元信息</span></span><br><span class="line">                    <span class="type">CachingMetadataReaderFactory</span> <span class="variable">factory</span> <span class="operator">=</span> </span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">CachingMetadataReaderFactory</span>();</span><br><span class="line">                    Resource[] resources = </span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">PathMatchingResourcePatternResolver</span>().getResources(path);</span><br><span class="line">                    <span class="type">AnnotationBeanNameGenerator</span> <span class="variable">generator</span> <span class="operator">=</span></span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">AnnotationBeanNameGenerator</span>();</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">                        <span class="type">MetadataReader</span> <span class="variable">reader</span> <span class="operator">=</span> factory.getMetadataReader(resource);</span><br><span class="line">                        <span class="comment">//5、判断是否间接或者直接加了@Component注解</span></span><br><span class="line">                        <span class="keyword">if</span> (reader.getAnnotationMetadata()</span><br><span class="line">                            		  	.hasMetaAnnotation(Component.class.getName())</span><br><span class="line">                            		   	|| </span><br><span class="line">                           	 reader.getAnnotationMetadata()</span><br><span class="line">                            			.hasAnnotation(Component.class.getName())) &#123;</span><br><span class="line">                            </span><br><span class="line">                            <span class="comment">//6、创建一个BeanDefinition</span></span><br><span class="line">                            <span class="type">AbstractBeanDefinition</span> <span class="variable">bd</span> <span class="operator">=</span> BeanDefinitionBuilder</span><br><span class="line">                                .genericBeanDefinition(reader</span><br><span class="line">                                                       	.getClassMetadata()</span><br><span class="line">                                                       	.getClassName())</span><br><span class="line">                                						.getBeanDefinition();</span><br><span class="line">                            <span class="keyword">if</span> (configurableListableBeanFactory <span class="keyword">instanceof</span> </span><br><span class="line">                                DefaultListableBeanFactory beanFactory) &#123;</span><br><span class="line">                                <span class="comment">//7、将BeanDefinition加入到Bean工厂</span></span><br><span class="line">                                <span class="type">String</span> <span class="variable">beanName</span> <span class="operator">=</span> generator.generateBeanName(bd, beanFactory);</span><br><span class="line">                                beanFactory.registerBeanDefinition(beanName,bd);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>当其他类使用时，只需要调用 context的 registerBean方法，并传入自定义类的.class即可</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">GenericApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericApplicationContext</span>();</span><br><span class="line">context.registerBean(ComponentScanPostProcessor.class);</span><br><span class="line"><span class="comment">//初始化容器</span></span><br><span class="line">context.refresh();</span><br><span class="line"><span class="comment">//for (String name : context.getBeanDefinitionNames()) &#123;</span></span><br><span class="line"><span class="comment">//    System.out.println(name);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//销毁容器</span></span><br><span class="line">context.close();</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>spring高级</category>
+      </categories>
+      <tags>
+        <tag>底层源码</tag>
+        <tag>spring高级</tag>
       </tags>
   </entry>
   <entry>
@@ -3228,24 +3246,6 @@
       </tags>
   </entry>
   <entry>
-    <title>模拟实现@ComponentScan</title>
-    <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0@ComponentScan/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0-ComponentScan%E6%B3%A8%E8%A7%A3">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模拟 @ComponentScan 注解的解析</span></span><br><span class="line"><span class="comment">//1、让自定义类实现 BeanDefinitionRegistryPostProcessor 接口</span></span><br><span class="line"><span class="comment">//		并重写 postProcessBeanFactory 方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ComponentScanPostProcessor</span> <span class="keyword">implements</span> <span class="title class_">BeanDefinitionRegistryPostProcessor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="comment">// context.refresh</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postProcessBeanFactory</span></span><br><span class="line">        <span class="params">(ConfigurableListableBeanFactory configurableListableBeanFactory)</span></span><br><span class="line">        <span class="keyword">throws</span> BeansException &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//2、使用 AnnotationUtils 工具类从Config类中找到 @ComponentScan 注解对象</span></span><br><span class="line">            <span class="type">ComponentScan</span> <span class="variable">componentScan</span> <span class="operator">=</span> AnnotationUtils</span><br><span class="line">                .findAnnotation(Config.class, ComponentScan.class);</span><br><span class="line">            <span class="keyword">if</span> (componentScan != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//3、不为空，获取包名（包名转换为classpath下的资源路径）</span></span><br><span class="line">                <span class="comment">//	com.itheima.a05.component </span></span><br><span class="line">                <span class="comment">//	-&gt; classpath*:com/itheima/a05/component/**/*.class</span></span><br><span class="line">                <span class="keyword">for</span> (String p : componentScan.basePackages()) &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> <span class="string">&quot;classpath*:&quot;</span> + p.replace(<span class="string">&quot;.&quot;</span>, <span class="string">&quot;/&quot;</span>) + <span class="string">&quot;/**/*.class&quot;</span>;</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">//4、读取类的元信息</span></span><br><span class="line">                    <span class="type">CachingMetadataReaderFactory</span> <span class="variable">factory</span> <span class="operator">=</span> </span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">CachingMetadataReaderFactory</span>();</span><br><span class="line">                    Resource[] resources = </span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">PathMatchingResourcePatternResolver</span>().getResources(path);</span><br><span class="line">                    <span class="type">AnnotationBeanNameGenerator</span> <span class="variable">generator</span> <span class="operator">=</span></span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">AnnotationBeanNameGenerator</span>();</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">                        <span class="type">MetadataReader</span> <span class="variable">reader</span> <span class="operator">=</span> factory.getMetadataReader(resource);</span><br><span class="line">                        <span class="comment">//5、判断是否间接或者直接加了@Component注解</span></span><br><span class="line">                        <span class="keyword">if</span> (reader.getAnnotationMetadata()</span><br><span class="line">                            		  	.hasMetaAnnotation(Component.class.getName())</span><br><span class="line">                            		   	|| </span><br><span class="line">                           	 reader.getAnnotationMetadata()</span><br><span class="line">                            			.hasAnnotation(Component.class.getName())) &#123;</span><br><span class="line">                            </span><br><span class="line">                            <span class="comment">//6、创建一个BeanDefinition</span></span><br><span class="line">                            <span class="type">AbstractBeanDefinition</span> <span class="variable">bd</span> <span class="operator">=</span> BeanDefinitionBuilder</span><br><span class="line">                                .genericBeanDefinition(reader</span><br><span class="line">                                                       	.getClassMetadata()</span><br><span class="line">                                                       	.getClassName())</span><br><span class="line">                                						.getBeanDefinition();</span><br><span class="line">                            <span class="keyword">if</span> (configurableListableBeanFactory <span class="keyword">instanceof</span> </span><br><span class="line">                                DefaultListableBeanFactory beanFactory) &#123;</span><br><span class="line">                                <span class="comment">//7、将BeanDefinition加入到Bean工厂</span></span><br><span class="line">                                <span class="type">String</span> <span class="variable">beanName</span> <span class="operator">=</span> generator.generateBeanName(bd, beanFactory);</span><br><span class="line">                                beanFactory.registerBeanDefinition(beanName,bd);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>当其他类使用时，只需要调用 context的 registerBean方法，并传入自定义类的.class即可</strong></em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">GenericApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericApplicationContext</span>();</span><br><span class="line">context.registerBean(ComponentScanPostProcessor.class);</span><br><span class="line"><span class="comment">//初始化容器</span></span><br><span class="line">context.refresh();</span><br><span class="line"><span class="comment">//for (String name : context.getBeanDefinitionNames()) &#123;</span></span><br><span class="line"><span class="comment">//    System.out.println(name);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//销毁容器</span></span><br><span class="line">context.close();</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>spring高级</category>
-      </categories>
-      <tags>
-        <tag>底层源码</tag>
-        <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>模拟解析@Bean注解</title>
     <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90Bean%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90-Bean%E6%B3%A8%E8%A7%A3">点此返回</a></p>
@@ -3278,6 +3278,59 @@
       <tags>
         <tag>底层源码</tag>
         <tag>spring高级</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>集合专题</title>
+    <url>/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h1><p><strong>ArrayList无参构造的初始容量为0</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/1.png" style="zoom:70%;">
+
+<p><strong>ArrayList有参构造的初始容量根据所给的长度进行创建（如果是集合，就根据集合的大小进行创建）</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/2.png" style="zoom:70%;">
+
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/3.png" style="zoom:70%;">
+
+<br>
+
+<h2 id="调用add方法触发扩容"><a href="#调用add方法触发扩容" class="headerlink" title="调用add方法触发扩容"></a>调用add方法触发扩容</h2><p>当往ArrayList添加元素的时候。触发第一次扩容，创建一个长度为10的新数组，然后将元素添加进新数组里面，再用新的数组替换掉旧的空数组。</p>
+<p>当数组内元素为10时，进行第二次扩容，扩容为第一次容量的1.5倍，即15（以后每一次扩容都是上一次的1.5倍）</p>
+<p><strong style="color:red">注意：此处的1.5倍其实是上一次容量右移一位，再加上它本身，如第三次扩容：15右移一位是7，7+15为22</strong></p>
+<br>
+
+<h2 id="调用addAll方法触发扩容"><a href="#调用addAll方法触发扩容" class="headerlink" title="调用addAll方法触发扩容"></a>调用addAll方法触发扩容</h2><p>在下一次扩容的容量跟实际的元素个数之间选择一个较大值</p>
+<p>如：添加元素个数为16个，那么数组容量将会扩容到22</p>
+<p>0	10	15	22	33	49	73	109</p>
+<br>
+
+<h1 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h1><h2 id="Fail-Fast策略"><a href="#Fail-Fast策略" class="headerlink" title="Fail-Fast策略"></a>Fail-Fast策略</h2><p><strong style="color:red">在通过迭代器遍历的同时如果有人对集合进行修改，那么就抛出异常</strong></p>
+<p><strong>ArrayList的迭代器采用了Fail-Fast策略</strong></p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><strong style="color:red">源码分析</strong></h3><p><strong style="color:green">增强for循环在首次调用内部会生成一个迭代器，在执行过程中，expectedModCount作为迭代器的成员变量，记录了迭代器刚开始迭代时的修改次数。modCount作为list的成员变量，记录list修改次数，该数会记录在expectedModCount里</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/4.png" style="zoom:70%;">
+
+<p><strong style="color:green">接下来调用hasNext方法和next方法，调用next方法之前会进行一次校验（checkForComodification方法）</strong></p>
+<p><strong style="color:green">当在迭代的过程中，对集合进行了修改，此时expectedModCount的值就会变换，导致二者不等，那么就会直接抛出异常</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/5.png" style="zoom:70%;">
+
+<br>
+
+<h2 id="Fail-Save策略"><a href="#Fail-Save策略" class="headerlink" title="Fail-Save策略"></a>Fail-Save策略</h2><p><strong style="color:red">在通过迭代器遍历的同时如果有人对集合进行修改，可以采取应对策略而不是抛出异常，如牺牲一致性来让整个遍历正常完成</strong></p>
+<p><strong>CopyOnWriteArrayList采用了Fail-Save策略</strong></p>
+<h3 id="源码分析-1"><a href="#源码分析-1" class="headerlink" title="源码分析"></a><strong style="color:red">源码分析</strong></h3><p><strong style="color:green">在迭代器内部会首先创建一个数组，将要遍历的数组复制过去，然后遍历该数组</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/6.png" style="zoom:70%;">
+
+<p><strong style="color:green">当我们在迭代的过程中调用add方法添加新元素的时候，实际上在add方法的内部是先将原来的数组复制一份，然后让长度加一，而新添加的元素加到了新的数组的最后一位，所以遍历的时候使用的是旧数组，而添加元素的时候使用的是新数组，二者互不干扰</strong></p>
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/7.png" style="zoom:70%;">
+
+<br>
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>面试</tag>
       </tags>
   </entry>
 </search>
