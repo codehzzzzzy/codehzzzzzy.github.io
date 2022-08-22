@@ -137,6 +137,41 @@
       </tags>
   </entry>
   <entry>
+    <title>03-数据区概述与线程</title>
+    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
+<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
+<p><strong>运行时数据区的完整图</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
+<p><strong>Java的内存区域</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
+<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
+<p><strong>即：</strong></p>
+<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
+<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
+<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
+<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
+<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
+<p><strong>JVM线程（*）</strong></p>
+<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
+<ul>
+<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
+<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
+<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
+<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>02-类加载器和类加载过程</title>
     <url>/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a><strong>类加载过程</strong></h1><p><img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/1.png" alt="截图"></p>
@@ -240,41 +275,6 @@
 <p><strong>3）常量在编译阶段会存入调用方法所在的类的常量池中（这个例子存在F类的常量池中）</strong></p>
 <p><strong>本质上没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化</strong></p>
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>03-数据区概述与线程</title>
-    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
-<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
-<p><strong>运行时数据区的完整图</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
-<p><strong>Java的内存区域</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
-<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
-<p><strong>即：</strong></p>
-<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
-<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
-<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
-<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
-<p><strong>JVM线程（*）</strong></p>
-<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
-<ul>
-<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
-<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1215,239 +1215,6 @@
       </tags>
   </entry>
   <entry>
-    <title>14-垃圾回收器</title>
-    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
-<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
-<p>按碎片处理方式：分为</p>
-<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
-<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
-<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
-<br>
-
-<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
-<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
-<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
-<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
-<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
-<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
-<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
-<p>快速：一个对象从诞生到被回收所经历的时间</p>
-<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
-<br>
-
-<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
-<br>
-
-<p><em><strong>GC发展阶段：</strong></em><br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
-<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
-<br>
-
-<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
-<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
-<p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
-<br>
-
-<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
-<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
-<p><strong>在Server模式下的用途：</strong></p>
-<p>1、与新生代的Parallel Scavenge配合使用</p>
-<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">2、作为老年代CMS收集器的后备垃圾收集方法</a></p>
-<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
-<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
-<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
-<br>
-
-<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>。<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
-<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
-<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器， 不影响老年代</strong></p>
-<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量，默认开启和CPU数据相同的线程数</strong></p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
-<br>
-
-<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><em><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></em></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
-<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
-<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
-<br>
-
-<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
-<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
-<br>
-
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
-<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
-<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
-<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
-<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
-<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
-<blockquote>
-<p><strong>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
-</blockquote>
-<br>
-
-<h1 id="CMS：低延迟"><a href="#CMS：低延迟" class="headerlink" title="CMS：低延迟"></a>CMS：低延迟</h1><p><em><strong style="color:red">HotSpot虚拟机中第一款真正意义上的并发收集器。第一次实现了让垃圾收集线程与用户线程同时工作</strong>，</em> <strong>也采用标记-清除算法和STW机制。</strong>在G1出现之前，CMS使用还是非常广泛的</p>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png"></p>
-<br>
-
-<h2 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a><em>初始标记</em></h2><p><em><strong style="color:red">标记出和GCRoots能直接关联到的对象，有STW现象（暂时时间非常短）</strong></em></p>
-<br>
-
-<h2 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a><em>并发标记阶段</em></h2><p><em><strong style="color:red">从GC Roots的直接关联对象开始遍历整个对象图的过程</strong><em>，这个过程耗时较长但是<strong>不用STW</strong>。**可以与垃圾收集线程一起并发运行</em></em></p>
-<br>
-
-<h2 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a><em>重新标记阶段</em></h2><p><strong>有些对象可能开始是垃圾，在并发标记阶段，由于用户线程的影响，导致不是垃圾了，这里需要重新标记的是这部分对象，<em>这个阶段的STW通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短</em></strong></p>
-<p><em><strong style="color:red">注意：重新标记是对已标记过的垃圾进行检测，此时会产生浮动垃圾</strong></em></p>
-<br>
-
-<h2 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h2><p><em><strong style="color:red">清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。</strong></em> <strong>由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的</strong></p>
-<br>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<p><strong>在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。</strong>因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是<strong>当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。</strong></p>
-<p>要是<strong>CMS运行期间预留的内存无法满足程序需要</strong>，就会出现一次“Concurrent Mode Failure”失败，这时<strong>虚拟机将启动后备预案：临时启用Serial 0ld收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。</strong></p>
-</blockquote>
-<p><em><strong style="color:red">CMS收集器的垃圾收集算法采用的是标记一清除算法，这意味着不可避免地将会产生一些内存碎片。 那么CMS在为新对象分配内存空间时，将无法使用指针碰撞，而只能够选择空闲列表执行内存分配。</strong></em></p>
-<br>
-
-<blockquote>
-<p><em><strong>最小化使用内存和并行开销：Serial GC（young）+ Serial Old GC（old）</strong></em></p>
-<p><em><strong>最大化应用程序吞吐量：Parallel GC（young）+ Parallel Old GC（old）</strong></em></p>
-<p><em><strong>最小化GC中断或停顿时间：Parallel New GC（young）+ CMS GC（old）</strong></em></p>
-</blockquote>
-<br>
-
-<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h3><p><strong>1）低延迟（最耗费时间的并发标记和并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</strong>）</p>
-<p><em>2）并发收集</em></p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1）产生内存碎片</strong></p>
-<p><strong>2）CMS收集器对CPU资源很敏感（<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png">并发阶段，占用一部分线程，吞吐量降低</a>）</strong></p>
-<p><strong>3）CMS收集器无法处理浮动垃圾</strong></p>
-<blockquote>
-<p>在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间</p>
-</blockquote>
-<br>
-
-<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p><code> -XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务（老年代）<br><em>（开启该参数后会自动将<code>-XX:+UseParNewGc</code>打开。即: ParNew (Young区用) +CMS (0ld区用) +Serial 0ld的组合）</em></p>
-<p><code>-XX:CMSlnitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收</p>
-<p><strong>JDK5以前默认为68，即当老年代的空间使用率达到68%时，会执行一次CMS 回收。JDK6及以上默认为92%</strong></p>
-<p><strong>通过该选项便可以有效降低Full GC的执行次数</strong></p>
-<p><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生</p>
-<p><code>-XX:CMSFullGCsBeforeCompaction</code>：设置在执行多少次Full GC后对内存空间进行压缩整理</p>
-<p><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数量</p>
-<br>
-
-<h1 id="G1：区域化分代式"><a href="#G1：区域化分代式" class="headerlink" title="G1：区域化分代式"></a><em><strong style="color:red">G1：区域化分代式</strong></em></h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><p><em><strong style="color:red">并行性：</strong>G1在回收期间，可以有多个GC线程同时工作（此时用户线程STW）</em></p>
-<p><em><strong style="color:red">并发性：</strong>G1拥有与应用程序交替执行的能力， 部分工作可以和应用程序同时执行，因此，不会在整个回收阶段发生完全阻塞应用程序的情况</em></p>
-<br>
-
-<h2 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h2><p><em><strong style="color:red">G1仍然属于分代型垃圾回收器。它区分年轻代和老年代，年轻代依然有Eden区和Survivor区。但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是连续的，也不再有固定大小和固定数量</strong></em></p>
-<p><strong>将堆空间分为若干个区域（region），这些区域中包含了逻辑上的年轻代和老年代。</strong></p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/8.png" style="zoom:60%;">
-
-<br>
-
-<h2 id="空间整合"><a href="#空间整合" class="headerlink" title="空间整合"></a>空间整合</h2><p><em><strong>G1将内存划分为一个个region，内存的回收以region为单位，region之间是复制算法。整体上可看作标记-压缩算法，两种算法都可以避免内存碎片。而且当分配大对象时不会因为无法找到连续内存空间而提前触发下一次GC。</strong></em></p>
-<br>
-
-<h2 id="可预测的停顿时间模型"><a href="#可预测的停顿时间模型" class="headerlink" title="可预测的停顿时间模型"></a><strong style="color:red">可预测的停顿时间模型</strong></h2><p><em><strong>软实时（soft real-time）</strong></em></p>
-<p>G1能建立可预测的停顿时间模型，让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒，可以通过参数<code>-XX:MaxGCPauseMillis</code>进行设置</p>
-<p><strong>由于分区的原因，G1可以只选取部分区域进行内存回收，缩小了回收的范围，对于全局停顿情况的发生也能得到较好的控制。</strong></p>
-<p><strong>G1 跟踪各个Region 里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。保证了G1收集器在有限的时间内可以获取尽可能高的收集效率。</strong></p>
-<p><strong style="color:red">注意：在小内存应用上CMS的表现大概率会优于G1，而G1在大内存应用上则发挥其优势。平衡点在6-8GB之间</strong></p>
-<br>
-
-<h2 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h2><p><code>-XX:+UseG1GC</code>：手动指定使用G1收集器执行内存回收任务</p>
-<p><code>-XX:G1HeapRegionSize</code>：设置每个Region的大小。值是2的幂，范围是1MB到32MB之间，目标是根据最小的Java堆大小划分出约2048个区域。默认是堆内存的1&#x2F;2000</p>
-<p><code>-XX:MaxGCPauseMillis</code>：<strong>设置期望达到的最大GC停顿时间指标（JVM会尽力实现,但不保证达到）</strong>默认200ms**(如果这个值设置很小，如20ms，那么它收集的region会少，这样长时间后，堆内存会满。产生FullGC从而出现STW)**</p>
-<p><code>-XX:ParallelGCThread</code>：设置STW时GC线程数的值。最多设置为8（垃圾回收线程）</p>
-<p><code>-XX:ConcGCThreads</code>：设置并发标记的线程数。将n设置为并行垃圾回收线程数的1&#x2F;4左右</p>
-<p><code>-XX:InitiatingHeapOccupancyPercent</code>：设置触发并发GC周期的Java堆占用率阈值。超过此值,就触发GC（默认45）</p>
-<blockquote>
-<ol>
-<li>开启G1垃圾收集器</li>
-<li>设置堆的最大内存</li>
-<li>设置最大的停顿时间</li>
-</ol>
-</blockquote>
-<br>
-
-<h2 id="region"><a href="#region" class="headerlink" title="region"></a><strong style="color:red">region</strong></h2><p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/9.png"></p>
-<p>1、<strong>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小为2的N次幂。可以通过<code>-XX:G1HeapRegionSize</code>设定。<strong style="color:red">所有的Region大小相同，且在JVM生命周期内不会被改变</strong></strong></p>
-<p><em>2、一个region 有可能属于任何一块内存区域。但是一个region只可能属于一个角色。</em></p>
-<p><strong style="color:red">3、Humongous内存区域（图中的H块）主要用于存储大对象，如果超过1. 5个region，就放到Humongous区</strong></p>
-<blockquote>
-<p>对于堆中的大对象，默认直接会被分配到老年代，但是如果它是一个短期存在的大对象，就会对垃圾收集器造成负面影响。为了解决这个问题，G1划分了一个<strong style="color:red">Humongous区,它用来专门存放大对象。如果一个H区装不下一个大对象，那么G1会寻找连续的H区来存储。为了能找到连续的H区，可以启动Full GC。</strong>G1的大多数行为都把H区作为老年代的一部分来看待</p>
-</blockquote>
-<br>
-
-<h2 id="记忆集"><a href="#记忆集" class="headerlink" title="记忆集"></a>记忆集</h2><blockquote>
-<p>一个region中的对象可能被其他任意region中对象引用，因此在判断对象是否存活的时候，需要扫描整个堆才能保证准确（出现STW）。所以使用每一个region对应一个记忆集（Remembered Set）来避免全局扫描</p>
-</blockquote>
-<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/11.png"></p>
-<p><em><strong>每次Reference类型数据写操作时，都会产生一个写屏障（Write Barrier）暂时中止操作，然后检查将要写入的引用指向的对象是否和该Reference类型数据在不同的Region （其他收集器：检查老年代对象是否引用了新生代对象）</strong></em><br><em><strong>如果不同，通过CardTable把相关引用信息记录到引用指向对象的所在Region对应的Remembered Set中<br>当进行垃圾收集时，在GC根节点的枚举范围加入Remembered Set</strong></em></p>
-<br>
-
-<h2 id="G1回收过程"><a href="#G1回收过程" class="headerlink" title="G1回收过程"></a><strong style="color:red">G1回收过程</strong></h2><p><em><strong>1、YoungGC</strong></em></p>
-<p><em><strong>2、老年代并发标记过程</strong></em></p>
-<p><em><strong>3、混合回收</strong></em></p>
-<p><em><strong>（作为一种失败保护机制，Full GC还是存在的）</strong></em></p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/10.png" style="zoom:67%;">
-
-<br>
-
-<h3 id="年轻代GC"><a href="#年轻代GC" class="headerlink" title="年轻代GC"></a>年轻代GC</h3><blockquote>
-<p>当Eden空间耗尽时,G1会启动一次年轻代垃圾回收过程<br>年轻代垃圾回收只会回收Eden区和Survivor区</p>
-</blockquote>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/12.png" style="zoom:67%;">
-
-<p><strong style="color:red">1、扫描根</strong>（根引用连同RSet记录的外部引用作为扫描存活对象的入口）</p>
-<p><strong style="color:red">2、更新RSet</strong>（ 此阶段完成后,RSet可以准确的反映老年代对所在的内存分段中对象的引用）</p>
-<p><strong style="color:red">3、处理RSet</strong>（t:识别被老年代对象指向的Eden中的对象，这些被指向的Eden中的对象被认为是存活的对象）</p>
-<p><strong style="color:red">4、复制对象</strong>（对象树被遍历，Eden区内存中存活的对象复制到Survivor区中空的内存分段，Survivor区内存段中存活的对象如果年龄未达阈值，年龄+1，达到阈值则被复制到Old区中空的内存分段。如果Survivor空间不够，Eden的部分数据会直接晋升到Old区）</p>
-<p><strong style="color:red">5、处理引用</strong></p>
-<br>
-
-<h3 id="并发标记过程"><a href="#并发标记过程" class="headerlink" title="并发标记过程"></a>并发标记过程</h3><p><strong style="color:red">1、初始标记阶段</strong>：标记从根节点直接可达的对象（STW+一次YoungGC）</p>
-<p><strong style="color:red">2、根区域扫描</strong>：扫描Survivor区直接可达的老年代区域对象，并标记被引用的对象。这一过程必须在young GC之前完成（YoungGC时，会动Survivor区，所以这一过程必须在YoungGC之前完成）</p>
-<p><strong style="color:red">3、并发标记</strong>：在整个堆中进行并发标记（和应用程序并发执行），此过程可能被YoungGC中断。在并发标记阶段,若发现区域对象中的所有对象都是垃圾，那这个区域会被立即回收。同时，并发标记过程中，会计算每个区域的对象活性（区域中存活对象的比例）</p>
-<p><strong style="color:red">4、再次标记</strong>：由于应用程序持续进行，需要修正上一次的标记结果（STW）</p>
-<p><strong style="color:red">5、独占清理</strong>：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域（STW，不会实际上去做垃圾的收集）</p>
-<p><strong style="color:red">6、并发清理阶段</strong>：识别并清理完全空闲的区域</p>
-<br>
-
-<h3 id="混合回收"><a href="#混合回收" class="headerlink" title="混合回收"></a>混合回收</h3><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/13.png" style="zoom:70%;">
-
-<blockquote>
-<p>当越来越多对象晋升到老年代时，为避免堆内存耗尽，虚拟机会触发一个混合的垃圾收集器</p>
-</blockquote>
-<p><strong style="color:red">混合回收除了回收整个Young region外，还会回收一部分的Old Region（可以选择哪些Old region被回收，从而对整个垃圾回收的耗时进行控制）</strong></p>
-<br>
-
-<h3 id="G1优化建议"><a href="#G1优化建议" class="headerlink" title="G1优化建议"></a>G1优化建议</h3><p>1、年轻代发送GC频率高，避免使用<code>-Xmn</code>或<code>-XX:NewRatio</code></p>
-<p>2、暂停时间目标不要太过严苛（影响吞吐量）</p>
-<br>
-
-<h1 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h1><p>-XX:+PrintGC：输出GC日志</p>
-<p>-XX:+PrintGCDetails：输出GC详细日志</p>
-<p>-XX:+PrintGCTimeStamps：输出GC时间戳（以基准时间形式）</p>
-<p>-XX:+PrintGCDateStamps：输出GC时间戳（以日期的形式）</p>
-<p>-XX:+PrintHeapAtGC：在GC前后打印堆信息</p>
-<p>-Xloggc:..&#x2F;logs&#x2F;gc.log：日志文件的输出路径</p>
-<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/14.png" style="zoom:100%;">
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>13-垃圾回收</title>
     <url>/2022/08/04/13-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</url>
     <content><![CDATA[<h1 id="相关概述"><a href="#相关概述" class="headerlink" title="相关概述"></a>相关概述</h1><p><strong style="color:red;"><em>垃圾：</em></strong><strong>运行程序中没有任何指针指向的对象。这个对象就是需要被回收的垃圾</strong></p>
@@ -1673,6 +1440,239 @@
 
 <h3 id="终结器引用（-）"><a href="#终结器引用（-）" class="headerlink" title="终结器引用（*）"></a><strong style="color:green">终结器引用（*）</strong></h3><p>用以实现对象的finalize方法，无需手动编码，内部配合引用队列使用。在GC时，终结器引用入队。由Finalize线程通过终结器引用找到被引用对象并调用它的finalize方法，第二次GC时才能回收被引用对象</p>
 <br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>14-垃圾回收器</title>
+    <url>/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="GC分类"><a href="#GC分类" class="headerlink" title="GC分类"></a>GC分类</h1><p>按线程数：分为串行垃圾回收器和并行垃圾回收器</p>
+<p>按工作模式：分为并发式垃圾回收器和独占式垃圾回收器</p>
+<p>按碎片处理方式：分为</p>
+<p><em><strong>1、压缩式垃圾回收器：在回收完成后，对存活对象进行压缩整理，清除回收后的碎片（再分配对象空间的使用：指针碰撞）</strong></em></p>
+<p><em><strong>2、非压缩式垃圾回收器（再分配对象空间的使用：空闲列表）</strong></em></p>
+<p>按工作的内存区间：分为年轻代垃圾回收器和老年代垃圾回收器</p>
+<br>
+
+<h1 id="GC性能指标"><a href="#GC性能指标" class="headerlink" title="GC性能指标"></a>GC性能指标</h1><p><em><strong style="color:red">吞吐量：运行用户代码·的时间占总运行时间的比例</strong>（总运行时间 &#x3D; 程序运行时间 + 内存回收时间）</em></p>
+<p><em><strong style="color:red">吞吐量优先，意味着在单位时间内，STW的时间最短</strong></em></p>
+<p>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例</p>
+<p><em><strong style="color:red">暂停时间：执行垃圾收集时，程序的工作线程被暂停的时间（STW）</strong></em></p>
+<p><em><strong style="color:red">暂停时间优先，意味着尽可能让单次STW的时间最短</strong></em></p>
+<p>收集频率：相对于应用程序的执行，收集操作发生的频率</p>
+<p><em><strong style="color:red">内存占用：Java堆区所占的内存大小</strong></em></p>
+<p>快速：一个对象从诞生到被回收所经历的时间</p>
+<p><em><strong style="color:red">注意：现在的标准为在最大吞吐量优先的情况下，降低停顿时间</strong></em></p>
+<br>
+
+<h1 id="回收器概述"><a href="#回收器概述" class="headerlink" title="回收器概述"></a>回收器概述</h1><p>新生代收集器：Serial GC、ParNew GC、Parallel Scavenge GC<br>老年代收集器：Serial 0ld GC、 Parallel 0ld GC、 CMS GC<br>整堆收集器：G1 GC</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/1.png"></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png"></p>
+<br>
+
+<p><em><strong>GC发展阶段：</strong></em><br><em><strong>Seria1&#x3D;&gt;Para11e1(并行)&#x3D;&gt;CMS(并发)&#x3D;&gt;G1&#x3D;&gt;ZGC</strong></em></p>
+<p>查看命令行相关参数（包含使用的垃圾收集器）：<code>-xx:+PrintCommandLineFlags</code></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/3.png"></p>
+<br>
+
+<h1 id="Serial，SerialOld-回收器"><a href="#Serial，SerialOld-回收器" class="headerlink" title="Serial，SerialOld 回收器"></a>Serial，SerialOld 回收器</h1><h2 id="Serial：串行"><a href="#Serial：串行" class="headerlink" title="Serial：串行"></a>Serial：串行</h2><p>HotSpot虚拟机Client模式下的默认<strong>新生代</strong>垃圾收集器（最基本，最悠久）</p>
+<p><em><strong style="color:red">采用复制算法，串行回收和STW机制方法执行内存回收</strong></em></p>
+<p>优势：简单，高效（没与其他收集器的单线程相比，没有线程交互的开销）</p>
+<br>
+
+<h2 id="Serial-Old：串行"><a href="#Serial-Old：串行" class="headerlink" title="Serial Old：串行"></a>Serial Old：串行</h2><p>Serial 0ld是运行在Client模式下默认的老年代垃圾回收器</p>
+<p><em><strong style="color:red">Serial 0ld收集器同样采用了串行回收和STW机制，只不过内存回收算法使用的是标记一压缩算法</strong></em></p>
+<p><strong>在Server模式下的用途：</strong></p>
+<p>1、与新生代的Parallel Scavenge配合使用</p>
+<p><a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">2、作为老年代CMS收集器的后备垃圾收集方法</a></p>
+<p><em><strong style="color:red">单线程回收：使用一个cpu或一条线程去完成垃圾收集工作而且必须暂停其他所有的工作线程</strong></em></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/4.png"></p>
+<p><em><strong style="color:red">设置Serial垃圾回收器</strong></em></p>
+<p>使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器，<strong>等价于新生代用Serial GC，且老年代用Serial 0ld GC</strong></p>
+<br>
+
+<h1 id="Parallel-New：并行"><a href="#Parallel-New：并行" class="headerlink" title="Parallel New：并行"></a>Parallel New：并行</h1><p>ParNew收集器是Serial收集器的多线程版本，除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。<strong style="color:red">ParNew收集器在年轻代中同样也是采用复制算法、STW机制</strong>。<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/2.png">目前只有ParNew GC能与CMS收集器配合工作</a></p>
+<p><em><strong style="color:red">设置ParNew垃圾回收器</strong></em></p>
+<p><code>-XX:+UseParNewGC</code>：指定使用ParNew收集器执行内存回收任务。它表示<strong>年轻代使用并行收集器， 不影响老年代</strong></p>
+<p><code>-XX:ParallelGCThreads</code>：<strong>限制线程数量，默认开启和CPU数据相同的线程数</strong></p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/5.png"></p>
+<br>
+
+<h1 id="Parallel-Scavenge-x2F-ParallelOld：吞吐量优先"><a href="#Parallel-Scavenge-x2F-ParallelOld：吞吐量优先" class="headerlink" title="Parallel Scavenge&#x2F;ParallelOld：吞吐量优先"></a><em><strong style="color:red">Parallel Scavenge&#x2F;ParallelOld：吞吐量优先</strong></em></h1><h2 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h2><p>HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，还用到Parallel Scavenge。该收集器同样也 <em><strong>采用了复制算法、并行回收和STW机制。在Java8中，默认是此垃圾收集器</strong></em></p>
+<p><em><strong style="color:red">Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，自适应调节策略是Parallel Scavenge与ParNew一个重要区别</strong></em></p>
+<p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，<strong>主要适合在后台运算而不需要太多交互的任务。常见在服务器环境中使用。</strong>例如执行批量处理、订单处理、工资支付、科学计算</p>
+<br>
+
+<h2 id="Parallel-0ld"><a href="#Parallel-0ld" class="headerlink" title="Parallel 0ld"></a>Parallel 0ld</h2><p><em><strong style="color:red">Parallel 0ld收集器采用了标记一压缩算法，但同样也是基于并行回收和STW机制</strong></em></p>
+<p>Parallel收集器在JDK1.6时提供了用于执行老年代垃圾收集的 Parallel 0ld收集器，用来代替老年代的Serial 0ld收集器</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/6.png"></p>
+<br>
+
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>-XX:+UseParallelGC</code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务</p>
+<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器</p>
+<p><em><strong>默认jdk8是开启的。上面两个参数，默认开启一个，另一个也会被开启。</strong></em></p>
+<p><code>-XX:ParallelGCThreads</code>：<em><strong>设置年轻代并行收集器的线程数，一般最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能</strong></em></p>
+<p><code>-XX:MaxGCPauseMillis</code>：设置垃圾收集器最大停顿时间(即STW的时间)</p>
+<p><code>-XX:+UseAdaptiveSizePolicy</code>：设置Parallel Scavenge收集器具有自适应调节策略</p>
+<blockquote>
+<p><strong>在这种模式下，年轻代的大小、Eden和Survivor的比例、晋升老年代的对象年龄等参数会被自动调整，已达到在堆大小、吞吐量和停顿时间之间的平衡点</strong><br>在手动调优比较困难的场合，可以直接使用这种自适应的方式，仅指定虚拟机的最大堆、目标的吞吐量和停顿时间，让虚拟机自己完成调优工作)</p>
+</blockquote>
+<br>
+
+<h1 id="CMS：低延迟"><a href="#CMS：低延迟" class="headerlink" title="CMS：低延迟"></a>CMS：低延迟</h1><p><em><strong style="color:red">HotSpot虚拟机中第一款真正意义上的并发收集器。第一次实现了让垃圾收集线程与用户线程同时工作</strong>，</em> <strong>也采用标记-清除算法和STW机制。</strong>在G1出现之前，CMS使用还是非常广泛的</p>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png"></p>
+<br>
+
+<h2 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a><em>初始标记</em></h2><p><em><strong style="color:red">标记出和GCRoots能直接关联到的对象，有STW现象（暂时时间非常短）</strong></em></p>
+<br>
+
+<h2 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a><em>并发标记阶段</em></h2><p><em><strong style="color:red">从GC Roots的直接关联对象开始遍历整个对象图的过程</strong><em>，这个过程耗时较长但是<strong>不用STW</strong>。**可以与垃圾收集线程一起并发运行</em></em></p>
+<br>
+
+<h2 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a><em>重新标记阶段</em></h2><p><strong>有些对象可能开始是垃圾，在并发标记阶段，由于用户线程的影响，导致不是垃圾了，这里需要重新标记的是这部分对象，<em>这个阶段的STW通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短</em></strong></p>
+<p><em><strong style="color:red">注意：重新标记是对已标记过的垃圾进行检测，此时会产生浮动垃圾</strong></em></p>
+<br>
+
+<h2 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h2><p><em><strong style="color:red">清理删除掉标记阶段判断的已经死亡的对象，释放内存空间。</strong></em> <strong>由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的</strong></p>
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p><strong>在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。</strong>因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是<strong>当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。</strong></p>
+<p>要是<strong>CMS运行期间预留的内存无法满足程序需要</strong>，就会出现一次“Concurrent Mode Failure”失败，这时<strong>虚拟机将启动后备预案：临时启用Serial 0ld收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。</strong></p>
+</blockquote>
+<p><em><strong style="color:red">CMS收集器的垃圾收集算法采用的是标记一清除算法，这意味着不可避免地将会产生一些内存碎片。 那么CMS在为新对象分配内存空间时，将无法使用指针碰撞，而只能够选择空闲列表执行内存分配。</strong></em></p>
+<br>
+
+<blockquote>
+<p><em><strong>最小化使用内存和并行开销：Serial GC（young）+ Serial Old GC（old）</strong></em></p>
+<p><em><strong>最大化应用程序吞吐量：Parallel GC（young）+ Parallel Old GC（old）</strong></em></p>
+<p><em><strong>最小化GC中断或停顿时间：Parallel New GC（young）+ CMS GC（old）</strong></em></p>
+</blockquote>
+<br>
+
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h3><p><strong>1）低延迟（最耗费时间的并发标记和并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的</strong>）</p>
+<p><em>2）并发收集</em></p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1）产生内存碎片</strong></p>
+<p><strong>2）CMS收集器对CPU资源很敏感（<a href="https://www.hzzzzzy.icu/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/7.png">并发阶段，占用一部分线程，吞吐量降低</a>）</strong></p>
+<p><strong>3）CMS收集器无法处理浮动垃圾</strong></p>
+<blockquote>
+<p>在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间</p>
+</blockquote>
+<br>
+
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><p><code> -XX:+UseConcMarkSweepGC</code>：手动指定使用CMS收集器执行内存回收任务（老年代）<br><em>（开启该参数后会自动将<code>-XX:+UseParNewGc</code>打开。即: ParNew (Young区用) +CMS (0ld区用) +Serial 0ld的组合）</em></p>
+<p><code>-XX:CMSlnitiatingOccupanyFraction</code>：设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收</p>
+<p><strong>JDK5以前默认为68，即当老年代的空间使用率达到68%时，会执行一次CMS 回收。JDK6及以上默认为92%</strong></p>
+<p><strong>通过该选项便可以有效降低Full GC的执行次数</strong></p>
+<p><code>-XX:+UseCMSCompactAtFullCollection</code>：用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生</p>
+<p><code>-XX:CMSFullGCsBeforeCompaction</code>：设置在执行多少次Full GC后对内存空间进行压缩整理</p>
+<p><code>-XX:ParallelCMSThreads</code>：设置CMS的线程数量</p>
+<br>
+
+<h1 id="G1：区域化分代式"><a href="#G1：区域化分代式" class="headerlink" title="G1：区域化分代式"></a><em><strong style="color:red">G1：区域化分代式</strong></em></h1><h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><p><em><strong style="color:red">并行性：</strong>G1在回收期间，可以有多个GC线程同时工作（此时用户线程STW）</em></p>
+<p><em><strong style="color:red">并发性：</strong>G1拥有与应用程序交替执行的能力， 部分工作可以和应用程序同时执行，因此，不会在整个回收阶段发生完全阻塞应用程序的情况</em></p>
+<br>
+
+<h2 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h2><p><em><strong style="color:red">G1仍然属于分代型垃圾回收器。它区分年轻代和老年代，年轻代依然有Eden区和Survivor区。但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是连续的，也不再有固定大小和固定数量</strong></em></p>
+<p><strong>将堆空间分为若干个区域（region），这些区域中包含了逻辑上的年轻代和老年代。</strong></p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/8.png" style="zoom:60%;">
+
+<br>
+
+<h2 id="空间整合"><a href="#空间整合" class="headerlink" title="空间整合"></a>空间整合</h2><p><em><strong>G1将内存划分为一个个region，内存的回收以region为单位，region之间是复制算法。整体上可看作标记-压缩算法，两种算法都可以避免内存碎片。而且当分配大对象时不会因为无法找到连续内存空间而提前触发下一次GC。</strong></em></p>
+<br>
+
+<h2 id="可预测的停顿时间模型"><a href="#可预测的停顿时间模型" class="headerlink" title="可预测的停顿时间模型"></a><strong style="color:red">可预测的停顿时间模型</strong></h2><p><em><strong>软实时（soft real-time）</strong></em></p>
+<p>G1能建立可预测的停顿时间模型，让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒，可以通过参数<code>-XX:MaxGCPauseMillis</code>进行设置</p>
+<p><strong>由于分区的原因，G1可以只选取部分区域进行内存回收，缩小了回收的范围，对于全局停顿情况的发生也能得到较好的控制。</strong></p>
+<p><strong>G1 跟踪各个Region 里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。保证了G1收集器在有限的时间内可以获取尽可能高的收集效率。</strong></p>
+<p><strong style="color:red">注意：在小内存应用上CMS的表现大概率会优于G1，而G1在大内存应用上则发挥其优势。平衡点在6-8GB之间</strong></p>
+<br>
+
+<h2 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h2><p><code>-XX:+UseG1GC</code>：手动指定使用G1收集器执行内存回收任务</p>
+<p><code>-XX:G1HeapRegionSize</code>：设置每个Region的大小。值是2的幂，范围是1MB到32MB之间，目标是根据最小的Java堆大小划分出约2048个区域。默认是堆内存的1&#x2F;2000</p>
+<p><code>-XX:MaxGCPauseMillis</code>：<strong>设置期望达到的最大GC停顿时间指标（JVM会尽力实现,但不保证达到）</strong>默认200ms**(如果这个值设置很小，如20ms，那么它收集的region会少，这样长时间后，堆内存会满。产生FullGC从而出现STW)**</p>
+<p><code>-XX:ParallelGCThread</code>：设置STW时GC线程数的值。最多设置为8（垃圾回收线程）</p>
+<p><code>-XX:ConcGCThreads</code>：设置并发标记的线程数。将n设置为并行垃圾回收线程数的1&#x2F;4左右</p>
+<p><code>-XX:InitiatingHeapOccupancyPercent</code>：设置触发并发GC周期的Java堆占用率阈值。超过此值,就触发GC（默认45）</p>
+<blockquote>
+<ol>
+<li>开启G1垃圾收集器</li>
+<li>设置堆的最大内存</li>
+<li>设置最大的停顿时间</li>
+</ol>
+</blockquote>
+<br>
+
+<h2 id="region"><a href="#region" class="headerlink" title="region"></a><strong style="color:red">region</strong></h2><p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/9.png"></p>
+<p>1、<strong>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小为2的N次幂。可以通过<code>-XX:G1HeapRegionSize</code>设定。<strong style="color:red">所有的Region大小相同，且在JVM生命周期内不会被改变</strong></strong></p>
+<p><em>2、一个region 有可能属于任何一块内存区域。但是一个region只可能属于一个角色。</em></p>
+<p><strong style="color:red">3、Humongous内存区域（图中的H块）主要用于存储大对象，如果超过1. 5个region，就放到Humongous区</strong></p>
+<blockquote>
+<p>对于堆中的大对象，默认直接会被分配到老年代，但是如果它是一个短期存在的大对象，就会对垃圾收集器造成负面影响。为了解决这个问题，G1划分了一个<strong style="color:red">Humongous区,它用来专门存放大对象。如果一个H区装不下一个大对象，那么G1会寻找连续的H区来存储。为了能找到连续的H区，可以启动Full GC。</strong>G1的大多数行为都把H区作为老年代的一部分来看待</p>
+</blockquote>
+<br>
+
+<h2 id="记忆集"><a href="#记忆集" class="headerlink" title="记忆集"></a>记忆集</h2><blockquote>
+<p>一个region中的对象可能被其他任意region中对象引用，因此在判断对象是否存活的时候，需要扫描整个堆才能保证准确（出现STW）。所以使用每一个region对应一个记忆集（Remembered Set）来避免全局扫描</p>
+</blockquote>
+<p><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/11.png"></p>
+<p><em><strong>每次Reference类型数据写操作时，都会产生一个写屏障（Write Barrier）暂时中止操作，然后检查将要写入的引用指向的对象是否和该Reference类型数据在不同的Region （其他收集器：检查老年代对象是否引用了新生代对象）</strong></em><br><em><strong>如果不同，通过CardTable把相关引用信息记录到引用指向对象的所在Region对应的Remembered Set中<br>当进行垃圾收集时，在GC根节点的枚举范围加入Remembered Set</strong></em></p>
+<br>
+
+<h2 id="G1回收过程"><a href="#G1回收过程" class="headerlink" title="G1回收过程"></a><strong style="color:red">G1回收过程</strong></h2><p><em><strong>1、YoungGC</strong></em></p>
+<p><em><strong>2、老年代并发标记过程</strong></em></p>
+<p><em><strong>3、混合回收</strong></em></p>
+<p><em><strong>（作为一种失败保护机制，Full GC还是存在的）</strong></em></p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/10.png" style="zoom:67%;">
+
+<br>
+
+<h3 id="年轻代GC"><a href="#年轻代GC" class="headerlink" title="年轻代GC"></a>年轻代GC</h3><blockquote>
+<p>当Eden空间耗尽时,G1会启动一次年轻代垃圾回收过程<br>年轻代垃圾回收只会回收Eden区和Survivor区</p>
+</blockquote>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/12.png" style="zoom:67%;">
+
+<p><strong style="color:red">1、扫描根</strong>（根引用连同RSet记录的外部引用作为扫描存活对象的入口）</p>
+<p><strong style="color:red">2、更新RSet</strong>（ 此阶段完成后,RSet可以准确的反映老年代对所在的内存分段中对象的引用）</p>
+<p><strong style="color:red">3、处理RSet</strong>（t:识别被老年代对象指向的Eden中的对象，这些被指向的Eden中的对象被认为是存活的对象）</p>
+<p><strong style="color:red">4、复制对象</strong>（对象树被遍历，Eden区内存中存活的对象复制到Survivor区中空的内存分段，Survivor区内存段中存活的对象如果年龄未达阈值，年龄+1，达到阈值则被复制到Old区中空的内存分段。如果Survivor空间不够，Eden的部分数据会直接晋升到Old区）</p>
+<p><strong style="color:red">5、处理引用</strong></p>
+<br>
+
+<h3 id="并发标记过程"><a href="#并发标记过程" class="headerlink" title="并发标记过程"></a>并发标记过程</h3><p><strong style="color:red">1、初始标记阶段</strong>：标记从根节点直接可达的对象（STW+一次YoungGC）</p>
+<p><strong style="color:red">2、根区域扫描</strong>：扫描Survivor区直接可达的老年代区域对象，并标记被引用的对象。这一过程必须在young GC之前完成（YoungGC时，会动Survivor区，所以这一过程必须在YoungGC之前完成）</p>
+<p><strong style="color:red">3、并发标记</strong>：在整个堆中进行并发标记（和应用程序并发执行），此过程可能被YoungGC中断。在并发标记阶段,若发现区域对象中的所有对象都是垃圾，那这个区域会被立即回收。同时，并发标记过程中，会计算每个区域的对象活性（区域中存活对象的比例）</p>
+<p><strong style="color:red">4、再次标记</strong>：由于应用程序持续进行，需要修正上一次的标记结果（STW）</p>
+<p><strong style="color:red">5、独占清理</strong>：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域（STW，不会实际上去做垃圾的收集）</p>
+<p><strong style="color:red">6、并发清理阶段</strong>：识别并清理完全空闲的区域</p>
+<br>
+
+<h3 id="混合回收"><a href="#混合回收" class="headerlink" title="混合回收"></a>混合回收</h3><img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/13.png" style="zoom:70%;">
+
+<blockquote>
+<p>当越来越多对象晋升到老年代时，为避免堆内存耗尽，虚拟机会触发一个混合的垃圾收集器</p>
+</blockquote>
+<p><strong style="color:red">混合回收除了回收整个Young region外，还会回收一部分的Old Region（可以选择哪些Old region被回收，从而对整个垃圾回收的耗时进行控制）</strong></p>
+<br>
+
+<h3 id="G1优化建议"><a href="#G1优化建议" class="headerlink" title="G1优化建议"></a>G1优化建议</h3><p>1、年轻代发送GC频率高，避免使用<code>-Xmn</code>或<code>-XX:NewRatio</code></p>
+<p>2、暂停时间目标不要太过严苛（影响吞吐量）</p>
+<br>
+
+<h1 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h1><p>-XX:+PrintGC：输出GC日志</p>
+<p>-XX:+PrintGCDetails：输出GC详细日志</p>
+<p>-XX:+PrintGCTimeStamps：输出GC时间戳（以基准时间形式）</p>
+<p>-XX:+PrintGCDateStamps：输出GC时间戳（以日期的形式）</p>
+<p>-XX:+PrintHeapAtGC：在GC前后打印堆信息</p>
+<p>-Xloggc:..&#x2F;logs&#x2F;gc.log：日志文件的输出路径</p>
+<img src="/2022/08/04/14-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/14.png" style="zoom:100%;">
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -2021,34 +2021,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2-3-算法的空间复杂度分析</title>
     <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
@@ -2078,27 +2050,31 @@
       </tags>
   </entry>
   <entry>
-    <title>2-nginx-配置到系统服务和系统环境</title>
-    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
-<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
-<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>2、使配置立即生效</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
 ]]></content>
       <categories>
-        <category>nginx</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
-        <tag>nginx</tag>
+        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -2140,6 +2116,30 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-nginx-配置到系统服务和系统环境</title>
+    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
+<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
+<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、使配置立即生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -2440,6 +2440,116 @@
 <p><strong>该指令提供在其中指定流服务器指令的配置文件上下文。和http指令同级</strong></p>
 <p><strong>案例：</strong></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>SpringMVC</title>
+    <url>/2022/08/19/SpringMVC/</url>
+    <content><![CDATA[<h1 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h1><h2 id="初始化时机"><a href="#初始化时机" class="headerlink" title="初始化时机"></a>初始化时机</h2><blockquote>
+<p>启动类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(A20.class);</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">&gt;<span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Config类</p>
+<p>1、创建内嵌的web容器工厂</p>
+<p>2、创建 DispatcherServlet</p>
+<p>3、注册 DispatcherServlet</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> &#123;</span><br><span class="line">&gt;<span class="comment">// 创建内嵌的web容器工厂</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> TomcatServletWebServerFactory <span class="title function_">tomcatServletWebServerFactory</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TomcatServletWebServerFactory</span>();</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 创建 DispatcherServlet</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> DispatcherServlet <span class="title function_">dispatcherServlet</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServlet</span>();</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 注册 DispatcherServlet, Spring MVC 的入口</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> DispatcherServletRegistrationBean <span class="title function_">dispatcherServletRegistrationBean</span><span class="params">(DispatcherServlet dispatcherServlet)</span> &#123;</span><br><span class="line">  <span class="comment">//拦截所有请求，使请求全部进入dispatcherServlet，再进行分发</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServletRegistrationBean</span>(dispatcherServlet,<span class="string">&quot;/&quot;</span>);</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>DispatcherServlet对象作为Spring容器的一个Bean，是由Spring容器创建的，但是它的初始化不是由Spring容器创建的，而是由tomcat服务器在首次使用到DispatcherServlet时由tomcat进行初始化。</p>
+<p>可以通过setLoadOnStartup方法设置优先级，来让tomcat一启动就加载DispatcherServlet</p>
+<p>（数字越小优先级越高）</p>
+<img src="/2022/08/19/SpringMVC/1.png" style="zoom:80%;">
+
+<p>一般来说该优先级是写在application.properties文件中，从而避免耦合。所以需要在类上使用注解来读取properties文件</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PropertySource(&quot;classpath:application.properties&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>还需要使用注解来绑定配置文件中的key，下面绑定的是properties文件中以spring.mvc开头和server开头的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableConfigurationProperties(&#123;WebMvcProperties.class,ServerProperties.class&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/19/SpringMVC/2.png" style="zoom:80%;">
+
+<br>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p><code>DispatcherServlet</code>的类层次如下：</p>
+<img src="/2022/08/19/SpringMVC/4.png" style="zoom:30%;">
+
+<p>从客户端穿过来的所有请求都需要通过<code>DispatcherServlet</code>前端控制器来进行请求的分发处理，然后把响应结果返回给客户端，它的本质其实也是一个Servlet，和其他Servlet一样有着同样的生命周期<a href="https://www.runoob.com/servlet/servlet-intro.html">（Servlet 简介）</a></p>
+<p>1、初始化	2、运行	3、销毁</p>
+<p>下图为<code>DispatcherServlet</code>的初始化过程</p>
+<img src="/2022/08/19/SpringMVC/3.png" style="zoom:60%;">
+
+<br>
+
+<p><code>DispatcherServlet</code>的初始化工作并没有在<code>DispatcherServlet</code>类中进行，而是在<code>HttpServletBean</code>类中重写了init()方法，代码如下</p>
+<p>步骤：</p>
+<p>1、init()方法通过实例化<code>ServletConfigPropertyValues</code>对<code>servlet</code>进行参数初始化</p>
+<p>2、参数初始化之后，会把<code>DispatcherServlet</code>转换为<code>BeanWrapper</code>，将其当作一个Bean去管理，这样就可以通过Spring的依赖注入对参数的值进行注入（通过<code>bw.setPropertyValues(pvs, true);</code>进行注入）</p>
+<p>3、调用的模板方法<code>initBeanWrapper</code>在<code>HttpServletBean</code>的子类中实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 	加载web.xml中的init-param进行初始化</span></span><br><span class="line"><span class="comment"> *	ServletConfigPropertyValues是HttpServletBean的一个内部类</span></span><br><span class="line"><span class="comment"> *	该类的作用是用来解析web.xml中元素&lt;servlet&gt;的子元素&lt;init-param&gt;的参数值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">   <span class="type">PropertyValues</span> <span class="variable">pvs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletConfigPropertyValues</span>(getServletConfig(), <span class="built_in">this</span>.requiredProperties);</span><br><span class="line">   <span class="keyword">if</span> (!pvs.isEmpty()) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">//此处将Servlet转化成BeanWrapper，便于值的注入</span></span><br><span class="line">         <span class="type">BeanWrapper</span> <span class="variable">bw</span> <span class="operator">=</span> PropertyAccessorFactory.forBeanPropertyAccess(<span class="built_in">this</span>);</span><br><span class="line">         <span class="type">ResourceLoader</span> <span class="variable">resourceLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletContextResourceLoader</span>(getServletContext());</span><br><span class="line">         bw.registerCustomEditor(Resource.class, <span class="keyword">new</span> <span class="title class_">ResourceEditor</span>(resourceLoader, getEnvironment()));</span><br><span class="line">          <span class="comment">//此处调用的是模板方法</span></span><br><span class="line">         initBeanWrapper(bw);</span><br><span class="line">          <span class="comment">//把初始配置设置给DispatcherServlet</span></span><br><span class="line">         bw.setPropertyValues(pvs, <span class="literal">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (BeansException ex) &#123;</span><br><span class="line">         <span class="keyword">if</span> (logger.isErrorEnabled()) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;Failed to set bean properties on servlet &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>, ex);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">throw</span> ex;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   initServletBean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、<code>initBeanWrapper</code>方法在FrameworkServlet类中的重写实现，主要是对web上下文进行初始化，代码如下：</p>
+<p>注意：<code>ContextLoaderListener</code>加载的时候已经创建了<code>WebApplicationContext</code>实例，这里是对这个实例的进一步补充初始化</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">initServletBean</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">   getServletContext().log(<span class="string">&quot;Initializing Spring &quot;</span> + getClass().getSimpleName() + <span class="string">&quot; &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">   <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">      logger.info(<span class="string">&quot;Initializing Servlet &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//初始化WebApplicationContext</span></span><br><span class="line">      <span class="built_in">this</span>.webApplicationContext = initWebApplicationContext();</span><br><span class="line">       <span class="comment">//模板方法，在子类中实现</span></span><br><span class="line">      initFrameworkServlet();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (ServletException | RuntimeException ex) &#123;</span><br><span class="line">      logger.error(<span class="string">&quot;Context initialization failed&quot;</span>, ex);</span><br><span class="line">      <span class="keyword">throw</span> ex;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> <span class="built_in">this</span>.enableLoggingRequestDetails ?</span><br><span class="line">            <span class="string">&quot;shown which may lead to unsafe logging of potentially sensitive data&quot;</span> :</span><br><span class="line">            <span class="string">&quot;masked to prevent unsafe logging of potentially sensitive data&quot;</span>;</span><br><span class="line">      logger.debug(<span class="string">&quot;enableLoggingRequestDetails=&#x27;&quot;</span> + <span class="built_in">this</span>.enableLoggingRequestDetails +</span><br><span class="line">            <span class="string">&quot;&#x27;: request parameters and headers will be &quot;</span> + value);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">      logger.info(<span class="string">&quot;Completed initialization in &quot;</span> + (System.currentTimeMillis() - startTime) + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、initWebApplicationContext方法主要是负责初始化DispatcherServlet自己的应用上下文</p>
+<p>先查看<code>FrameworkServlet</code>在构造时，是否传入一个<code>WebApplicationContext</code>，如果不会就会查找，仍然没有查到，则会自己创建一个<code>WebApplicationContext</code>，最后对WebApplicationContext进行onRefresh()操作完成对上下文的创建，onRefresh还是一个模板方法，让子类实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> WebApplicationContext <span class="title function_">initWebApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//获取rootContext，如果在web.xml中配置了ContextLoaderListener，那么这个就是rootContext</span></span><br><span class="line">   <span class="type">WebApplicationContext</span> <span class="variable">rootContext</span> <span class="operator">=</span></span><br><span class="line">         WebApplicationContextUtils.getWebApplicationContext(getServletContext());</span><br><span class="line">   <span class="type">WebApplicationContext</span> <span class="variable">wac</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断FrameworkServlet的构造方法是否传入了webApplicationContext，如果有，就使用传入的</span></span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">this</span>.webApplicationContext != <span class="literal">null</span>) &#123;</span><br><span class="line">      wac = <span class="built_in">this</span>.webApplicationContext;</span><br><span class="line">      <span class="keyword">if</span> (wac <span class="keyword">instanceof</span> ConfigurableWebApplicationContext) &#123;</span><br><span class="line">         <span class="type">ConfigurableWebApplicationContext</span> <span class="variable">cwac</span> <span class="operator">=</span> (ConfigurableWebApplicationContext) wac;</span><br><span class="line">         <span class="keyword">if</span> (!cwac.isActive()) &#123;</span><br><span class="line">            <span class="comment">//如果context还没有被refresh，需要设置父context或者设置应用上下文的id等</span></span><br><span class="line">            <span class="keyword">if</span> (cwac.getParent() == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="comment">//在没有明确的父context情况下，注入rootContext的实例</span></span><br><span class="line">               cwac.setParent(rootContext);</span><br><span class="line">            &#125;</span><br><span class="line">            configureAndRefreshWebApplicationContext(cwac);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (wac == <span class="literal">null</span>) &#123;</span><br><span class="line">      wac = findWebApplicationContext();</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果最终没有传入也没有找到WebApplicationContext的话，就自己创建一个</span></span><br><span class="line">   <span class="keyword">if</span> (wac == <span class="literal">null</span>) &#123;</span><br><span class="line">       wac = createWebApplicationContext(rootContext);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!<span class="built_in">this</span>.refreshEventReceived) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span> (<span class="built_in">this</span>.onRefreshMonitor) &#123;、</span><br><span class="line">          <span class="comment">//模板方法，让子类实现</span></span><br><span class="line">         onRefresh(wac);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">this</span>.publishContext) &#123;</span><br><span class="line">      <span class="comment">// Publish the context as a servlet context attribute.</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">attrName</span> <span class="operator">=</span> getServletContextAttributeName();</span><br><span class="line">      getServletContext().setAttribute(attrName, wac);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> wac;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="RequestMappingHandlerMapping"><a href="#RequestMappingHandlerMapping" class="headerlink" title="RequestMappingHandlerMapping"></a>RequestMappingHandlerMapping</h1><p>RequestMappingHandlerMapping 初始化时，会收集所有 @RequestMapping 映射信息，封装为 Map，其中</p>
+<ul>
+<li>key 是 RequestMappingInfo 类型，包括请求路径、请求方法等信息</li>
+<li>value 是 HandlerMethod 类型，包括控制器方法对象、控制器对象</li>
+<li>有了这个 Map，就可以在请求到达时，快速完成映射，找到 HandlerMethod 并与匹配的拦截器一起返回给 DispatcherServlet</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A20</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(A20.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">        <span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line">        <span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line">        <span class="comment">//获取映射结果（key封装了路径信息和请求类型，value为控制器方法）</span></span><br><span class="line">        Map&lt;RequestMappingInfo, HandlerMethod&gt; handlerMethods = handlerMapping.getHandlerMethods();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line">        <span class="comment">//HandlerExecutionChain with [com.itheima.a20.Controller1#test1()] and 0 interceptors</span></span><br><span class="line">        <span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(<span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/test1&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="RequestMappingHandlerAdapter"><a href="#RequestMappingHandlerAdapter" class="headerlink" title="RequestMappingHandlerAdapter"></a>RequestMappingHandlerAdapter</h1><p>因为RequestMappingHandlerAdapter里面invokeHandlerMethod方法是私有的，所以我们创建一个子类去继承他，然后重写该方法，将该方法改为public</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRequestMappingHandlerAdapter</span> <span class="keyword">extends</span> <span class="title class_">RequestMappingHandlerAdapter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">invokeHandlerMethod</span><span class="params">(HttpServletRequest request, HttpServletResponse response, HandlerMethod handlerMethod)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.invokeHandlerMethod(request, response, handlerMethod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>RequestMappingHandlerAdapter 内部含有大量的web基础组件来协助完成一整个请求处理，因此它可以被描述为单个请求的调度、处理中心，如：</p>
+<ul>
+<li>HandlerMethodArgumentResolver 解析控制器方法参数</li>
+<li>HandlerMethodReturnValueHandler 处理控制器方法返回值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line">    <span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/test2&quot;</span>);</span><br><span class="line">    request.setParameter(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    <span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line">        <span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line">	<span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line">	<span class="comment">//参数一：请求对象</span></span><br><span class="line">	<span class="comment">//参数二：响应对象</span></span><br><span class="line">	<span class="comment">//参数三：handlerMethod对象</span></span><br><span class="line">	handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取多个参数解析器</span></span><br><span class="line">    List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers = handlerAdapter.getArgumentResolvers();</span><br><span class="line">    <span class="keyword">for</span> (HandlerMethodArgumentResolver argumentResolver : argumentResolvers) &#123;</span><br><span class="line">            System.out.println(argumentResolver);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取所有返回值处理器</span></span><br><span class="line">    <span class="keyword">for</span> (HandlerMethodReturnValueHandler returnValueHandler : handlerAdapter.getReturnValueHandlers()) &#123;</span><br><span class="line">        System.out.println(returnValueHandler);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义参数解析器"><a href="#自定义参数解析器" class="headerlink" title="自定义参数解析器"></a>自定义参数解析器</h2><img src="/2022/08/19/SpringMVC/5.png" style="zoom:75%;">
+
+<img src="/2022/08/19/SpringMVC/6.png" style="zoom:75%;">
+
+<p>为了让handlerAdapter能够识别自定义的参数解析器，在Config里调用setCustomArgumentResolvers方法将自定义的参数解析器加入到handlerAdapter中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> RequestMappingHandlerAdapter <span class="title function_">requestMappingHandlerAdapter</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">TokenArgumentResolver</span> <span class="variable">tokenArgumentResolver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TokenArgumentResolver</span>();</span><br><span class="line">    <span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRequestMappingHandlerAdapter</span>();</span><br><span class="line">    handlerAdapter.setCustomArgumentResolvers(List.of(tokenArgumentResolver));</span><br><span class="line">    <span class="keyword">return</span> handlerAdapter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建自定义的参数解析器（实现HandlerMethodArgumentResolver接口）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenArgumentResolver</span> <span class="keyword">implements</span> <span class="title class_">HandlerMethodArgumentResolver</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 是否支持某个参数</span></span><br><span class="line">    <span class="comment">// 如果参数上标注了@Token注解，那么才需要进行解析</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">supportsParameter</span><span class="params">(MethodParameter parameter)</span> &#123;</span><br><span class="line">        <span class="type">Token</span> <span class="variable">token</span> <span class="operator">=</span> parameter.getParameterAnnotation(Token.class);</span><br><span class="line">        <span class="keyword">return</span> token != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 解析参数</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">resolveArgument</span><span class="params">(MethodParameter parameter, ModelAndViewContainer mavContainer,</span></span><br><span class="line"><span class="params">                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> webRequest.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建虚拟请求，并进行测试</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line"><span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;/test3&quot;</span>);</span><br><span class="line">request.addHeader(<span class="string">&quot;token&quot;</span>,<span class="string">&quot;令牌&quot;</span>);</span><br><span class="line"><span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line"><span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line"><span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(request);</span><br><span class="line"></span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line">handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="自定义的返回值处理器"><a href="#自定义的返回值处理器" class="headerlink" title="自定义的返回值处理器"></a>自定义的返回值处理器</h2><p><img src="/2022/08/19/SpringMVC/7.png" style="zoom:85%;"><img src="/2022/08/19/SpringMVC/8.png" style="zoom:85%;"></p>
+<p> 创建自定义的返回值处理器（实现HandlerMethodReturnValueHandler接口）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YmlReturnValueHandler</span> <span class="keyword">implements</span> <span class="title class_">HandlerMethodReturnValueHandler</span> &#123;</span><br><span class="line">    <span class="comment">// 是否支持某个参数</span></span><br><span class="line">    <span class="comment">// 如果参数上标注了@Yml注解，那么才需要进行解析</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">supportsReturnType</span><span class="params">(MethodParameter returnType)</span> &#123;</span><br><span class="line">        <span class="type">Yml</span> <span class="variable">yml</span> <span class="operator">=</span> returnType.getMethodAnnotation(Yml.class);</span><br><span class="line">        <span class="keyword">return</span> yml != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> returnValue   返回值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span><br><span class="line"><span class="params">                                  ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 1. 转换返回结果为 yaml 字符串</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Yaml</span>().dump(returnValue);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 将 yaml 字符串写入响应</span></span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> webRequest.getNativeResponse(HttpServletResponse.class);</span><br><span class="line">        response.setContentType(<span class="string">&quot;text/plain;charset=utf-8&quot;</span>);</span><br><span class="line">        response.getWriter().print(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 设置请求已经处理完毕</span></span><br><span class="line">        mavContainer.setRequestHandled(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了让handlerAdapter能够识别自定义的返回值解析器，在Config里调用setCustomReturnValueHandlers方法将自定义的返回值解析器加入到handlerAdapter中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> RequestMappingHandlerAdapter <span class="title function_">requestMappingHandlerAdapter</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">TokenArgumentResolver</span> <span class="variable">tokenArgumentResolver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TokenArgumentResolver</span>();</span><br><span class="line">    <span class="type">YmlReturnValueHandler</span> <span class="variable">ymlReturnValueHandler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">YmlReturnValueHandler</span>();</span><br><span class="line"></span><br><span class="line">    handlerAdapter.setCustomReturnValueHandlers(List.of(ymlReturnValueHandler));</span><br><span class="line">    <span class="keyword">return</span> handlerAdapter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建虚拟请求，并进行测试</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line"><span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/test4&quot;</span>);</span><br><span class="line"><span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line"><span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line"><span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(request);</span><br><span class="line"></span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line">handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br><span class="line"></span><br><span class="line"><span class="comment">//检查响应结果</span></span><br><span class="line"><span class="type">byte</span>[] content = response.getContentAsByteArray();</span><br><span class="line">System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(content, StandardCharsets.UTF_8));</span><br><span class="line"><span class="comment">//!!com.itheima.a20.Controller1$User &#123;age: 18, name: 张三&#125;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+]]></content>
+      <categories>
+        <category>spring高级</category>
+      </categories>
+      <tags>
+        <tag>底层源码</tag>
+        <tag>spring高级</tag>
+      </tags>
   </entry>
   <entry>
     <title>AOP</title>
@@ -2757,120 +2867,48 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringMVC</title>
-    <url>/2022/08/19/SpringMVC/</url>
-    <content><![CDATA[<h1 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h1><h2 id="初始化时机"><a href="#初始化时机" class="headerlink" title="初始化时机"></a>初始化时机</h2><blockquote>
-<p>启动类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(A20.class);</span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">&gt;<span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Config类</p>
-<p>1、创建内嵌的web容器工厂</p>
-<p>2、创建 DispatcherServlet</p>
-<p>3、注册 DispatcherServlet</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;<span class="meta">@Configuration</span></span><br><span class="line">&gt;<span class="meta">@ComponentScan</span></span><br><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> &#123;</span><br><span class="line">&gt;<span class="comment">// 创建内嵌的web容器工厂</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> TomcatServletWebServerFactory <span class="title function_">tomcatServletWebServerFactory</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TomcatServletWebServerFactory</span>();</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 创建 DispatcherServlet</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> DispatcherServlet <span class="title function_">dispatcherServlet</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServlet</span>();</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="comment">// 注册 DispatcherServlet, Spring MVC 的入口</span></span><br><span class="line">&gt;<span class="meta">@Bean</span></span><br><span class="line">&gt;<span class="keyword">public</span> DispatcherServletRegistrationBean <span class="title function_">dispatcherServletRegistrationBean</span><span class="params">(DispatcherServlet dispatcherServlet)</span> &#123;</span><br><span class="line">  <span class="comment">//拦截所有请求，使请求全部进入dispatcherServlet，再进行分发</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DispatcherServletRegistrationBean</span>(dispatcherServlet,<span class="string">&quot;/&quot;</span>);</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>DispatcherServlet对象作为Spring容器的一个Bean，是由Spring容器创建的，但是它的初始化不是由Spring容器创建的，而是由tomcat服务器在首次使用到DispatcherServlet时由tomcat进行初始化。</p>
-<p>可以通过setLoadOnStartup方法设置优先级，来让tomcat一启动就加载DispatcherServlet</p>
-<p>（数字越小优先级越高）</p>
-<img src="/2022/08/19/SpringMVC/1.png" style="zoom:80%;">
-
-<p>一般来说该优先级是写在application.properties文件中，从而避免耦合。所以需要在类上使用注解来读取properties文件</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PropertySource(&quot;classpath:application.properties&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<p>还需要使用注解来绑定配置文件中的key，下面绑定的是properties文件中以spring.mvc开头和server开头的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableConfigurationProperties(&#123;WebMvcProperties.class,ServerProperties.class&#125;)</span></span><br></pre></td></tr></table></figure>
-
-<img src="/2022/08/19/SpringMVC/2.png" style="zoom:80%;">
-
-<br>
-
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p><code>DispatcherServlet</code>的类层次如下：</p>
-<img src="/2022/08/19/SpringMVC/4.png" style="zoom:30%;">
-
-<p>从客户端穿过来的所有请求都需要通过<code>DispatcherServlet</code>前端控制器来进行请求的分发处理，然后把响应结果返回给客户端，它的本质其实也是一个Servlet，和其他Servlet一样有着同样的生命周期<a href="https://www.runoob.com/servlet/servlet-intro.html">（Servlet 简介）</a></p>
-<p>1、初始化	2、运行	3、销毁</p>
-<p>下图为<code>DispatcherServlet</code>的初始化过程</p>
-<img src="/2022/08/19/SpringMVC/3.png" style="zoom:60%;">
-
-<br>
-
-<p><code>DispatcherServlet</code>的初始化工作并没有在<code>DispatcherServlet</code>类中进行，而是在<code>HttpServletBean</code>类中重写了init()方法，代码如下</p>
-<p>步骤：</p>
-<p>1、init()方法通过实例化<code>ServletConfigPropertyValues</code>对<code>servlet</code>进行参数初始化</p>
-<p>2、参数初始化之后，会把<code>DispatcherServlet</code>转换为<code>BeanWrapper</code>，将其当作一个Bean去管理，这样就可以通过Spring的依赖注入对参数的值进行注入（通过<code>bw.setPropertyValues(pvs, true);</code>进行注入）</p>
-<p>3、调用的模板方法<code>initBeanWrapper</code>在<code>HttpServletBean</code>的子类中实现</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 	加载web.xml中的init-param进行初始化</span></span><br><span class="line"><span class="comment"> *	ServletConfigPropertyValues是HttpServletBean的一个内部类</span></span><br><span class="line"><span class="comment"> *	该类的作用是用来解析web.xml中元素&lt;servlet&gt;的子元素&lt;init-param&gt;的参数值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">   <span class="type">PropertyValues</span> <span class="variable">pvs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletConfigPropertyValues</span>(getServletConfig(), <span class="built_in">this</span>.requiredProperties);</span><br><span class="line">   <span class="keyword">if</span> (!pvs.isEmpty()) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">//此处将Servlet转化成BeanWrapper，便于值的注入</span></span><br><span class="line">         <span class="type">BeanWrapper</span> <span class="variable">bw</span> <span class="operator">=</span> PropertyAccessorFactory.forBeanPropertyAccess(<span class="built_in">this</span>);</span><br><span class="line">         <span class="type">ResourceLoader</span> <span class="variable">resourceLoader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletContextResourceLoader</span>(getServletContext());</span><br><span class="line">         bw.registerCustomEditor(Resource.class, <span class="keyword">new</span> <span class="title class_">ResourceEditor</span>(resourceLoader, getEnvironment()));</span><br><span class="line">          <span class="comment">//此处调用的是模板方法</span></span><br><span class="line">         initBeanWrapper(bw);</span><br><span class="line">          <span class="comment">//把初始配置设置给DispatcherServlet</span></span><br><span class="line">         bw.setPropertyValues(pvs, <span class="literal">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (BeansException ex) &#123;</span><br><span class="line">         <span class="keyword">if</span> (logger.isErrorEnabled()) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;Failed to set bean properties on servlet &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>, ex);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">throw</span> ex;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   initServletBean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>4、<code>initBeanWrapper</code>方法在FrameworkServlet类中的重写实现，主要是对web上下文进行初始化，代码如下：</p>
-<p>注意：<code>ContextLoaderListener</code>加载的时候已经创建了<code>WebApplicationContext</code>实例，这里是对这个实例的进一步补充初始化</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">initServletBean</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">   getServletContext().log(<span class="string">&quot;Initializing Spring &quot;</span> + getClass().getSimpleName() + <span class="string">&quot; &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">   <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">      logger.info(<span class="string">&quot;Initializing Servlet &#x27;&quot;</span> + getServletName() + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//初始化WebApplicationContext</span></span><br><span class="line">      <span class="built_in">this</span>.webApplicationContext = initWebApplicationContext();</span><br><span class="line">       <span class="comment">//模板方法，在子类中实现</span></span><br><span class="line">      initFrameworkServlet();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (ServletException | RuntimeException ex) &#123;</span><br><span class="line">      logger.error(<span class="string">&quot;Context initialization failed&quot;</span>, ex);</span><br><span class="line">      <span class="keyword">throw</span> ex;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> <span class="built_in">this</span>.enableLoggingRequestDetails ?</span><br><span class="line">            <span class="string">&quot;shown which may lead to unsafe logging of potentially sensitive data&quot;</span> :</span><br><span class="line">            <span class="string">&quot;masked to prevent unsafe logging of potentially sensitive data&quot;</span>;</span><br><span class="line">      logger.debug(<span class="string">&quot;enableLoggingRequestDetails=&#x27;&quot;</span> + <span class="built_in">this</span>.enableLoggingRequestDetails +</span><br><span class="line">            <span class="string">&quot;&#x27;: request parameters and headers will be &quot;</span> + value);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">      logger.info(<span class="string">&quot;Completed initialization in &quot;</span> + (System.currentTimeMillis() - startTime) + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>5、initWebApplicationContext方法主要是负责初始化DispatcherServlet自己的应用上下文</p>
-<p>先查看<code>FrameworkServlet</code>在构造时，是否传入一个<code>WebApplicationContext</code>，如果不会就会查找，仍然没有查到，则会自己创建一个<code>WebApplicationContext</code>，最后对WebApplicationContext进行onRefresh()操作完成对上下文的创建，onRefresh还是一个模板方法，让子类实现</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> WebApplicationContext <span class="title function_">initWebApplicationContext</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//获取rootContext，如果在web.xml中配置了ContextLoaderListener，那么这个就是rootContext</span></span><br><span class="line">   <span class="type">WebApplicationContext</span> <span class="variable">rootContext</span> <span class="operator">=</span></span><br><span class="line">         WebApplicationContextUtils.getWebApplicationContext(getServletContext());</span><br><span class="line">   <span class="type">WebApplicationContext</span> <span class="variable">wac</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断FrameworkServlet的构造方法是否传入了webApplicationContext，如果有，就使用传入的</span></span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">this</span>.webApplicationContext != <span class="literal">null</span>) &#123;</span><br><span class="line">      wac = <span class="built_in">this</span>.webApplicationContext;</span><br><span class="line">      <span class="keyword">if</span> (wac <span class="keyword">instanceof</span> ConfigurableWebApplicationContext) &#123;</span><br><span class="line">         <span class="type">ConfigurableWebApplicationContext</span> <span class="variable">cwac</span> <span class="operator">=</span> (ConfigurableWebApplicationContext) wac;</span><br><span class="line">         <span class="keyword">if</span> (!cwac.isActive()) &#123;</span><br><span class="line">            <span class="comment">//如果context还没有被refresh，需要设置父context或者设置应用上下文的id等</span></span><br><span class="line">            <span class="keyword">if</span> (cwac.getParent() == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="comment">//在没有明确的父context情况下，注入rootContext的实例</span></span><br><span class="line">               cwac.setParent(rootContext);</span><br><span class="line">            &#125;</span><br><span class="line">            configureAndRefreshWebApplicationContext(cwac);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (wac == <span class="literal">null</span>) &#123;</span><br><span class="line">      wac = findWebApplicationContext();</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果最终没有传入也没有找到WebApplicationContext的话，就自己创建一个</span></span><br><span class="line">   <span class="keyword">if</span> (wac == <span class="literal">null</span>) &#123;</span><br><span class="line">       wac = createWebApplicationContext(rootContext);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!<span class="built_in">this</span>.refreshEventReceived) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span> (<span class="built_in">this</span>.onRefreshMonitor) &#123;、</span><br><span class="line">          <span class="comment">//模板方法，让子类实现</span></span><br><span class="line">         onRefresh(wac);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">this</span>.publishContext) &#123;</span><br><span class="line">      <span class="comment">// Publish the context as a servlet context attribute.</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">attrName</span> <span class="operator">=</span> getServletContextAttributeName();</span><br><span class="line">      getServletContext().setAttribute(attrName, wac);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> wac;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="RequestMappingHandlerMapping"><a href="#RequestMappingHandlerMapping" class="headerlink" title="RequestMappingHandlerMapping"></a>RequestMappingHandlerMapping</h1><p>RequestMappingHandlerMapping 初始化时，会收集所有 @RequestMapping 映射信息，封装为 Map，其中</p>
-<ul>
-<li>key 是 RequestMappingInfo 类型，包括请求路径、请求方法等信息</li>
-<li>value 是 HandlerMethod 类型，包括控制器方法对象、控制器对象</li>
-<li>有了这个 Map，就可以在请求到达时，快速完成映射，找到 HandlerMethod 并与匹配的拦截器一起返回给 DispatcherServlet</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A20</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(A20.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line">        <span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line">        <span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line">        <span class="comment">//获取映射结果（key封装了路径信息和请求类型，value为控制器方法）</span></span><br><span class="line">        Map&lt;RequestMappingInfo, HandlerMethod&gt; handlerMethods = handlerMapping.getHandlerMethods();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line">        <span class="comment">//HandlerExecutionChain with [com.itheima.a20.Controller1#test1()] and 0 interceptors</span></span><br><span class="line">        <span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(<span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/test1&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="RequestMappingHandlerAdapter"><a href="#RequestMappingHandlerAdapter" class="headerlink" title="RequestMappingHandlerAdapter"></a>RequestMappingHandlerAdapter</h1><p>因为RequestMappingHandlerAdapter里面invokeHandlerMethod方法是私有的，所以我们创建一个子类去继承他，然后重写该方法，将该方法改为public</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRequestMappingHandlerAdapter</span> <span class="keyword">extends</span> <span class="title class_">RequestMappingHandlerAdapter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">invokeHandlerMethod</span><span class="params">(HttpServletRequest request, HttpServletResponse response, HandlerMethod handlerMethod)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.invokeHandlerMethod(request, response, handlerMethod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>RequestMappingHandlerAdapter 内部含有大量的web基础组件来协助完成一整个请求处理，因此它可以被描述为单个请求的调度、处理中心，如：</p>
-<ul>
-<li>HandlerMethodArgumentResolver 解析控制器方法参数</li>
-<li>HandlerMethodReturnValueHandler 处理控制器方法返回值</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line">    <span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/test2&quot;</span>);</span><br><span class="line">    request.setParameter(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">    <span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line">        <span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line">	<span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line">	<span class="comment">//参数一：请求对象</span></span><br><span class="line">	<span class="comment">//参数二：响应对象</span></span><br><span class="line">	<span class="comment">//参数三：handlerMethod对象</span></span><br><span class="line">	handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取多个参数解析器</span></span><br><span class="line">    List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers = handlerAdapter.getArgumentResolvers();</span><br><span class="line">    <span class="keyword">for</span> (HandlerMethodArgumentResolver argumentResolver : argumentResolvers) &#123;</span><br><span class="line">            System.out.println(argumentResolver);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取所有返回值处理器</span></span><br><span class="line">    <span class="keyword">for</span> (HandlerMethodReturnValueHandler returnValueHandler : handlerAdapter.getReturnValueHandlers()) &#123;</span><br><span class="line">        System.out.println(returnValueHandler);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义参数解析器"><a href="#自定义参数解析器" class="headerlink" title="自定义参数解析器"></a>自定义参数解析器</h2><img src="/2022/08/19/SpringMVC/5.png" style="zoom:75%;">
-
-<img src="/2022/08/19/SpringMVC/6.png" style="zoom:75%;">
-
-<p>为了让handlerAdapter能够识别自定义的参数解析器，在Config里调用setCustomArgumentResolvers方法将自定义的参数解析器加入到handlerAdapter中</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> RequestMappingHandlerAdapter <span class="title function_">requestMappingHandlerAdapter</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">TokenArgumentResolver</span> <span class="variable">tokenArgumentResolver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TokenArgumentResolver</span>();</span><br><span class="line">    <span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRequestMappingHandlerAdapter</span>();</span><br><span class="line">    handlerAdapter.setCustomArgumentResolvers(List.of(tokenArgumentResolver));</span><br><span class="line">    <span class="keyword">return</span> handlerAdapter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>创建自定义的参数解析器（实现HandlerMethodArgumentResolver接口）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenArgumentResolver</span> <span class="keyword">implements</span> <span class="title class_">HandlerMethodArgumentResolver</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 是否支持某个参数</span></span><br><span class="line">    <span class="comment">// 如果参数上标注了@Token注解，那么才需要进行解析</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">supportsParameter</span><span class="params">(MethodParameter parameter)</span> &#123;</span><br><span class="line">        <span class="type">Token</span> <span class="variable">token</span> <span class="operator">=</span> parameter.getParameterAnnotation(Token.class);</span><br><span class="line">        <span class="keyword">return</span> token != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 解析参数</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">resolveArgument</span><span class="params">(MethodParameter parameter, ModelAndViewContainer mavContainer,</span></span><br><span class="line"><span class="params">                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> webRequest.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>创建虚拟请求，并进行测试</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line"><span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;/test3&quot;</span>);</span><br><span class="line">request.addHeader(<span class="string">&quot;token&quot;</span>,<span class="string">&quot;令牌&quot;</span>);</span><br><span class="line"><span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line"><span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line"><span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(request);</span><br><span class="line"></span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line">handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="自定义的返回值处理器"><a href="#自定义的返回值处理器" class="headerlink" title="自定义的返回值处理器"></a>自定义的返回值处理器</h2><p><img src="/2022/08/19/SpringMVC/7.png" style="zoom:85%;"><img src="/2022/08/19/SpringMVC/8.png" style="zoom:85%;"></p>
-<p> 创建自定义的返回值处理器（实现HandlerMethodReturnValueHandler接口）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">YmlReturnValueHandler</span> <span class="keyword">implements</span> <span class="title class_">HandlerMethodReturnValueHandler</span> &#123;</span><br><span class="line">    <span class="comment">// 是否支持某个参数</span></span><br><span class="line">    <span class="comment">// 如果参数上标注了@Yml注解，那么才需要进行解析</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">supportsReturnType</span><span class="params">(MethodParameter returnType)</span> &#123;</span><br><span class="line">        <span class="type">Yml</span> <span class="variable">yml</span> <span class="operator">=</span> returnType.getMethodAnnotation(Yml.class);</span><br><span class="line">        <span class="keyword">return</span> yml != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> returnValue   返回值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span><br><span class="line"><span class="params">                                  ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 1. 转换返回结果为 yaml 字符串</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Yaml</span>().dump(returnValue);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 将 yaml 字符串写入响应</span></span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> webRequest.getNativeResponse(HttpServletResponse.class);</span><br><span class="line">        response.setContentType(<span class="string">&quot;text/plain;charset=utf-8&quot;</span>);</span><br><span class="line">        response.getWriter().print(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 设置请求已经处理完毕</span></span><br><span class="line">        mavContainer.setRequestHandled(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了让handlerAdapter能够识别自定义的返回值解析器，在Config里调用setCustomReturnValueHandlers方法将自定义的返回值解析器加入到handlerAdapter中</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> RequestMappingHandlerAdapter <span class="title function_">requestMappingHandlerAdapter</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">TokenArgumentResolver</span> <span class="variable">tokenArgumentResolver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TokenArgumentResolver</span>();</span><br><span class="line">    <span class="type">YmlReturnValueHandler</span> <span class="variable">ymlReturnValueHandler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">YmlReturnValueHandler</span>();</span><br><span class="line"></span><br><span class="line">    handlerAdapter.setCustomReturnValueHandlers(List.of(ymlReturnValueHandler));</span><br><span class="line">    <span class="keyword">return</span> handlerAdapter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>创建虚拟请求，并进行测试</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AnnotationConfigServletWebServerApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">AnnotationConfigServletWebServerApplicationContext</span>(WebConfig.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个虚拟的请求和响应对象</span></span><br><span class="line"><span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/test4&quot;</span>);</span><br><span class="line"><span class="type">MockHttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletResponse</span>();</span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析@RequestMapping以及派生注解，生成路径和控制器方法的映射关系，在初始化时就生成了</span></span><br><span class="line"><span class="type">RequestMappingHandlerMapping</span> <span class="variable">handlerMapping</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(RequestMappingHandlerMapping.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求来了，获取控制器方法，返回一个处理器执行链对象</span></span><br><span class="line"><span class="type">HandlerExecutionChain</span> <span class="variable">chain</span> <span class="operator">=</span> handlerMapping.getHandler(request);</span><br><span class="line"></span><br><span class="line"><span class="type">MyRequestMappingHandlerAdapter</span> <span class="variable">handlerAdapter</span> <span class="operator">=</span> </span><br><span class="line">    context.getBean(MyRequestMappingHandlerAdapter.class);</span><br><span class="line"></span><br><span class="line">handlerAdapter.invokeHandlerMethod(request,response, (HandlerMethod) chain.getHandler());</span><br><span class="line"></span><br><span class="line"><span class="comment">//检查响应结果</span></span><br><span class="line"><span class="type">byte</span>[] content = response.getContentAsByteArray();</span><br><span class="line">System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(content, StandardCharsets.UTF_8));</span><br><span class="line"><span class="comment">//!!com.itheima.a20.Controller1$User &#123;age: 18, name: 张三&#125;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-]]></content>
-      <categories>
-        <category>spring高级</category>
-      </categories>
-      <tags>
-        <tag>底层源码</tag>
-        <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>defineClass源码</title>
     <url>/2022/08/09/defineClass%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; defineClass(String name, Resource res) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> name.lastIndexOf(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> res.getCodeSourceURL();</span><br><span class="line">    <span class="keyword">if</span> (i != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">pkgname</span> <span class="operator">=</span> name.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="comment">// Check if package already loaded.</span></span><br><span class="line">        <span class="type">Manifest</span> <span class="variable">man</span> <span class="operator">=</span> res.getManifest();</span><br><span class="line">        definePackageInternal(pkgname, man, url);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now read the class bytes and define the class</span></span><br><span class="line">    java.nio.<span class="type">ByteBuffer</span> <span class="variable">bb</span> <span class="operator">=</span> res.getByteBuffer();</span><br><span class="line">    <span class="keyword">if</span> (bb != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Use (direct) ByteBuffer:</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bb, cs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] b = res.getBytes();</span><br><span class="line">        <span class="comment">// must read certificates AFTER reading bytes.</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length, cs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>findClass方法源码</title>
+    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>loadClass方法源码剖析</title>
+    <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<br>
+
+<p><em>1、先在<strong>当前加载器的缓存</strong>中*<em>查找有无目标类</em></em>,如果有,直接返回。*</p>
+<p><em>2、判断当前加载器的父加载器是否为空</em> <em>,如果不为空,则调用 parent.loadClass(name, false) 接口进行加载</em></p>
+<p><em>3、反之,如果当前加载器的父类加载器为空,则调用 findBootstrapClassOrNull(name) 接口,让引导类加载器进行加载</em></p>
+<p><em>4、如果通过以上3条路径都没能成功加载,则调用 findClass(name) 接口进行加载。该接口最终会调用 java.lang.ClassLoader 接口的 defineClass 系列的native接口加载目标Java类。</em></p>
+<p><strong>双亲委派的模型就隐藏在这第2和第3步中</strong></p>
+<br>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">       <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;	<span class="comment">//同步操作，保证只能加载一次</span></span><br><span class="line">		<span class="comment">//首先，在缓存中判断是否已经加载同名的类</span></span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="comment">//parent：当前类加载器的父类加载器</span></span><br><span class="line">                   <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                       <span class="comment">//如果存在父类加载器，则调用父类加载器进行类的加载</span></span><br><span class="line">                       c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;	<span class="comment">//parent为null：父类加载器是引导类加载器</span></span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                   <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                   <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;	<span class="comment">//当前类加载器的父类加载器未加载此类 或 当前类加载器被加载</span></span><br><span class="line">                   <span class="comment">//调用当前ClassLoader</span></span><br><span class="line">                   <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (resolve) &#123;	<span class="comment">//是否进行解析操作</span></span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -3190,30 +3228,6 @@
       </tags>
   </entry>
   <entry>
-    <title>loadClass方法源码剖析</title>
-    <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<br>
-
-<p><em>1、先在<strong>当前加载器的缓存</strong>中*<em>查找有无目标类</em></em>,如果有,直接返回。*</p>
-<p><em>2、判断当前加载器的父加载器是否为空</em> <em>,如果不为空,则调用 parent.loadClass(name, false) 接口进行加载</em></p>
-<p><em>3、反之,如果当前加载器的父类加载器为空,则调用 findBootstrapClassOrNull(name) 接口,让引导类加载器进行加载</em></p>
-<p><em>4、如果通过以上3条路径都没能成功加载,则调用 findClass(name) 接口进行加载。该接口最终会调用 java.lang.ClassLoader 接口的 defineClass 系列的native接口加载目标Java类。</em></p>
-<p><strong>双亲委派的模型就隐藏在这第2和第3步中</strong></p>
-<br>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">       <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;	<span class="comment">//同步操作，保证只能加载一次</span></span><br><span class="line">		<span class="comment">//首先，在缓存中判断是否已经加载同名的类</span></span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="comment">//parent：当前类加载器的父类加载器</span></span><br><span class="line">                   <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                       <span class="comment">//如果存在父类加载器，则调用父类加载器进行类的加载</span></span><br><span class="line">                       c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;	<span class="comment">//parent为null：父类加载器是引导类加载器</span></span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                   <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                   <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;	<span class="comment">//当前类加载器的父类加载器未加载此类 或 当前类加载器被加载</span></span><br><span class="line">                   <span class="comment">//调用当前ClassLoader</span></span><br><span class="line">                   <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (resolve) &#123;	<span class="comment">//是否进行解析操作</span></span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>模拟实现@ComponentScan</title>
     <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0@ComponentScan/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0-ComponentScan%E6%B3%A8%E8%A7%A3">点此返回</a></p>
@@ -3264,20 +3278,6 @@
       <tags>
         <tag>底层源码</tag>
         <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>findClass方法源码</title>
-    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -3359,6 +3359,65 @@
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>在实例化之后，底层创建了一个长度是16的一维数组Entry[] table，在进行put操作时，先获得key的hashCode，通过hash()散列算法得到hash值，进而定位到数组的位置</p>
 <p>如果该位置上为空，此时添加成功</p>
 <p>如果该位置上不为空，意味着此位置上存在一个或多个数据（以链表的形式存在），此时比较该元素与其他元素的hash值（调用equals方法），当返回false时添加成功，返回true时使用新的value替换掉旧的value</p>
+<br>
+
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>capacity 容量，默认16。</p>
+<p>loadFactor 加载因子，默认是0.75</p>
+<p>threshold 阈值。阈值&#x3D;容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。</p>
+<br>
+
+<h2 id="二次哈希的意义"><a href="#二次哈希的意义" class="headerlink" title="二次哈希的意义"></a>二次哈希的意义</h2><p>下面是HashMap根据二次Hash计算出的哈希码，计算键值对下标的代码，<code>length</code>是底层数组的长度。HashMap采用了位运算，而非常见的取模运算</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="title function_">indexFor</span><span class="params">(<span class="type">int</span> h, <span class="type">int</span> length)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当不进行二次hash的时候，假设数组长度为16，当哈希码为5时，下标Index结果是5\</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line"> 00000000000000000000000000000101</span><br><span class="line">&amp;00000000000000000000000000001111</span><br><span class="line">=00000000000000000000000000000101</span><br><span class="line">=5</span><br></pre></td></tr></table></figure>
+
+<p>当哈希码为65541时，下标Index结果依然是5，不同的哈希码算出相同的下标，出现了哈希碰撞</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line"> 00000000000000010000000000000101</span><br><span class="line">&amp;00000000000000000000000000001111</span><br><span class="line">=00000000000000000000000000001101</span><br><span class="line">=5</span><br></pre></td></tr></table></figure>
+
+<p>通过例子可以发现哈希码的高位压根就没有参与运算，全部被丢弃了。</p>
+<p>不管哈希码的高位是多少，都不会影响最终Index的计算结果，因为只有低位才参与了运算，这样的哈希函数是不好的，它会带来更多的冲突，影响HashMap的效率。</p>
+<p>HashMap为了解决这个问题，将哈希码的高16位与低16位进行异或运算，得到一个新的哈希码，这样就可以让高位也参与到运算，这个函数也被称为扰动函数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">    <span class="type">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="literal">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：HashMap通过二次哈希，引入扰动函数，拿高16位和低16位做异或运算，把高位的特征和地位的特征组合起来，以此来降低哈希碰撞的概率</p>
+<p>注意：二次 hash 是为了配合 <em>容量是 2 的 n 次幂</em> 这一设计前提，如果 hash 表的容量不是 2 的 n 次幂，则不必二次 hash，<em>容量是 2 的 n 次幂</em> 这一设计计算索引效率更好，但 hash 的分散性就不好，需要二次 hash 来作为补偿，没有采用这一设计的典型例子是 Hashtable</p>
+<br>
+
+<h2 id="数组容量为何是2的n次幂"><a href="#数组容量为何是2的n次幂" class="headerlink" title="数组容量为何是2的n次幂"></a>数组容量为何是2的n次幂</h2><p>1、当数组容量是2的n次幂时，计算索引时可以用按位与运算代替求模运算，提高运算性能</p>
+<p>2、扩容时使用<code>hash &amp; oldCap == 0</code>的元素留在原来位置，否则<code>新位置 = 旧位置 + oldCap</code></p>
+<p>3、可以尽量避免hash冲突的发生。</p>
+<p>从HashMap的源码中可以看到HashMap在扩容时选择了位运算，向集合中添加元素时，会使用(n - 1) &amp; hash的计算方法来得出该元素在集合中的位置。</p>
+<p>hash表初始数组长度是16进行一次扩容数组长度就会变成32，他们的二进制分别是10000和100000。</p>
+<p>(n-1)&amp;hash中n就是hash表原来的长度，n-1就会使二进制发生如下的变化：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">16	10000 	-&gt; 	15	01111</span><br><span class="line">32	100000 	-&gt; 	31	011111</span><br></pre></td></tr></table></figure>
+
+<p>(n-1)&amp;hash，接下来就会与被插入的对象hash进行按位与运算，看下面几个例子：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">01111 &amp; 01001 = 01001</span><br><span class="line">01111 &amp; 01101 = 01101</span><br></pre></td></tr></table></figure>
+
+<p>如果数组扩容不是按2的n次幂来运算，那么就会有hash冲突的情况出现。比如数组长度16进行一次扩容以后变成了25（二进制11001），与带插入新元素进行&amp;运算时就会出现hash冲突，如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">11001 &amp; 10111 = 10001</span><br><span class="line">11001 &amp; 10011 = 10001</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/12.png" style="zoom:70%;">
+
+<br>
+
+<h2 id="树化与退化"><a href="#树化与退化" class="headerlink" title="树化与退化"></a>树化与退化</h2><h3 id="树化规则"><a href="#树化规则" class="headerlink" title="树化规则"></a><strong>树化规则</strong></h3><p>当链表长度超过树化阈值 8 时，先尝试扩容来减少链表长度，如果数组容量已经 &gt;&#x3D;64，才会进行树化</p>
+<h3 id="树化意义"><a href="#树化意义" class="headerlink" title="树化意义"></a><strong>树化意义</strong></h3><p>红黑树用来避免 DoS 攻击，防止链表超长时性能下降，树化应当是偶然情况，是保底策略</p>
+<p>hash 表的查找，更新的时间复杂度是 *O(1)*，而红黑树的查找，更新的时间复杂度是 *O(log_2⁡n )*，TreeNode 占用空间也比普通 Node 的大，如非必要，尽量还是使用链表</p>
+<p>hash 值如果足够随机，则在 hash 表内按泊松分布，在负载因子 0.75 的情况下，长度超过 8 的链表出现概率是 0.00000006，树化阈值选择 8 就是为了让树化几率足够小</p>
+<h3 id="退化规则"><a href="#退化规则" class="headerlink" title="退化规则"></a><strong>退化规则</strong></h3><p>情况1：在扩容时如果拆分树时，树元素个数 &lt;&#x3D; 6 则会退化链表</p>
+<p>情况2：remove 树节点时，若 root、root.left、root.right、root.left.left 有一个为 null ，也会退化为链表（在移除之前进行检查）</p>
+<p><img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/13.png" style="zoom:60%;"><img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/14.png" style="zoom:70%;"><img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/15.png" style="zoom:70%;"><img src="/2022/08/21/%E9%9B%86%E5%90%88%E4%B8%93%E9%A2%98/16.png" style="zoom:70%;"></p>
+<br>
+
+<h2 id="put方法流程总结"><a href="#put方法流程总结" class="headerlink" title="put方法流程总结"></a>put方法流程总结</h2><p>HashMap 是懒惰创建数组的，首次使用才创建数组</p>
+<p>计算索引（桶下标）</p>
+<p>如果桶下标还没人占用，创建 Node 占位返回</p>
+<p>如果桶下标已经有人占用 </p>
+<p>​	已经是 TreeNode 走红黑树的添加或更新逻辑</p>
+<p>​	是普通 Node，走链表的添加或更新逻辑，如果链表长度超过树化阈值，走树化逻辑</p>
+<p>返回前检查容量是否超过阈值，一旦超过进行扩容</p>
 ]]></content>
       <tags>
         <tag>面试</tag>
