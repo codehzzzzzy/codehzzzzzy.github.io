@@ -137,69 +137,6 @@
       </tags>
   </entry>
   <entry>
-    <title>04-程序计数器</title>
-    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
-<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
-<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
-<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
-<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
-<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
-<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
-<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
-<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
-<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
-<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
-<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
-<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
-<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
-<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>03-数据区概述与线程</title>
-    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
-<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
-<p><strong>运行时数据区的完整图</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
-<p><strong>Java的内存区域</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
-<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
-<p><strong>即：</strong></p>
-<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
-<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
-<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
-<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
-<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
-<p><strong>JVM线程（*）</strong></p>
-<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
-<ul>
-<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
-<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>02-类加载器和类加载过程</title>
     <url>/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a><strong>类加载过程</strong></h1><p><img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/1.png" alt="截图"></p>
@@ -303,6 +240,69 @@
 <p><strong>3）常量在编译阶段会存入调用方法所在的类的常量池中（这个例子存在F类的常量池中）</strong></p>
 <p><strong>本质上没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化</strong></p>
 <p>  <img src="/2022/07/11/02-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/10.png" alt="截图 (10)"></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03-数据区概述与线程</title>
+    <url>/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a><strong>数据区</strong></h1><p><strong>JVM在执行java程序的过程中会把它管理的内存划分为若干个不同的数据区域（包括5个运行时数据区）</strong></p>
+<p><strong>1、方法区	2、虚拟机栈	3、本地方法栈	4、堆	5、程序计数器</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/1.jpg" alt="截图1"></p>
+<p><strong>运行时数据区的完整图</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/2.jpg" alt="截图2"></p>
+<p><strong>Java的内存区域</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/3.jpg" alt="截图3"></p>
+<p><strong>灰色的为单独线程私有的，红色的为多个线程共享的。</strong></p>
+<p><strong>即：</strong></p>
+<p><strong>1、每个线程：独立包括程序计数器、虚拟机栈、本地方法栈。</strong></p>
+<p><strong>2、线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</strong></p>
+<p>​    <img src="/2022/07/12/03-%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BA%BF%E7%A8%8B/4.jpg" alt="截图4"></p>
+<h1 id="线程的简单介绍"><a href="#线程的简单介绍" class="headerlink" title="线程的简单介绍"></a><strong>线程的简单介绍</strong></h1><p><strong>线程是一个程序里的运行单元。JVM允许一个应用有多个线程并行的执行</strong></p>
+<p>当一个Java线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java线程执行终止后，本地线程也会回收。</p>
+<p>操作系统负责所有线程的安排调度到任何一个可用的CPU上。<strong>一旦本地线程初始化成功，它就会调用Java线程中的run()方法。</strong></p>
+<p><strong>JVM线程（*）</strong></p>
+<p>虚拟机线程：这种线程的操作是需要JVM达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要JVM达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</p>
+<ul>
+<li>周期任务线程：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
+<li>GC线程：这种线程对在JVM里不同种类的垃圾收集行为提供了支持。</li>
+<li>编译线程：这种线程在运行时会将字节码编译成到本地代码。</li>
+<li>信号调度线程：这种线程接收信号并发送给JVM，在它内部通过调用适当的方法进行处理。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>04-程序计数器</title>
+    <url>/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="程序计数器（PC寄存器）"><a href="#程序计数器（PC寄存器）" class="headerlink" title="程序计数器（PC寄存器）"></a><strong>程序计数器</strong>（PC寄存器）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>既不存在GC也不存在OOM</strong></p>
+<p><strong>PC寄存器用来存储指向下一条指令的地址，也是即将要执行的指令代码</strong>。由执行引擎读取下一条指令</p>
+<p>它是一块<strong>很小的内存空间</strong>，几乎可以忽略不记。也是<strong>运行速度最快的存储区域</strong>。</p>
+<p>在JVM规范中，每个线程都有它自己的程序计数器，是<strong>线程私有的</strong>，生命周期与线程的生命周期保持一致。</p>
+<p>  <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/1.jpg" alt="截图1"></p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a><strong>代码演示</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/2.jpg" alt="截图2"></p>
+<p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/3.jpg" alt="截图3"></p>
+<p><strong>通过PC寄存器，我们就可以知道当前程序执行到哪一步了</strong></p>
+<p>​    <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/4.jpg" alt="截图4"></p>
+<h2 id="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"><a href="#使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）" class="headerlink" title="使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？）"></a><strong>使用PC寄存器存储字节码地址有什么用？（为什么要使用PC寄存器记录当前线程的执行地址呢？</strong>）</h2><p><strong>1、CPU需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</strong></p>
+<p><strong>2、JVM的字节码解释器需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令。</strong></p>
+<h2 id="PC寄存器为什么被设定为线程私有的？"><a href="#PC寄存器为什么被设定为线程私有的？" class="headerlink" title="PC寄存器为什么被设定为线程私有的？"></a><strong>PC寄存器为什么被设定为线程私有的？</strong></h2><p><strong>由于CPU时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</strong></p>
+<p><strong>这样必然导致经常中断或恢复，为了保证分毫无差。每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</strong></p>
+<p> <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/5.jpg" alt="截图5"></p>
+<p><strong>比如一个cpu负责3个线程，cpu会在3个线程间轮流执行，为了能够保证CPU在切换的过程中，每个线程都可以按照切换之前的指令继续执行，而不影响其他线程，所以PC寄存器设定为线程私有的</strong></p>
+<h2 id="CPU时间片（-）"><a href="#CPU时间片（-）" class="headerlink" title="CPU时间片（*）"></a><strong>CPU时间片（*）</strong></h2><p>   <img src="/2022/07/12/04-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/6.jpg" alt="截图6"></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -786,6 +786,32 @@
       </tags>
   </entry>
   <entry>
+    <title>1-1-数据结构分类</title>
+    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
+<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
+</ul>
+<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
+<ul>
+<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
+</ul>
+<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
+<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
+<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
+<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
+<li>图形结构：图形结构的数据元素是多对多的关系</li>
+</ul>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
+<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1-nginx-目录，配置文件</title>
     <url>/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="使用-工具tree查看目录结构"><a href="#使用-工具tree查看目录结构" class="headerlink" title="使用 工具tree查看目录结构"></a><strong>使用</strong> <strong>工具tree查看目录结构</strong></h1><p><strong>1、安装tree工具：</strong> <strong>yum install -y tree</strong></p>
@@ -912,32 +938,6 @@
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1-1-数据结构分类</title>
-    <url>/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<h2 id="数据结构分类："><a href="#数据结构分类：" class="headerlink" title="数据结构分类："></a><strong>数据结构分类：</strong></h2><ul>
-<li>顺序存储结构： 把数据元素放到地址连续的存储单元里面，其数据间的逻辑关系和物理关系是一致的 ，比如我们常用的数组就是顺序存储结构。</li>
-</ul>
-<p>​    <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/1.png" alt="0" style="zoom:67%;"></p>
-<ul>
-<li>链式存储结构： 是把数据元素存放在任意的存储单元里面，这组存储单元可以是连续的也可以是不连续的。此时，数据元素之间并 不能反映元素间的逻辑关系，因此在链式存储结构中引进了一个指针存放数据元素的地址，这样通过地址就可以找 到相关联数据元素的位置</li>
-</ul>
-<h2 id="逻辑结构分类："><a href="#逻辑结构分类：" class="headerlink" title="逻辑结构分类："></a><strong>逻辑结构分类：</strong></h2><ul>
-<li>集合结构：集合结构中数据元素除了属于同一个集合外，他们之间没有任何其他的关系。</li>
-<li>线性结构：线性结构中的数据元素之间存在一对一的关系</li>
-<li>树形结构：树形结构中的数据元素之间存在一对多的层次关系</li>
-<li>图形结构：图形结构的数据元素是多对多的关系</li>
-</ul>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/2.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/3.png" alt="0" style="zoom: 67%;"></p>
-<p><img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/4.png" alt="0" style="zoom: 67%;">  <img src="/2022/07/12/1-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/5.png" alt="0" style="zoom: 67%;"></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -2078,6 +2078,30 @@
       </tags>
   </entry>
   <entry>
+    <title>2-nginx-配置到系统服务和系统环境</title>
+    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
+<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
+<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、使配置立即生效</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>3-1-冒泡排序</title>
     <url>/2022/07/12/3-1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p><strong>排序原理：</strong> </p>
@@ -2116,30 +2140,6 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2-nginx-配置到系统服务和系统环境</title>
-    <url>/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="一、将nginx配置到系统服务"><a href="#一、将nginx配置到系统服务" class="headerlink" title="一、将nginx配置到系统服务"></a><strong>一、将nginx配置到系统服务</strong></h1><p><strong>1、在   <code>/usr/lib/systemd/system</code>   目录下添加nginx.service,内容如下</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx web service</span><br><span class="line">Documentation=http://nginx.org/en/docs/</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=default.target</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、添加完成后如果权限有问题需要进行权限设置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod 755 /usr/lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、使用系统命令来操作Nginx服务</strong></p>
-<p><img src="/2022/07/13/2-nginx-%E9%85%8D%E7%BD%AE%E5%88%B0%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83/1.png"></p>
-<h1 id="二、将nginx命令配置到系统环境"><a href="#二、将nginx命令配置到系统环境" class="headerlink" title="二、将nginx命令配置到系统环境"></a><strong>二、将nginx命令配置到系统环境</strong></h1><p><strong>1、修改</strong> <code>/etc/profile</code> <strong>文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">在最后一行添加</span><br><span class="line">export PATH=$PATH:/usr/local/nginx/sbin</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、使配置立即生效</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -2859,7 +2859,97 @@
 
 <br>
 
-<h1 id="参数解析器"><a href="#参数解析器" class="headerlink" title="参数解析器"></a>参数解析器</h1><br>
+<h1 id="参数解析器"><a href="#参数解析器" class="headerlink" title="参数解析器"></a>参数解析器</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>定义一个控制器类ControllerUser，在其中测试常见参数的解析，同时定义测试需要的实体类User，具体实现如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Controller</span> &#123;</span><br><span class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="meta">@RequestParam(&quot;name1&quot;)</span> String name1,</span></span><br><span class="line"><span class="params">                         String name2,</span></span><br><span class="line"><span class="params">                         <span class="meta">@RequestParam(&quot;age&quot;)</span> <span class="type">int</span> age,</span></span><br><span class="line"><span class="params">                         <span class="meta">@RequestParam(name = &quot;home&quot;, defaultValue = &quot;$&#123;CATALINA_HOME&#125;&quot;)</span> String home1,</span></span><br><span class="line"><span class="params">                         <span class="meta">@RequestParam(&quot;file&quot;)</span> MultipartFile file,</span></span><br><span class="line"><span class="params">                         <span class="meta">@PathVariable(&quot;id&quot;)</span> <span class="type">int</span> id,</span></span><br><span class="line"><span class="params">                         <span class="meta">@RequestHeader(&quot;Content-Type&quot;)</span> String header,</span></span><br><span class="line"><span class="params">                         <span class="meta">@CookieValue(&quot;token&quot;)</span> String token,</span></span><br><span class="line"><span class="params">                         <span class="meta">@Value(&quot;$&#123;CATALINA_HOME&#125;&quot;)</span> String home2,</span></span><br><span class="line"><span class="params">                         HttpServletRequest request,</span></span><br><span class="line"><span class="params">                         <span class="meta">@ModelAttribute</span> User user1,</span></span><br><span class="line"><span class="params">                         User user2,</span></span><br><span class="line"><span class="params">                         <span class="meta">@RequestBody</span> User user3</span></span><br><span class="line"><span class="params">        )</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;<span class="built_in">this</span>.name = name;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;<span class="keyword">return</span> age;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;<span class="built_in">this</span>.age = age;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;User&#123;&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                    <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                    <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个模拟浏览器发送请求的方法mockRequest()，方便进行测试，具体实现如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> HttpServletRequest <span class="title function_">mockRequest</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">MockHttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MockHttpServletRequest</span>();</span><br><span class="line">        request.setParameter(<span class="string">&quot;name1&quot;</span>, <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        request.setParameter(<span class="string">&quot;name2&quot;</span>, <span class="string">&quot;lisi&quot;</span>);</span><br><span class="line">        request.addPart(<span class="keyword">new</span> <span class="title class_">MockPart</span>(<span class="string">&quot;file&quot;</span>, <span class="string">&quot;abc&quot;</span>, <span class="string">&quot;hello&quot;</span>.getBytes(StandardCharsets.UTF_8)));</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">AntPathMatcher</span>()</span><br><span class="line">                .extractUriTemplateVariables(<span class="string">&quot;/test/&#123;id&#125;&quot;</span>, <span class="string">&quot;/test/123&quot;</span>);</span><br><span class="line">        request.setAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, map);</span><br><span class="line">        request.setContentType(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">        request.setCookies(<span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;token&quot;</span>, <span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        request.setParameter(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        request.setParameter(<span class="string">&quot;age&quot;</span>, <span class="string">&quot;18&quot;</span>);</span><br><span class="line">        request.setContent(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                    &#123;</span></span><br><span class="line"><span class="string">                        &quot;name&quot;:&quot;李四&quot;,</span></span><br><span class="line"><span class="string">                        &quot;age&quot;:20</span></span><br><span class="line"><span class="string">                    &#125;&quot;&quot;&quot;</span></span><br><span class="line">                .getBytes(StandardCharsets.UTF_8));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">StandardServletMultipartResolver</span>().resolveMultipart(request);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="解析-RequestParam注解"><a href="#解析-RequestParam注解" class="headerlink" title="解析@RequestParam注解"></a>解析@RequestParam注解</h2><p><strong style="color:red">RequestMappingHandlerAdapter 的调用过程</strong></p>
+<ol>
+<li><strong>控制器方法被封装为 HandlerMethod</strong></li>
+<li><strong>准备对象绑定与类型转换</strong></li>
+<li><strong>准备 ModelAndViewContainer 用来存储中间 Model 结果</strong></li>
+<li><strong>解析每个参数值</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(WebConfig.class);</span><br><span class="line">        <span class="type">DefaultListableBeanFactory</span> <span class="variable">beanFactory</span> <span class="operator">=</span> context.getDefaultListableBeanFactory();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//准备测试request</span></span><br><span class="line">        <span class="type">HttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> mockRequest();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//要点1. 控制器方法被封装为HandlerMethod</span></span><br><span class="line">   		<span class="comment">//参数一：控制器对象</span></span><br><span class="line">        <span class="comment">//参数二：控制器类中的方法对象</span></span><br><span class="line">        <span class="type">HandlerMethod</span> <span class="variable">handlerMethod</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HandlerMethod</span>(<span class="keyword">new</span> <span class="title class_">Controller</span>(), Controller.class.getMethod(<span class="string">&quot;test&quot;</span>, String.class, String.class, <span class="type">int</span>.class, String.class, MultipartFile.class, <span class="type">int</span>.class, String.class, String.class, String.class, HttpServletRequest.class, User.class, User.class, User.class));</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//要点2. 准备对象绑定与类型转换</span></span><br><span class="line">        <span class="type">ServletRequestDataBinderFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletRequestDataBinderFactory</span>(<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//要点3. 准备ModelAndViewController用来存储中间 Model 结果</span></span><br><span class="line">        <span class="type">ModelAndViewContainer</span> <span class="variable">container</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndViewContainer</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//要点4. 解析每个参数值</span></span><br><span class="line">        <span class="keyword">for</span> (MethodParameter parameter : handlerMethod.getMethodParameters()) &#123;</span><br><span class="line">            <span class="comment">//true表示不是必须有@RequestParam注解，false表示必须有@RequestParam注解</span></span><br><span class="line">            <span class="type">RequestParamMethodArgumentResolver</span> <span class="variable">resolver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RequestParamMethodArgumentResolver</span>(beanFactory, <span class="literal">false</span>);</span><br><span class="line">            <span class="comment">//获得参数上的注解</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">annotations</span> <span class="operator">=</span> Arrays.stream(parameter.getParameterAnnotations()).map(a -&gt; a.annotationType().getSimpleName()).collect(Collectors.joining());</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> annotations.length() &gt; <span class="number">0</span> ? <span class="string">&quot; @&quot;</span> + annotations + <span class="string">&quot; &quot;</span> : <span class="string">&quot; &quot;</span>;</span><br><span class="line">            <span class="comment">//设置参数名解析器</span></span><br><span class="line">            parameter.initParameterNameDiscovery(<span class="keyword">new</span> <span class="title class_">DefaultParameterNameDiscoverer</span>());</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">if</span> (resolver.supportsParameter(parameter)) &#123;</span><br><span class="line">                <span class="comment">//支持此参数</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">v</span> <span class="operator">=</span> resolver.resolveArgument(parameter, container, <span class="keyword">new</span> <span class="title class_">ServletWebRequest</span>(request), factory);</span><br><span class="line">                System.out.println(<span class="string">&quot;[&quot;</span> + parameter.getParameterIndex() + <span class="string">&quot;]&quot;</span> + str + parameter.getParameterType().getSimpleName() + <span class="string">&quot; &quot;</span> + parameter.getParameterName() + <span class="string">&quot;-&gt;&quot;</span> + v);</span><br><span class="line">                System.out.println(<span class="string">&quot;模型数据为：&quot;</span>+container.getModel());</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;[&quot;</span> + parameter.getParameterIndex() + <span class="string">&quot;]&quot;</span> + str + parameter.getParameterType().getSimpleName() + <span class="string">&quot; &quot;</span> + parameter.getParameterName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong style="color:red">测试结果如下：</strong></p>
+<p><strong style="color:red">可以看出加了@RequestParam注解的参数都已经被解析，没有加@RequestParam注解的参数没有被解析</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[<span class="number">0</span>] <span class="meta">@RequestParam</span> String name1-&gt;zhangsan</span><br><span class="line">模型数据为：&#123;&#125;</span><br><span class="line">[<span class="number">1</span>] String name2</span><br><span class="line">[<span class="number">2</span>] <span class="meta">@RequestParam</span> <span class="type">int</span> age-&gt;<span class="number">18</span></span><br><span class="line">模型数据为：&#123;&#125;</span><br><span class="line">09:<span class="number">47</span>:<span class="number">47.789</span> [main] DEBUG org.springframework.core.env.PropertySourcesPropertyResolver - Found key <span class="string">&#x27;CATALINA_HOME&#x27;</span> in PropertySource <span class="string">&#x27;systemEnvironment&#x27;</span> with value of type String</span><br><span class="line">[<span class="number">3</span>] <span class="meta">@RequestParam</span> String home1-&gt;D:\Tomcat\apache-tomcat-<span class="number">9.0</span><span class="number">.37</span></span><br><span class="line">模型数据为：&#123;&#125;</span><br><span class="line">[<span class="number">4</span>] <span class="meta">@RequestParam</span> MultipartFile file-&gt;org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@<span class="number">525575</span></span><br><span class="line">模型数据为：&#123;&#125;</span><br><span class="line">[<span class="number">5</span>] <span class="meta">@PathVariable</span> <span class="type">int</span> id</span><br><span class="line">[<span class="number">6</span>] <span class="meta">@RequestHeader</span> String header</span><br><span class="line">[<span class="number">7</span>] <span class="meta">@CookieValue</span> String token</span><br><span class="line">[<span class="number">8</span>] <span class="meta">@Value</span> String home2</span><br><span class="line">[<span class="number">9</span>] HttpServletRequest request</span><br><span class="line">[<span class="number">10</span>] <span class="meta">@ModelAttribute</span> User user1</span><br><span class="line">[<span class="number">11</span>] User user2</span><br><span class="line">[<span class="number">12</span>] <span class="meta">@RequestBody</span> User user3</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="组合参数解析器"><a href="#组合参数解析器" class="headerlink" title="组合参数解析器"></a>组合参数解析器</h2><p>添加多个解析器组合<strong>HandlerMethodArgumentResolverComposite</strong>，在其中添加解析各个注解所需的解析器，具体实现如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//多个解析器组合</span></span><br><span class="line">            <span class="type">HandlerMethodArgumentResolverComposite</span> <span class="variable">composite</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HandlerMethodArgumentResolverComposite</span>();</span><br><span class="line">         composite.addResolvers(</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">RequestParamMethodArgumentResolver</span>(beanFactory,<span class="literal">false</span>),<span class="comment">//必须有@RequestParam</span></span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">PathVariableMethodArgumentResolver</span>(),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">RequestHeaderMethodArgumentResolver</span>(beanFactory),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ServletCookieValueMethodArgumentResolver</span>(beanFactory),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ExpressionValueMethodArgumentResolver</span>(beanFactory),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ServletRequestMethodArgumentResolver</span>(),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ServletModelAttributeMethodProcessor</span>(<span class="literal">false</span>),<span class="comment">//必须有@ModelAttribute</span></span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">RequestResponseBodyMethodProcessor</span>(List.of(<span class="keyword">new</span> <span class="title class_">MappingJackson2HttpMessageConverter</span>())),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ServletModelAttributeMethodProcessor</span>(<span class="literal">true</span>),<span class="comment">//省略@ModelAttribute</span></span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">RequestParamMethodArgumentResolver</span>(beanFactory,<span class="literal">true</span>)<span class="comment">//省略@RequestParam</span></span><br><span class="line">            );</span><br><span class="line"> </span><br><span class="line">             <span class="keyword">if</span> (composite.supportsParameter(parameter)) &#123;</span><br><span class="line">                <span class="comment">//支持此参数</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">v</span> <span class="operator">=</span> composite.resolveArgument(parameter, container, <span class="keyword">new</span> <span class="title class_">ServletWebRequest</span>(request), factory);</span><br><span class="line">                System.out.println(<span class="string">&quot;[&quot;</span> + parameter.getParameterIndex() + <span class="string">&quot;]&quot;</span> + str + parameter.getParameterType().getSimpleName() + <span class="string">&quot; &quot;</span> + parameter.getParameterName() + <span class="string">&quot;-&gt;&quot;</span> + v);</span><br><span class="line">                System.out.println(<span class="string">&quot;模型数据为：&quot;</span>+container.getModel());</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;[&quot;</span> + parameter.getParameterIndex() + <span class="string">&quot;]&quot;</span> + str + parameter.getParameterType().getSimpleName() + <span class="string">&quot; &quot;</span> + parameter.getParameterName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="常见的参数解析"><a href="#常见的参数解析" class="headerlink" title="常见的参数解析"></a>常见的参数解析</h2><p><strong style="color:red">调用组合解析器的addResolvers进行添加</strong></p>
+<ul>
+<li><p>@RequestParam &#x3D;&#x3D;&gt; RequestParamMethodArgumentResolver(beanFactory,false)</p>
+</li>
+<li><p>省略 @RequestParam &#x3D;&#x3D;&gt; RequestParamMethodArgumentResolver(beanFactory,true)</p>
+</li>
+<li><p>@RequestParam(defaultValue)  </p>
+</li>
+<li><p>@PathVariable &#x3D;&#x3D;&gt; PathVariableMethodArgumentResolver()</p>
+</li>
+<li><p>@RequestHeader &#x3D;&#x3D;&gt; RequestHeaderMethodArgumentResolver(beanFactory)</p>
+</li>
+<li><p>@CookieValue &#x3D;&#x3D;&gt; ServletCookieValueMethodArgumentResolver(beanFactory)</p>
+</li>
+<li><p>@Value &#x3D;&#x3D;&gt; ExpressionValueMethodArgumentResolver(beanFactory)</p>
+</li>
+<li><p>HttpServletRequest 等 &#x3D;&#x3D;&gt; ServletRequestMethodArgumentResolver()</p>
+</li>
+<li><p>@ModelAttribute &#x3D;&#x3D;&gt; ServletModelAttributeMethodProcessor(false)</p>
+</li>
+<li><p>省略 @ModelAttribute &#x3D;&#x3D;&gt; ServletModelAttributeMethodProcessor(true)</p>
+</li>
+<li><p>@RequestBody &#x3D;&#x3D;&gt; RequestResponseBodyMethodProcessor(List.of(new MappingJackson2HttpMessageConverter()))</p>
+</li>
+</ul>
+<br>
+
+<h1 id="获取参数名"><a href="#获取参数名" class="headerlink" title="获取参数名"></a>获取参数名</h1><h2 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h2><p>在自己的工程下面创建新的文件夹，不要放在src目录下（为了避免idea自动编译它，可以减少idea在自动编译时添加的一些选项），创建Bean2.Java文件 ,文件内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(String name,<span class="type">int</span> age)</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在终端中通过javac命令编译Bean2，编译后生成的class文件，通过idea反编译查看，发现没有参数名称</p>
+<p>此时通过 <code>javac -parameters .\Bean2.java</code> 命令重新进行编译，就可以获取到参数名称</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bean2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Bean2</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(String var1, <span class="type">int</span> var2)</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<blockquote>
+<p>测试通过 <code>javac -g .\Bean2.java</code> 命令重新进行编译，查看编译后生成的class文件，发现此时也是可以获取到参数名</p>
+<p>通过 <code>javap -c -v .\Bean2.class</code> 命令分别反编译上述两个命令生成的class文件，可以看到通过 <code>javac -parameters .\Bean2.java</code> 编译生成的class文件中会生成一个<code>MethodParameters</code>，在其中会包含参数信息；通过 <code>javac -g .\Bean2.java</code> 编译生成的class文件中会生成一 <code>LocalVariableTable</code> 本地变量表，其中也会包含参数信息</p>
+</blockquote>
+<p>​	通过以下两种方式再次进行测试后，可以发现编译时添加了 -parameters 生成的参数表，可以通过反射拿到参数名，添加-g生成的本地变量表无法通过反射拿到参数名</p>
+<img src="/2022/08/19/SpringMVC/9.png" style="zoom:85%;">
+
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong style="color:red">总结</strong></h2><p>如果编译时添加了 <code>-parameters</code> 参数可以生成参数表, 反射时就可以拿到参数名</p>
+<p>如果编译时添加了 <code>-g</code> 可以生成调试信息, 但分为两种情况</p>
+<ul>
+<li><p>普通类, 会包含局部变量表, 用 asm 可以拿到参数名</p>
+</li>
+<li><p>接口, 不会包含局部变量表, 无法获得参数名</p>
+</li>
+</ul>
+<p>这也是 MyBatis 在实现 Mapper 接口时为何要提供 @Param 注解来辅助获得参数名</p>
+<br>
+
+<h1 id="对象绑定和类型转换"><a href="#对象绑定和类型转换" class="headerlink" title="对象绑定和类型转换"></a>对象绑定和类型转换</h1><p><strong style="color:red">底层第一套转换接口与实现</strong></p>
+<img src="/2022/08/19/SpringMVC/10.png" style="zoom:85%;">
+
+<p><strong style="color:red">底层第二套转换接口与实现</strong></p>
+<img src="/2022/08/19/SpringMVC/11.png" style="zoom:85%;">
+
+<p><strong style="color:green">明天再写……</strong></p>
 ]]></content>
       <categories>
         <category>spring高级</category>
@@ -2874,44 +2964,6 @@
     <url>/2022/08/09/defineClass%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; defineClass(String name, Resource res) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> name.lastIndexOf(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> res.getCodeSourceURL();</span><br><span class="line">    <span class="keyword">if</span> (i != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">pkgname</span> <span class="operator">=</span> name.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="comment">// Check if package already loaded.</span></span><br><span class="line">        <span class="type">Manifest</span> <span class="variable">man</span> <span class="operator">=</span> res.getManifest();</span><br><span class="line">        definePackageInternal(pkgname, man, url);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now read the class bytes and define the class</span></span><br><span class="line">    java.nio.<span class="type">ByteBuffer</span> <span class="variable">bb</span> <span class="operator">=</span> res.getByteBuffer();</span><br><span class="line">    <span class="keyword">if</span> (bb != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Use (direct) ByteBuffer:</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bb, cs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] b = res.getBytes();</span><br><span class="line">        <span class="comment">// must read certificates AFTER reading bytes.</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length, cs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>findClass方法源码</title>
-    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>loadClass方法源码剖析</title>
-    <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<br>
-
-<p><em>1、先在<strong>当前加载器的缓存</strong>中*<em>查找有无目标类</em></em>,如果有,直接返回。*</p>
-<p><em>2、判断当前加载器的父加载器是否为空</em> <em>,如果不为空,则调用 parent.loadClass(name, false) 接口进行加载</em></p>
-<p><em>3、反之,如果当前加载器的父类加载器为空,则调用 findBootstrapClassOrNull(name) 接口,让引导类加载器进行加载</em></p>
-<p><em>4、如果通过以上3条路径都没能成功加载,则调用 findClass(name) 接口进行加载。该接口最终会调用 java.lang.ClassLoader 接口的 defineClass 系列的native接口加载目标Java类。</em></p>
-<p><strong>双亲委派的模型就隐藏在这第2和第3步中</strong></p>
-<br>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">       <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;	<span class="comment">//同步操作，保证只能加载一次</span></span><br><span class="line">		<span class="comment">//首先，在缓存中判断是否已经加载同名的类</span></span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="comment">//parent：当前类加载器的父类加载器</span></span><br><span class="line">                   <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                       <span class="comment">//如果存在父类加载器，则调用父类加载器进行类的加载</span></span><br><span class="line">                       c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;	<span class="comment">//parent为null：父类加载器是引导类加载器</span></span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                   <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                   <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;	<span class="comment">//当前类加载器的父类加载器未加载此类 或 当前类加载器被加载</span></span><br><span class="line">                   <span class="comment">//调用当前ClassLoader</span></span><br><span class="line">                   <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (resolve) &#123;	<span class="comment">//是否进行解析操作</span></span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -3320,6 +3372,30 @@
       </tags>
   </entry>
   <entry>
+    <title>loadClass方法源码剖析</title>
+    <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<br>
+
+<p><em>1、先在<strong>当前加载器的缓存</strong>中*<em>查找有无目标类</em></em>,如果有,直接返回。*</p>
+<p><em>2、判断当前加载器的父加载器是否为空</em> <em>,如果不为空,则调用 parent.loadClass(name, false) 接口进行加载</em></p>
+<p><em>3、反之,如果当前加载器的父类加载器为空,则调用 findBootstrapClassOrNull(name) 接口,让引导类加载器进行加载</em></p>
+<p><em>4、如果通过以上3条路径都没能成功加载,则调用 findClass(name) 接口进行加载。该接口最终会调用 java.lang.ClassLoader 接口的 defineClass 系列的native接口加载目标Java类。</em></p>
+<p><strong>双亲委派的模型就隐藏在这第2和第3步中</strong></p>
+<br>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve)</span><br><span class="line">       <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;	<span class="comment">//同步操作，保证只能加载一次</span></span><br><span class="line">		<span class="comment">//首先，在缓存中判断是否已经加载同名的类</span></span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   <span class="comment">//parent：当前类加载器的父类加载器</span></span><br><span class="line">                   <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                       <span class="comment">//如果存在父类加载器，则调用父类加载器进行类的加载</span></span><br><span class="line">                       c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;	<span class="comment">//parent为null：父类加载器是引导类加载器</span></span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                   <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                   <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;	<span class="comment">//当前类加载器的父类加载器未加载此类 或 当前类加载器被加载</span></span><br><span class="line">                   <span class="comment">//调用当前ClassLoader</span></span><br><span class="line">                   <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (resolve) &#123;	<span class="comment">//是否进行解析操作</span></span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>并发专题</title>
     <url>/2022/08/25/%E5%B9%B6%E5%8F%91%E4%B8%93%E9%A2%98/</url>
     <content><![CDATA[<h1 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h1><img src="/2022/08/25/%E5%B9%B6%E5%8F%91%E4%B8%93%E9%A2%98/1.png" style="zoom:80%;">
@@ -3371,9 +3447,12 @@
 </li>
 <li><p>醒来时机不同</p>
 <ul>
-<li>执行 sleep(long) 和 wait(long) 的线程都会在等待相应毫秒后醒来</li>
-<li>wait(long) 和 wait() 还可以被 notify 唤醒，wait() 如果不唤醒就一直等下去</li>
-<li>它们都可以被打断唤醒</li>
+<li><p>执行 sleep(long) 和 wait(long) 的线程都会在等待相应毫秒后醒来</p>
+</li>
+<li><p>wait(long) 和 wait() 还可以被 notify 唤醒，wait() 如果不唤醒就一直等下去</p>
+</li>
+<li><p>它们都可以被打断唤醒</p>
+</li>
 </ul>
 </li>
 <li><p>锁特性不同（重点）</p>
@@ -3384,6 +3463,20 @@
 </ul>
 </li>
 </ul>
+<br>
+
+<h1 id="lock和synchronized"><a href="#lock和synchronized" class="headerlink" title="lock和synchronized"></a>lock和synchronized</h1><h2 id="语法层面"><a href="#语法层面" class="headerlink" title="语法层面"></a>语法层面</h2><p>synchronized是关键字，源码在JVM中，用C++实现</p>
+<p>lock是接口，源码由jdk提供，用java语言实现</p>
+<p>使用synchronized时，退出同步代码块锁会自动释放，而使用Lock时，需要手动调用 unlock 方法释放锁</p>
+<br>
+
+<h2 id="功能层面"><a href="#功能层面" class="headerlink" title="功能层面"></a>功能层面</h2><p>二者都属于悲观锁，都具备基本的互斥，同步，锁重入</p>
+<p>Lock提供了许多synchronized不具备的功能，如：获取等待状态，公平锁，可打断，可超时，多条件变量</p>
+<p>Lock有适合不同场景的实现，如：ReentrantLock，ReentrantReadWriteLock</p>
+<br>
+
+<h2 id="性能层面"><a href="#性能层面" class="headerlink" title="性能层面"></a>性能层面</h2><p>在</p>
+<br>
 ]]></content>
       <tags>
         <tag>面试</tag>
@@ -3398,23 +3491,6 @@
 <p><em><strong>当其他类使用时，只需要调用 context的 registerBean方法，并传入自定义类的.class即可</strong></em></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">GenericApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericApplicationContext</span>();</span><br><span class="line">context.registerBean(ComponentScanPostProcessor.class);</span><br><span class="line"><span class="comment">//初始化容器</span></span><br><span class="line">context.refresh();</span><br><span class="line"><span class="comment">//for (String name : context.getBeanDefinitionNames()) &#123;</span></span><br><span class="line"><span class="comment">//    System.out.println(name);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//销毁容器</span></span><br><span class="line">context.close();</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>spring高级</category>
-      </categories>
-      <tags>
-        <tag>底层源码</tag>
-        <tag>spring高级</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>模拟解析@Bean注解</title>
-    <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90Bean%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90-Bean%E6%B3%A8%E8%A7%A3">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AtBeanPostProcessor</span> <span class="keyword">implements</span> <span class="title class_">BeanFactoryPostProcessor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postProcessBeanFactory</span></span><br><span class="line">            <span class="params">(ConfigurableListableBeanFactory configurableListableBeanFactory)</span></span><br><span class="line">            <span class="keyword">throws</span> BeansException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//读取类信息</span></span><br><span class="line">            <span class="type">CachingMetadataReaderFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CachingMetadataReaderFactory</span>();</span><br><span class="line">            <span class="type">MetadataReader</span> <span class="variable">reader</span> <span class="operator">=</span> factory</span><br><span class="line">                    .getMetadataReader(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;com/itheima/a05/Config.class&quot;</span>));</span><br><span class="line">            <span class="comment">//获取被@Bean标注的方法</span></span><br><span class="line">            <span class="comment">//1.获取和注解相关的元数据</span></span><br><span class="line">            <span class="comment">//2.进一步获取被@Bean注解标注的方法</span></span><br><span class="line">            Set&lt;MethodMetadata&gt; methods = reader</span><br><span class="line">                    .getAnnotationMetadata()</span><br><span class="line">                    .getAnnotatedMethods(Bean.class.getName());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (MethodMetadata method : methods) &#123;</span><br><span class="line">                System.out.println(method);</span><br><span class="line">                <span class="comment">//解析@Bean注解中的属性</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">initMethod</span> <span class="operator">=</span> (String) </span><br><span class="line">                        method.getAnnotationAttributes(Bean.class.getName()).get(<span class="string">&quot;initMethod&quot;</span>);</span><br><span class="line">                <span class="comment">//利用BeanDefinitionBuilder获取BeanDefinition，并加入bean工厂</span></span><br><span class="line">                <span class="type">BeanDefinitionBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> BeanDefinitionBuilder.genericBeanDefinition();</span><br><span class="line">                builder.setFactoryMethodOnBean(method.getMethodName(),<span class="string">&quot;config&quot;</span>);</span><br><span class="line">                <span class="comment">//指定自动装配模式(因为SqlSessionFactoryBean有一个dataSource参数)</span></span><br><span class="line">                builder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR);</span><br><span class="line">                <span class="keyword">if</span> (initMethod.length() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    builder.setInitMethodName(initMethod);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">AbstractBeanDefinition</span> <span class="variable">bd</span> <span class="operator">=</span> builder.getBeanDefinition();</span><br><span class="line">                <span class="comment">//注册Bean到容器中</span></span><br><span class="line">                <span class="keyword">if</span> (configurableListableBeanFactory </span><br><span class="line">                        <span class="keyword">instanceof</span> DefaultListableBeanFactory beanFactory) &#123;</span><br><span class="line">                    beanFactory.registerBeanDefinition(method.getMethodName(),bd);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>当其他类调用时，只需调用容器的registerBean方法，传入对实现类.class文件即可</strong></em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BeanApp</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(BeanApp.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//创建一个干净容器</span></span><br><span class="line">        <span class="type">GenericApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericApplicationContext</span>();</span><br><span class="line">        context.registerBean(<span class="string">&quot;config&quot;</span>, Config.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解析@Bean</span></span><br><span class="line">        context.registerBean(AtBeanPostProcessor.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化容器</span></span><br><span class="line">        context.refresh();</span><br><span class="line">        <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//销毁容器</span></span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>spring高级</category>
@@ -3610,6 +3686,37 @@
 ]]></content>
       <tags>
         <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>findClass方法源码</title>
+    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模拟解析@Bean注解</title>
+    <url>/2022/08/09/%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90Bean%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/%E5%AE%B9%E5%99%A8%E4%B8%8EBean/#%E6%A8%A1%E6%8B%9F%E8%A7%A3%E6%9E%90-Bean%E6%B3%A8%E8%A7%A3">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AtBeanPostProcessor</span> <span class="keyword">implements</span> <span class="title class_">BeanFactoryPostProcessor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postProcessBeanFactory</span></span><br><span class="line">            <span class="params">(ConfigurableListableBeanFactory configurableListableBeanFactory)</span></span><br><span class="line">            <span class="keyword">throws</span> BeansException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//读取类信息</span></span><br><span class="line">            <span class="type">CachingMetadataReaderFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CachingMetadataReaderFactory</span>();</span><br><span class="line">            <span class="type">MetadataReader</span> <span class="variable">reader</span> <span class="operator">=</span> factory</span><br><span class="line">                    .getMetadataReader(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;com/itheima/a05/Config.class&quot;</span>));</span><br><span class="line">            <span class="comment">//获取被@Bean标注的方法</span></span><br><span class="line">            <span class="comment">//1.获取和注解相关的元数据</span></span><br><span class="line">            <span class="comment">//2.进一步获取被@Bean注解标注的方法</span></span><br><span class="line">            Set&lt;MethodMetadata&gt; methods = reader</span><br><span class="line">                    .getAnnotationMetadata()</span><br><span class="line">                    .getAnnotatedMethods(Bean.class.getName());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (MethodMetadata method : methods) &#123;</span><br><span class="line">                System.out.println(method);</span><br><span class="line">                <span class="comment">//解析@Bean注解中的属性</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">initMethod</span> <span class="operator">=</span> (String) </span><br><span class="line">                        method.getAnnotationAttributes(Bean.class.getName()).get(<span class="string">&quot;initMethod&quot;</span>);</span><br><span class="line">                <span class="comment">//利用BeanDefinitionBuilder获取BeanDefinition，并加入bean工厂</span></span><br><span class="line">                <span class="type">BeanDefinitionBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> BeanDefinitionBuilder.genericBeanDefinition();</span><br><span class="line">                builder.setFactoryMethodOnBean(method.getMethodName(),<span class="string">&quot;config&quot;</span>);</span><br><span class="line">                <span class="comment">//指定自动装配模式(因为SqlSessionFactoryBean有一个dataSource参数)</span></span><br><span class="line">                builder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR);</span><br><span class="line">                <span class="keyword">if</span> (initMethod.length() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    builder.setInitMethodName(initMethod);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">AbstractBeanDefinition</span> <span class="variable">bd</span> <span class="operator">=</span> builder.getBeanDefinition();</span><br><span class="line">                <span class="comment">//注册Bean到容器中</span></span><br><span class="line">                <span class="keyword">if</span> (configurableListableBeanFactory </span><br><span class="line">                        <span class="keyword">instanceof</span> DefaultListableBeanFactory beanFactory) &#123;</span><br><span class="line">                    beanFactory.registerBeanDefinition(method.getMethodName(),bd);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>当其他类调用时，只需调用容器的registerBean方法，传入对实现类.class文件即可</strong></em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BeanApp</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(BeanApp.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//创建一个干净容器</span></span><br><span class="line">        <span class="type">GenericApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GenericApplicationContext</span>();</span><br><span class="line">        context.registerBean(<span class="string">&quot;config&quot;</span>, Config.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解析@Bean</span></span><br><span class="line">        context.registerBean(AtBeanPostProcessor.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化容器</span></span><br><span class="line">        context.refresh();</span><br><span class="line">        <span class="keyword">for</span> (String name : context.getBeanDefinitionNames()) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//销毁容器</span></span><br><span class="line">        context.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>spring高级</category>
+      </categories>
+      <tags>
+        <tag>底层源码</tag>
+        <tag>spring高级</tag>
       </tags>
   </entry>
 </search>
