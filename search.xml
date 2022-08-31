@@ -2771,12 +2771,10 @@
 <br>
 
 <h2 id="limit方法"><a href="#limit方法" class="headerlink" title="limit方法"></a>limit方法</h2><p><code>Stream&lt;T&gt; limit(long maxSize)</code>：取用前几个元素</p>
-<p>注意：参数是一个long 类型，如果流的长度大于参数，则进行截取；否则不进行操作</p>
+<p><strong style="color:red">注意：参数是一个long 类型，如果流的长度大于参数，则进行截取；否则不进行操作</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line"><span class="comment">//获取流中前三个元素</span></span><br><span class="line">stream.limit(<span class="number">3</span>).forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <br>
-
-<h2 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a>map方法</h2><br>
 
 <h2 id="skip方法"><a href="#skip方法" class="headerlink" title="skip方法"></a>skip方法</h2><p><code>Stream&lt;T&gt; skip(long n)</code>：跳过前几个元素</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line"><span class="comment">//跳过前3个元素</span></span><br><span class="line">stream.skip(<span class="number">3</span>).forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -2788,7 +2786,7 @@
 
 <br>
 
-<h2 id="map方法-1"><a href="#map方法-1" class="headerlink" title="map方法"></a>map方法</h2><p>将流中的元素进行再次加工形成一个新流，流中的每一个元素映射为另外的元素</p>
+<h2 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a>map方法</h2><p><strong style="color:red">将流中的元素进行再次加工形成一个新流，流中的每一个元素映射为另外的元素</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>);</span><br><span class="line">        stream.map((String str)-&gt;&#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.parseInt(str);</span><br><span class="line">        &#125;).forEach((Integer num)-&gt;&#123;</span><br><span class="line">            System.out.println(num);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
 
 <br>
