@@ -128,9 +128,9 @@
 <p><strong>针对接口编程，而不是针对具体实现编程</strong></p>
 <p><strong>松耦合设计</strong></p>
 <p>​    <img src="/2022/07/12/01-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99/10.png" alt="0"></p>
-]]></content>
+<h1 id="待整理"><a href="#待整理" class="headerlink" title="待整理"></a><strong style="color:red">待整理</strong></h1>]]></content>
       <categories>
-        <category>java</category>
+        <category>设计模式</category>
       </categories>
       <tags>
         <tag>设计模式</tag>
@@ -812,29 +812,6 @@
       </tags>
   </entry>
   <entry>
-    <title>10-直接内存</title>
-    <url>/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
-    <content><![CDATA[<p><strong>1、直接内存不是虚拟机运行时数据区的一部分，而是在Java堆外，直接向系统申请的内存空间</strong></p>
-<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/1.png"></p>
-<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/2.png"></p>
-<p>2、来源于NIO，通过存在堆中的 <code>DirectByteBuffer</code> 操作本地内存</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">BUFFER</span> <span class="operator">=</span> <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//1GB</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">//直接分配本地内存空间</span></span><br><span class="line">    <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocateDirect(BUFFER);</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存分配完毕&quot;</span>);</span><br><span class="line">    byteBuffer = <span class="literal">null</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存开始释放！&quot;</span>);</span><br><span class="line">    System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3、通常访问直接内存的速度会优于访问java堆的速度<strong>（读写性能更高，适用于读写频繁的场合）</strong></p>
-<p><strong>4、java的NIO库运行java程序使用直接内存用于数据缓冲</strong></p>
-<p>5、直接内存大小可以通过<code>MaxDirectMemorySize</code>设置，如果不指定，默认与堆的最大值<code>-Xmx</code>参数值一致，但是<strong>由于直接内存在java堆外，因此它不会直接受限于-Xmx指定的最大堆大小，它和java堆受限于操作系统能给出的最大内存</strong></p>
-<p><strong>6、简单理解： <code>java process memory = java heap + native memory</code></strong></p>
-<br>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1-nginx-目录，配置文件</title>
     <url>/2022/07/13/1-nginx-%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="使用-工具tree查看目录结构"><a href="#使用-工具tree查看目录结构" class="headerlink" title="使用 工具tree查看目录结构"></a><strong>使用</strong> <strong>工具tree查看目录结构</strong></h1><p><strong>1、安装tree工具：</strong> <strong>yum install -y tree</strong></p>
@@ -961,6 +938,29 @@
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>10-直接内存</title>
+    <url>/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
+    <content><![CDATA[<p><strong>1、直接内存不是虚拟机运行时数据区的一部分，而是在Java堆外，直接向系统申请的内存空间</strong></p>
+<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/1.png"></p>
+<p><img src="/2022/07/15/10-%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/2.png"></p>
+<p>2、来源于NIO，通过存在堆中的 <code>DirectByteBuffer</code> 操作本地内存</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">BUFFER</span> <span class="operator">=</span> <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1024</span>;<span class="comment">//1GB</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="comment">//直接分配本地内存空间</span></span><br><span class="line">    <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.allocateDirect(BUFFER);</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存分配完毕&quot;</span>);</span><br><span class="line">    byteBuffer = <span class="literal">null</span>;</span><br><span class="line">    System.out.println(<span class="string">&quot;直接内存开始释放！&quot;</span>);</span><br><span class="line">    System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、通常访问直接内存的速度会优于访问java堆的速度<strong>（读写性能更高，适用于读写频繁的场合）</strong></p>
+<p><strong>4、java的NIO库运行java程序使用直接内存用于数据缓冲</strong></p>
+<p>5、直接内存大小可以通过<code>MaxDirectMemorySize</code>设置，如果不指定，默认与堆的最大值<code>-Xmx</code>参数值一致，但是<strong>由于直接内存在java堆外，因此它不会直接受限于-Xmx指定的最大堆大小，它和java堆受限于操作系统能给出的最大内存</strong></p>
+<p><strong>6、简单理解： <code>java process memory = java heap + native memory</code></strong></p>
+<br>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
       </tags>
   </entry>
   <entry>
@@ -2021,34 +2021,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2-2-函数调用时间复杂度分析</title>
-    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
-<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
-<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
-<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
-<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
-<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
-<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
-<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2-3-算法的空间复杂度分析</title>
     <url>/2022/07/12/2-3-%E7%AE%97%E6%B3%95%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="一、java中常见内存占用"><a href="#一、java中常见内存占用" class="headerlink" title="一、java中常见内存占用"></a>一、java中常见内存占用</h2><p>1.基本数据类型内存占用情况：</p>
@@ -2069,6 +2041,34 @@
 <p>所以从空间占用的角度讲，算法一要优于算法二。</p>
 <p>由于java中有内存垃圾回收机制，并且jvm对程序的内存占用也有优化（例如即时编译），我们无法精确的评估一 个java程序的内存占用情况，但是了解了java的基本内存占用，使我们可以对java程序的内存占用情况进行估算。 由于现在的计算机设备内存一般都比较大，基本上个人计算机都是4G起步，大的可以达到32G</p>
 <p>所以<strong>内存占用一般 情况下并不是我们算法的瓶颈，普通情况下直接说复杂度，默认为算法的时间复杂度。</strong></p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-2-函数调用时间复杂度分析</title>
+    <url>/2022/07/12/2-2-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="案例一："><a href="#案例一：" class="headerlink" title="案例一："></a><strong>案例一：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>show方法的时间复杂度为O(1),main方法的时间复杂度是O(n)</strong></p>
+<h2 id="案例二："><a href="#案例二：" class="headerlink" title="案例二："></a><strong>案例二：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在main方法中，有一个for循环，循环体调用了show方法，由于show方法内部也有一个for循环</p>
+<p><strong>所以show方法 的时间复杂度为O(n)，main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="案例三："><a href="#案例三：" class="headerlink" title="案例三："></a><strong>案例三：</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">int</span> n=<span class="number">100</span>;</span><br><span class="line">    show(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        show(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; i++) &#123;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在show方法中，有一个for循环，所以show方法的时间复杂度为O(n),在main方法中，show(n)这行代码内部执行 的次数为n，第一个for循环内调用了show方法，所以其执行次数为n^2,第二个嵌套for循环内只执行了一行代码，</p>
+<p>所以其执行次数为n^2,那么<strong>main方法总执行次数为n+n^2+n^2&#x3D;2n^2+n</strong>。</p>
+<p>根据大O推导规则，去掉n保留最高阶 项，并去掉最高阶项的常数因子2，所以<strong>最终main方法的时间复杂度为O(n^2)</strong></p>
+<h2 id="最坏情况"><a href="#最坏情况" class="headerlink" title="最坏情况"></a><strong>最坏情况</strong></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] arr=&#123;<span class="number">11</span>,<span class="number">10</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num==arr[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最好情况：</strong> 查找的第一个数字就是期望的数字，那么算法的时间复杂度为O(1) </p>
+<p><strong>最坏情况：</strong> 查找的最后一个数字，才是期望的数字，那么算法的时间复杂度为O(n) </p>
+<p><strong>平均情况：</strong> 任何数字查找的平均成本是O(n&#x2F;2) <strong>最坏情况是一种保证，在应用中，这是一种最基本的保障，即使在最坏情况下，也能够正常提供服务，所以，除非 特别指定，</strong> <strong>我们提到的运行时间都指的是最坏情况下的运行时间。</strong></p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -2174,137 +2174,6 @@
       </categories>
       <tags>
         <tag>数据结构基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-nginx-静态资源部署</title>
-    <url>/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h1 id="静态资源的配置指令"><a href="#静态资源的配置指令" class="headerlink" title="静态资源的配置指令"></a><strong>静态资源的配置指令</strong></h1><h2 id="listen指令：-用来配置监听端口"><a href="#listen指令：-用来配置监听端口" class="headerlink" title="listen指令： 用来配置监听端口"></a><strong>listen指令：</strong> <strong>用来配置监听端口</strong></h2><p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/1.png"></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/2.png"></p>
-<p><strong>default_server属性是标识符，用来将此虚拟主机设置成默认主机</strong></p>
-<p><strong>所谓的默认主机指的是如果没有匹配到对应的address:port，则会默认执行的。</strong> 如果不指定默认使用的是第一个server</p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/3.png"></p>
-<br>
-
-<h2 id="server-name指令："><a href="#server-name指令：" class="headerlink" title="server_name指令："></a><strong>server_name指令：</strong></h2><p><strong>用来设置虚拟主机服务名称</strong></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/4.png"></p>
-<p><strong>三种匹配方式：精确匹配、通配符匹配、正则表达式匹配</strong></p>
-<br>
-
-<h3 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a><strong>精确匹配</strong></h3><p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/5.png"></p>
-<p>域名是要收取一定的费用，所以可以使用修改hosts文件来制作一些虚拟域名来使用。需要修改 <code>/etc/hosts</code> 文件来添加</p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/6.png"></p>
-<br>
-
-<h3 id="通配符匹配"><a href="#通配符匹配" class="headerlink" title="通配符匹配"></a><strong>通配符匹配</strong></h3><p><strong>server_name中支持通配符”*“,但需要注意的是通配符不能出现在域名的中间，只能出现在首段或尾段</strong></p>
-<p><strong>(*)代表任意字符</strong></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/7.png"></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/8.png"></p>
-<br>
-
-<h3 id="正则表达式匹配"><a href="#正则表达式匹配" class="headerlink" title="正则表达式匹配"></a><strong>正则表达式匹配</strong></h3><p><strong>server_name中可以使用正则表达式，并且使用 ~ 作为正则表达式字符串的开始标记</strong></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/9.png"></p>
-<p>括号取值</p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/10.png"></p>
-<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/11.png"></p>
-<br>
-
-<h3 id="匹配执行顺序"><a href="#匹配执行顺序" class="headerlink" title="匹配执行顺序"></a><strong>匹配执行顺序</strong></h3><p><em><strong>1、准确匹配</strong></em></p>
-<p><em><strong>2、通配符在开始时匹配</strong></em></p>
-<p><em><strong>3、通配符在结束时匹配</strong></em></p>
-<p><em><strong>4、正则表达式匹配</strong></em></p>
-<p><em><strong>5、被默认的default_server处理，如果没有指定默认找第一个server</strong></em></p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>4-nginx-反向代理</title>
-    <url>/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Nginx反向代理的配置语法"><a href="#Nginx反向代理的配置语法" class="headerlink" title="Nginx反向代理的配置语法"></a><strong>Nginx反向代理的配置语法</strong></h1><p><strong style="color:red;"><strong>Nginx反向代理模块的指令是由ngx_http_proxy_module模块进行解析</strong></strong></p>
-<h2 id="proxy-pass"><a href="#proxy-pass" class="headerlink" title="proxy_pass"></a><strong>proxy_pass</strong></h2><p><strong style="color:red;"><strong>用来设置被代理服务器地址，可以是主机名称、IP地址加端口号形式</strong></strong></p>
-<p><strong>URL：需要进行设置的被代理服务器地址，包含传输协议(http,https:&#x2F;&#x2F;)、主机名称或IP地址加端口号、URI等要素</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/1.png"></p>
-<p><strong>当proxy_pass时，要注意是否要在URL后面加</strong> <strong>&#x2F;</strong> <strong>的问题：</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/2.png"></p>
-<p><strong>当客户端访问</strong> <strong><a href="http://localhost/index.html%EF%BC%8C%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84">http://localhost/index.html，效果是一样的</a></strong></p>
-<br>
-
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/3.png"></p>
-<p><strong>当客户端访问</strong> <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong> <strong>的时候</strong></p>
-<p>第一个proxy_pass就变成了  <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong></p>
-<p>第二个proxy_pass就变成了  <strong><a href="http://localhost/index.html">http://localhost/index.html</a></strong>  效果就不一样了</p>
-<p><strong>当没有斜杠时，location后的路径会加上去，有斜杠时，则不会。</strong></p>
-<br>
-
-<h2 id="proxy-set-header"><a href="#proxy-set-header" class="headerlink" title="proxy_set_header"></a><strong>proxy_set_header</strong></h2><p><strong style="color:red;"><strong>更改Nginx服务器接收到的客户端请求的请求头信息，然后将新的请求头发送给代理的服务器</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/4.png"></p>
-<p><strong>测试案例：以140为代理服务器，141为被代理服务器，发送请求头信息username为HZY</strong></p>
-<p><strong>代理服务器</strong> [192.168.174.140]</p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/5.png"></p>
-<p><strong>被代理服务器</strong> [192.168.174.141]</p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/6.png"></p>
-<br>
-
-<h2 id="proxy-redirect"><a href="#proxy-redirect" class="headerlink" title="proxy_redirect"></a><strong>proxy_redirect</strong></h2><p><strong style="color:red;"><strong>重置头信息中的”Location”和”Refresh”的值</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7.png"></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/8.png"></p>
-<p><strong>测试案例：</strong></p>
-<p><strong>当发送192.168.174.140:8081&#x2F;add.html请求时，代理服务端（140）将请求代理到 141</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/9.png"></p>
-<p><strong>服务端（141）判断当前请求的资源路径是否为空，如果为空，则返回状态码302，临时重定向到192.168.174.141:80，访问默认的index.html</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/10.png"></p>
-<br>
-
-<h2 id="反向代理案例"><a href="#反向代理案例" class="headerlink" title="反向代理案例"></a><strong>反向代理案例</strong></h2><p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/11.png"></p>
-<p><strong>如图所示，当用户发送请求到代理服务器端，<a href="http://192.168.174.140:8082/server1%EF%BC%8C%E8%AF%B7%E6%B1%82%E5%B0%86%E4%BC%9A%E8%A2%AB%E4%BB%A3%E7%90%86%E5%88%B0http://192.168.174.141:9001/%E4%B8%8A%E9%9D%A2">http://192.168.174.140:8082/server1，请求将会被代理到http://192.168.174.141:9001/上面</a></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/12.png"></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/13.png"></p>
-<br>
-
-<h1 id="反向代理系统调优"><a href="#反向代理系统调优" class="headerlink" title="反向代理系统调优"></a><strong>反向代理系统调优</strong></h1><p><strong>反向代理值：Buffer（缓冲）和Cache（缓存）</strong></p>
-<p><strong style="color:red;"><strong>相同点：两种方式都是提高IO吞吐效率，提升nginx代理的性能</strong></strong></p>
-<p><strong style="color:red;"><strong>不同点：</strong></strong></p>
-<p><strong style="color:red;"><strong>Buffer是用来解决不同设备之间数据传递速度不一致导致的性能低的问题，BUffer中的数据一旦此次操作完成后，就可以删除</strong></strong></p>
-<p><strong style="color:red;"><em><strong>Cache主要是备份，将被代理服务器的数据缓存一份到代理服务器上去。当客户端再次获取相同的数据时，就只需要从代理服务器上去获取，而不需要再次通过被代理服务器，效率高，缓存中的数据可以重复使用，只有满足特定的条件才会删除</strong></em></strong></p>
-<h2 id="Proxy-Buffer相关指令"><a href="#Proxy-Buffer相关指令" class="headerlink" title="Proxy Buffer相关指令"></a><strong>Proxy Buffer相关指令</strong></h2><h3 id="1）proxy-buffering"><a href="#1）proxy-buffering" class="headerlink" title="1）proxy_buffering"></a><strong>1）proxy_buffering</strong></h3><p><strong style="color:red;"><strong>该指令用来开启或者关闭代理服务器的缓冲区</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/14.png"></p>
-<br>
-
-<h3 id="2）proxy-buffers"><a href="#2）proxy-buffers" class="headerlink" title="2）proxy_buffers"></a><strong>2）proxy_buffers</strong></h3><p><strong style="color:red;"><strong>指定单个连接从代理服务器读取响应的缓存区的个数和大小</strong></strong></p>
-<p><strong>number：缓存区的个数</strong></p>
-<p><strong>size：每个缓存区的大小，缓存区的总大小为number*size</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/15.png"></p>
-<br>
-
-<h3 id="3）proxy-buffer-size"><a href="#3）proxy-buffer-size" class="headerlink" title="3）proxy_buffer_size"></a><strong>3）proxy_buffer_size</strong></h3><p><strong style="color:red;"><strong>设置从被代理服务器获取的第一部分响应数据的大小。保持与proxy_buffers中的size一致即可，当然也可以更小。</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/16.png"></p>
-<br>
-
-<h3 id="4）proxy-busy-buffers-size"><a href="#4）proxy-busy-buffers-size" class="headerlink" title="4）proxy_busy_buffers_size"></a><strong>4）proxy_busy_buffers_size</strong></h3><p><strong style="color:red;"><strong>用来限制同时处于BUSY状态的缓冲总大小。</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/17.png"></p>
-<br>
-
-<h3 id="5）proxy-temp-path"><a href="#5）proxy-temp-path" class="headerlink" title="5）proxy_temp_path"></a><strong>5）proxy_temp_path</strong></h3><p><strong style="color:red;"><strong>当缓冲区存满后，仍未被Nginx服务器完全接受，响应数据就会被临时存放在磁盘文件上，该指令设置文件路径</strong></strong></p>
-<p><strong>注意path最多设置三层</strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/18.png"></p>
-<br>
-
-<h3 id="6）proxy-temp-file-write-size"><a href="#6）proxy-temp-file-write-size" class="headerlink" title="6）proxy_temp_file_write_size"></a><strong>6）proxy_temp_file_write_size</strong></h3><p><strong style="color:red;"><strong>用来设置磁盘上缓冲文件的大小</strong></strong></p>
-<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/19.png"></p>
-<br>
-
-<h1 id="通用网站的配置"><a href="#通用网站的配置" class="headerlink" title="通用网站的配置"></a><strong>通用网站的配置</strong></h1><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">proxy_buffering</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">proxy_buffer_size</span> <span class="number">4</span> <span class="number">32k</span>;</span><br><span class="line"><span class="attribute">proxy_busy_buffers_size</span> <span class="number">64k</span>;</span><br><span class="line"><span class="attribute">proxy_temp_file_write_size</span> <span class="number">64k</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -2440,6 +2309,63 @@
 <p><strong>该指令提供在其中指定流服务器指令的配置文件上下文。和http指令同级</strong></p>
 <p><strong>案例：</strong></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>LeetCode</title>
+    <url>/2022/08/30/LeetCode/</url>
+    <content><![CDATA[<h1 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h1><p><strong style="color:red"></strong></p>
+<h2 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h2><h3 id="哈希表-1"><a href="#哈希表-1" class="headerlink" title="哈希表"></a>哈希表</h3><p>哈希表是根据关键码的值而直接进行访问的数据结构。实际上其实数组也是一张哈希表，哈希表中关键码就是数组的索引下标，然后通过下标直接访问数组中的元素</p>
+<img src="/2022/08/30/LeetCode/1.png" style="zoom:50%;">
+
+<p><strong style="color:red">一般哈希表都是用来快速判断一个元素是否出现集合里</strong></p>
+<p><strong style="color:red">哈希法是牺牲了空间换取了时间，因为要使用额外的数组，set或者是map来存放数据，才能实现快速的查找</strong></p>
+<br>
+
+<h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p><strong style="color:red">哈希函数，就是将元素直接映射为哈希表上的索引，然后就可以通过查询索引下标进行快速访问</strong></p>
+<p>哈希函数如下图所示，通过hashCode把名字转化为数值，一般hashcode是通过特定编码方式，可以将其他数据格式转化为不同的数值。</p>
+<br>
+
+<h3 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h3><p><strong style="color:red">当出现哈希碰撞的时候，发生冲突的元素都被存储在链表中</strong></p>
+<p>拉链法就是要选择适当的哈希表的大小，这样既不会因为数组空值而浪费大量内存，也不会因为链表太长而在查找上浪费太多时间。</p>
+<h3 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h3><p><strong style="color:red">使用线性探测法，一定要保证哈希表大小大于数据大小。 因为需要依靠哈希表中的空位来解决碰撞问题</strong></p>
+<p>如果出现冲突的位置，那么就向下找一个空位放置。所以要求tableSize一定要大于dataSize ，要不然哈希表上就没有空置的位置来存放冲突的数据了</p>
+<br>
+
+<h2 id="有效的字母异位词"><a href="#有效的字母异位词" class="headerlink" title="有效的字母异位词"></a><a href="https://leetcode.cn/problems/valid-anagram/">有效的字母异位词</a></h2><img src="/2022/08/30/LeetCode/2.png" style="zoom:90%;">
+
+<p><strong style="color:red">定义一个数组记录字符串s里字符出现的次数。然后将把字符映射到数组也就是哈希表的索引下标上，因为字符a到字符z的ASCII是26个连续的数值，所以字符a映射为下标0，相应的字符z映射为下标25</strong></p>
+<blockquote>
+<p>首先遍历字符串s，将 <code>s[i] -  &#39;a&#39;</code> 所在的元素做++ ，这样就将字符串s中字符出现的次数，统计出来了</p>
+<p>然后再遍历字串t，对t中出现的字符映射数组索引上的数值再做–</p>
+<p>最后，检查数组上有无元素不为零，如果又，就说明s和t中字符出现的次数肯定不一样</p>
+<p>时间复杂度为O(n)，空间上因为定义了常量大小的辅助数组，空间复杂度为O(1)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAnagram</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] nums = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : s.toCharArray()) &#123;</span><br><span class="line">        nums[c-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : t.toCharArray()) &#123;</span><br><span class="line">        nums[c-<span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="赎金信"><a href="#赎金信" class="headerlink" title="赎金信"></a><a href="https://leetcode.cn/problems/ransom-note/">赎金信</a></h2><img src="/2022/08/30/LeetCode/3.png" style="zoom:80%;">
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canConstruct</span><span class="params">(String ransomNote, String magazine)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] nums = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : magazine.toCharArray()) &#123;</span><br><span class="line">        nums[c - <span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : ransomNote.toCharArray()) &#123;</span><br><span class="line">        nums[c - <span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="字母异位词分组"><a href="#字母异位词分组" class="headerlink" title="字母异位词分组"></a><a href="https://leetcode.cn/problems/group-anagrams/">字母异位词分组</a></h2><img src="/2022/08/30/LeetCode/4.png" style="zoom:80%;">
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
   </entry>
   <entry>
     <title>AOP</title>
@@ -2757,24 +2683,244 @@
       </tags>
   </entry>
   <entry>
+    <title>3-nginx-静态资源部署</title>
+    <url>/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="静态资源的配置指令"><a href="#静态资源的配置指令" class="headerlink" title="静态资源的配置指令"></a><strong>静态资源的配置指令</strong></h1><h2 id="listen指令：-用来配置监听端口"><a href="#listen指令：-用来配置监听端口" class="headerlink" title="listen指令： 用来配置监听端口"></a><strong>listen指令：</strong> <strong>用来配置监听端口</strong></h2><p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/1.png"></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/2.png"></p>
+<p><strong>default_server属性是标识符，用来将此虚拟主机设置成默认主机</strong></p>
+<p><strong>所谓的默认主机指的是如果没有匹配到对应的address:port，则会默认执行的。</strong> 如果不指定默认使用的是第一个server</p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/3.png"></p>
+<br>
+
+<h2 id="server-name指令："><a href="#server-name指令：" class="headerlink" title="server_name指令："></a><strong>server_name指令：</strong></h2><p><strong>用来设置虚拟主机服务名称</strong></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/4.png"></p>
+<p><strong>三种匹配方式：精确匹配、通配符匹配、正则表达式匹配</strong></p>
+<br>
+
+<h3 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a><strong>精确匹配</strong></h3><p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/5.png"></p>
+<p>域名是要收取一定的费用，所以可以使用修改hosts文件来制作一些虚拟域名来使用。需要修改 <code>/etc/hosts</code> 文件来添加</p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/6.png"></p>
+<br>
+
+<h3 id="通配符匹配"><a href="#通配符匹配" class="headerlink" title="通配符匹配"></a><strong>通配符匹配</strong></h3><p><strong>server_name中支持通配符”*“,但需要注意的是通配符不能出现在域名的中间，只能出现在首段或尾段</strong></p>
+<p><strong>(*)代表任意字符</strong></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/7.png"></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/8.png"></p>
+<br>
+
+<h3 id="正则表达式匹配"><a href="#正则表达式匹配" class="headerlink" title="正则表达式匹配"></a><strong>正则表达式匹配</strong></h3><p><strong>server_name中可以使用正则表达式，并且使用 ~ 作为正则表达式字符串的开始标记</strong></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/9.png"></p>
+<p>括号取值</p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/10.png"></p>
+<p><img src="/2022/07/13/3-nginx-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%83%A8%E7%BD%B2/11.png"></p>
+<br>
+
+<h3 id="匹配执行顺序"><a href="#匹配执行顺序" class="headerlink" title="匹配执行顺序"></a><strong>匹配执行顺序</strong></h3><p><em><strong>1、准确匹配</strong></em></p>
+<p><em><strong>2、通配符在开始时匹配</strong></em></p>
+<p><em><strong>3、通配符在结束时匹配</strong></em></p>
+<p><em><strong>4、正则表达式匹配</strong></em></p>
+<p><em><strong>5、被默认的default_server处理，如果没有指定默认找第一个server</strong></em></p>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Stream流</title>
+    <url>/2022/08/31/Stream%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="获取流"><a href="#获取流" class="headerlink" title="获取流"></a>获取流</h1><h2 id="根据List获取流"><a href="#根据List获取流" class="headerlink" title="根据List获取流"></a>根据List获取流</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;Object&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">Stream&lt;Object&gt; stream = list.stream();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="根据Set集合获取流"><a href="#根据Set集合获取流" class="headerlink" title="根据Set集合获取流"></a>根据Set集合获取流</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashSet&lt;Object&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">Stream&lt;Object&gt; stream = set.stream();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="根据Map集合获取流"><a href="#根据Map集合获取流" class="headerlink" title="根据Map集合获取流"></a><strong style="color:red">根据Map集合获取流</strong></h2><h3 id="根据键获取流"><a href="#根据键获取流" class="headerlink" title="根据键获取流"></a>根据键获取流</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashMap&lt;Object, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">Stream&lt;Object&gt; stream = map.keySet().stream();</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据值获取流"><a href="#根据值获取流" class="headerlink" title="根据值获取流"></a>根据值获取流</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashMap&lt;Object, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">Stream&lt;Object&gt; stream = map.values().stream();</span><br></pre></td></tr></table></figure>
+
+<h3 id="根据键值对对象获取值"><a href="#根据键值对对象获取值" class="headerlink" title="根据键值对对象获取值"></a>根据键值对对象获取值</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HashMap&lt;Object, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">Stream&lt;Map.Entry&lt;Object, Object&gt;&gt; stream = map.entrySet().stream();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="根据数组获取流"><a href="#根据数组获取流" class="headerlink" title="根据数组获取流"></a>根据数组获取流</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String[] strs = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>&#125;;</span><br><span class="line">Stream&lt;String&gt; stream = Stream.of(strs);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a><strong style="color:red">常用方法</strong></h1><p>终结方法：返回值类型不再是Stream接口本身类型的方法</p>
+<p>非终结方法（延迟方法）：返回值类型仍然是Stream接口自身类型的方法，除了终结方法都是延迟方法</p>
+<img src="/2022/08/31/Stream%E6%B5%81/1.png" style="zoom:80%;">
+
+<h2 id="count方法"><a href="#count方法" class="headerlink" title="count方法"></a>count方法</h2><p><code>long count();</code>：统计流中的元素，返回long类型数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;Object&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> list.stream().count();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="forEach方法"><a href="#forEach方法" class="headerlink" title="forEach方法"></a>forEach方法</h2><p><code>void forEach(Consumer&lt;? super T&gt; action)</code>：逐一处理流中的元素</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">list.forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="filter方法"><a href="#filter方法" class="headerlink" title="filter方法"></a>filter方法</h2><p><code>Stream&lt;T&gt; filter(Predicate&lt;? super ?&gt; predicate)</code>：过滤出满足条件的元素</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line">stream.filter((String str)-&gt;&#123;</span><br><span class="line">    <span class="comment">//过滤出所有以&quot;a&quot;开头的字符串</span></span><br><span class="line">    <span class="keyword">return</span> str.startsWith(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;).forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="limit方法"><a href="#limit方法" class="headerlink" title="limit方法"></a>limit方法</h2><p><code>Stream&lt;T&gt; limit(long maxSize)</code>：取用前几个元素</p>
+<p>注意：参数是一个long 类型，如果流的长度大于参数，则进行截取；否则不进行操作</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line"><span class="comment">//获取流中前三个元素</span></span><br><span class="line">stream.limit(<span class="number">3</span>).forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a>map方法</h2><br>
+
+<h2 id="skip方法"><a href="#skip方法" class="headerlink" title="skip方法"></a>skip方法</h2><p><code>Stream&lt;T&gt; skip(long n)</code>：跳过前几个元素</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line"><span class="comment">//跳过前3个元素</span></span><br><span class="line">stream.skip(<span class="number">3</span>).forEach((String str)-&gt;&#123;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="concat方法"><a href="#concat方法" class="headerlink" title="concat方法"></a>concat方法</h2><p><code>public static &lt;T&gt; Stream&lt;T&gt; concat(Stream&lt;? extends T&gt; a, Stream&lt;? extends T&gt; b)</code>：合并两个流</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream1 = Stream.of(<span class="string">&quot;abc&quot;</span>, <span class="string">&quot;bbc&quot;</span>, <span class="string">&quot;cba&quot;</span>, <span class="string">&quot;aac&quot;</span>);</span><br><span class="line">        Stream&lt;Integer&gt; stream2 = Stream.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">        Stream&lt;? <span class="keyword">extends</span> <span class="title class_">Serializable</span>&gt; stream = Stream.concat(stream1, stream2);</span><br><span class="line">        stream.forEach((Object res)-&gt;&#123;</span><br><span class="line">            System.out.println(res);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="map方法-1"><a href="#map方法-1" class="headerlink" title="map方法"></a>map方法</h2><p>将流中的元素进行再次加工形成一个新流，流中的每一个元素映射为另外的元素</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>);</span><br><span class="line">        stream.map((String str)-&gt;&#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.parseInt(str);</span><br><span class="line">        &#125;).forEach((Integer num)-&gt;&#123;</span><br><span class="line">            System.out.println(num);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="collect-方法"><a href="#collect-方法" class="headerlink" title="collect() 方法"></a>collect() 方法</h2><p>收集流中的数据到集合或者数组中去</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>);</span><br><span class="line">      <span class="comment">//收集流中的数据到list中</span></span><br><span class="line">      List&lt;String&gt; list = stream.collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">      <span class="comment">//收集流中的数据到set</span></span><br><span class="line">      Set&lt;String&gt; set = stream.collect(Collectors.toSet());</span><br><span class="line"></span><br><span class="line">      <span class="comment">//收集流中的数据到指定集合中（此处是ArrayList）</span></span><br><span class="line">      ArrayList&lt;String&gt; arrayList = stream.collect(Collectors.toCollection(ArrayList::<span class="keyword">new</span>));</span><br><span class="line"></span><br><span class="line">      <span class="comment">//收集 Stream 流中的数据到数组中   使用 toArray()无参</span></span><br><span class="line">      <span class="comment">//注意：此处的strs1默认为Object[]无法获取length等参数</span></span><br><span class="line">      <span class="comment">//可以将其强转为String[]</span></span><br><span class="line">      Object[] strs1 = stream.toArray();</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//收集 Stream 流中的数据到数组中   使用有参返回指定类型数组</span></span><br><span class="line">      String[] strs2 = stream.toArray(String[]::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="Stream流中数据聚合-x2F-分组-x2F-分区-x2F-拼接操作"><a href="#Stream流中数据聚合-x2F-分组-x2F-分区-x2F-拼接操作" class="headerlink" title="Stream流中数据聚合&#x2F;分组&#x2F;分区&#x2F;拼接操作"></a><strong>Stream流中数据聚合&#x2F;分组&#x2F;分区&#x2F;拼接操作</strong></h1><blockquote>
+<p>先创建一个实体类Student方便进行演示</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String name;	<span class="comment">//名字</span></span><br><span class="line">   <span class="keyword">private</span> <span class="type">int</span> age;	<span class="comment">//年龄</span></span><br><span class="line">   <span class="keyword">private</span> <span class="type">int</span> score;	<span class="comment">//分数</span></span><br><span class="line">   <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> age, <span class="type">int</span> score)</span> &#123;</span><br><span class="line">       <span class="built_in">this</span>.name = name;</span><br><span class="line">       <span class="built_in">this</span>.age = age;</span><br><span class="line">       <span class="built_in">this</span>.score = score;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123; <span class="built_in">this</span>.name = name; &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123; <span class="keyword">return</span> age; &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123; <span class="built_in">this</span>.age = age; &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getScore</span><span class="params">()</span> &#123; <span class="keyword">return</span> score; &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setScore</span><span class="params">(<span class="type">int</span> score)</span> &#123; <span class="built_in">this</span>.score = score; &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">               <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">               <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">               <span class="string">&quot;, score=&quot;</span> + score +</span><br><span class="line">               <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream&lt;Student&gt; studentStream = Stream.of(</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;A&quot;</span>, <span class="number">10</span>, <span class="number">90</span>),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;B&quot;</span>, <span class="number">12</span>, <span class="number">92</span>),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;C&quot;</span>, <span class="number">14</span>, <span class="number">94</span>),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;D&quot;</span>, <span class="number">16</span>, <span class="number">96</span>)</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">//1、获取分数最大值</span></span><br><span class="line">        Optional&lt;Student&gt; max = studentStream.collect(Collectors.maxBy((s1, s2) -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> s1.getScore() - s2.getScore();</span><br><span class="line">        &#125;));</span><br><span class="line">        <span class="comment">//化简后</span></span><br><span class="line"><span class="comment">//        Optional&lt;Student&gt; max = studentStream.max(Comparator.comparingInt(Student::getScore));</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、求年龄平均值</span></span><br><span class="line">        <span class="type">Double</span> <span class="variable">age</span> <span class="operator">=</span> studentStream.collect(Collectors.averagingInt(Student::getAge));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、统计学生数量</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">count</span> <span class="operator">=</span> studentStream.collect(Collectors.counting());</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="分组操作"><a href="#分组操作" class="headerlink" title="分组操作"></a>分组操作</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1、按照年龄进行分组</span></span><br><span class="line">Map&lt;Integer, List&lt;Student&gt;&gt; map1 = studentStream.collect(Collectors.groupingBy(Student::getAge));</span><br><span class="line">map1.forEach((key,value)-&gt;&#123;</span><br><span class="line">    System.out.println(key+<span class="string">&quot;:&quot;</span>+value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 16:[Student&#123;name=&#x27;D&#x27;, age=16, score=96&#125;]</span></span><br><span class="line"><span class="comment"> * 10:[Student&#123;name=&#x27;A&#x27;, age=10, score=90&#125;]</span></span><br><span class="line"><span class="comment"> * 12:[Student&#123;name=&#x27;B&#x27;, age=12, score=92&#125;]</span></span><br><span class="line"><span class="comment"> * 14:[Student&#123;name=&#x27;C&#x27;, age=14, score=94&#125;]</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2、将分数大于90的分为优秀，小于90分为良</span></span><br><span class="line">Map&lt;String, List&lt;Student&gt;&gt; map2 = studentStream.collect(Collectors.groupingBy(s-&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span> (s.getScore()&gt;<span class="number">90</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;优秀&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;良&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line">map2.forEach((key,value)-&gt;&#123;</span><br><span class="line">    System.out.println(key+<span class="string">&quot;:&quot;</span>+value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 优秀:[Student&#123;name=&#x27;B&#x27;, age=12, score=92&#125;</span></span><br><span class="line"><span class="comment"> * 			Student&#123;name=&#x27;C&#x27;, age=14, score=94&#125;</span></span><br><span class="line"><span class="comment"> *			Student&#123;name=&#x27;D&#x27;, age=16, score=96&#125;]</span></span><br><span class="line"><span class="comment"> * 良:[Student&#123;name=&#x27;A&#x27;, age=10, score=90&#125;]</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>javase</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4-nginx-反向代理</title>
+    <url>/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Nginx反向代理的配置语法"><a href="#Nginx反向代理的配置语法" class="headerlink" title="Nginx反向代理的配置语法"></a><strong>Nginx反向代理的配置语法</strong></h1><p><strong style="color:red;"><strong>Nginx反向代理模块的指令是由ngx_http_proxy_module模块进行解析</strong></strong></p>
+<h2 id="proxy-pass"><a href="#proxy-pass" class="headerlink" title="proxy_pass"></a><strong>proxy_pass</strong></h2><p><strong style="color:red;"><strong>用来设置被代理服务器地址，可以是主机名称、IP地址加端口号形式</strong></strong></p>
+<p><strong>URL：需要进行设置的被代理服务器地址，包含传输协议(http,https:&#x2F;&#x2F;)、主机名称或IP地址加端口号、URI等要素</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/1.png"></p>
+<p><strong>当proxy_pass时，要注意是否要在URL后面加</strong> <strong>&#x2F;</strong> <strong>的问题：</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/2.png"></p>
+<p><strong>当客户端访问</strong> <strong><a href="http://localhost/index.html%EF%BC%8C%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84">http://localhost/index.html，效果是一样的</a></strong></p>
+<br>
+
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/3.png"></p>
+<p><strong>当客户端访问</strong> <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong> <strong>的时候</strong></p>
+<p>第一个proxy_pass就变成了  <strong><a href="http://localhost/server/index.html">http://localhost/server/index.html</a></strong></p>
+<p>第二个proxy_pass就变成了  <strong><a href="http://localhost/index.html">http://localhost/index.html</a></strong>  效果就不一样了</p>
+<p><strong>当没有斜杠时，location后的路径会加上去，有斜杠时，则不会。</strong></p>
+<br>
+
+<h2 id="proxy-set-header"><a href="#proxy-set-header" class="headerlink" title="proxy_set_header"></a><strong>proxy_set_header</strong></h2><p><strong style="color:red;"><strong>更改Nginx服务器接收到的客户端请求的请求头信息，然后将新的请求头发送给代理的服务器</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/4.png"></p>
+<p><strong>测试案例：以140为代理服务器，141为被代理服务器，发送请求头信息username为HZY</strong></p>
+<p><strong>代理服务器</strong> [192.168.174.140]</p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/5.png"></p>
+<p><strong>被代理服务器</strong> [192.168.174.141]</p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/6.png"></p>
+<br>
+
+<h2 id="proxy-redirect"><a href="#proxy-redirect" class="headerlink" title="proxy_redirect"></a><strong>proxy_redirect</strong></h2><p><strong style="color:red;"><strong>重置头信息中的”Location”和”Refresh”的值</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/7.png"></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/8.png"></p>
+<p><strong>测试案例：</strong></p>
+<p><strong>当发送192.168.174.140:8081&#x2F;add.html请求时，代理服务端（140）将请求代理到 141</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/9.png"></p>
+<p><strong>服务端（141）判断当前请求的资源路径是否为空，如果为空，则返回状态码302，临时重定向到192.168.174.141:80，访问默认的index.html</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/10.png"></p>
+<br>
+
+<h2 id="反向代理案例"><a href="#反向代理案例" class="headerlink" title="反向代理案例"></a><strong>反向代理案例</strong></h2><p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/11.png"></p>
+<p><strong>如图所示，当用户发送请求到代理服务器端，<a href="http://192.168.174.140:8082/server1%EF%BC%8C%E8%AF%B7%E6%B1%82%E5%B0%86%E4%BC%9A%E8%A2%AB%E4%BB%A3%E7%90%86%E5%88%B0http://192.168.174.141:9001/%E4%B8%8A%E9%9D%A2">http://192.168.174.140:8082/server1，请求将会被代理到http://192.168.174.141:9001/上面</a></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/12.png"></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/13.png"></p>
+<br>
+
+<h1 id="反向代理系统调优"><a href="#反向代理系统调优" class="headerlink" title="反向代理系统调优"></a><strong>反向代理系统调优</strong></h1><p><strong>反向代理值：Buffer（缓冲）和Cache（缓存）</strong></p>
+<p><strong style="color:red;"><strong>相同点：两种方式都是提高IO吞吐效率，提升nginx代理的性能</strong></strong></p>
+<p><strong style="color:red;"><strong>不同点：</strong></strong></p>
+<p><strong style="color:red;"><strong>Buffer是用来解决不同设备之间数据传递速度不一致导致的性能低的问题，BUffer中的数据一旦此次操作完成后，就可以删除</strong></strong></p>
+<p><strong style="color:red;"><em><strong>Cache主要是备份，将被代理服务器的数据缓存一份到代理服务器上去。当客户端再次获取相同的数据时，就只需要从代理服务器上去获取，而不需要再次通过被代理服务器，效率高，缓存中的数据可以重复使用，只有满足特定的条件才会删除</strong></em></strong></p>
+<h2 id="Proxy-Buffer相关指令"><a href="#Proxy-Buffer相关指令" class="headerlink" title="Proxy Buffer相关指令"></a><strong>Proxy Buffer相关指令</strong></h2><h3 id="1）proxy-buffering"><a href="#1）proxy-buffering" class="headerlink" title="1）proxy_buffering"></a><strong>1）proxy_buffering</strong></h3><p><strong style="color:red;"><strong>该指令用来开启或者关闭代理服务器的缓冲区</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/14.png"></p>
+<br>
+
+<h3 id="2）proxy-buffers"><a href="#2）proxy-buffers" class="headerlink" title="2）proxy_buffers"></a><strong>2）proxy_buffers</strong></h3><p><strong style="color:red;"><strong>指定单个连接从代理服务器读取响应的缓存区的个数和大小</strong></strong></p>
+<p><strong>number：缓存区的个数</strong></p>
+<p><strong>size：每个缓存区的大小，缓存区的总大小为number*size</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/15.png"></p>
+<br>
+
+<h3 id="3）proxy-buffer-size"><a href="#3）proxy-buffer-size" class="headerlink" title="3）proxy_buffer_size"></a><strong>3）proxy_buffer_size</strong></h3><p><strong style="color:red;"><strong>设置从被代理服务器获取的第一部分响应数据的大小。保持与proxy_buffers中的size一致即可，当然也可以更小。</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/16.png"></p>
+<br>
+
+<h3 id="4）proxy-busy-buffers-size"><a href="#4）proxy-busy-buffers-size" class="headerlink" title="4）proxy_busy_buffers_size"></a><strong>4）proxy_busy_buffers_size</strong></h3><p><strong style="color:red;"><strong>用来限制同时处于BUSY状态的缓冲总大小。</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/17.png"></p>
+<br>
+
+<h3 id="5）proxy-temp-path"><a href="#5）proxy-temp-path" class="headerlink" title="5）proxy_temp_path"></a><strong>5）proxy_temp_path</strong></h3><p><strong style="color:red;"><strong>当缓冲区存满后，仍未被Nginx服务器完全接受，响应数据就会被临时存放在磁盘文件上，该指令设置文件路径</strong></strong></p>
+<p><strong>注意path最多设置三层</strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/18.png"></p>
+<br>
+
+<h3 id="6）proxy-temp-file-write-size"><a href="#6）proxy-temp-file-write-size" class="headerlink" title="6）proxy_temp_file_write_size"></a><strong>6）proxy_temp_file_write_size</strong></h3><p><strong style="color:red;"><strong>用来设置磁盘上缓冲文件的大小</strong></strong></p>
+<p><img src="/2022/07/18/4-nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/19.png"></p>
+<br>
+
+<h1 id="通用网站的配置"><a href="#通用网站的配置" class="headerlink" title="通用网站的配置"></a><strong>通用网站的配置</strong></h1><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">proxy_buffering</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">proxy_buffer_size</span> <span class="number">4</span> <span class="number">32k</span>;</span><br><span class="line"><span class="attribute">proxy_busy_buffers_size</span> <span class="number">64k</span>;</span><br><span class="line"><span class="attribute">proxy_temp_file_write_size</span> <span class="number">64k</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>defineClass源码</title>
     <url>/2022/08/09/defineClass%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; defineClass(String name, Resource res) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> name.lastIndexOf(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">    <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> res.getCodeSourceURL();</span><br><span class="line">    <span class="keyword">if</span> (i != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">pkgname</span> <span class="operator">=</span> name.substring(<span class="number">0</span>, i);</span><br><span class="line">        <span class="comment">// Check if package already loaded.</span></span><br><span class="line">        <span class="type">Manifest</span> <span class="variable">man</span> <span class="operator">=</span> res.getManifest();</span><br><span class="line">        definePackageInternal(pkgname, man, url);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now read the class bytes and define the class</span></span><br><span class="line">    java.nio.<span class="type">ByteBuffer</span> <span class="variable">bb</span> <span class="operator">=</span> res.getByteBuffer();</span><br><span class="line">    <span class="keyword">if</span> (bb != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Use (direct) ByteBuffer:</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bb, cs);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] b = res.getBytes();</span><br><span class="line">        <span class="comment">// must read certificates AFTER reading bytes.</span></span><br><span class="line">        CodeSigner[] signers = res.getCodeSigners();</span><br><span class="line">        <span class="type">CodeSource</span> <span class="variable">cs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CodeSource</span>(url, signers);</span><br><span class="line">        sun.misc.PerfCounter.getReadClassBytesTime().addElapsedTimeFrom(t0);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, b, <span class="number">0</span>, b.length, cs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>JVM</tag>
-        <tag>底层源码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>findClass方法源码</title>
-    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -3102,6 +3248,20 @@
       </tags>
   </entry>
   <entry>
+    <title>findClass方法源码</title>
+    <url>/2022/08/09/findClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(<span class="keyword">final</span> String name)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">final</span> Class&lt;?&gt; result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        result = AccessController.doPrivileged(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Class&lt;?&gt;&gt;() &#123;</span><br><span class="line">                <span class="keyword">public</span> Class&lt;?&gt; run() <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> name.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;/&#x27;</span>).concat(<span class="string">&quot;.class&quot;</span>);</span><br><span class="line">                    <span class="type">Resource</span> <span class="variable">res</span> <span class="operator">=</span> ucp.getResource(path, <span class="literal">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (res != <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//defineClass：根据所给的二进制数据和名称，返回一个Class实例</span></span><br><span class="line">                            <span class="keyword">return</span> defineClass(name, res);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name, e);</span><br><span class="line">                        &#125; </span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, acc);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (java.security.PrivilegedActionException pae) &#123;</span><br><span class="line">        <span class="keyword">throw</span> (ClassNotFoundException) pae.getException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>底层源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>loadClass方法源码剖析</title>
     <url>/2022/08/09/loadClass%E6%96%B9%E6%B3%95%E6%BA%90%E7%A0%81/</url>
     <content><![CDATA[<p><a href="https://www.hzzzzzy.icu/2022/08/09/16-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95">点此返回</a></p>
@@ -3211,6 +3371,7 @@
 
 ]]></content>
       <tags>
+        <tag>设计模式</tag>
         <tag>面试</tag>
       </tags>
   </entry>
@@ -3607,6 +3768,7 @@
 <br>
 ]]></content>
       <tags>
+        <tag>javase</tag>
         <tag>面试</tag>
       </tags>
   </entry>
@@ -3678,7 +3840,7 @@
 
 <h2 id="调用add方法触发扩容"><a href="#调用add方法触发扩容" class="headerlink" title="调用add方法触发扩容"></a>调用add方法触发扩容</h2><p>当往ArrayList添加元素的时候。触发第一次扩容，创建一个长度为10的新数组，然后将元素添加进新数组里面，再用新的数组替换掉旧的空数组。</p>
 <p>当数组内元素为10时，进行第二次扩容，扩容为第一次容量的1.5倍，即15（以后每一次扩容都是上一次的1.5倍）</p>
-<p><strong style="color:red">注意：此处的1.5倍其实是上一次容量右移一位，再加上它本身，如第三次扩容：15右移一位是7，7+15为22</strong></p>
+<p><strong style="color:red">注意：此处的1.5倍其实是上一次容量二进制右移一位，再加上它本身，如第三次扩容：15右移一位是7，7+15为22</strong></p>
 <br>
 
 <h2 id="调用addAll方法触发扩容"><a href="#调用addAll方法触发扩容" class="headerlink" title="调用addAll方法触发扩容"></a>调用addAll方法触发扩容</h2><p>在下一次扩容的容量跟实际的元素个数之间选择一个较大值</p>
@@ -3830,6 +3992,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">h</span> <span class="operator">=</span> hash;</span><br><span class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">char</span> val[] = value;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">            h = <span class="number">31</span> * h + val[i];</span><br><span class="line">        &#125;</span><br><span class="line">        hash = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
+        <tag>javase</tag>
         <tag>面试</tag>
       </tags>
   </entry>
